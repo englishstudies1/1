@@ -40,7 +40,7 @@
     /* --- PAGE 1: Welcome --- */
     #welcomePage {
       display: flex; flex-direction: column; align-items: center; justify-content: center; flex-grow: 1;
-      text-align: center; color: white; animation: fadeIn 0.8s ease;
+      text-align: center; color: white;
     }
 
     .welcome-card {
@@ -88,18 +88,11 @@
     .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 10px; }
 
     .sub-page { display: none; background: white; padding: 30px; border-radius: 20px; color: #333; }
-    .module-box {
-      background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px;
-      margin: 10px 0; border-radius: 10px;
-    }
+    .module-box { background: #f8fafc; border: 1px solid #e2e8f0; padding: 15px; margin: 10px 0; border-radius: 10px; font-weight: 500;}
 
-    .admin-section {
-      background: rgba(255,255,255,0.1); margin-top: 30px; padding: 20px; border-radius: 15px; color: white;
-    }
+    .admin-section { background: rgba(255,255,255,0.1); margin-top: 30px; padding: 20px; border-radius: 15px; color: white; }
     .badge-principal { background: #ef4444; padding: 4px 10px; border-radius: 5px; font-weight: bold; margin-right: 5px; }
     .badge-other { background: #4b5563; padding: 4px 10px; border-radius: 5px; margin-left: 5px; font-size: 0.85rem; }
-
-    .announcement-item { border-left: 4px solid var(--primary); padding: 10px; margin-bottom: 10px; background: #f1f5f9; }
 
     .link-item {
       display: flex; align-items: center; gap: 10px; padding: 12px;
@@ -110,9 +103,12 @@
     .link-item i.fa-whatsapp { color: #25d366; }
     .link-item i.fa-google { color: #4285f4; }
 
-    .hidden { display: none; }
     .back-btn { background: #64748b; color: white; padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; margin-bottom: 15px; }
     .footer-copy { text-align: center; color: rgba(255,255,255,0.6); padding: 20px; font-size: 0.9rem; }
+    .hidden { display: none; }
+
+    .module-tabs { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+    .tab-item { flex: 1; padding: 15px; background: var(--primary); color: white; border-radius: 10px; text-align: center; cursor: pointer; font-weight: bold; }
   </style>
 </head>
 <body>
@@ -126,7 +122,6 @@
     <div class="welcome-card">
       <i class="fas fa-book-reader main-logo"></i>
       <h2>Welcome Student!</h2>
-      <p>Your Gateway to English Excellence</p>
       <div class="btn-group">
         <button class="action-btn btn-login" onclick="showForm('login')">Login</button>
         <button class="action-btn btn-signup" onclick="showForm('signup')">Sign Up</button>
@@ -136,19 +131,16 @@
 
   <div id="authContainer" class="form-container">
     <button class="back-btn" onclick="resetToWelcome()">← Back</button>
-    
     <div id="loginForm" class="hidden">
       <h2>Login</h2>
       <input type="email" placeholder="Email Address">
       <input type="password" placeholder="Password">
       <button class="action-btn btn-signup" style="width:100%" onclick="loginSuccess()">Enter Dashboard</button>
     </div>
-
     <div id="signupForm" class="hidden">
       <h2>Create New Account</h2>
       <div style="display:flex; gap:10px"><input type="text" placeholder="First Name"><input type="text" placeholder="Last Name"></div>
-      <input type="text" placeholder="Massar Code (e.g. R123456)">
-      <input type="text" placeholder="Apogée Number">
+      <input type="text" placeholder="Massar Code"><input type="text" placeholder="Apogée Number">
       <div class="phone-row">
         <select>
           <option value="+212">🇲🇦 MA +212</option>
@@ -159,8 +151,7 @@
         </select>
         <input type="tel" placeholder="Phone Number">
       </div>
-      <input type="email" placeholder="Email Address">
-      <input type="password" placeholder="Create Password">
+      <input type="email" placeholder="Email Address"><input type="password" placeholder="Create Password">
       <select id="groupSelect">
         <option value="">Select Your Group</option>
         <option value="GR1">Group 1 (GR1)</option>
@@ -171,62 +162,56 @@
   </div>
 
   <div id="dashboard">
-    <div class="news-ticker">
-      <i class="fas fa-bullhorn" style="margin-right:10px;"></i>
-      <marquee>📢 News: New Study Materials and Last Year Exams are now available. | 📢 Join our WhatsApp Groups for instant updates.</marquee>
-    </div>
-
+    <div class="news-ticker"><i class="fas fa-bullhorn" style="margin-right:10px;"></i><marquee>📢 Important updates for English Studies students. Check your group links below.</marquee></div>
     <div id="mainGrid" class="grid-menu">
       <div class="card" onclick="openSub('modules')"><i class="fas fa-book"></i><h3>Modules</h3></div>
       <div class="card" onclick="openSub('exams')"><i class="fas fa-file-signature"></i><h3>Last Year Exams</h3></div>
       <div class="card" onclick="openSub('timetable')"><i class="fas fa-calendar-alt"></i><h3>Timetable</h3></div>
-      <div class="card" onclick="openSub('makeup')"><i class="fas fa-clock"></i><h3>Makeup Session</h3></div>
+      <div class="card" onclick="openSub('makeup')"><i class="fas fa-clock"></i><h3>Makeup</h3></div>
       <div class="card" onclick="openSub('all_ann')"><i class="fas fa-list-ul"></i><h3>Announcements</h3></div>
       <div class="card" onclick="openSub('space')"><i class="fas fa-link"></i><h3>Student Space</h3></div>
     </div>
-
     <div id="subPage" class="sub-page">
       <button class="back-btn" onclick="closeSub()">← Back to Menu</button>
       <div id="subContent"></div>
     </div>
-
     <div class="admin-section" id="adminArea"></div>
   </div>
-
   <div class="footer-copy">Mourad Project's @ 2026</div>
 </div>
 
 <script>
   let currentGR = "GR1";
+  const linksDB = {
+    GR1: {
+      l1: "https://chat.whatsapp.com/KC8H6nooswS9j3Gg9yozZt",
+      l2: "https://chat.whatsapp.com/DGysm3YhQnpE7nGQLDd5km",
+      l3: "https://classroom.google.com/c/ODM0OTEzMjY5NTEz?cjc=amozilem"
+    },
+    GR2: {
+      l1: "https://chat.whatsapp.com/D8EFIBAoCqh9MatabkO1oN",
+      l2: "https://chat.whatsapp.com/EKZ56fLFPevJ4NvoSkDMV6",
+      l3: "https://classroom.google.com/c/NzkyNjU3NjkxNTM0?cjc=ldqb36iw"
+    }
+  };
 
   function showForm(type) {
     document.getElementById('welcomePage').style.display = 'none';
     document.getElementById('authContainer').style.display = 'block';
-    const loginF = document.getElementById('loginForm');
-    const signupF = document.getElementById('signupForm');
-    if(type === 'login') { loginF.classList.remove('hidden'); signupF.classList.add('hidden'); } 
-    else { signupF.classList.remove('hidden'); loginF.classList.add('hidden'); }
+    type === 'login' ? document.getElementById('loginForm').classList.remove('hidden') : document.getElementById('signupForm').classList.remove('hidden');
   }
 
-  function resetToWelcome() {
-    document.getElementById('welcomePage').style.display = 'flex';
-    document.getElementById('authContainer').style.display = 'none';
-  }
+  function resetToWelcome() { location.reload(); }
 
   function loginSuccess() {
     currentGR = document.getElementById('groupSelect').value || "GR1";
     document.getElementById('authContainer').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
-    
     const adminArea = document.getElementById('adminArea');
     if(currentGR === "GR1") {
-      adminArea.innerHTML = `<h4><i class="fas fa-user-shield"></i> GR1 Management</h4>
-      <p>Admin Principal: <span class="badge-principal">Mourad</span></p>
-      <p>Others Admins: <span class="badge-other">Moneim</span><span class="badge-other">Soufiane</span><span class="badge-other">Mohamed</span><span class="badge-other">Samia</span></p>`;
+      adminArea.innerHTML = `<h4>GR1 Management</h4><p>Admin Principal: <span class="badge-principal">Mourad</span></p><p>Others Admins: <span class="badge-other">Moneim</span><span class="badge-other">Soufiane</span><span class="badge-other">Mohamed</span><span class="badge-other">Samia</span></p>`;
     } else {
-      adminArea.innerHTML = `<h4><i class="fas fa-user-shield"></i> GR2 Management</h4>
-      <p>Admin Principal: <span class="badge-principal">Mourad</span> <span class="badge-principal">Hajar</span></p>
-      <p>Others Admins: <span class="badge-other">Marwa</span></p>`;
+      adminArea.innerHTML = `<h4>GR2 Management</h4><p>Admin Principal: <span class="badge-principal">Mourad</span> <span class="badge-principal">Hajar</span></p><p>Others Admins: <span class="badge-other">Marwa</span></p>`;
     }
   }
 
@@ -234,37 +219,31 @@
     document.getElementById('mainGrid').classList.add('hidden');
     const content = document.getElementById('subContent');
     document.getElementById('subPage').style.display = 'block';
-
-    if(type === 'modules') {
-      content.innerHTML = `<h2>Study Modules</h2>
-        <div class="module-box"><h4>Spoken English</h4><ul><li><a href="#">phonetics_part1.pdf</a></li></ul></div>
-        <div class="module-box"><h4>Paragraph Writing</h4><ul><li><a href="#">essay_structure.docx</a></li></ul></div>`;
-    } else if(type === 'exams') {
-      content.innerHTML = `<h2>Last Year Exams</h2>
-        <div class="module-box"><h4>Semester 1 Exams (2025)</h4><ul><li><a href="#">Linguistics_Exam.pdf</a></li><li><a href="#">Literature_Exam.pdf</a></li></ul></div>`;
-    } else if(type === 'space') {
-      content.innerHTML = `<h2>Student Space & Links</h2>
-        <a href="#" class="link-item"><i class="fab fa-whatsapp"></i> Link 1: WhatsApp Chat (${currentGR})</a>
-        <a href="#" class="link-item"><i class="fab fa-whatsapp"></i> Link 2: WhatsApp Announcements (${currentGR})</a>
-        <a href="#" class="link-item"><i class="fab fa-google"></i> Link 3: Google Classroom (${currentGR})</a>
+    if(type === 'space') {
+      const data = linksDB[currentGR];
+      const grText = currentGR === "GR1" ? "GR1" : "GR2";
+      content.innerHTML = `<h2>Student Space</h2>
+        <a href="${data.l1}" target="_blank" class="link-item"><i class="fab fa-whatsapp"></i> English Studies ${grText}, S1/2</a>
+        <a href="${data.l2}" target="_blank" class="link-item"><i class="fab fa-whatsapp"></i> English Studies Announcements S1/2</a>
+        <a href="${data.l3}" target="_blank" class="link-item"><i class="fab fa-google"></i> English Studies ${grText}, S1/2</a>
         <hr>
-        <a href="https://ent.uiz.ac.ma" target="_blank" class="link-item">ENT Platform Portal</a>
-        <a href="http://www.flshm.ac.ma/convocations" target="_blank" class="link-item">FLSHM Convocation</a>`;
-    } else if(type === 'all_ann') {
-      content.innerHTML = `<h2>All Announcements</h2><div class="announcement-item"><strong>2026-01-15:</strong> New Year exams files added.</div>`;
-    } else if(type === 'timetable') {
-      content.innerHTML = `<h2>Timetable</h2><p>Latest update for ${currentGR} is now available.</p>`;
-    } else if(type === 'makeup') {
-      content.innerHTML = `<h2>Makeup Sessions</h2><div class="announcement-item">No sessions scheduled yet.</div>`;
-    }
+        <a href="https://ent.univh2c.ma/uPortal/normal/render.uP" target="_blank" class="link-item">ENT</a>
+        <a href="http://flshm.univh2c.ma/convocation/" target="_blank" class="link-item">Flhsm Convocations</a>`;
+    } else if(type === 'modules') {
+      content.innerHTML = `<h2>Modules</h2><div class="module-tabs"><div class="tab-item" onclick="showModuleFolder('S1')">Modules S1</div><div class="tab-item" onclick="showModuleFolder('S2')">Modules S2</div><div class="tab-item" onclick="showModuleFolder('Last')">Last Years Lessons Modules</div></div><div id="moduleFolders"></div>`;
+    } else { content.innerHTML = `<h2>${type}</h2><p>Section coming soon.</p>`; }
   }
 
-  function closeSub() {
-    document.getElementById('mainGrid').classList.remove('hidden');
-    document.getElementById('subPage').style.display = 'none';
+  function showModuleFolder(folder) {
+    const box = document.getElementById('moduleFolders');
+    if(folder === 'S1') {
+      box.innerHTML = `<h3>S1 Modules</h3><div class="module-box">Grammar 1</div><div class="module-box">Spoken English</div><div class="module-box">Guided Reading 1</div><div class="module-box">University Work Methodology</div><div class="module-box">Paragraph Writing</div><div class="module-box">Reading Comprehension</div><div class="module-box">Academc Vocabulary</div>`;
+    } else if(folder === 'S2') {
+      box.innerHTML = `<h3>S2 Modules</h3><div class="module-box">British / American Civilization</div><div class="module-box">Oral communication</div><div class="module-box">Composition</div><div class="module-box">Digital Culture</div><div class="module-box">Grammar 2</div><div class="module-box">Reading Comprehension 2</div><div class="module-box">Guided Reading 2</div>`;
+    } else { box.innerHTML = `<h3>Last Years Lessons</h3><div class="module-box">Archive folder contents...</div>`; }
   }
+
+  function closeSub() { document.getElementById('mainGrid').classList.remove('hidden'); document.getElementById('subPage').style.display = 'none'; }
 </script>
-
 </body>
-
 </html>
