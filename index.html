@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Studies | FLSHM Mohammedia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --navy: #0a2342; --royal: #1a4480; --sky: #4a90d9;
+      --gold: #c9a84c; --gold-light: #f0d080; --cream: #faf8f4;
+      --text: #1a2035; --muted: #6b7a99; --border: #e2e8f2;
+      --card-shadow: 0 4px 24px rgba(10,35,66,0.10);
+      --card-hover: 0 12px 40px rgba(10,35,66,0.18);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'DM Sans',sans-serif; background:var(--cream); color:var(--text); min-height:100vh; }
+
+    /* HEADER */
+    header { background:var(--navy); position:sticky; top:0; z-index:1000; box-shadow:0 2px 20px rgba(0,0,0,0.25); }
+    .header-top { display:flex; align-items:center; justify-content:space-between; padding:0 40px; height:72px; }
+    .logo-block { display:flex; align-items:center; gap:14px; }
+    .logo-icon { width:46px; height:46px; background:linear-gradient(135deg,var(--gold),var(--gold-light)); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:22px; color:var(--navy); font-weight:900; }
+    .logo-text { color:white; }
+    .logo-text .site-name { font-family:'Playfair Display',serif; font-size:20px; font-weight:700; }
+    .logo-text .site-sub { font-size:11px; color:rgba(255,255,255,0.55); letter-spacing:1px; text-transform:uppercase; }
+    .header-actions { display:flex; align-items:center; gap:12px; }
+    .group-switcher { display:flex; background:rgba(255,255,255,0.1); border-radius:8px; overflow:hidden; }
+    .gr-btn { padding:7px 18px; border:none; cursor:pointer; font-family:'DM Sans',sans-serif; font-weight:600; font-size:13px; color:rgba(255,255,255,0.6); background:transparent; transition:all 0.25s; }
+    .gr-btn.active { background:var(--gold); color:var(--navy); }
+    .admin-trigger { width:36px; height:36px; border:none; cursor:pointer; background:transparent; border-radius:8px; color:transparent; font-size:16px; display:flex; align-items:center; justify-content:center; }
+    .header-nav { background:rgba(0,0,0,0.2); display:flex; gap:0; overflow-x:auto; }
+    .nav-item { padding:12px 22px; cursor:pointer; color:rgba(255,255,255,0.65); font-size:13px; font-weight:500; white-space:nowrap; border-bottom:3px solid transparent; transition:all 0.2s; display:flex; align-items:center; gap:7px; }
+    .nav-item:hover { color:white; background:rgba(255,255,255,0.07); }
+    .nav-item.active { color:var(--gold); border-bottom-color:var(--gold); }
+    .nav-item i { font-size:13px; }
+
+    /* HERO */
+    .hero { background:linear-gradient(135deg,var(--navy) 0%,var(--royal) 60%,#2a5fa8 100%); padding:70px 40px 60px; display:flex; align-items:center; gap:60px; position:relative; overflow:hidden; }
+    .hero::before { content:''; position:absolute; top:-80px; right:-80px; width:400px; height:400px; border-radius:50%; background:radial-gradient(circle,rgba(201,168,76,0.15) 0%,transparent 70%); }
+    .hero::after { content:''; position:absolute; bottom:-100px; left:30%; width:300px; height:300px; border-radius:50%; background:radial-gradient(circle,rgba(74,144,217,0.12) 0%,transparent 70%); }
+    .hero-text { flex:1; color:white; position:relative; z-index:1; }
+    .hero-badge { display:inline-flex; align-items:center; gap:7px; background:rgba(201,168,76,0.2); border:1px solid rgba(201,168,76,0.4); border-radius:100px; padding:5px 14px; font-size:12px; color:var(--gold-light); margin-bottom:18px; }
+    .hero h1 { font-family:'Playfair Display',serif; font-size:clamp(28px,4vw,46px); font-weight:900; line-height:1.15; margin-bottom:14px; }
+    .hero h1 span { color:var(--gold); }
+    .hero p { color:rgba(255,255,255,0.7); font-size:15px; line-height:1.7; max-width:480px; }
+    .hero-stats { display:flex; gap:32px; margin-top:32px; flex-wrap:wrap; }
+    .stat-item { text-align:center; }
+    .stat-num { font-family:'Playfair Display',serif; font-size:30px; color:var(--gold); font-weight:700; }
+    .stat-label { font-size:11px; color:rgba(255,255,255,0.5); text-transform:uppercase; letter-spacing:1px; }
+    .hero-card { background:rgba(255,255,255,0.08); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.15); border-radius:20px; padding:28px 32px; min-width:270px; position:relative; z-index:1; animation:floatCard 4s ease-in-out infinite; }
+    @keyframes floatCard { 0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);} }
+    .hero-card .card-label { font-size:11px; text-transform:uppercase; letter-spacing:1.5px; color:var(--gold); margin-bottom:16px; font-weight:600; }
+    .hero-card .quick-link { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid rgba(255,255,255,0.1); color:rgba(255,255,255,0.8); font-size:13px; cursor:pointer; transition:0.2s; }
+    .hero-card .quick-link:last-child { border-bottom:none; }
+    .hero-card .quick-link:hover { color:var(--gold); padding-left:4px; }
+    .hero-card .quick-link i { width:28px; height:28px; background:rgba(201,168,76,0.15); border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:12px; color:var(--gold); }
+
+    /* TICKER */
+    .ticker-bar { background:var(--gold); color:var(--navy); display:flex; align-items:center; overflow:hidden; }
+    .ticker-label { background:var(--navy); color:var(--gold); padding:10px 20px; font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; white-space:nowrap; display:flex; align-items:center; gap:7px; }
+    .ticker-content { flex:1; overflow:hidden; }
+    .ticker-inner { display:inline-block; animation:ticker 28s linear infinite; white-space:nowrap; padding:10px 20px; font-size:13px; font-weight:600; }
+    @keyframes ticker { 0%{transform:translateX(100vw);}100%{transform:translateX(-100%);} }
+
+    /* MAIN */
+    main { max-width:1200px; margin:0 auto; padding:40px 24px; }
+    .sec-header { margin-bottom:28px; }
+    .sec-header h2 { font-family:'Playfair Display',serif; font-size:26px; color:var(--navy); display:flex; align-items:center; gap:10px; }
+    .sec-header h2 i { font-size:20px; color:var(--gold); }
+    .sec-header p { color:var(--muted); font-size:14px; margin-top:4px; }
+    .section-divider { height:2px; background:linear-gradient(90deg,var(--gold),transparent); width:60px; margin-top:8px; }
+
+    /* CARDS */
+    .cards-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:18px; }
+    .menu-card { background:white; border-radius:16px; padding:28px 22px; text-align:center; cursor:pointer; border:1px solid var(--border); box-shadow:var(--card-shadow); transition:all 0.3s cubic-bezier(.34,1.56,.64,1); position:relative; overflow:hidden; }
+    .menu-card::before { content:''; position:absolute; bottom:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--royal),var(--sky)); transform:scaleX(0); transition:0.3s; }
+    .menu-card:hover { transform:translateY(-6px); box-shadow:var(--card-hover); border-color:var(--sky); }
+    .menu-card:hover::before { transform:scaleX(1); }
+    .card-ico { width:56px; height:56px; border-radius:14px; margin:0 auto 14px; display:flex; align-items:center; justify-content:center; font-size:22px; }
+    .ico-blue{background:#dbeafe;color:var(--royal);} .ico-green{background:#dcfce7;color:#166534;} .ico-orange{background:#ffedd5;color:#c2410c;} .ico-purple{background:#ede9fe;color:#6d28d9;} .ico-teal{background:#ccfbf1;color:#0f766e;} .ico-gold{background:#fef3c7;color:#92400e;}
+    .menu-card h3 { font-size:15px; font-weight:600; color:var(--navy); margin-bottom:4px; }
+    .menu-card p { font-size:12px; color:var(--muted); }
+
+    /* ANNOUNCEMENTS */
+    .ann-list { display:flex; flex-direction:column; gap:12px; }
+    .ann-item { background:white; border:1px solid var(--border); border-radius:14px; padding:18px 20px; display:flex; gap:16px; align-items:flex-start; box-shadow:var(--card-shadow); transition:0.2s; }
+    .ann-item:hover { border-color:var(--sky); }
+    .ann-dot { width:10px; height:10px; border-radius:50%; background:var(--sky); margin-top:5px; flex-shrink:0; }
+    .ann-dot.urgent{background:#ef4444;} .ann-dot.info{background:var(--gold);}
+    .ann-body { flex:1; }
+    .ann-meta { display:flex; gap:10px; align-items:center; margin-bottom:5px; flex-wrap:wrap; }
+    .ann-date { font-size:11px; color:var(--muted); }
+    .ann-tag { font-size:10px; padding:2px 8px; border-radius:100px; font-weight:600; }
+    .tag-urgent{background:#fee2e2;color:#991b1b;} .tag-info{background:#dbeafe;color:#1e40af;} .tag-general{background:#f1f5f9;color:#475569;}
+    .ann-text { font-size:14px; color:var(--text); line-height:1.5; }
+    .ann-group { font-size:11px; color:var(--muted); margin-top:4px; }
+
+    /* MODULE LIST */
+    .module-list { display:flex; flex-direction:column; gap:10px; }
+    .mod-item { background:#f8fafc; border:1px solid var(--border); border-radius:10px; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; transition:0.2s; }
+    .mod-item:hover { background:#eef2ff; border-color:var(--sky); }
+    .mod-name { font-weight:500; font-size:14px; }
+    .mod-action { display:flex; gap:8px; flex-wrap:wrap; }
+    .mod-btn { padding:5px 12px; border:none; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; transition:0.2s; text-decoration:none; display:inline-flex; align-items:center; gap:4px; }
+    .mod-btn-lesson { background:#ede9fe; color:#6d28d9; }
+    .mod-btn-lesson:hover { background:#6d28d9; color:white; }
+    .mod-btn-dl { background:#dbeafe; color:var(--royal); }
+    .mod-btn-dl:hover { background:var(--royal); color:white; }
+
+    /* TIMETABLE */
+    .ttable { width:100%; border-collapse:collapse; margin-top:4px; }
+    .ttable th { background:var(--navy); color:white; padding:12px 16px; text-align:left; font-size:13px; font-weight:600; }
+    .ttable th:first-child{border-radius:10px 0 0 0;} .ttable th:last-child{border-radius:0 10px 0 0;}
+    .ttable td { padding:12px 16px; font-size:13px; border-bottom:1px solid var(--border); }
+    .ttable tr:last-child td { border-bottom:none; }
+    .ttable tr:nth-child(even) td { background:#f8fafc; }
+    .ttable tr:hover td { background:#eef2ff; }
+    .time-chip { background:#dbeafe; color:var(--royal); padding:3px 10px; border-radius:100px; font-size:12px; font-weight:600; white-space:nowrap; }
+
+    /* MAKEUP */
+    .makeup-item { background:#f8fafc; border:1px solid var(--border); border-left:4px solid var(--sky); border-radius:10px; padding:16px 18px; margin-bottom:12px; }
+    .makeup-date { font-size:12px; font-weight:700; color:var(--royal); margin-bottom:4px; }
+    .makeup-desc { font-size:14px; color:var(--text); }
+
+    /* STUDENT SPACE */
+    .space-link { display:flex; align-items:center; gap:14px; padding:16px 18px; background:#f8fafc; border:1px solid var(--border); border-radius:12px; text-decoration:none; color:var(--text); font-weight:500; font-size:14px; transition:0.2s; margin-bottom:10px; }
+    .space-link:hover { background:#eef2ff; border-color:var(--sky); transform:translateX(4px); }
+    .space-link-ico { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; }
+    .wsp{background:#dcfce7;color:#16a34a;} .gc{background:#fee2e2;color:#dc2626;} .ent{background:#dbeafe;color:var(--royal);}
+
+    /* LESSON/EXAM CARDS */
+    .lesson-card { background:#f8fafc; border:1px solid var(--border); border-radius:12px; padding:16px 18px; margin-bottom:10px; }
+    .lesson-header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:6px; }
+    .lesson-module { font-weight:700; color:var(--navy); font-size:14px; }
+    .lesson-meta { font-size:12px; color:var(--muted); }
+    .lesson-desc { font-size:13px; color:var(--text); line-height:1.6; margin-bottom:10px; }
+    .lesson-link-btn { display:inline-flex; align-items:center; gap:6px; padding:6px 14px; background:var(--royal); color:white; border-radius:8px; font-size:13px; font-weight:600; text-decoration:none; transition:0.2s; }
+    .lesson-link-btn:hover { background:var(--navy); }
+    .lesson-sem-tag { display:inline-block; font-size:10px; padding:2px 8px; border-radius:100px; background:#dbeafe; color:var(--royal); font-weight:600; margin-left:6px; }
+
+    /* INFO ALERT */
+    .info-alert { background:#eff6ff; border:1px solid #bfdbfe; border-radius:10px; padding:12px 16px; display:flex; gap:10px; align-items:center; font-size:13px; color:#1e40af; margin-bottom:20px; }
+
+    /* SEM TABS */
+    .sem-tabs { display:flex; gap:8px; margin-bottom:24px; }
+    .sem-tab { padding:9px 22px; border:1px solid var(--border); border-radius:8px; background:white; cursor:pointer; font-size:13px; font-weight:600; color:var(--muted); transition:0.2s; }
+    .sem-tab.active { background:var(--navy); color:white; border-color:var(--navy); }
+
+    /* MODALS */
+    .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center; padding:20px; overflow-y:auto; }
+    .modal-overlay.open { display:flex; }
+    .modal { background:white; border-radius:20px; padding:32px; width:100%; max-width:520px; box-shadow:0 25px 60px rgba(0,0,0,0.3); animation:fadeUp 0.25s ease; margin:auto; }
+    .modal h3 { font-family:'Playfair Display',serif; font-size:22px; color:var(--navy); margin-bottom:6px; }
+    .modal p { color:var(--muted); font-size:13px; margin-bottom:20px; }
+    .modal input,.modal textarea,.modal select { width:100%; padding:11px 14px; border:1px solid var(--border); border-radius:10px; font-family:'DM Sans',sans-serif; font-size:14px; margin-bottom:10px; outline:none; transition:0.2s; }
+    .modal input:focus,.modal textarea:focus,.modal select:focus { border-color:var(--sky); box-shadow:0 0 0 3px rgba(74,144,217,0.15); }
+    .modal textarea { resize:vertical; min-height:80px; }
+    .modal-actions { display:flex; gap:10px; margin-top:8px; }
+    .modal-btn { flex:1; padding:12px; border:none; border-radius:10px; cursor:pointer; font-family:'DM Sans',sans-serif; font-weight:600; font-size:14px; transition:0.2s; }
+    .modal-btn-cancel { background:#f1f5f9; color:var(--muted); }
+    .modal-btn-cancel:hover { background:#e2e8f0; }
+    .modal-btn-save { background:var(--navy); color:white; }
+    .modal-btn-save:hover { background:var(--royal); }
+    .pin-input-group { display:flex; gap:8px; align-items:center; margin-bottom:12px; }
+    .pin-field { flex:1; padding:12px 14px; border:1px solid var(--border); border-radius:10px; font-family:'DM Sans',sans-serif; font-size:14px; outline:none; transition:0.2s; }
+    .pin-field:focus { border-color:var(--sky); box-shadow:0 0 0 3px rgba(74,144,217,0.15); }
+    .pin-submit { padding:12px 20px; background:var(--navy); color:white; border:none; border-radius:10px; cursor:pointer; font-weight:600; font-size:14px; transition:0.2s; }
+    .pin-submit:hover { background:var(--royal); }
+    .pin-error { color:#ef4444; font-size:13px; margin-top:4px; display:none; }
+
+    /* ADMIN PANEL */
+    .admin-panel { display:none; background:white; border-radius:20px; padding:28px; border:2px solid var(--gold); margin-top:32px; max-width:1200px; margin-left:auto; margin-right:auto; }
+    .admin-panel.open { display:block; animation:fadeUp 0.3s ease; }
+    .admin-tabs { display:flex; gap:8px; margin-bottom:24px; flex-wrap:wrap; }
+    .admin-tab { padding:8px 16px; border:1px solid var(--border); border-radius:8px; background:#f8fafc; cursor:pointer; font-size:13px; font-weight:600; color:var(--muted); transition:0.2s; white-space:nowrap; }
+    .admin-tab.active { background:var(--gold); color:var(--navy); border-color:var(--gold); }
+    .admin-section-content { display:none; }
+    .admin-section-content.active { display:block; }
+    .add-btn { padding:10px 20px; background:var(--navy); color:white; border:none; border-radius:10px; cursor:pointer; font-family:'DM Sans',sans-serif; font-weight:600; font-size:13px; display:inline-flex; align-items:center; gap:7px; margin-bottom:16px; transition:0.2s; }
+    .add-btn:hover { background:var(--royal); }
+    .admin-item { background:#f8fafc; border:1px solid var(--border); border-radius:10px; padding:14px 16px; display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; gap:12px; }
+    .admin-item-info { font-size:13px; flex:1; min-width:0; }
+    .admin-item-info strong { font-weight:600; color:var(--navy); display:block; word-break:break-word; }
+    .admin-item-info span { color:var(--muted); font-size:12px; }
+    .del-btn { padding:5px 12px; background:#fee2e2; color:#991b1b; border:none; border-radius:6px; cursor:pointer; font-size:12px; font-weight:600; transition:0.2s; white-space:nowrap; }
+    .del-btn:hover { background:#991b1b; color:white; }
+    .admin-badge { display:inline-block; background:var(--gold); color:var(--navy); font-size:10px; font-weight:700; padding:2px 8px; border-radius:100px; text-transform:uppercase; letter-spacing:0.5px; margin-left:8px; }
+
+    /* FOOTER */
+    footer { background:var(--navy); color:rgba(255,255,255,0.7); margin-top:60px; }
+    .footer-main { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr 1fr; gap:40px; padding:50px 24px 40px; }
+    .footer-col h4 { font-family:'Playfair Display',serif; color:white; font-size:16px; margin-bottom:14px; }
+    .footer-col p,.footer-col a { font-size:13px; line-height:1.9; color:rgba(255,255,255,0.55); display:block; text-decoration:none; transition:0.2s; }
+    .footer-col a:hover { color:var(--gold); }
+    .footer-divider { border:none; border-top:1px solid rgba(255,255,255,0.1); }
+    .footer-bottom { max-width:1200px; margin:0 auto; padding:18px 24px; display:flex; justify-content:space-between; align-items:center; font-size:12px; color:rgba(255,255,255,0.35); }
+    .footer-bottom span { color:var(--gold); }
+
+    /* UTILS */
+    .page { display:none; }
+    .page.active { display:block; }
+    .pulse-dot { display:inline-block; width:8px; height:8px; background:#22c55e; border-radius:50%; margin-right:6px; animation:pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0.4);}50%{box-shadow:0 0 0 6px rgba(34,197,94,0);} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);} }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);} }
+    .fade-in { animation:fadeIn 0.4s ease forwards; }
+
+    @media(max-width:768px){
+      .header-top{padding:0 18px;}
+      .hero{flex-direction:column;padding:40px 20px;gap:32px;}
+      .hero-card{min-width:unset;width:100%;}
+      main{padding:24px 16px;}
+      .footer-main{grid-template-columns:1fr;gap:24px;padding:32px 20px;}
+      .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
+      .cards-grid{grid-template-columns:repeat(2,1fr);}
+      .mod-item{flex-direction:column;align-items:flex-start;}
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="logo-block">
+      <div class="logo-icon">E</div>
+      <div class="logo-text">
+        <div class="site-name">English Studies</div>
+        <div class="site-sub">FLSHM · Mohammedia</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <div class="group-switcher">
+        <button class="gr-btn active" id="grBtn1" onclick="switchGroup('GR1')">GR1</button>
+        <button class="gr-btn" id="grBtn2" onclick="switchGroup('GR2')">GR2</button>
+      </div>
+      <button class="admin-trigger" onclick="openAdminModal()" id="adminTrigger">
+        <i class="fas fa-shield-halved"></i>
+      </button>
+    </div>
+  </div>
+  <nav class="header-nav">
+    <div class="nav-item active" onclick="showPage('home')" id="nav-home"><i class="fas fa-home"></i> Home</div>
+    <div class="nav-item" onclick="showPage('modules')" id="nav-modules"><i class="fas fa-book"></i> Modules</div>
+    <div class="nav-item" onclick="showPage('exams')" id="nav-exams"><i class="fas fa-file-alt"></i> Past Exams</div>
+    <div class="nav-item" onclick="showPage('timetable')" id="nav-timetable"><i class="fas fa-calendar-week"></i> Timetable</div>
+    <div class="nav-item" onclick="showPage('makeup')" id="nav-makeup"><i class="fas fa-clock-rotate-left"></i> Makeup Sessions</div>
+    <div class="nav-item" onclick="showPage('announcements')" id="nav-announcements"><i class="fas fa-bullhorn"></i> Announcements</div>
+    <div class="nav-item" onclick="showPage('space')" id="nav-space"><i class="fas fa-users"></i> Student Space</div>
+  </nav>
+</header>
+
+<div class="ticker-bar">
+  <div class="ticker-label"><i class="fas fa-broadcast-tower"></i> News</div>
+  <div class="ticker-content">
+    <div class="ticker-inner" id="tickerText">📢 Welcome to the English Studies Portal — FLSHM Mohammedia &nbsp;&nbsp;&nbsp; 📚 S1 Timetable is now live &nbsp;&nbsp;&nbsp; 🎓 GR1 & GR2 — remember to complete your online registration</div>
+  </div>
+</div>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-badge"><span class="pulse-dot"></span> Academic Year 2025–2026</div>
+      <h1>Faculty of Letters<br>& <span>Humanities</span></h1>
+      <p>Your official portal for the English Studies Department — GR1 & GR2. Access timetables, modules, past exams, announcements, and more.</p>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">Modules</div></div>
+        <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Groups</div></div>
+        <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Semesters</div></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="card-label">Quick Access</div>
+      <div class="quick-link" onclick="showPage('timetable')"><i class="fas fa-calendar-week"></i> View Timetable</div>
+      <div class="quick-link" onclick="showPage('modules')"><i class="fas fa-book"></i> Study Modules</div>
+      <div class="quick-link" onclick="showPage('exams')"><i class="fas fa-file-alt"></i> Past Exams</div>
+      <div class="quick-link" onclick="showPage('makeup')"><i class="fas fa-clock-rotate-left"></i> Makeup Sessions</div>
+      <div class="quick-link" onclick="showPage('space')"><i class="fas fa-users"></i> Student Space</div>
+    </div>
+  </section>
+  <main>
+    <div class="sec-header" style="margin-top:8px;">
+      <h2><i class="fas fa-bullhorn"></i> Latest Announcements</h2>
+      <div class="section-divider"></div>
+    </div>
+    <div class="ann-list" id="annPreview"></div>
+    <div style="margin-top:32px;">
+      <div class="sec-header">
+        <h2><i class="fas fa-th-large"></i> Quick Navigation</h2>
+        <div class="section-divider"></div>
+      </div>
+      <div class="cards-grid">
+        <div class="menu-card" onclick="showPage('modules')"><div class="card-ico ico-blue"><i class="fas fa-book"></i></div><h3>Modules</h3><p>Course materials S1 & S2</p></div>
+        <div class="menu-card" onclick="showPage('exams')"><div class="card-ico ico-green"><i class="fas fa-file-signature"></i></div><h3>Past Exams</h3><p>Last year's exam papers</p></div>
+        <div class="menu-card" onclick="showPage('timetable')"><div class="card-ico ico-orange"><i class="fas fa-calendar-week"></i></div><h3>Timetable</h3><p>Weekly class schedule</p></div>
+        <div class="menu-card" onclick="showPage('makeup')"><div class="card-ico ico-purple"><i class="fas fa-clock-rotate-left"></i></div><h3>Makeup Sessions</h3><p>Rescheduled lessons</p></div>
+        <div class="menu-card" onclick="showPage('announcements')"><div class="card-ico ico-teal"><i class="fas fa-bullhorn"></i></div><h3>Announcements</h3><p>Department updates</p></div>
+        <div class="menu-card" onclick="showPage('space')"><div class="card-ico ico-gold"><i class="fas fa-users"></i></div><h3>Student Space</h3><p>WhatsApp & Classroom</p></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- MODULES -->
+<div id="page-modules" class="page">
+  <main>
+    <div class="sec-header" style="margin-top:8px;">
+      <h2><i class="fas fa-book"></i> Study Modules</h2>
+      <p>Lessons uploaded by admin for each module</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="sem-tabs">
+      <div class="sem-tab active" onclick="showModSem('S1',this)">Semester 1</div>
+      <div class="sem-tab" onclick="showModSem('S2',this)">Semester 2</div>
+    </div>
+    <div id="modList"></div>
+  </main>
+</div>
+
+<!-- PAST EXAMS -->
+<div id="page-exams" class="page">
+  <main>
+    <div class="sec-header" style="margin-top:8px;">
+      <h2><i class="fas fa-file-alt"></i> Last Year Exams</h2>
+      <p>Past examination papers uploaded by admin</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="sem-tabs">
+      <div class="sem-tab active" onclick="showExamSem('S1',this)">Semester 1</div>
+      <div class="sem-tab" onclick="showExamSem('S2',this)">Semester 2</div>
+    </div>
+    <div id="examList"></div>
+  </main>
+</div>
+
+<!-- TIMETABLE -->
+<div id="page-timetable" class="page">
+  <main>
+    <div class="sec-header" style="margin-top:8px;">
+      <h2><i class="fas fa-calendar-week"></i> Class Timetable</h2>
+      <p>Weekly schedule — subject to change, check regularly</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="info-alert"><i class="fas fa-info-circle"></i> The timetable may be updated by the admin. Please check back regularly.</div>
+    <div class="sem-tabs">
+      <div class="sem-tab active" onclick="showTTSem('S1',this)">Semester 1</div>
+      <div class="sem-tab" onclick="showTTSem('S2',this)">Semester 2</div>
+    </div>
+    <div id="ttView"></div>
+  </main>
+</div>
+
+<!-- MAKEUP -->
+<div id="page-makeup" class="page">
+  <main>
+    <div class="sec-header" style="margin-top:8px;">
+      <h2><i class="fas fa-clock-rotate-left"></i> Makeup Sessions</h2>
+      <p>Rescheduled and extra lessons for your group</p>
+      <div class="section-divider"></div>
+    </div>
+    <div id="makeupList"></div>
+  </main>
+</div>
+
+<!-- ANNOUNCEMENTS -->
+<div id="page-announcements" class="page">
+  <main>
+    <div class="sec-header" style="margin-top:8px;">
+      <h2><i class="fas fa-bullhorn"></i> All Announcements</h2>
+      <p>Official updates from the English Studies Department</p>
+      <div class="section-divider"></div>
+    </div>
+    <div class="ann-list" id="annFull"></div>
+  </main>
+</div>
+
+<!-- STUDENT SPACE -->
+<div id="page-space" class="page">
+  <main>
+    <div class="sec-header" style="margin-top:8px;">
+      <h2><i class="fas fa-users"></i> Student Space</h2>
+      <p>Community links and resources for your group</p>
+      <div class="section-divider"></div>
+    </div>
+    <div id="spaceLinks"></div>
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-col">
+      <h4>English Studies Portal</h4>
+      <p>Faculty of Letters & Humanities<br>Hassan II University — Mohammedia<br>English Studies Department</p>
+      <p style="margin-top:10px;color:rgba(255,255,255,0.35);font-size:12px;">GR1 & GR2 · Academic Year 2025–2026</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#" onclick="showPage('timetable')">Timetable</a>
+      <a href="#" onclick="showPage('modules')">Modules</a>
+      <a href="#" onclick="showPage('exams')">Past Exams</a>
+      <a href="#" onclick="showPage('makeup')">Makeup Sessions</a>
+      <a href="#" onclick="showPage('announcements')">Announcements</a>
+    </div>
+    <div class="footer-col">
+      <h4>External Resources</h4>
+      <a href="http://flshm.univh2c.ma/home" target="_blank">FLSHM Official Website</a>
+      <a href="https://ent.univh2c.ma/uPortal/normal/render.uP" target="_blank">ENT Student Portal</a>
+      <a href="https://classroom.google.com" target="_blank">Google Classroom</a>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    <span>© 2026 English Studies Portal · FLSHM Mohammedia</span>
+    <span>Made by <span>Mourad</span></span>
+  </div>
+</footer>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" class="admin-panel">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+    <div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:20px;color:var(--navy);"><i class="fas fa-shield-halved" style="color:var(--gold);margin-right:8px;"></i>Admin Panel <span class="admin-badge">Active</span></h3>
+      <p style="font-size:13px;color:var(--muted);margin-top:4px;">All changes are saved automatically and persist after refresh.</p>
+    </div>
+    <button style="padding:8px 16px;background:#fee2e2;color:#991b1b;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;" onclick="lockAdmin()"><i class="fas fa-lock"></i> Lock Panel</button>
+  </div>
+  <div class="admin-tabs">
+    <div class="admin-tab active" onclick="switchAdminTab('announcements',this)">📢 Announcements</div>
+    <div class="admin-tab" onclick="switchAdminTab('timetable',this)">📅 Timetable</div>
+    <div class="admin-tab" onclick="switchAdminTab('makeup',this)">🔄 Makeup Sessions</div>
+    <div class="admin-tab" onclick="switchAdminTab('lessons',this)">📖 Lessons</div>
+    <div class="admin-tab" onclick="switchAdminTab('examsadmin',this)">📝 Exams</div>
+  </div>
+  <div class="admin-section-content active" id="admin-announcements">
+    <button class="add-btn" onclick="openModal('addAnnModal')"><i class="fas fa-plus"></i> New Announcement</button>
+    <div id="adminAnnList"></div>
+  </div>
+  <div class="admin-section-content" id="admin-timetable">
+    <button class="add-btn" onclick="openModal('addTTModal')"><i class="fas fa-plus"></i> Add Class Row</button>
+    <div id="adminTTList"></div>
+  </div>
+  <div class="admin-section-content" id="admin-makeup">
+    <button class="add-btn" onclick="openModal('addMakeupModal')"><i class="fas fa-plus"></i> Add Makeup Session</button>
+    <div id="adminMakeupList"></div>
+  </div>
+  <div class="admin-section-content" id="admin-lessons">
+    <button class="add-btn" onclick="openModal('addLessonModal')"><i class="fas fa-plus"></i> Add Lesson</button>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Add a lesson link (Google Drive, PDF link, etc.) for any module.</p>
+    <div id="adminLessonList"></div>
+  </div>
+  <div class="admin-section-content" id="admin-examsadmin">
+    <button class="add-btn" onclick="openModal('addExamModal')"><i class="fas fa-plus"></i> Add Exam</button>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Add a past exam link for any module.</p>
+    <div id="adminExamList"></div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="adminPinModal">
+  <div class="modal">
+    <h3><i class="fas fa-shield-halved" style="color:var(--gold);margin-right:8px;"></i>Admin Access</h3>
+    <p>Enter your admin code to access the management panel.</p>
+    <div class="pin-input-group">
+      <input type="password" class="pin-field" id="pinField" placeholder="Enter admin code..." maxlength="30">
+      <button class="pin-submit" onclick="checkPin()">Enter</button>
+    </div>
+    <div class="pin-error" id="pinError">❌ Incorrect code. Try again.</div>
+    <div class="modal-actions" style="margin-top:16px;">
+      <button class="modal-btn modal-btn-cancel" onclick="closeAdminModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="addAnnModal">
+  <div class="modal">
+    <h3>Add Announcement</h3>
+    <p>This will appear for the selected group on the portal.</p>
+    <input type="text" id="annTitleInput" placeholder="Title / Subject">
+    <textarea id="annTextInput" placeholder="Announcement text..."></textarea>
+    <select id="annGroupInput">
+      <option value="Both">Both GR1 & GR2</option>
+      <option value="GR1">GR1 Only</option>
+      <option value="GR2">GR2 Only</option>
+    </select>
+    <select id="annTypeInput">
+      <option value="general">General</option>
+      <option value="info">Info</option>
+      <option value="urgent">Urgent</option>
+    </select>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" onclick="closeModal('addAnnModal')">Cancel</button>
+      <button class="modal-btn modal-btn-save" onclick="saveAnn()">Add Announcement</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="addMakeupModal">
+  <div class="modal">
+    <h3>Add Makeup Session</h3>
+    <p>Add a rescheduled or extra session for students.</p>
+    <input type="date" id="makeupDateInput">
+    <input type="text" id="makeupDescInput" placeholder="Description (e.g., Grammar - Room 12)">
+    <select id="makeupGroupInput">
+      <option value="Both">Both GR1 & GR2</option>
+      <option value="GR1">GR1 Only</option>
+      <option value="GR2">GR2 Only</option>
+    </select>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" onclick="closeModal('addMakeupModal')">Cancel</button>
+      <button class="modal-btn modal-btn-save" onclick="saveMakeup()">Add Session</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="addTTModal">
+  <div class="modal">
+    <h3>Add Timetable Row</h3>
+    <p>Add a class slot to the timetable.</p>
+    <select id="ttSemInput"><option value="S1">Semester 1</option><option value="S2">Semester 2</option></select>
+    <select id="ttGrInput"><option value="GR1">GR1</option><option value="GR2">GR2</option></select>
+    <input type="text" id="ttDayInput" placeholder="Day (e.g., Monday)">
+    <input type="text" id="ttModInput" placeholder="Module name">
+    <input type="text" id="ttTimeInput" placeholder="Time (e.g., 10:30 - 12:30)">
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" onclick="closeModal('addTTModal')">Cancel</button>
+      <button class="modal-btn modal-btn-save" onclick="saveTTRow()">Add Row</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="addLessonModal">
+  <div class="modal">
+    <h3>Add Lesson</h3>
+    <p>Add a lesson link for a module. Students will see a button to open it.</p>
+    <select id="lessonSemInput"><option value="S1">Semester 1</option><option value="S2">Semester 2</option></select>
+    <input type="text" id="lessonModInput" placeholder="Module name (e.g., Grammar 1)">
+    <input type="text" id="lessonTitleInput" placeholder="Lesson title (e.g., Lesson 1 - Present Tense)">
+    <textarea id="lessonDescInput" placeholder="Short description (optional)..."></textarea>
+    <input type="url" id="lessonUrlInput" placeholder="Link (Google Drive, PDF, etc.)">
+    <select id="lessonGroupInput">
+      <option value="Both">Both GR1 & GR2</option>
+      <option value="GR1">GR1 Only</option>
+      <option value="GR2">GR2 Only</option>
+    </select>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" onclick="closeModal('addLessonModal')">Cancel</button>
+      <button class="modal-btn modal-btn-save" onclick="saveLesson()">Add Lesson</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="addExamModal">
+  <div class="modal">
+    <h3>Add Past Exam</h3>
+    <p>Add an exam paper link for a module.</p>
+    <select id="examSemInput"><option value="S1">Semester 1</option><option value="S2">Semester 2</option></select>
+    <input type="text" id="examModInput" placeholder="Module name (e.g., Grammar 1)">
+    <input type="text" id="examTitleInput" placeholder="Exam title (e.g., Final Exam 2024/2025)">
+    <textarea id="examDescInput" placeholder="Short description (optional)..."></textarea>
+    <input type="url" id="examUrlInput" placeholder="Link (Google Drive, PDF, etc.)">
+    <select id="examGroupInput">
+      <option value="Both">Both GR1 & GR2</option>
+      <option value="GR1">GR1 Only</option>
+      <option value="GR2">GR2 Only</option>
+    </select>
+    <div class="modal-actions">
+      <button class="modal-btn modal-btn-cancel" onclick="closeModal('addExamModal')">Cancel</button>
+      <button class="modal-btn modal-btn-save" onclick="saveExam()">Add Exam</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CONSTANTS ──────────────────────────────────
+const ADMIN_CODE = 'Flshm-Mourad@2000';
+const STORE_KEYS = { ann:'flshm_ann', makeup:'flshm_makeup', timetable:'flshm_tt', lessons:'flshm_lessons', exams:'flshm_exams', nextId:'flshm_nextid' };
+
+// ── DEFAULTS ───────────────────────────────────
+const DEFAULT_ANN = [
+  { id:1, title:'Welcome to Semester 1!', text:'Please ensure your registration is complete and check your group schedule.', group:'Both', type:'info', date:'2026-01-02' },
+  { id:2, title:'Library Hours Extended', text:'Library hours have been extended for the exam period — open until 8PM.', group:'Both', type:'general', date:'2026-01-08' },
+  { id:3, title:'Urgent: Classroom Change', text:'Grammar session on Thursday has been moved to Amphi B.', group:'GR1', type:'urgent', date:'2026-01-10' },
+];
+const DEFAULT_MAKEUP = [
+  { id:4, date:'2026-01-02', desc:'Reading Comprehension — Amphi 1 (Extra session)', group:'Both' },
+  { id:5, date:'2026-01-05', desc:'Grammar — Room 12 (Makeup for Tuesday)', group:'GR1' },
+  { id:6, date:'2026-01-08', desc:'Spoken English — Language Lab', group:'GR2' },
+];
+const DEFAULT_TT = {
+  GR1:{ S1:[
+    {day:'Monday',module:'Academic Vocabulary',time:'12:30 - 14:30'},
+    {day:'Tuesday',module:'University Work Methodology',time:'10:30 - 12:30'},
+    {day:'Tuesday',module:'Guided Reading',time:'12:30 - 14:30'},
+    {day:'Wednesday',module:'Paragraph Writing',time:'12:30 - 14:30'},
+    {day:'Wednesday',module:'Reading Comprehension',time:'14:30 - 16:30'},
+    {day:'Thursday',module:'Grammar',time:'08:30 - 10:30'},
+    {day:'Thursday',module:'Spoken English',time:'10:30 - 12:30'},
+  ], S2:[] },
+  GR2:{ S1:[
+    {day:'Monday',module:'Grammar',time:'08:30 - 10:30'},
+    {day:'Tuesday',module:'Spoken English',time:'10:30 - 12:30'},
+    {day:'Wednesday',module:'Academic Vocabulary',time:'12:30 - 14:30'},
+    {day:'Thursday',module:'Reading Comprehension',time:'10:30 - 12:30'},
+  ], S2:[] }
+};
+const MODULE_NAMES = {
+  S1:['Grammar 1','Spoken English','Guided Reading 1','University Work Methodology','Paragraph Writing','Reading Comprehension','Academic Vocabulary'],
+  S2:['British & American Civilization','Oral Communication','Composition','Digital Culture','Grammar 2','Reading Comprehension 2','Guided Reading 2']
+};
+
+// ── STORAGE HELPERS ────────────────────────────
+function load(key, def) {
+  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : def; } catch(e) { return def; }
+}
+function save(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch(e) {}
+}
+
+// ── STATE ──────────────────────────────────────
+let currentGroup = 'GR1';
+let adminUnlocked = false;
+let currentTTSem = 'S1';
+let announcements = load(STORE_KEYS.ann, DEFAULT_ANN);
+let makeupSessions = load(STORE_KEYS.makeup, DEFAULT_MAKEUP);
+let timetable = load(STORE_KEYS.timetable, DEFAULT_TT);
+let lessons = load(STORE_KEYS.lessons, []);
+let examPapers = load(STORE_KEYS.exams, []);
+let nextId = load(STORE_KEYS.nextId, 20);
+
+function bumpId() { nextId++; save(STORE_KEYS.nextId, nextId); return nextId; }
+
+const linksDB = {
+  GR1:[
+    {label:'English Studies GR1 · S1/2',url:'https://chat.whatsapp.com/KC8H6nooswS9j3Gg9yozZt',ico:'fab fa-whatsapp',cls:'wsp'},
+    {label:'Announcements GR1 · S1/2',url:'https://chat.whatsapp.com/DGysm3YhQnpE7nGQLDd5km',ico:'fab fa-whatsapp',cls:'wsp'},
+    {label:'Google Classroom GR1',url:'https://classroom.google.com/c/ODM0OTEzMjY5NTEz?cjc=amozilem',ico:'fab fa-google',cls:'gc'},
+  ],
+  GR2:[
+    {label:'English Studies GR2 · S1/2',url:'https://chat.whatsapp.com/D8EFIBAoCqh9MatabkO1oN',ico:'fab fa-whatsapp',cls:'wsp'},
+    {label:'Announcements GR2 · S1/2',url:'https://chat.whatsapp.com/EKZ56fLFPevJ4NvoSkDMV6',ico:'fab fa-whatsapp',cls:'wsp'},
+    {label:'Google Classroom GR2',url:'https://classroom.google.com/c/NzkyNjU3NjkxNTM0?cjc=ldqb36iw',ico:'fab fa-google',cls:'gc'},
+  ]
+};
+
+// ── NAVIGATION ─────────────────────────────────
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.getElementById('nav-'+page).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  renderPage(page);
+}
+function renderPage(page) {
+  if(page==='home') renderAnnPreview();
+  else if(page==='modules') renderModules('S1');
+  else if(page==='exams') renderExams('S1');
+  else if(page==='timetable') renderTimetable('S1');
+  else if(page==='makeup') renderMakeup();
+  else if(page==='announcements') renderAllAnn();
+  else if(page==='space') renderSpace();
+}
+function switchGroup(gr) {
+  currentGroup=gr;
+  document.getElementById('grBtn1').classList.toggle('active',gr==='GR1');
+  document.getElementById('grBtn2').classList.toggle('active',gr==='GR2');
+  const active=document.querySelector('.page.active');
+  if(active) renderPage(active.id.replace('page-',''));
+}
+
+// ── ANNOUNCEMENTS ──────────────────────────────
+function annHTML(a) {
+  const dot=a.type==='urgent'?'urgent':(a.type==='info'?'info':'');
+  return `<div class="ann-item"><div class="ann-dot ${dot}"></div><div class="ann-body">
+    <div class="ann-meta"><span class="ann-date">${a.date}</span><span class="ann-tag tag-${a.type}">${a.type.charAt(0).toUpperCase()+a.type.slice(1)}</span></div>
+    <div class="ann-text"><strong>${a.title}</strong><br>${a.text}</div>
+    <div class="ann-group">For: ${a.group}</div>
+  </div></div>`;
+}
+function filteredAnn() { return announcements.filter(a=>a.group==='Both'||a.group===currentGroup); }
+function renderAnnPreview() { const el=document.getElementById('annPreview'); const f=filteredAnn().slice(0,3); el.innerHTML=f.length?f.map(annHTML).join(''):'<p style="color:var(--muted);font-size:14px;">No announcements yet.</p>'; }
+function renderAllAnn() { const el=document.getElementById('annFull'); const f=filteredAnn(); el.innerHTML=f.length?f.map(annHTML).join(''):'<p style="color:var(--muted);font-size:14px;">No announcements yet.</p>'; }
+
+// ── MODULES ────────────────────────────────────
+function renderModules(sem) {
+  const el=document.getElementById('modList');
+  const filtered=lessons.filter(l=>(l.group==='Both'||l.group===currentGroup)&&l.sem===sem);
+  // Group lessons by module name
+  const grouped={};
+  MODULE_NAMES[sem].forEach(m=>{ grouped[m]=[]; });
+  filtered.forEach(l=>{ if(!grouped[l.module]) grouped[l.module]=[]; grouped[l.module].push(l); });
+  
+  let html='';
+  Object.entries(grouped).forEach(([mod, lsns])=>{
+    html+=`<div style="margin-bottom:18px;">
+      <div style="font-weight:700;color:var(--navy);font-size:14px;padding:10px 14px;background:#eef2ff;border-radius:10px 10px 0 0;border:1px solid var(--border);border-bottom:none;display:flex;align-items:center;gap:8px;"><i class="fas fa-book-open" style="color:var(--royal);"></i>${mod}</div>`;
+    if(lsns.length===0) {
+      html+=`<div style="padding:12px 16px;background:#f8fafc;border:1px solid var(--border);border-radius:0 0 10px 10px;font-size:13px;color:var(--muted);">No lessons uploaded yet.</div>`;
+    } else {
+      lsns.forEach(l=>{
+        html+=`<div class="mod-item" style="border-radius:0;border-top:none;">
+          <div><div class="mod-name">${l.title}</div>${l.desc?`<div style="font-size:12px;color:var(--muted);margin-top:2px;">${l.desc}</div>`:''}</div>
+          <div class="mod-action"><a href="${l.url}" target="_blank" class="mod-btn mod-btn-lesson"><i class="fas fa-external-link-alt"></i> Open</a></div>
+        </div>`;
+      });
+      html+=`<div style="height:6px;background:#f8fafc;border:1px solid var(--border);border-top:none;border-radius:0 0 10px 10px;"></div>`;
+    }
+    html+=`</div>`;
+  });
+  el.innerHTML=html||'<div class="info-alert"><i class="fas fa-info-circle"></i> No lessons uploaded yet for this semester.</div>';
+}
+
+function renderExams(sem) {
+  const el=document.getElementById('examList');
+  const filtered=examPapers.filter(e=>(e.group==='Both'||e.group===currentGroup)&&e.sem===sem);
+  const grouped={};
+  MODULE_NAMES[sem].forEach(m=>{ grouped[m]=[]; });
+  filtered.forEach(e=>{ if(!grouped[e.module]) grouped[e.module]=[]; grouped[e.module].push(e); });
+
+  let html='';
+  Object.entries(grouped).forEach(([mod, exms])=>{
+    html+=`<div style="margin-bottom:18px;">
+      <div style="font-weight:700;color:var(--navy);font-size:14px;padding:10px 14px;background:#dcfce7;border-radius:10px 10px 0 0;border:1px solid var(--border);border-bottom:none;display:flex;align-items:center;gap:8px;"><i class="fas fa-file-alt" style="color:#166534;"></i>${mod}</div>`;
+    if(exms.length===0) {
+      html+=`<div style="padding:12px 16px;background:#f8fafc;border:1px solid var(--border);border-radius:0 0 10px 10px;font-size:13px;color:var(--muted);">No exams uploaded yet.</div>`;
+    } else {
+      exms.forEach(e=>{
+        html+=`<div class="mod-item" style="border-radius:0;border-top:none;">
+          <div><div class="mod-name">${e.title}</div>${e.desc?`<div style="font-size:12px;color:var(--muted);margin-top:2px;">${e.desc}</div>`:''}</div>
+          <div class="mod-action"><a href="${e.url}" target="_blank" class="mod-btn mod-btn-dl"><i class="fas fa-download"></i> Download</a></div>
+        </div>`;
+      });
+      html+=`<div style="height:6px;background:#f8fafc;border:1px solid var(--border);border-top:none;border-radius:0 0 10px 10px;"></div>`;
+    }
+    html+=`</div>`;
+  });
+  el.innerHTML=html||'<div class="info-alert"><i class="fas fa-info-circle"></i> No exams uploaded yet for this semester.</div>';
+}
+
+function showModSem(sem,el) { document.querySelectorAll('#page-modules .sem-tab').forEach(t=>t.classList.remove('active')); el.classList.add('active'); renderModules(sem); }
+function showExamSem(sem,el) { document.querySelectorAll('#page-exams .sem-tab').forEach(t=>t.classList.remove('active')); el.classList.add('active'); renderExams(sem); }
+
+// ── TIMETABLE ──────────────────────────────────
+function renderTimetable(sem) {
+  currentTTSem=sem;
+  const el=document.getElementById('ttView');
+  const rows=timetable[currentGroup]?timetable[currentGroup][sem]:[];
+  if(!rows||rows.length===0) { el.innerHTML='<div class="info-alert"><i class="fas fa-info-circle"></i> Timetable for this semester will be uploaded soon.</div>'; return; }
+  el.innerHTML=`<table class="ttable"><thead><tr><th>Day</th><th>Module</th><th>Time</th></tr></thead><tbody>${rows.map((r,i)=>`<tr style="animation:fadeIn 0.3s ease ${i*0.05}s both"><td>${r.day}</td><td>${r.module}</td><td><span class="time-chip">${r.time}</span></td></tr>`).join('')}</tbody></table>`;
+}
+function showTTSem(sem,el) { document.querySelectorAll('#page-timetable .sem-tab').forEach(t=>t.classList.remove('active')); el.classList.add('active'); renderTimetable(sem); }
+
+// ── MAKEUP ─────────────────────────────────────
+function renderMakeup() {
+  const el=document.getElementById('makeupList');
+  const f=makeupSessions.filter(s=>s.group==='Both'||s.group===currentGroup);
+  el.innerHTML=f.length?f.map(s=>`<div class="makeup-item"><div class="makeup-date"><i class="fas fa-calendar-day"></i> ${s.date} · ${s.group}</div><div class="makeup-desc">${s.desc}</div></div>`).join(''):'<div class="info-alert"><i class="fas fa-info-circle"></i> No makeup sessions scheduled.</div>';
+}
+
+// ── STUDENT SPACE ──────────────────────────────
+function renderSpace() {
+  const el=document.getElementById('spaceLinks');
+  el.innerHTML=linksDB[currentGroup].map(l=>`<a href="${l.url}" target="_blank" class="space-link"><div class="space-link-ico ${l.cls}"><i class="${l.ico}"></i></div>${l.label}</a>`).join('')+
+  `<div style="margin-top:20px;border-top:1px solid var(--border);padding-top:20px;">
+    <a href="https://ent.univh2c.ma/uPortal/normal/render.uP" target="_blank" class="space-link"><div class="space-link-ico ent"><i class="fas fa-graduation-cap"></i></div>ENT Student Portal — Hassan II University</a>
+    <a href="http://flshm.univh2c.ma/home" target="_blank" class="space-link"><div class="space-link-ico ent"><i class="fas fa-university"></i></div>FLSHM Official Website</a>
+  </div>`;
+}
+
+// ── ADMIN ──────────────────────────────────────
+function openAdminModal() {
+  if(adminUnlocked){ scrollToAdmin(); return; }
+  document.getElementById('adminPinModal').classList.add('open');
+  setTimeout(()=>document.getElementById('pinField').focus(),100);
+}
+function closeAdminModal() { document.getElementById('adminPinModal').classList.remove('open'); document.getElementById('pinField').value=''; document.getElementById('pinError').style.display='none'; }
+function checkPin() {
+  if(document.getElementById('pinField').value===ADMIN_CODE) {
+    adminUnlocked=true; closeAdminModal();
+    document.getElementById('adminPanel').classList.add('open');
+    renderAdminPanel(); scrollToAdmin();
+  } else {
+    document.getElementById('pinError').style.display='block';
+    document.getElementById('pinField').value='';
+    document.getElementById('pinField').focus();
+  }
+}
+document.getElementById('pinField').addEventListener('keydown',e=>{ if(e.key==='Enter') checkPin(); });
+function scrollToAdmin() { document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'}); }
+function lockAdmin() { adminUnlocked=false; document.getElementById('adminPanel').classList.remove('open'); }
+function switchAdminTab(tab,el) {
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.admin-section-content').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('admin-'+tab).classList.add('active');
+}
+function renderAdminPanel() { renderAdminAnn(); renderAdminTT(); renderAdminMakeup(); renderAdminLessons(); renderAdminExams(); }
+
+function renderAdminAnn() {
+  document.getElementById('adminAnnList').innerHTML=announcements.map(a=>`<div class="admin-item"><div class="admin-item-info"><strong>${a.title}</strong><span>${a.date} · ${a.group} · ${a.type}</span></div><button class="del-btn" onclick="deleteAnn(${a.id})"><i class="fas fa-trash"></i> Delete</button></div>`).join('')||'<p style="color:var(--muted);font-size:13px;">No announcements.</p>';
+}
+function renderAdminTT() {
+  let html=''; ['GR1','GR2'].forEach(gr=>{ ['S1','S2'].forEach(sem=>{ const rows=(timetable[gr]&&timetable[gr][sem])||[]; if(rows.length){ html+=`<div style="margin-bottom:16px;"><strong style="font-size:13px;color:var(--navy);">${gr} · ${sem}</strong><div style="margin-top:8px;">`; rows.forEach((r,i)=>{ html+=`<div class="admin-item"><div class="admin-item-info"><strong>${r.day} · ${r.module}</strong><span>${r.time}</span></div><button class="del-btn" onclick="deleteTTRow('${gr}','${sem}',${i})"><i class="fas fa-trash"></i></button></div>`; }); html+=`</div></div>`; } }); });
+  document.getElementById('adminTTList').innerHTML=html||'<p style="color:var(--muted);font-size:13px;">No timetable rows.</p>';
+}
+function renderAdminMakeup() {
+  document.getElementById('adminMakeupList').innerHTML=makeupSessions.map(s=>`<div class="admin-item"><div class="admin-item-info"><strong>${s.desc}</strong><span>${s.date} · ${s.group}</span></div><button class="del-btn" onclick="deleteMakeup(${s.id})"><i class="fas fa-trash"></i> Delete</button></div>`).join('')||'<p style="color:var(--muted);font-size:13px;">No sessions.</p>';
+}
+function renderAdminLessons() {
+  document.getElementById('adminLessonList').innerHTML=lessons.map(l=>`<div class="admin-item"><div class="admin-item-info"><strong>${l.title}</strong><span>${l.module} · ${l.sem} · ${l.group}</span></div><button class="del-btn" onclick="deleteLesson(${l.id})"><i class="fas fa-trash"></i> Delete</button></div>`).join('')||'<p style="color:var(--muted);font-size:13px;">No lessons added yet.</p>';
+}
+function renderAdminExams() {
+  document.getElementById('adminExamList').innerHTML=examPapers.map(e=>`<div class="admin-item"><div class="admin-item-info"><strong>${e.title}</strong><span>${e.module} · ${e.sem} · ${e.group}</span></div><button class="del-btn" onclick="deleteExam(${e.id})"><i class="fas fa-trash"></i> Delete</button></div>`).join('')||'<p style="color:var(--muted);font-size:13px;">No exams added yet.</p>';
+}
+
+// ── CRUD ───────────────────────────────────────
+function saveAnn() {
+  const title=document.getElementById('annTitleInput').value.trim();
+  const text=document.getElementById('annTextInput').value.trim();
+  if(!title||!text){alert('Please fill all fields.');return;}
+  const today=new Date().toISOString().split('T')[0];
+  announcements.unshift({id:bumpId(),title,text,group:document.getElementById('annGroupInput').value,type:document.getElementById('annTypeInput').value,date:today});
+  save(STORE_KEYS.ann,announcements);
+  closeModal('addAnnModal');
+  document.getElementById('annTitleInput').value=''; document.getElementById('annTextInput').value='';
+  renderAdminAnn(); renderAnnPreview(); renderAllAnn(); updateTicker();
+}
+function deleteAnn(id) {
+  if(!confirm('Delete this announcement?'))return;
+  announcements=announcements.filter(a=>a.id!==id); save(STORE_KEYS.ann,announcements);
+  renderAdminAnn(); renderAnnPreview(); renderAllAnn(); updateTicker();
+}
+function saveMakeup() {
+  const date=document.getElementById('makeupDateInput').value;
+  const desc=document.getElementById('makeupDescInput').value.trim();
+  if(!date||!desc){alert('Please fill all fields.');return;}
+  makeupSessions.push({id:bumpId(),date,desc,group:document.getElementById('makeupGroupInput').value});
+  save(STORE_KEYS.makeup,makeupSessions);
+  closeModal('addMakeupModal');
+  document.getElementById('makeupDateInput').value=''; document.getElementById('makeupDescInput').value='';
+  renderAdminMakeup(); renderMakeup();
+}
+function deleteMakeup(id) {
+  if(!confirm('Delete this session?'))return;
+  makeupSessions=makeupSessions.filter(s=>s.id!==id); save(STORE_KEYS.makeup,makeupSessions);
+  renderAdminMakeup(); renderMakeup();
+}
+function saveTTRow() {
+  const sem=document.getElementById('ttSemInput').value;
+  const gr=document.getElementById('ttGrInput').value;
+  const day=document.getElementById('ttDayInput').value.trim();
+  const mod=document.getElementById('ttModInput').value.trim();
+  const time=document.getElementById('ttTimeInput').value.trim();
+  if(!day||!mod||!time){alert('Please fill all fields.');return;}
+  if(!timetable[gr]) timetable[gr]={S1:[],S2:[]};
+  if(!timetable[gr][sem]) timetable[gr][sem]=[];
+  timetable[gr][sem].push({day,module:mod,time});
+  save(STORE_KEYS.timetable,timetable);
+  closeModal('addTTModal');
+  document.getElementById('ttDayInput').value=''; document.getElementById('ttModInput').value=''; document.getElementById('ttTimeInput').value='';
+  renderAdminTT(); renderTimetable(currentTTSem);
+}
+function deleteTTRow(gr,sem,idx) {
+  if(!confirm('Delete this row?'))return;
+  timetable[gr][sem].splice(idx,1); save(STORE_KEYS.timetable,timetable);
+  renderAdminTT(); renderTimetable(currentTTSem);
+}
+function saveLesson() {
+  const sem=document.getElementById('lessonSemInput').value;
+  const mod=document.getElementById('lessonModInput').value.trim();
+  const title=document.getElementById('lessonTitleInput').value.trim();
+  const desc=document.getElementById('lessonDescInput').value.trim();
+  const url=document.getElementById('lessonUrlInput').value.trim();
+  const group=document.getElementById('lessonGroupInput').value;
+  if(!mod||!title||!url){alert('Please fill Module, Title and Link.');return;}
+  lessons.push({id:bumpId(),sem,module:mod,title,desc,url,group});
+  save(STORE_KEYS.lessons,lessons);
+  closeModal('addLessonModal');
+  document.getElementById('lessonModInput').value=''; document.getElementById('lessonTitleInput').value=''; document.getElementById('lessonDescInput').value=''; document.getElementById('lessonUrlInput').value='';
+  renderAdminLessons(); renderModules(sem);
+}
+function deleteLesson(id) {
+  if(!confirm('Delete this lesson?'))return;
+  lessons=lessons.filter(l=>l.id!==id); save(STORE_KEYS.lessons,lessons);
+  renderAdminLessons(); renderModules('S1');
+}
+function saveExam() {
+  const sem=document.getElementById('examSemInput').value;
+  const mod=document.getElementById('examModInput').value.trim();
+  const title=document.getElementById('examTitleInput').value.trim();
+  const desc=document.getElementById('examDescInput').value.trim();
+  const url=document.getElementById('examUrlInput').value.trim();
+  const group=document.getElementById('examGroupInput').value;
+  if(!mod||!title||!url){alert('Please fill Module, Title and Link.');return;}
+  examPapers.push({id:bumpId(),sem,module:mod,title,desc,url,group});
+  save(STORE_KEYS.exams,examPapers);
+  closeModal('addExamModal');
+  document.getElementById('examModInput').value=''; document.getElementById('examTitleInput').value=''; document.getElementById('examDescInput').value=''; document.getElementById('examUrlInput').value='';
+  renderAdminExams(); renderExams(sem);
+}
+function deleteExam(id) {
+  if(!confirm('Delete this exam?'))return;
+  examPapers=examPapers.filter(e=>e.id!==id); save(STORE_KEYS.exams,examPapers);
+  renderAdminExams(); renderExams('S1');
+}
+
+// ── MODALS ─────────────────────────────────────
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+document.querySelectorAll('.modal-overlay').forEach(m=>{ m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}); });
+
+// ── TICKER ─────────────────────────────────────
+function updateTicker() {
+  const items=filteredAnn().slice(0,5).map(a=>`📢 ${a.title}: ${a.text}`).join(' &nbsp;&nbsp;&nbsp; ');
+  document.getElementById('tickerText').innerHTML=items||'📢 Welcome to the English Studies Portal — FLSHM Mohammedia';
+}
+
+// ── INIT ───────────────────────────────────────
+renderAnnPreview();
+updateTicker();
+</script>
+</body>
+</html>
