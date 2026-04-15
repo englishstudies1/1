@@ -1,0 +1,2042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>English Studies | FLSHM Mohammedia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root{--navy:#0a2342;--royal:#1a4480;--sky:#4a90d9;--gold:#c9a84c;--gold-light:#f0d080;--cream:#faf8f4;--text:#1a2035;--muted:#6b7a99;--border:#e2e8f2;--card-shadow:0 4px 24px rgba(10,35,66,0.10);--card-hover:0 12px 40px rgba(10,35,66,0.18);}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;}
+    header{background:var(--navy);position:sticky;top:0;z-index:1000;box-shadow:0 2px 20px rgba(0,0,0,0.25);}
+    .header-top{display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:72px;}
+    .logo-block{display:flex;align-items:center;gap:14px;}
+    .logo-icon{width:46px;height:46px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--navy);font-weight:900;}
+    .logo-text .site-name{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:white;letter-spacing:.5px;}
+    .logo-text .site-sub{font-size:11px;color:rgba(255,255,255,.55);letter-spacing:1px;text-transform:uppercase;}
+    .header-actions{display:flex;align-items:center;gap:12px;}
+    .group-switcher{display:flex;background:rgba(255,255,255,.1);border-radius:8px;overflow:hidden;}
+    .gr-btn{padding:7px 18px;border:none;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:13px;color:rgba(255,255,255,.6);background:transparent;transition:.25s;}
+    .gr-btn.active{background:var(--gold);color:var(--navy);}
+    /* Admin trigger hidden */
+    .admin-trigger{width:1px;height:1px;border:none;cursor:pointer;background:transparent;opacity:0;overflow:hidden;}
+    .header-nav{background:rgba(0,0,0,.2);display:flex;gap:0;overflow-x:auto;}
+    .nav-item{padding:12px 22px;cursor:pointer;color:rgba(255,255,255,.65);font-size:13px;font-weight:500;white-space:nowrap;border-bottom:3px solid transparent;transition:.2s;display:flex;align-items:center;gap:7px;}
+    .nav-item:hover{color:white;background:rgba(255,255,255,.07);}
+    .nav-item.active{color:var(--gold);border-bottom-color:var(--gold);}
+    /* HERO */
+    .hero{background:linear-gradient(135deg,var(--navy) 0%,var(--royal) 60%,#2a5fa8 100%);padding:70px 40px 60px;display:flex;align-items:center;gap:60px;position:relative;overflow:hidden;}
+    .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.15) 0%,transparent 70%);}
+    .hero-text{flex:1;color:white;position:relative;z-index:1;}
+    .hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(201,168,76,.2);border:1px solid rgba(201,168,76,.4);border-radius:100px;padding:5px 14px;font-size:12px;color:var(--gold-light);margin-bottom:18px;}
+    .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,54px);font-weight:700;line-height:1.1;margin-bottom:14px;}
+    .hero h1 span{color:var(--gold);}
+    .hero p{color:rgba(255,255,255,.7);font-size:15px;line-height:1.7;max-width:480px;}
+    .hero-stats{display:flex;gap:32px;margin-top:32px;flex-wrap:wrap;}
+    .stat-num{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--gold);font-weight:700;}
+    .stat-label{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;}
+    .hero-card{background:rgba(255,255,255,.08);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:28px 32px;min-width:270px;position:relative;z-index:1;animation:floatCard 4s ease-in-out infinite;}
+    @keyframes floatCard{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+    .card-label{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:16px;font-weight:600;}
+    .quick-link{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.8);font-size:13px;cursor:pointer;transition:.2s;}
+    .quick-link:last-child{border-bottom:none;}
+    .quick-link:hover{color:var(--gold);padding-left:4px;}
+    .quick-link i{width:28px;height:28px;background:rgba(201,168,76,.15);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--gold);}
+    /* TICKER — single announcement */
+    .ticker-bar{background:var(--gold);color:var(--navy);display:flex;align-items:center;overflow:hidden;height:40px;}
+    .ticker-label{background:var(--navy);color:var(--gold);padding:0 20px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;white-space:nowrap;display:flex;align-items:center;gap:7px;height:100%;}
+    .ticker-content{flex:1;overflow:hidden;height:100%;display:flex;align-items:center;}
+    .ticker-inner{display:inline-block;animation:ticker 22s linear infinite;white-space:nowrap;padding:0 20px;font-size:13px;font-weight:600;}
+    @keyframes ticker{0%{transform:translateX(60vw);}100%{transform:translateX(-100%);}}
+    /* MAIN */
+    main{max-width:1200px;margin:0 auto;padding:40px 24px;}
+    .sec-header{margin-bottom:28px;}
+    .sec-header h2{font-family:'Cormorant Garamond',serif;font-size:28px;color:var(--navy);display:flex;align-items:center;gap:10px;}
+    .sec-header h2 i{font-size:20px;color:var(--gold);}
+    .sec-header p{color:var(--muted);font-size:14px;margin-top:4px;}
+    .section-divider{height:2px;background:linear-gradient(90deg,var(--gold),transparent);width:60px;margin-top:8px;}
+    .cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;}
+    .menu-card{background:white;border-radius:16px;padding:28px 22px;text-align:center;cursor:pointer;border:1px solid var(--border);box-shadow:var(--card-shadow);transition:all .3s cubic-bezier(.34,1.56,.64,1);position:relative;overflow:hidden;}
+    .menu-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--royal),var(--sky));transform:scaleX(0);transition:.3s;}
+    .menu-card:hover{transform:translateY(-6px);box-shadow:var(--card-hover);border-color:var(--sky);}
+    .menu-card:hover::before{transform:scaleX(1);}
+    .card-ico{width:56px;height:56px;border-radius:14px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-size:22px;}
+    .ico-blue{background:#dbeafe;color:var(--royal);}.ico-green{background:#dcfce7;color:#166534;}.ico-orange{background:#ffedd5;color:#c2410c;}.ico-purple{background:#ede9fe;color:#6d28d9;}.ico-teal{background:#ccfbf1;color:#0f766e;}.ico-gold{background:#fef3c7;color:#92400e;}
+    .menu-card h3{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:4px;}
+    .menu-card p{font-size:12px;color:var(--muted);}
+    /* ANNOUNCEMENTS */
+    .ann-list{display:flex;flex-direction:column;gap:12px;}
+    .ann-item{background:white;border:1px solid var(--border);border-radius:14px;padding:18px 20px;display:flex;gap:16px;align-items:flex-start;box-shadow:var(--card-shadow);}
+    .ann-dot{width:10px;height:10px;border-radius:50%;background:var(--sky);margin-top:5px;flex-shrink:0;}
+    .ann-dot.urgent{background:#ef4444;}.ann-dot.info{background:var(--gold);}
+    .ann-body{flex:1;}
+    .ann-meta{display:flex;gap:10px;align-items:center;margin-bottom:5px;flex-wrap:wrap;}
+    .ann-date{font-size:11px;color:var(--muted);}
+    .ann-tag{font-size:10px;padding:2px 8px;border-radius:100px;font-weight:600;}
+    .tag-urgent{background:#fee2e2;color:#991b1b;}.tag-info{background:#dbeafe;color:#1e40af;}.tag-general{background:#f1f5f9;color:#475569;}
+    .ann-text{font-size:14px;color:var(--text);line-height:1.5;}
+    .ann-group{font-size:11px;color:var(--muted);margin-top:4px;}
+    /* TABS */
+    .sem-tabs{display:flex;gap:8px;margin-bottom:24px;}
+    .sem-tab{padding:9px 22px;border:1px solid var(--border);border-radius:8px;background:white;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:.2s;}
+    .sem-tab.active{background:var(--navy);color:white;border-color:var(--navy);}
+    /* MODULES */
+    .module-list{display:flex;flex-direction:column;gap:10px;}
+    .mod-item{background:#f8fafc;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+    .mod-item:hover{border-color:var(--sky);}
+    .mod-header{padding:14px 18px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+    .mod-name{font-weight:500;font-size:14px;display:flex;align-items:center;gap:8px;}
+    .mod-toggle{color:var(--muted);font-size:12px;transition:.3s;}
+    .mod-item.open .mod-toggle{transform:rotate(180deg);}
+    .mod-files{display:none;padding:0 18px 14px;border-top:1px solid var(--border);}
+    .mod-item.open .mod-files{display:block;}
+    .file-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;}
+    .file-item:last-child{border-bottom:none;}
+    .file-item a{color:var(--royal);font-weight:500;text-decoration:none;flex:1;}
+    .file-item a:hover{color:var(--sky);}
+    .file-tag{font-size:10px;padding:2px 8px;border-radius:100px;font-weight:600;background:#dbeafe;color:var(--royal);}
+    .no-files{color:var(--muted);font-size:13px;padding:10px 0;}
+    /* TIMETABLE */
+    .ttable{width:100%;border-collapse:collapse;margin-top:4px;}
+    .ttable th{background:var(--navy);color:white;padding:12px 16px;text-align:left;font-size:13px;font-weight:600;}
+    .ttable th:first-child{border-radius:10px 0 0 0;}.ttable th:last-child{border-radius:0 10px 0 0;}
+    .ttable td:nth-child(3),.ttable th:nth-child(3){color:var(--royal);font-size:12px;}
+    .ttable td{padding:12px 16px;font-size:13px;border-bottom:1px solid var(--border);}
+    .ttable tr:last-child td{border-bottom:none;}.ttable tr:nth-child(even) td{background:#f8fafc;}.ttable tr:hover td{background:#eef2ff;}
+    .time-chip{background:#dbeafe;color:var(--royal);padding:3px 10px;border-radius:100px;font-size:12px;font-weight:600;white-space:nowrap;}
+    .makeup-item{background:#f8fafc;border:1px solid var(--border);border-left:4px solid var(--sky);border-radius:10px;padding:16px 18px;margin-bottom:12px;}
+    .makeup-date{font-size:12px;font-weight:700;color:var(--royal);margin-bottom:4px;}
+    .makeup-desc{font-size:14px;color:var(--text);}
+    .space-link{display:flex;align-items:center;gap:14px;padding:16px 18px;background:#f8fafc;border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--text);font-weight:500;font-size:14px;transition:.2s;margin-bottom:10px;}
+    .space-link:hover{background:#eef2ff;border-color:var(--sky);transform:translateX(4px);}
+    .space-link-ico{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;}
+    .wsp{background:#dcfce7;color:#16a34a;}.gc{background:#fee2e2;color:#dc2626;}.ent{background:#dbeafe;color:var(--royal);}
+    .info-alert{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:12px 16px;display:flex;gap:10px;align-items:center;font-size:13px;color:#1e40af;margin-bottom:20px;}
+    /* MODALS */
+    .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:9999;align-items:center;justify-content:center;padding:20px;}
+    .modal-overlay.open{display:flex;}
+    .modal{background:white;border-radius:20px;padding:32px;width:100%;max-width:520px;box-shadow:0 25px 60px rgba(0,0,0,.3);animation:fadeUp .25s ease;max-height:90vh;overflow-y:auto;}
+    .modal h3{font-family:'Cormorant Garamond',serif;font-size:24px;color:var(--navy);margin-bottom:6px;}
+    .modal p.sub{color:var(--muted);font-size:13px;margin-bottom:20px;}
+    .modal input,.modal textarea,.modal select{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;margin-bottom:12px;outline:none;transition:.2s;}
+    .modal input:focus,.modal textarea:focus,.modal select:focus{border-color:var(--sky);box-shadow:0 0 0 3px rgba(74,144,217,.15);}
+    .modal textarea{resize:vertical;min-height:80px;}
+    .modal-actions{display:flex;gap:10px;margin-top:8px;}
+    .modal-btn{flex:1;padding:12px;border:none;border-radius:10px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:14px;transition:.2s;}
+    .modal-btn-cancel{background:#f1f5f9;color:var(--muted);}.modal-btn-cancel:hover{background:#e2e8f0;}
+    .modal-btn-save{background:var(--navy);color:white;}.modal-btn-save:hover{background:var(--royal);}
+    /* ADMIN */
+    .admin-panel{display:none;background:white;border-radius:20px;padding:28px 24px;border:2px solid var(--gold);margin:32px auto;max-width:1200px;}
+    .admin-panel.open{display:block;animation:fadeUp .3s ease;}
+    .admin-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
+    .admin-tab{padding:8px 18px;border:1px solid var(--border);border-radius:8px;background:#f8fafc;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:.2s;}
+    .admin-tab.active{background:var(--gold);color:var(--navy);border-color:var(--gold);}
+    .admin-section-content{display:none;}.admin-section-content.active{display:block;}
+    .add-btn{padding:10px 20px;background:var(--navy);color:white;border:none;border-radius:10px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:13px;display:inline-flex;align-items:center;gap:7px;margin-bottom:16px;transition:.2s;}
+    .add-btn:hover{background:var(--royal);}
+    /* Drag-to-reorder admin items */
+    .admin-item{background:#f8fafc;border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:10px;cursor:grab;user-select:none;}
+    .admin-item.dragging{opacity:.5;border:2px dashed var(--gold);cursor:grabbing;}
+    .admin-item.drag-over{border:2px solid var(--sky);background:#eef2ff;}
+    .drag-handle{color:var(--muted);font-size:14px;margin-right:4px;cursor:grab;flex-shrink:0;}
+    .admin-item-info{font-size:13px;flex:1;min-width:0;}
+    .admin-item-info strong{font-weight:600;color:var(--navy);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .admin-item-info span{color:var(--muted);font-size:12px;}
+    .admin-item-actions{display:flex;gap:6px;flex-shrink:0;}
+    .del-btn{padding:5px 12px;background:#fee2e2;color:#991b1b;border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:.2s;}
+    .del-btn:hover{background:#991b1b;color:white;}
+    .edit-btn{padding:5px 12px;background:#dbeafe;color:var(--royal);border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:.2s;}
+    .edit-btn:hover{background:var(--royal);color:white;}
+    /* Pin */
+    .pin-input-group{display:flex;gap:8px;align-items:center;margin-bottom:12px;}
+    .pin-field{flex:1;padding:12px 14px;border:1px solid var(--border);border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:14px;outline:none;}
+    .pin-field:focus{border-color:var(--sky);box-shadow:0 0 0 3px rgba(74,144,217,.15);}
+    .pin-submit{padding:12px 20px;background:var(--navy);color:white;border:none;border-radius:10px;cursor:pointer;font-weight:600;}
+    .pin-error{color:#ef4444;font-size:13px;margin-top:4px;display:none;}
+    /* Admin mod groups */
+    .admin-mod-group{margin-bottom:12px;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+    .admin-mod-head{padding:11px 16px;background:#f8fafc;font-weight:600;font-size:13px;color:var(--navy);display:flex;justify-content:space-between;align-items:center;cursor:pointer;}
+    .admin-mod-body{padding:12px 16px;display:none;}
+    .admin-mod-group.open .admin-mod-body{display:block;}
+    .admin-file-item{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;}
+    .admin-file-item:last-child{border-bottom:none;}
+    .admin-file-item span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    /* FOOTER */
+    footer{background:var(--navy);color:rgba(255,255,255,.7);margin-top:60px;}
+    .footer-main{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;padding:50px 24px 40px;}
+    .footer-col h4{font-family:'Cormorant Garamond',serif;color:white;font-size:18px;margin-bottom:14px;}
+    .footer-col p,.footer-col a{font-size:13px;line-height:1.9;color:rgba(255,255,255,.55);display:block;text-decoration:none;transition:.2s;}
+    .footer-col a:hover{color:var(--gold);}
+    /* Admin login icon in footer — subtle */
+    .footer-admin-btn{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.15);font-size:14px;transition:.2s;padding:4px;}
+    .footer-admin-btn:hover{color:rgba(255,255,255,.35);}
+    .footer-divider{border:none;border-top:1px solid rgba(255,255,255,.1);}
+    .footer-bottom{max-width:1200px;margin:0 auto;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(255,255,255,.35);}
+    /* PAGES */
+    .page{display:none;}.page.active{display:block;}
+    .fade-in{animation:fadeIn .4s ease forwards;}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}
+    .pulse-dot{display:inline-block;width:8px;height:8px;background:#22c55e;border-radius:50%;margin-right:6px;animation:pulse 2s ease-in-out infinite;}
+    @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4);}50%{box-shadow:0 0 0 6px rgba(34,197,94,0);}}
+    .admin-badge{display:inline-block;background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;text-transform:uppercase;letter-spacing:.5px;margin-left:8px;}
+    /* Makeup new layout */
+    .makeup-row{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0;}
+    .mk-cell{display:flex;align-items:center;gap:6px;font-size:13px;background:#f0f4ff;padding:5px 12px;border-radius:20px;color:var(--navy);}
+    .mk-cell i{color:var(--royal);font-size:12px;}
+    .makeup-note{font-size:13px;color:var(--muted);margin-top:4px;font-style:italic;}
+    /* Version badge */
+    .version-badge{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);font-size:10px;font-weight:800;padding:3px 10px;border-radius:100px;letter-spacing:.5px;display:inline-block;}
+    .new-badge{background:#ef4444;color:white;font-size:9px;font-weight:800;padding:2px 6px;border-radius:100px;letter-spacing:.5px;animation:pulse 2s infinite;vertical-align:super;}
+    /* Arrow reorder buttons */
+    .order-btn{padding:3px 8px;border:1px solid var(--border);border-radius:5px;background:white;cursor:pointer;font-size:12px;color:var(--muted);transition:.15s;line-height:1;}
+    .order-btn:hover{background:var(--navy);color:white;border-color:var(--navy);}
+    .order-btn:disabled{opacity:.3;cursor:default;}
+    .order-btns{display:flex;flex-direction:column;gap:2px;flex-shrink:0;}
+    /* Module edit btn */
+    .mod-edit-btn{padding:5px 12px;background:#dbeafe;color:var(--royal);border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:.2s;}
+    .mod-edit-btn:hover{background:var(--royal);color:white;}
+    /* Views & likes on ann/makeup */
+    .ann-footer{display:flex;align-items:center;gap:14px;margin-top:10px;padding-top:8px;border-top:1px solid var(--border);}
+    .stat-pill{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);}
+    .like-btn{display:flex;align-items:center;gap:5px;font-size:12px;background:none;border:none;cursor:pointer;color:var(--muted);padding:3px 8px;border-radius:20px;transition:.2s;}
+    .like-btn:hover{background:#fee2e2;color:#e11d48;}
+    .like-btn.liked{color:#e11d48;background:#fee2e2;}
+    /* Settings checkboxes */
+    #admin-settings-content label{user-select:none;}
+    #admin-settings-content input[type=checkbox]{width:16px;height:16px;cursor:pointer;accent-color:var(--navy);}
+    .loading-overlay{position:fixed;inset:0;background:rgba(10,35,66,0.92);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;color:white;gap:16px;}
+    .loading-spinner{width:48px;height:48px;border:4px solid rgba(255,255,255,0.2);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+    .loading-text{font-size:15px;color:rgba(255,255,255,0.7);font-family:'Plus Jakarta Sans',sans-serif;}
+    /* Login modal */
+    .login-modal .modal-icon{width:64px;height:64px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:26px;color:var(--navy);}
+    .admin-who{font-size:12px;background:#f0f4ff;border-radius:8px;padding:8px 12px;margin-bottom:12px;color:var(--royal);font-weight:500;}
+    
+    /* Arrow reorder buttons */
+    .order-btn{padding:3px 8px;border:1px solid var(--border);border-radius:5px;background:white;cursor:pointer;font-size:12px;color:var(--muted);transition:.15s;line-height:1;}
+    .order-btn:hover{background:var(--navy);color:white;border-color:var(--navy);}
+    .order-btns{display:flex;flex-direction:column;gap:2px;flex-shrink:0;}
+    /* Views & likes on ann/makeup */
+    .ann-footer{display:flex;align-items:center;gap:14px;margin-top:10px;padding-top:8px;border-top:1px solid var(--border);}
+    .stat-pill{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted);}
+    .like-btn{display:flex;align-items:center;gap:5px;font-size:12px;background:none;border:none;cursor:pointer;color:var(--muted);padding:3px 8px;border-radius:20px;transition:.2s;}
+    .like-btn:hover{background:#fee2e2;color:#e11d48;}
+    .like-btn.liked{color:#e11d48;background:#fee2e2;}
+    /* Multiline ann text */
+    .ann-text{font-size:14px;color:var(--text);line-height:1.6;white-space:pre-wrap;word-break:break-word;}
+    /* Module edit */
+    .mod-edit-btn{padding:5px 12px;background:#dbeafe;color:var(--royal);border:none;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:.2s;}
+    .mod-edit-btn:hover{background:var(--royal);color:white;}
+
+    /* Comments system */
+    .comments-section{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);}
+    .comments-toggle-btn{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--royal);background:none;border:none;cursor:pointer;padding:4px 8px;border-radius:8px;transition:.2s;font-weight:600;}
+    .comments-toggle-btn:hover{background:#dbeafe;}
+    .comments-box{margin-top:12px;display:none;}
+    .comments-box.open{display:block;}
+    .comment-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #f0f4ff;}
+    .comment-item:last-child{border-bottom:none;}
+    .comment-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--royal),var(--sky));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:white;flex-shrink:0;}
+    .comment-body{flex:1;}
+    .comment-username{font-size:12px;font-weight:700;color:var(--navy);}
+    .comment-text{font-size:13px;color:var(--text);line-height:1.5;margin-top:2px;white-space:pre-wrap;word-break:break-word;}
+    .comment-text .mention{color:#2563eb;font-weight:600;}
+    .comment-meta{display:flex;align-items:center;gap:10px;margin-top:6px;}
+    .comment-time{font-size:11px;color:var(--muted);}
+    .comment-like-btn{display:flex;align-items:center;gap:4px;font-size:11px;background:none;border:none;cursor:pointer;color:var(--muted);padding:2px 6px;border-radius:10px;transition:.2s;}
+    .comment-like-btn:hover{background:#fee2e2;color:#e11d48;}
+    .comment-like-btn.liked{color:#e11d48;background:#fee2e2;}
+    .comment-reply-btn{font-size:11px;color:var(--royal);background:none;border:none;cursor:pointer;padding:2px 6px;border-radius:10px;transition:.2s;font-weight:600;}
+    .comment-reply-btn:hover{background:#dbeafe;}
+    .comment-del-btn{font-size:11px;color:#991b1b;background:none;border:none;cursor:pointer;padding:2px 6px;border-radius:10px;transition:.2s;}
+    .comment-del-btn:hover{background:#fee2e2;}
+    .replies-section{margin-left:42px;border-left:2px solid #e2e8f2;padding-left:10px;margin-top:6px;}
+    .comment-input-row{display:flex;gap:8px;margin-top:12px;align-items:flex-start;}
+    .comment-input-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:white;flex-shrink:0;margin-top:4px;}
+    .comment-input-wrap{flex:1;position:relative;}
+    .comment-textarea{width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;resize:none;outline:none;transition:.2s;min-height:36px;max-height:120px;overflow-y:auto;}
+    .comment-textarea:focus{border-color:var(--sky);box-shadow:0 0 0 2px rgba(74,144,217,.12);}
+    .comment-send-btn{padding:7px 14px;background:var(--navy);color:white;border:none;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;transition:.2s;margin-top:4px;white-space:nowrap;}
+    .comment-send-btn:hover{background:var(--royal);}
+    .username-tag{font-size:11px;color:var(--muted);margin-top:4px;font-style:italic;}
+    @media(max-width:768px){.header-top{padding:0 18px;}.hero{flex-direction:column;padding:40px 20px;gap:32px;}.hero-card{min-width:unset;width:100%;}main{padding:24px 16px;}.footer-main{grid-template-columns:1fr;gap:24px;padding:32px 20px;}.footer-bottom{flex-direction:column;gap:6px;text-align:center;}.cards-grid{grid-template-columns:repeat(2,1fr);}}
+  </style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Loading portal...</div>
+</div>
+
+<header>
+  <div class="header-top">
+    <div class="logo-block">
+      <div class="logo-icon">E</div>
+      <div class="logo-text"><div class="site-name">English Studies</div><div class="site-sub">FLSHM · Mohammedia</div></div>
+    </div>
+    <div class="header-actions">
+      <div class="group-switcher">
+        <button class="gr-btn active" id="grBtn1" onclick="switchGroup('GR1')">GR1</button>
+        <button class="gr-btn" id="grBtn2" onclick="switchGroup('GR2')">GR2</button>
+      </div>
+      <!-- Hidden admin trigger (1px invisible) -->
+      <button class="admin-trigger" id="adminTrigger" onclick="openLoginModal()"></button>
+    </div>
+  </div>
+  <nav class="header-nav">
+    <div class="nav-item active" onclick="showPage('home')" id="nav-home"><i class="fas fa-home"></i> Home</div>
+    <div class="nav-item" onclick="showPage('modules')" id="nav-modules"><i class="fas fa-book"></i> Modules</div>
+    <div class="nav-item" onclick="showPage('exams')" id="nav-exams"><i class="fas fa-file-alt"></i> Past Exams</div>
+    <div class="nav-item" onclick="showPage('timetable')" id="nav-timetable"><i class="fas fa-calendar-week"></i> Timetable</div>
+    <div class="nav-item" onclick="showPage('makeup')" id="nav-makeup"><i class="fas fa-clock-rotate-left"></i> Makeup Sessions</div>
+    <div class="nav-item" onclick="showPage('announcements')" id="nav-announcements"><i class="fas fa-bullhorn"></i> Announcements</div>
+    <div class="nav-item" onclick="showPage('space')" id="nav-space"><i class="fas fa-users"></i> Student Space</div>
+  </nav>
+</header>
+
+<!-- Ticker: only first announcement -->
+<div class="ticker-bar">
+  <div class="ticker-label"><i class="fas fa-broadcast-tower"></i> News</div>
+  <div class="ticker-content"><div class="ticker-inner" id="tickerText">📢 Welcome to the English Studies Portal — FLSHM Mohammedia</div></div>
+</div>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-badge"><span class="pulse-dot"></span> Academic Year 2025–2026</div>
+      <h1>Faculty of Letters<br>& <span>Humanities</span></h1>
+      <p>Your official portal for the English Studies Department — GR1 &amp; GR2. Access timetables, modules, past exams, announcements, and more.</p>
+      <div class="hero-stats">
+        <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">Modules</div></div>
+        <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Groups</div></div>
+        <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Semesters</div></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="card-label">Quick Access</div>
+      <div class="quick-link" onclick="showPage('timetable')"><i class="fas fa-calendar-week"></i> View Timetable</div>
+      <div class="quick-link" onclick="showPage('modules')"><i class="fas fa-book"></i> Study Modules</div>
+      <div class="quick-link" onclick="showPage('exams')"><i class="fas fa-file-alt"></i> Past Exams</div>
+      <div class="quick-link" onclick="showPage('makeup')"><i class="fas fa-clock-rotate-left"></i> Makeup Sessions</div>
+      <div class="quick-link" onclick="showPage('space')"><i class="fas fa-users"></i> Student Space</div>
+    </div>
+  </section>
+  <main>
+    <div class="sec-header" style="margin-top:8px;"><h2><i class="fas fa-bullhorn"></i> Latest Announcements</h2><div class="section-divider"></div></div>
+    <div class="ann-list" id="annPreview"></div>
+    <div style="margin-top:32px;">
+      <div class="sec-header"><h2><i class="fas fa-th-large"></i> Quick Navigation</h2><div class="section-divider"></div></div>
+      <div class="cards-grid">
+        <div class="menu-card" onclick="showPage('modules')"><div class="card-ico ico-blue"><i class="fas fa-book"></i></div><h3>Modules</h3><p>Course materials S1 &amp; S2</p></div>
+        <div class="menu-card" onclick="showPage('exams')"><div class="card-ico ico-green"><i class="fas fa-file-signature"></i></div><h3>Past Exams</h3><p>Last year's exam papers</p></div>
+        <div class="menu-card" onclick="showPage('timetable')"><div class="card-ico ico-orange"><i class="fas fa-calendar-week"></i></div><h3>Timetable</h3><p>Weekly class schedule</p></div>
+        <div class="menu-card" onclick="showPage('makeup')"><div class="card-ico ico-purple"><i class="fas fa-clock-rotate-left"></i></div><h3>Makeup Sessions</h3><p>Rescheduled lessons</p></div>
+        <div class="menu-card" onclick="showPage('announcements')"><div class="card-ico ico-teal"><i class="fas fa-bullhorn"></i></div><h3>Announcements</h3><p>Department updates</p></div>
+        <div class="menu-card" onclick="showPage('space')"><div class="card-ico ico-gold"><i class="fas fa-users"></i></div><h3>Student Space</h3><p>WhatsApp &amp; Classroom</p></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- MODULES -->
+<div id="page-modules" class="page">
+  <main>
+    <div class="sec-header" style="margin-top:8px;"><h2><i class="fas fa-book"></i> Study Modules</h2><p>Click a module to view lessons and files</p><div class="section-divider"></div></div>
+    <div class="sem-tabs" id="modSemTabs"></div>
+    <div class="module-list" id="modList"></div>
+  </main>
+</div>
+
+<!-- PAST EXAMS -->
+<div id="page-exams" class="page">
+  <main>
+    <div class="sec-header" style="margin-top:8px;"><h2><i class="fas fa-file-alt"></i> Last Year Exams</h2><p>Click a module to view past exam files</p><div class="section-divider"></div></div>
+    <div class="sem-tabs" id="examSemTabs"></div>
+    <div class="module-list" id="examList"></div>
+  </main>
+</div>
+
+<!-- TIMETABLE -->
+<div id="page-timetable" class="page">
+  <main>
+    <div class="sec-header" style="margin-top:8px;"><h2><i class="fas fa-calendar-week"></i> Class Timetable</h2><p>Weekly schedule — subject to change</p><div class="section-divider"></div></div>
+    <div class="info-alert"><i class="fas fa-info-circle"></i> The timetable may be updated by the admin. Please check back regularly.</div>
+    <div class="sem-tabs"><div class="sem-tab active" onclick="showTTSem('S1',this)">Semester 1</div><div class="sem-tab" onclick="showTTSem('S2',this)">Semester 2</div></div>
+    <div id="ttView"></div>
+  </main>
+</div>
+
+<!-- MAKEUP -->
+<div id="page-makeup" class="page">
+  <main>
+    <div class="sec-header" style="margin-top:8px;"><h2><i class="fas fa-clock-rotate-left"></i> Makeup Sessions</h2><p>Rescheduled and extra lessons</p><div class="section-divider"></div></div>
+    <div id="makeupList"></div>
+  </main>
+</div>
+
+<!-- ANNOUNCEMENTS -->
+<div id="page-announcements" class="page">
+  <main>
+    <div class="sec-header" style="margin-top:8px;"><h2><i class="fas fa-bullhorn"></i> All Announcements</h2><p>Official updates from the English Studies Department</p><div class="section-divider"></div></div>
+    <div class="ann-list" id="annFull"></div>
+  </main>
+</div>
+
+<!-- STUDENT SPACE -->
+<div id="page-space" class="page">
+  <main>
+    <div class="sec-header" style="margin-top:8px;"><h2><i class="fas fa-users"></i> Student Space</h2><p>Community links and resources for your group</p><div class="section-divider"></div></div>
+    <div id="spaceLinks"></div>
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-main">
+    <div class="footer-col">
+      <h4>English Studies Portal</h4>
+      <p>Faculty of Letters &amp; Humanities<br>Hassan II University — Mohammedia<br>English Studies Department</p>
+      <p style="margin-top:10px;color:rgba(255,255,255,.35);font-size:12px;">GR1 &amp; GR2 · Academic Year 2025–2026</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a href="#" onclick="showPage('timetable')">Timetable</a>
+      <a href="#" onclick="showPage('modules')">Modules</a>
+      <a href="#" onclick="showPage('exams')">Past Exams</a>
+      <a href="#" onclick="showPage('makeup')">Makeup Sessions</a>
+      <a href="#" onclick="showPage('announcements')">Announcements</a>
+    </div>
+    <div class="footer-col">
+      <h4>External Resources</h4>
+      <a href="http://flshm.univh2c.ma/home" target="_blank">FLSHM Official Website</a>
+      <a href="https://ent.univh2c.ma/uPortal/normal/render.uP" target="_blank">ENT Student Portal</a>
+      <a href="https://classroom.google.com" target="_blank">Google Classroom</a>
+    </div>
+  </div>
+  <hr class="footer-divider">
+  <div class="footer-bottom">
+    <span id="footerCopy">© 2026 English Studies Portal · FLSHM Mohammedia &nbsp;<span class="version-badge" id="footerVersion">v2.0.1</span></span>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span id="footerMadeBy" style="display:none;"></span>
+      <button class="footer-admin-btn" onclick="openLoginModal()" title=""><i class="fas fa-circle-user"></i></button>
+    </div>
+  </div>
+</footer>
+
+<!-- ADMIN PANEL -->
+<div id="adminPanel" class="admin-panel">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+    <div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--navy);"><i class="fas fa-shield-halved" style="color:var(--gold);margin-right:8px;"></i>Admin Panel <span class="admin-badge">Active</span></h3>
+      <p style="font-size:13px;color:var(--muted);margin-top:4px;">Logged in as: <strong id="adminWho" style="color:var(--navy);"></strong> — All changes saved to Firebase instantly.</p>
+    </div>
+    <button style="padding:8px 16px;background:#fee2e2;color:#991b1b;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:13px;" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+  <div class="admin-tabs">
+    <div class="admin-tab active" onclick="switchAdminTab('announcements',this)">📢 Announcements</div>
+    <div class="admin-tab" onclick="switchAdminTab('lessons',this)">📚 Lessons</div>
+    <div class="admin-tab" onclick="switchAdminTab('exams-admin',this)">📝 Exams</div>
+    <div class="admin-tab" onclick="switchAdminTab('timetable',this)">📅 Timetable</div>
+    <div class="admin-tab" onclick="switchAdminTab('makeup',this)">🔄 Makeup</div>
+    <div class="admin-tab" onclick="switchAdminTab('settings',this)">⚙️ Settings</div>
+    <div class="admin-tab" onclick="switchAdminTab('comments',this)">💬 Comments</div>
+  </div>
+  <div class="admin-section-content active" id="admin-announcements">
+    <button class="add-btn" onclick="openModal('addAnnModal')"><i class="fas fa-plus"></i> New Announcement</button>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:12px;"><i class="fas fa-grip-vertical"></i> Drag items to reorder</p>
+    <div id="adminAnnList"></div>
+  </div>
+  <div class="admin-section-content" id="admin-lessons">
+    <div class="sem-tabs" style="margin-bottom:16px;">
+      <div class="sem-tab active" onclick="switchLessonAdminSem('S1',this)">Semester 1</div>
+      <div class="sem-tab" onclick="switchLessonAdminSem('S2',this)">Semester 2</div>
+    </div>
+    <div id="adminLessonList"></div>
+  </div>
+  <div class="admin-section-content" id="admin-exams-admin">
+    <div class="sem-tabs" style="margin-bottom:16px;">
+      <div class="sem-tab active" onclick="switchExamAdminSem('S1',this)">Semester 1</div>
+      <div class="sem-tab" onclick="switchExamAdminSem('S2',this)">Semester 2</div>
+    </div>
+    <div id="adminExamList"></div>
+  </div>
+  <div class="admin-section-content" id="admin-timetable">
+    <button class="add-btn" onclick="openModal('addTTModal')"><i class="fas fa-plus"></i> Add Class Row</button>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:12px;"><i class="fas fa-grip-vertical"></i> Drag to reorder rows</p>
+    <div id="adminTTList"></div>
+  </div>
+  <div class="admin-section-content" id="admin-makeup">
+    <button class="add-btn" onclick="openModal('addMakeupModal')"><i class="fas fa-plus"></i> Add Makeup Session</button>
+    <div id="adminMakeupList"></div>
+  </div>
+  <div class="admin-section-content" id="admin-settings">
+    <div id="admin-settings-content"></div>
+  </div>
+  <div class="admin-section-content" id="admin-comments">
+    <h4 style="font-size:14px;color:var(--navy);margin-bottom:12px;font-weight:700;">💬 Gestion des commentaires</h4>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">Tous les commentaires de toutes les annonces. Supprimez ceux qui sont inappropriés.</p>
+    <div id="adminCommentsList"></div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL (email + password) -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal login-modal">
+    <div class="login-modal">
+      <div class="modal-icon"><i class="fas fa-graduation-cap"></i></div>
+      <h3 style="text-align:center;margin-bottom:4px;">Admin Login</h3>
+      <p class="sub" style="text-align:center;">FLSHM English Studies Portal</p>
+      <div class="admin-who" id="loginWhoHint"></div>
+      <input type="email" id="loginEmail" placeholder="Email address">
+      <input type="password" id="loginPassword" placeholder="Password">
+      <div class="pin-error" id="loginError">❌ Incorrect email or password.</div>
+      <div class="modal-actions" style="margin-top:4px;">
+        <button class="modal-btn modal-btn-cancel" onclick="closeModal('loginModal')">Cancel</button>
+        <button class="modal-btn modal-btn-save" onclick="doLogin()"><i class="fas fa-sign-in-alt"></i> Login</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADD ANNOUNCEMENT MODAL -->
+<div class="modal-overlay" id="addAnnModal">
+  <div class="modal">
+    <h3>Add Announcement</h3><p class="sub">Appears instantly for all students.</p>
+    <input type="text" id="annTitleInput" placeholder="Title / Subject">
+    <textarea id="annTextInput" placeholder="Announcement text..."></textarea>
+    <select id="annGroupInput"><option value="Both">Both GR1 &amp; GR2</option><option value="GR1">GR1 Only</option><option value="GR2">GR2 Only</option></select>
+    <select id="annTypeInput"><option value="general">General</option><option value="info">Info</option><option value="urgent">Urgent</option></select>
+    <!-- Manual date + time -->
+    <label style="font-size:12px;color:var(--muted);margin-bottom:4px;display:block;">Date &amp; Time (manual)</label>
+    <div style="display:flex;gap:8px;">
+      <input type="date" id="annDateInput" style="flex:1;">
+      <input type="time" id="annTimeInput" style="flex:1;">
+    </div>
+    <div class="modal-actions" style="margin-top:4px;"><button class="modal-btn modal-btn-cancel" onclick="closeModal('addAnnModal')">Cancel</button><button class="modal-btn modal-btn-save" onclick="saveAnn()">Add</button></div>
+  </div>
+</div>
+
+<!-- EDIT ANNOUNCEMENT MODAL -->
+<div class="modal-overlay" id="editAnnModal">
+  <div class="modal">
+    <h3>Edit Announcement</h3><p class="sub">Modify the selected announcement.</p>
+    <input type="hidden" id="editAnnId">
+    <input type="text" id="editAnnTitle" placeholder="Title / Subject">
+    <textarea id="editAnnText" placeholder="Announcement text..."></textarea>
+    <select id="editAnnGroup"><option value="Both">Both GR1 &amp; GR2</option><option value="GR1">GR1 Only</option><option value="GR2">GR2 Only</option></select>
+    <select id="editAnnType"><option value="general">General</option><option value="info">Info</option><option value="urgent">Urgent</option></select>
+    <div style="display:flex;gap:8px;">
+      <input type="date" id="editAnnDate" style="flex:1;">
+      <input type="time" id="editAnnTime" style="flex:1;">
+    </div>
+    <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px;">Manual override: Views &amp; Likes</label>
+    <div style="display:flex;gap:8px;">
+      <input type="number" id="editAnnViews" placeholder="Views" min="0" style="flex:1;">
+      <input type="number" id="editAnnLikes" placeholder="Likes" min="0" style="flex:1;">
+    </div>
+    <div class="modal-actions" style="margin-top:4px;"><button class="modal-btn modal-btn-cancel" onclick="closeModal('editAnnModal')">Cancel</button><button class="modal-btn modal-btn-save" onclick="updateAnn()">Save Changes</button></div>
+  </div>
+</div>
+
+<!-- ADD LESSON -->
+<div class="modal-overlay" id="addLessonModal">
+  <div class="modal">
+    <h3>Add Lesson File</h3>
+    <p class="sub">Importez depuis Google Drive ou collez n'importe quel lien public.</p>
+    <select id="lessonSemInput" onchange="populateLessonMods()"><option value="S1">Semester 1</option><option value="S2">Semester 2</option></select>
+    <select id="lessonModInput"></select>
+    <input type="text" id="lessonNameInput" placeholder="Nom du fichier (ex: Grammar Lesson 3)">
+    <div style="position:relative;">
+      <input type="url" id="lessonUrlInput" placeholder="https://drive.google.com/file/d/... ou autre lien">
+      <div style="font-size:11px;color:var(--muted);margin-top:4px;margin-bottom:4px;">
+        <i class="fab fa-google-drive" style="color:#4285F4;"></i> Google Drive : clic droit sur le fichier → <strong>Obtenir le lien</strong> → Copiez le lien
+      </div>
+    </div>
+    <select id="lessonGroupInput"><option value="Both">Both GR1 &amp; GR2</option><option value="GR1">GR1 Only</option><option value="GR2">GR2 Only</option></select>
+    <div class="modal-actions"><button class="modal-btn modal-btn-cancel" onclick="closeModal('addLessonModal')">Cancel</button><button class="modal-btn modal-btn-save" onclick="saveLesson()">Add Lesson</button></div>
+  </div>
+</div>
+
+<!-- ADD EXAM -->
+<div class="modal-overlay" id="addExamModal">
+  <div class="modal">
+    <h3>Add Exam File</h3><p class="sub">Paste a Google Drive or any public link.</p>
+    <select id="examSemInput" onchange="populateExamMods()"><option value="S1">Semester 1</option><option value="S2">Semester 2</option></select>
+    <select id="examModInput"></select>
+    <input type="text" id="examNameInput" placeholder="File name (e.g., Grammar Exam 2024)">
+    <input type="url" id="examUrlInput" placeholder="https://drive.google.com/...">
+    <select id="examGroupInput"><option value="Both">Both GR1 &amp; GR2</option><option value="GR1">GR1 Only</option><option value="GR2">GR2 Only</option></select>
+    <div class="modal-actions"><button class="modal-btn modal-btn-cancel" onclick="closeModal('addExamModal')">Cancel</button><button class="modal-btn modal-btn-save" onclick="saveExam()">Add Exam</button></div>
+  </div>
+</div>
+
+<!-- ADD TIMETABLE ROW -->
+<div class="modal-overlay" id="addTTModal">
+  <div class="modal">
+    <h3>Add Timetable Row</h3><p class="sub">Add a class slot to a group's schedule.</p>
+    <select id="ttSemInput"><option value="S1">Semester 1</option><option value="S2">Semester 2</option></select>
+    <select id="ttGrInput"><option value="GR1">GR1</option><option value="GR2">GR2</option></select>
+    <input type="text" id="ttDayInput" placeholder="Day (e.g., Monday)">
+    <input type="text" id="ttModInput" placeholder="Module name">
+    <input type="text" id="ttTimeInput" placeholder="Time (e.g., 10:30 - 12:30)">
+    <input type="text" id="ttRoomInput" placeholder="Room (e.g., Amphi A) — optional">
+    <input type="text" id="ttProfInput" placeholder="Professor name — optional">
+    <div class="modal-actions"><button class="modal-btn modal-btn-cancel" onclick="closeModal('addTTModal')">Cancel</button><button class="modal-btn modal-btn-save" onclick="saveTTRow()">Add Row</button></div>
+  </div>
+</div>
+
+<!-- ADD MAKEUP -->
+<div class="modal-overlay" id="addMakeupModal">
+  <div class="modal">
+    <h3>Add Makeup Session</h3><p class="sub">Add a rescheduled or extra session.</p>
+    <input type="date" id="makeupDateInput">
+    <input type="text" id="makeupModInput" placeholder="Module (e.g., Grammar 1) *">
+    <input type="text" id="makeupTimeInput" placeholder="Time (e.g., 10:30 - 12:30)">
+    <input type="text" id="makeupAmphiInput" placeholder="Amphi / Room (e.g., Amphi A)">
+    <input type="text" id="makeupDescInput" placeholder="Extra note (optional)">
+    <select id="makeupGroupInput"><option value="Both">Both GR1 &amp; GR2</option><option value="GR1">GR1 Only</option><option value="GR2">GR2 Only</option></select>
+    <div class="modal-actions"><button class="modal-btn modal-btn-cancel" onclick="closeModal('addMakeupModal')">Cancel</button><button class="modal-btn modal-btn-save" onclick="saveMakeup()">Add Session</button></div>
+  </div>
+</div>
+
+
+<!-- EDIT TIMETABLE ROW -->
+<div class="modal-overlay" id="editTTModal">
+  <div class="modal">
+    <h3>Edit Timetable Row</h3><p class="sub">Modify this class slot.</p>
+    <input type="hidden" id="editTTId">
+    <input type="text" id="editTTDay" placeholder="Day (e.g., Monday)">
+    <input type="text" id="editTTMod" placeholder="Module name">
+    <input type="text" id="editTTTime" placeholder="Time (e.g., 10:30 - 12:30)">
+    <input type="text" id="editTTRoom" placeholder="Room (e.g., Amphi A) — optional">
+    <input type="text" id="editTTProf" placeholder="Professor name — optional">
+    <div class="modal-actions"><button class="modal-btn modal-btn-cancel" onclick="closeModal('editTTModal')">Cancel</button><button class="modal-btn modal-btn-save" onclick="updateTTRow()">Save Changes</button></div>
+  </div>
+</div>
+<!-- EDIT MAKEUP -->
+<div class="modal-overlay" id="editMakeupModal">
+  <div class="modal">
+    <h3>Edit Makeup Session</h3><p class="sub">Modify this session.</p>
+    <input type="hidden" id="editMakeupId">
+    <input type="date" id="editMakeupDate">
+    <input type="text" id="editMakeupMod" placeholder="Module name">
+    <input type="text" id="editMakeupTime" placeholder="Time (e.g., 10:30 - 12:30)">
+    <input type="text" id="editMakeupAmphi" placeholder="Amphi / Room">
+    <input type="text" id="editMakeupDesc" placeholder="Extra note (optional)">
+    <select id="editMakeupGroup"><option value="Both">Both GR1 &amp; GR2</option><option value="GR1">GR1 Only</option><option value="GR2">GR2 Only</option></select>
+    <label style="font-size:12px;color:var(--muted);display:block;margin-bottom:4px;">Manual override: Views &amp; Likes</label>
+    <div style="display:flex;gap:8px;">
+      <input type="number" id="editMakeupViews" placeholder="Views count" min="0" style="flex:1;">
+      <input type="number" id="editMakeupLikes" placeholder="Likes count" min="0" style="flex:1;">
+    </div>
+    <div class="modal-actions"><button class="modal-btn modal-btn-cancel" onclick="closeModal('editMakeupModal')">Cancel</button><button class="modal-btn modal-btn-save" onclick="updateMakeup()">Save Changes</button></div>
+  </div>
+</div>
+<!-- EDIT LESSON FILE -->
+<div class="modal-overlay" id="editLessonModal">
+  <div class="modal">
+    <h3>Edit Lesson File</h3><p class="sub">Modify this file.</p>
+    <input type="hidden" id="editLessonId">
+    <input type="text" id="editLessonName" placeholder="File name">
+    <input type="url" id="editLessonUrl" placeholder="https://drive.google.com/...">
+    <select id="editLessonGroup"><option value="Both">Both GR1 &amp; GR2</option><option value="GR1">GR1 Only</option><option value="GR2">GR2 Only</option></select>
+    <div class="modal-actions"><button class="modal-btn modal-btn-cancel" onclick="closeModal('editLessonModal')">Cancel</button><button class="modal-btn modal-btn-save" onclick="updateLesson()">Save Changes</button></div>
+  </div>
+</div>
+<!-- EDIT EXAM FILE -->
+<div class="modal-overlay" id="editExamModal">
+  <div class="modal">
+    <h3>Edit Exam File</h3><p class="sub">Modify this file.</p>
+    <input type="hidden" id="editExamId">
+    <input type="text" id="editExamName" placeholder="File name">
+    <input type="url" id="editExamUrl" placeholder="https://drive.google.com/...">
+    <select id="editExamGroup"><option value="Both">Both GR1 &amp; GR2</option><option value="GR1">GR1 Only</option><option value="GR2">GR2 Only</option></select>
+    <div class="modal-actions"><button class="modal-btn modal-btn-cancel" onclick="closeModal('editExamModal')">Cancel</button><button class="modal-btn modal-btn-save" onclick="updateExam()">Save Changes</button></div>
+  </div>
+</div>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, updateDoc, writeBatch, increment, setDoc, getDoc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDH1738INWjoXnzXLOPytluX1ED8saNcyI",
+  authDomain: "english-studies-flshm.firebaseapp.com",
+  projectId: "english-studies-flshm",
+  storageBucket: "english-studies-flshm.firebasestorage.app",
+  messagingSenderId: "271583538710",
+  appId: "1:271583538710:web:1922dbfbeebc9fb1a5cf37"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+// ══ ADMIN EMAILS (for role detection) ══
+const ADMIN_EMAILS = {
+  'mouradaittaleb02@gmail.com': { name: 'Mourad', role: 'GR1' },
+  'hajaryahya40@gmail.com':     { name: 'Hajar',  role: 'GR2' },
+};
+
+// ══ CONSTANTS ══
+const DEFAULT_MODS = {
+  S1:['Grammar 1','Spoken English','Guided Reading 1','University Work Methodology','Paragraph Writing','Reading Comprehension','Academic Vocabulary'],
+  S2:['British & American Civilization','Oral Communication','Composition','Digital Culture','Grammar 2','Reading Comprehension 2','Guided Reading 2'],
+  S3:[],S4:[],S5:[],S6:[]
+};
+let MODS = JSON.parse(JSON.stringify(DEFAULT_MODS));
+const LINKS = {
+  GR1:[
+    {label:'English Studies GR1 · S1/2',url:'https://chat.whatsapp.com/KC8H6nooswS9j3Gg9yozZt',ico:'fab fa-whatsapp',cls:'wsp'},
+    {label:'Announcements GR1 · S1/2',url:'https://chat.whatsapp.com/DGysm3YhQnpE7nGQLDd5km',ico:'fab fa-whatsapp',cls:'wsp'},
+    {label:'Google Classroom GR1',url:'https://classroom.google.com/c/ODM0OTEzMjY5NTEz?cjc=amozilem',ico:'fab fa-google',cls:'gc'},
+  ],
+  GR2:[
+    {label:'English Studies GR2 · S1/2',url:'https://chat.whatsapp.com/D8EFIBAoCqh9MatabkO1oN',ico:'fab fa-whatsapp',cls:'wsp'},
+    {label:'Announcements GR2 · S1/2',url:'https://chat.whatsapp.com/EKZ56fLFPevJ4NvoSkDMV6',ico:'fab fa-whatsapp',cls:'wsp'},
+    {label:'Google Classroom GR2',url:'https://classroom.google.com/c/NzkyNjU3NjkxNTM0?cjc=ldqb36iw',ico:'fab fa-google',cls:'gc'},
+  ]
+};
+
+// ══ STATE ══
+let currentGroup='GR1', adminUnlocked=false, currentAdmin=null;
+let curModSem='S1', curExamSem='S1', curTTSem='S1';
+let lesAdminSem='S1', exAdminSem='S1';
+let announcements=[], makeupSessions=[], timetable=[], lessons=[], exams=[];
+// Site settings stored in Firebase
+let siteSettings = {
+  hiddenPages: [],
+  hiddenSems: [],
+  ttColumns: {room:true, prof:true},
+  customMods: {},
+  pageOrder: ['home','modules','exams','timetable','makeup','announcements','space'],
+  version: 'v2.0.1',
+  madeBy: '',
+  footerText: '© 2026 English Studies Portal · FLSHM Mohammedia'
+};
+
+// Session visitor ID (unique per browser session)
+const visitorId = sessionStorage.getItem('vid') || Math.random().toString(36).slice(2);
+sessionStorage.setItem('vid', visitorId);
+
+// ══ LOGIN — Firebase Auth ══
+window.openLoginModal = function(){
+  if(adminUnlocked){ document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'}); return; }
+  document.getElementById('loginEmail').value='';
+  document.getElementById('loginPassword').value='';
+  document.getElementById('loginError').style.display='none';
+  openModal('loginModal');
+  setTimeout(()=>document.getElementById('loginEmail').focus(),100);
+};
+window.doLogin = async function(){
+  const email=document.getElementById('loginEmail').value.trim();
+  const pass=document.getElementById('loginPassword').value;
+  const errEl=document.getElementById('loginError');
+  errEl.style.display='none';
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+    // onAuthStateChanged will handle the rest
+  } catch(e){
+    errEl.textContent='❌ Email ou mot de passe incorrect.';
+    errEl.style.display='block';
+  }
+};
+document.getElementById('loginPassword').addEventListener('keydown',e=>{if(e.key==='Enter')window.doLogin();});
+
+onAuthStateChanged(auth, user => {
+  if(user){
+    const emailKey = user.email.toLowerCase();
+    const acc = ADMIN_EMAILS[emailKey];
+    if(acc){
+      adminUnlocked=true;
+      currentAdmin={email:user.email, name:acc.name, role:acc.role};
+      closeModal('loginModal');
+      const grColor=acc.role==='GR1'?'#1e40af':'#166534';
+      const grBg=acc.role==='GR1'?'#dbeafe':'#dcfce7';
+      document.getElementById('adminWho').innerHTML=`${acc.name} <span style="background:${grBg};color:${grColor};padding:2px 10px;border-radius:100px;font-size:11px;font-weight:800;">${acc.role}</span>`;
+      document.getElementById('adminPanel').classList.add('open');
+      renderAdminPanel();
+      document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'});
+    } else {
+      // Not an admin email — sign out immediately
+      signOut(auth);
+      const errEl=document.getElementById('loginError');
+      if(errEl){ errEl.textContent='❌ Accès refusé. Compte non autorisé.'; errEl.style.display='block'; }
+    }
+  } else {
+    adminUnlocked=false; currentAdmin=null;
+    document.getElementById('adminPanel').classList.remove('open');
+  }
+});
+
+window.logoutAdmin=function(){ signOut(auth); };
+
+// ══ REALTIME LISTENERS ══
+function setupListeners(){
+  onSnapshot(collection(db,'announcements'),snap=>{
+    announcements=snap.docs.map(d=>({id:d.id,...d.data()}));
+    announcements.sort((a,b)=>(a.order??99)-(b.order??99));
+    renderAnnPreview(); renderAllAnn(); updateTicker();
+    if(adminUnlocked) renderAdminAnn();
+  });
+  onSnapshot(collection(db,'makeup'),snap=>{
+    makeupSessions=snap.docs.map(d=>({id:d.id,...d.data()}));
+    makeupSessions.sort((a,b)=>(a.order??99)-(b.order??99));
+    renderMakeup();
+    if(adminUnlocked) renderAdminMakeup();
+  });
+  onSnapshot(collection(db,'timetable'),snap=>{
+    timetable=snap.docs.map(d=>({id:d.id,...d.data()}));
+    timetable.sort((a,b)=>(a.order??99)-(b.order??99));
+    renderTimetable(curTTSem);
+    if(adminUnlocked) renderAdminTT();
+  });
+  onSnapshot(collection(db,'lessons'),snap=>{
+    lessons=snap.docs.map(d=>({id:d.id,...d.data()}));
+    renderModules(curModSem);
+    if(adminUnlocked) renderAdminLessons(lesAdminSem);
+  });
+  onSnapshot(collection(db,'exams'),snap=>{
+    exams=snap.docs.map(d=>({id:d.id,...d.data()}));
+    renderExams(curExamSem);
+    if(adminUnlocked) renderAdminExams(exAdminSem);
+  });
+  // Settings — realtime updates after initial load
+  onSnapshot(doc(db,'settings','main'),snap=>{
+    if(snap.exists()){ applySettingsData(snap.data()); }
+  });
+}
+
+// ── Apply settings data (used by both getDoc on init and onSnapshot) ──
+function applySettingsData(d){
+  siteSettings.hiddenPages = d.hiddenPages||[];
+  siteSettings.hiddenSems  = d.hiddenSems||[];
+  siteSettings.ttColumns   = d.ttColumns||{room:true,prof:true};
+  siteSettings.customMods  = d.customMods||{};
+  siteSettings.pageOrder   = d.pageOrder||['home','modules','exams','timetable','makeup','announcements','space'];
+  siteSettings.version     = d.version||'v2.0.1';
+  siteSettings.madeBy      = d.madeBy||'';
+  siteSettings.footerText  = d.footerText||'© 2026 English Studies Portal · FLSHM Mohammedia';
+  // Override MODS with saved custom lists for every sem that was ever saved
+  ['S1','S2','S3','S4','S5','S6'].forEach(s=>{
+    if(Object.prototype.hasOwnProperty.call(siteSettings.customMods, s)){
+      MODS[s] = siteSettings.customMods[s];
+    }
+  });
+  applyHiddenPages();
+  renderModSemTabs();
+  renderExamSemTabs();
+  renderTimetable(curTTSem);
+  applyFooterSettings();
+  if(adminUnlocked){ renderAdminLessonSemTabs(); renderAdminExamSemTabs(); renderAdminSettings(); }
+}
+
+// ══ SEED ══
+async function seedIfEmpty(){
+  const s=await getDocs(collection(db,'announcements'));
+  if(s.empty){
+    await addDoc(collection(db,'announcements'),{title:'Welcome to Semester 1!',text:'Please ensure your registration is complete.',group:'Both',type:'info',date:'2026-01-02',time:'08:00',order:0,views:0,likes:0});
+    await addDoc(collection(db,'announcements'),{title:'Library Hours Extended',text:'Library open until 8PM during exam period.',group:'Both',type:'general',date:'2026-01-08',time:'',order:1,views:0,likes:0});
+    await addDoc(collection(db,'announcements'),{title:'Urgent: Classroom Change',text:'Grammar on Thursday moved to Amphi B.',group:'GR1',type:'urgent',date:'2026-01-10',time:'',order:2,views:0,likes:0});
+  }
+  const mk=await getDocs(collection(db,'makeup'));
+  if(mk.empty){
+    await addDoc(collection(db,'makeup'),{date:'2026-01-02',desc:'Reading Comprehension — Amphi 1',group:'Both',order:0,views:0,likes:0});
+    await addDoc(collection(db,'makeup'),{date:'2026-01-05',desc:'Grammar — Room 12',group:'GR1',order:1,views:0,likes:0});
+    await addDoc(collection(db,'makeup'),{date:'2026-01-08',desc:'Spoken English — Language Lab',group:'GR2',order:2,views:0,likes:0});
+  }
+  const tt=await getDocs(collection(db,'timetable'));
+  if(tt.empty){
+    const rows=[
+      {gr:'GR1',sem:'S1',day:'Monday',module:'Academic Vocabulary',time:'12:30 - 14:30',order:0},
+      {gr:'GR1',sem:'S1',day:'Tuesday',module:'University Work Methodology',time:'10:30 - 12:30',order:1},
+      {gr:'GR1',sem:'S1',day:'Tuesday',module:'Guided Reading',time:'12:30 - 14:30',order:2},
+      {gr:'GR1',sem:'S1',day:'Wednesday',module:'Paragraph Writing',time:'12:30 - 14:30',order:3},
+      {gr:'GR1',sem:'S1',day:'Wednesday',module:'Reading Comprehension',time:'14:30 - 16:30',order:4},
+      {gr:'GR1',sem:'S1',day:'Thursday',module:'Grammar',time:'08:30 - 10:30',order:5},
+      {gr:'GR1',sem:'S1',day:'Thursday',module:'Spoken English',time:'10:30 - 12:30',order:6},
+      {gr:'GR2',sem:'S1',day:'Monday',module:'Grammar',time:'08:30 - 10:30',order:0},
+      {gr:'GR2',sem:'S1',day:'Tuesday',module:'Spoken English',time:'10:30 - 12:30',order:1},
+      {gr:'GR2',sem:'S1',day:'Wednesday',module:'Academic Vocabulary',time:'12:30 - 14:30',order:2},
+      {gr:'GR2',sem:'S1',day:'Thursday',module:'Reading Comprehension',time:'10:30 - 12:30',order:3},
+    ];
+    for(const r of rows) await addDoc(collection(db,'timetable'),r);
+  }
+}
+
+async function init(){
+  try{
+    await syncLikesFromFirebase();
+    // ── Load settings FIRST so hidden sems/pages apply before first render ──
+    try{
+      const snap = await getDoc(doc(db,'settings','main'));
+      if(snap.exists()) applySettingsData(snap.data());
+    }catch(e){ console.warn('settings preload failed',e); }
+    await seedIfEmpty();
+    setupListeners();
+    populateLessonMods();
+    populateExamMods();
+    renderModSemTabs();
+    renderExamSemTabs();
+    applyFooterSettings();
+    showNewBadgeOnce();
+  }
+  catch(e){ console.error(e); }
+  finally{ document.getElementById('loadingOverlay').style.display='none'; }
+}
+init();
+
+// Show "NEW" badge on version for first-time visitors
+function showNewBadgeOnce(){
+  const seen = localStorage.getItem('flshm_v201');
+  if(!seen){
+    const badge = document.createElement('span');
+    badge.className='new-badge';
+    badge.textContent='NEW';
+    const vBadge = document.querySelector('.version-badge');
+    if(vBadge){ vBadge.appendChild(badge); }
+    // Mark as seen after 10 seconds
+    setTimeout(()=>{ localStorage.setItem('flshm_v201','1'); if(badge.parentNode) badge.remove(); }, 10000);
+  }
+}
+
+// ══ NAV ══
+window.showPage=function(p){
+  document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(x=>x.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  document.getElementById('nav-'+p).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(p==='modules') renderModules(curModSem);
+  else if(p==='exams') renderExams(curExamSem);
+  else if(p==='timetable') renderTimetable(curTTSem);
+  else if(p==='makeup') renderMakeup();
+  else if(p==='announcements') renderAllAnn();
+  else if(p==='space') renderSpace();
+  else if(p==='home'){ renderAnnPreview(); updateTicker(); }
+};
+// Apply hidden pages and ordering to nav
+function applyHiddenPages(){
+  const allPages=['home','modules','exams','timetable','makeup','announcements','space'];
+  const order=siteSettings.pageOrder||allPages;
+  const nav=document.querySelector('.header-nav');
+  if(!nav) return;
+  // Re-order nav items according to pageOrder
+  order.forEach(p=>{
+    const el=document.getElementById('nav-'+p);
+    if(el){ el.style.display=siteSettings.hiddenPages.includes(p)?'none':'flex'; nav.appendChild(el); }
+  });
+  // Any page not in order array — keep at end
+  allPages.filter(p=>!order.includes(p)).forEach(p=>{
+    const el=document.getElementById('nav-'+p);
+    if(el){ el.style.display=siteSettings.hiddenPages.includes(p)?'none':'flex'; }
+  });
+}
+// Apply hidden sems to tabs
+function applyHiddenSems(){
+  // handled in renderModSemTabs, renderExamSemTabs etc.
+}
+
+// Apply footer text/version/madeBy from settings
+function applyFooterSettings(){
+  const vEl = document.getElementById('footerVersion');
+  if(vEl) vEl.textContent = siteSettings.version || 'v2.0.1';
+  const cEl = document.getElementById('footerCopy');
+  if(cEl){
+    const ft = siteSettings.footerText || '© 2026 English Studies Portal · FLSHM Mohammedia';
+    cEl.innerHTML = ft + ' &nbsp;<span class="version-badge" id="footerVersion">' + (siteSettings.version||'v2.0.1') + '</span>';
+  }
+  const mbEl = document.getElementById('footerMadeBy');
+  if(mbEl){
+    if(siteSettings.madeBy){
+      mbEl.style.display='inline';
+      mbEl.innerHTML = 'Made by <span style="color:var(--gold);">' + siteSettings.madeBy + '</span>';
+    } else {
+      mbEl.style.display='none';
+    }
+  }
+}
+
+window.switchGroup=function(gr){
+  currentGroup=gr;
+  document.getElementById('grBtn1').classList.toggle('active',gr==='GR1');
+  document.getElementById('grBtn2').classList.toggle('active',gr==='GR2');
+  const a=document.querySelector('.page.active');
+  if(a) window.showPage(a.id.replace('page-',''));
+};
+
+// ══ USER ID — persistent per browser forever ══
+const USER_ID = (()=>{
+  let id = localStorage.getItem('flshm_uid');
+  if(!id){ id = 'u_'+Date.now()+'_'+Math.random().toString(36).slice(2); localStorage.setItem('flshm_uid',id); }
+  return id;
+})();
+
+// ══ VIEWS — 1 view per user per item, stored in Firebase ══
+// viewed set: loaded once at startup from localStorage cache + Firebase
+let viewedSet = JSON.parse(localStorage.getItem('flshm_viewed')||'{}');
+function saveViewedSet(){ localStorage.setItem('flshm_viewed', JSON.stringify(viewedSet)); }
+
+async function recordView(col, id){
+  const key = col+'_'+id;
+  if(viewedSet[key]) return; // already viewed by this user
+  viewedSet[key] = true;
+  saveViewedSet();
+  try {
+    // Store in Firebase: userViews/{userId}/views/{col_id} = true
+    await setDoc(doc(db,'userViews',USER_ID+'_'+col+'_'+id),{uid:USER_ID,col,itemId:id,ts:Date.now()});
+    // Increment counter on the item
+    await updateDoc(doc(db,col,id),{views: increment(1)});
+  } catch(e){ console.warn('view err',e); }
+}
+
+// ══ LIKES — stored in Firebase, 1 like per user per item ══
+// likedSet: loaded once from localStorage (cache), verified against Firebase on first load
+let likedSet = JSON.parse(localStorage.getItem('flshm_liked')||'{}');
+function saveLikedSet(){ localStorage.setItem('flshm_liked', JSON.stringify(likedSet)); }
+
+window.toggleLike = async function(col, id, btnEl){
+  const key = col+'_'+id;
+  const likeDocId = USER_ID+'_'+col+'_'+id;
+  if(likedSet[key]){
+    // Unlike
+    likedSet[key] = false;
+    saveLikedSet();
+    btnEl.classList.remove('liked');
+    // Update like count on item
+    try { await updateDoc(doc(db,col,id),{likes: increment(-1)}); } catch(e){}
+    // Remove like doc from Firebase
+    try { await deleteDoc(doc(db,'userLikes',likeDocId)); } catch(e){}
+    // Update displayed count
+    const countSpan = btnEl.querySelector('span');
+    if(countSpan) countSpan.textContent = Math.max(0,(parseInt(countSpan.textContent)||1)-1);
+  } else {
+    // Like
+    likedSet[key] = true;
+    saveLikedSet();
+    btnEl.classList.add('liked');
+    try { await updateDoc(doc(db,col,id),{likes: increment(1)}); } catch(e){}
+    // Save like doc in Firebase permanently
+    try {
+      await setDoc(doc(db,'userLikes',likeDocId),{uid:USER_ID,col,itemId:id,ts:Date.now()});
+    } catch(e){}
+    // Update displayed count
+    const countSpan = btnEl.querySelector('span');
+    if(countSpan) countSpan.textContent = (parseInt(countSpan.textContent)||0)+1;
+  }
+};
+
+function isLiked(col,id){
+  return !!likedSet[col+'_'+id];
+}
+
+// Sync likes from Firebase on startup (so likes persist across devices/browsers)
+async function syncLikesFromFirebase(){
+  try {
+    const snap = await getDocs(collection(db,'userLikes'));
+    snap.docs.forEach(d=>{
+      const data = d.data();
+      if(data.uid === USER_ID){
+        likedSet[data.col+'_'+data.itemId] = true;
+      }
+    });
+    saveLikedSet();
+  } catch(e){}
+}
+
+// ══ COMMENTS SYSTEM ══
+
+// Generate or retrieve persistent anonymous username
+function getMyUsername(){
+  let u = localStorage.getItem('flshm_username');
+  if(!u){
+    const n = Math.floor(100 + Math.random()*900);
+    u = 'student-'+n;
+    localStorage.setItem('flshm_username', u);
+  }
+  return u;
+}
+
+// Format comment text: highlight @mentions in blue
+function formatCommentText(text){
+  const escaped = text
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\n/g,'<br>');
+  return escaped.replace(/@([\w\-]+)/g,'<span class="mention">@$1</span>');
+}
+
+// Relative time
+function relTime(ts){
+  const diff = Date.now()-ts;
+  if(diff<60000) return 'À l\'instant';
+  if(diff<3600000) return Math.floor(diff/60000)+'min';
+  if(diff<86400000) return Math.floor(diff/3600000)+'h';
+  return Math.floor(diff/86400000)+'j';
+}
+
+// Comments cache: annId -> [{id,username,text,ts,likes,likedBy:[]}]
+const commentsCache = {};
+const commentsListeners = {};
+
+window.toggleComments = function(annId, btn){
+  const box = document.getElementById('cmtBox-'+annId);
+  if(!box) return;
+  const isOpen = box.classList.toggle('open');
+  btn.querySelector('i').className = isOpen ? 'fas fa-comment-slash' : 'fas fa-comment';
+  if(isOpen && !commentsListeners[annId]){
+    loadComments(annId);
+  }
+}
+
+function loadComments(annId){
+  if(commentsListeners[annId]) return;
+  const colRef = collection(db,'comments');
+  // Listen for top-level comments on this announcement
+  const q = query(colRef, where('annId','==',annId), where('parentId','==',null));
+  commentsListeners[annId] = onSnapshot(q, snap=>{
+    const comments = snap.docs.map(d=>({id:d.id,...d.data()}));
+    comments.sort((a,b)=>(a.ts||0)-(b.ts||0));
+    commentsCache[annId] = comments;
+    renderCommentsList(annId, comments);
+    // Update count badge
+    const countEl = document.getElementById('cmtCount-'+annId);
+    if(countEl) countEl.textContent = comments.length > 0 ? `${comments.length} commentaire${comments.length>1?'s':''}` : 'Commentaires';
+  });
+}
+
+async function renderCommentsList(annId, comments){
+  const listEl = document.getElementById('cmtList-'+annId);
+  if(!listEl) return;
+  if(!comments.length){ listEl.innerHTML='<p style="font-size:12px;color:var(--muted);padding:6px 0;">Soyez le premier à commenter !</p>'; return; }
+
+  let html = '';
+  for(const c of comments){
+    // Fetch replies count for each comment
+    const likedKey = 'cmt_'+c.id;
+    const likedCls = likedSet[likedKey] ? 'liked' : '';
+    html += `<div class="comment-item" id="cmt-${c.id}">
+      <div class="comment-avatar">${c.username.slice(-2).toUpperCase()}</div>
+      <div class="comment-body">
+        <span class="comment-username">${escapeUsername(c.username)}</span>
+        <div class="comment-text">${formatCommentText(c.text||'')}</div>
+        <div class="comment-meta">
+          <span class="comment-time">${relTime(c.ts||Date.now())}</span>
+          <button class="comment-like-btn ${likedCls}" onclick="toggleCommentLike('${c.id}','${annId}',this)">
+            <i class="fas fa-heart"></i> <span>${c.likes||0}</span>
+          </button>
+          <button class="comment-reply-btn" onclick="showReplyInput('${annId}','${c.id}','${escapeUsername(c.username)}')">
+            <i class="fas fa-reply"></i> Répondre
+          </button>
+          ${adminUnlocked ? `<button class="comment-del-btn" onclick="deleteComment('${c.id}','${annId}')"><i class="fas fa-trash"></i></button>` : ''}
+        </div>
+        <div class="replies-section" id="replies-${c.id}">
+          <div id="replyList-${c.id}"></div>
+          <div id="replyInput-${c.id}" style="display:none;">
+            <div class="comment-input-row" style="margin-top:8px;">
+              <div class="comment-input-avatar" style="width:22px;height:22px;font-size:9px;">${getMyUsername().slice(-2).toUpperCase()}</div>
+              <div class="comment-input-wrap">
+                <textarea class="comment-textarea" id="replyTA-${c.id}" placeholder="Répondre à @${escapeUsername(c.username)}..." rows="1"
+                  onkeydown="cmtKeydown(event,'${annId}','${c.id}')"></textarea>
+              </div>
+              <button class="comment-send-btn" style="padding:5px 10px;font-size:11px;" onclick="submitComment('${annId}','${c.id}')"><i class="fas fa-paper-plane"></i></button>
+            </div>
+          </div>
+        </div>
+        ${!commentsListeners['reply_'+c.id] ? loadReplies(annId, c.id) : ''}
+      </div>
+    </div>`;
+  }
+  listEl.innerHTML = html;
+}
+
+function loadReplies(annId, parentId){
+  if(commentsListeners['reply_'+parentId]) return '';
+  const q = query(collection(db,'comments'), where('annId','==',annId), where('parentId','==',parentId));
+  commentsListeners['reply_'+parentId] = onSnapshot(q, snap=>{
+    const replies = snap.docs.map(d=>({id:d.id,...d.data()}));
+    replies.sort((a,b)=>(a.ts||0)-(b.ts||0));
+    renderReplies(annId, parentId, replies);
+  });
+  return '';
+}
+
+function renderReplies(annId, parentId, replies){
+  const el = document.getElementById('replyList-'+parentId);
+  if(!el) return;
+  if(!replies.length){ el.innerHTML=''; return; }
+  el.innerHTML = replies.map(r=>{
+    const likedKey='cmt_'+r.id;
+    const likedCls=likedSet[likedKey]?'liked':'';
+    return `<div class="comment-item" id="cmt-${r.id}" style="padding:6px 0;">
+      <div class="comment-avatar" style="width:24px;height:24px;font-size:9px;">${r.username.slice(-2).toUpperCase()}</div>
+      <div class="comment-body">
+        <span class="comment-username">${escapeUsername(r.username)}</span>
+        <div class="comment-text">${formatCommentText(r.text||'')}</div>
+        <div class="comment-meta">
+          <span class="comment-time">${relTime(r.ts||Date.now())}</span>
+          <button class="comment-like-btn ${likedCls}" onclick="toggleCommentLike('${r.id}','${annId}',this)">
+            <i class="fas fa-heart"></i> <span>${r.likes||0}</span>
+          </button>
+          ${adminUnlocked ? `<button class="comment-del-btn" onclick="deleteComment('${r.id}','${annId}')"><i class="fas fa-trash"></i></button>` : ''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function escapeUsername(u){ return (u||'').replace(/'/g,'&#39;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+window.showReplyInput = function(annId, parentId, username){
+  const el = document.getElementById('replyInput-'+parentId);
+  if(!el) return;
+  el.style.display = el.style.display==='none' ? 'block' : 'none';
+  const ta = document.getElementById('replyTA-'+parentId);
+  if(ta && el.style.display==='block'){
+    ta.value = '@'+username+' ';
+    ta.focus();
+  }
+};
+
+window.cmtKeydown = function(e, annId, parentId){
+  if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); submitComment(annId, parentId); }
+};
+
+window.submitComment = async function(annId, parentId){
+  const taId = parentId ? 'replyTA-'+parentId : 'cmtInput-'+annId;
+  const ta = document.getElementById(taId);
+  if(!ta) return;
+  const text = ta.value.trim();
+  if(!text) return;
+  const username = getMyUsername();
+  try {
+    await addDoc(collection(db,'comments'),{
+      annId, parentId: parentId||null,
+      username, text, ts: Date.now(), likes: 0
+    });
+    ta.value='';
+    if(parentId){
+      const el=document.getElementById('replyInput-'+parentId);
+      if(el) el.style.display='none';
+      if(!commentsListeners['reply_'+parentId]) loadReplies(annId, parentId);
+    }
+  } catch(e){ alert('Erreur lors de l\'envoi du commentaire.'); }
+};
+
+window.toggleCommentLike = async function(cmtId, annId, btnEl){
+  const key = 'cmt_'+cmtId;
+  const countSpan = btnEl.querySelector('span');
+  if(likedSet[key]){
+    likedSet[key]=false; saveLikedSet(); btnEl.classList.remove('liked');
+    const cur = parseInt(countSpan.textContent)||0;
+    countSpan.textContent = Math.max(0,cur-1);
+    try{ await updateDoc(doc(db,'comments',cmtId),{likes:increment(-1)}); }catch(e){}
+  } else {
+    likedSet[key]=true; saveLikedSet(); btnEl.classList.add('liked');
+    const cur = parseInt(countSpan.textContent)||0;
+    countSpan.textContent = cur+1;
+    try{ await updateDoc(doc(db,'comments',cmtId),{likes:increment(1)}); }catch(e){}
+  }
+};
+
+window.deleteComment = async function(cmtId, annId){
+  if(!confirm('Supprimer ce commentaire ?')) return;
+  try{
+    await deleteDoc(doc(db,'comments',cmtId));
+    // Also delete replies to this comment
+    const q = query(collection(db,'comments'), where('parentId','==',cmtId));
+    const snap = await getDocs(q);
+    const batch = writeBatch(db);
+    snap.docs.forEach(d=>batch.delete(d.ref));
+    await batch.commit();
+  }catch(e){ alert('Erreur lors de la suppression.'); }
+};
+
+// ── Render admin comments list ──
+window.renderAdminComments = async function(){
+  const el = document.getElementById('adminCommentsList');
+  if(!el) return;
+  el.innerHTML='<p style="color:var(--muted);font-size:13px;">Chargement...</p>';
+  try{
+    const snap = await getDocs(collection(db,'comments'));
+    const all = snap.docs.map(d=>({id:d.id,...d.data()}));
+    all.sort((a,b)=>(b.ts||0)-(a.ts||0));
+    if(!all.length){ el.innerHTML='<p style="color:var(--muted);font-size:13px;">Aucun commentaire.</p>'; return; }
+    el.innerHTML = all.map(c=>{
+      const ann = announcements.find(a=>a.id===c.annId);
+      const annTitle = ann ? ann.title : c.annId;
+      return `<div class="admin-item">
+        <div class="admin-item-info">
+          <strong>${escapeUsername(c.username)} ${c.parentId?'<em style="color:var(--muted);font-size:11px;">(réponse)</em>':''}</strong>
+          <span>${(c.text||'').slice(0,80)} · <em>${annTitle}</em> · ${relTime(c.ts||0)}</span>
+        </div>
+        <div class="admin-item-actions">
+          <button class="del-btn" onclick="deleteComment('${c.id}','${c.annId}');renderAdminComments()"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>`;
+    }).join('');
+  }catch(e){ el.innerHTML='<p style="color:#ef4444;font-size:13px;">Erreur de chargement.</p>'; }
+}
+
+// ══ ANNOUNCEMENTS ══
+function annHTML(a){
+  const d=a.type==='urgent'?'urgent':(a.type==='info'?'info':'');
+  const dt=[a.date,a.time].filter(Boolean).join(' · ');
+  // Record view (1 per user)
+  recordView('announcements',a.id);
+  const liked = isLiked('announcements',a.id);
+  const likedCls = liked?'liked':'';
+  return `<div class="ann-item"><div class="ann-dot ${d}"></div><div class="ann-body">
+    <div class="ann-meta"><span class="ann-date">${dt}</span><span class="ann-tag tag-${a.type}">${a.type[0].toUpperCase()+a.type.slice(1)}</span></div>
+    <div style="font-weight:700;font-size:15px;color:var(--navy);margin-bottom:5px;">${escapeHtml(a.title||'')}</div>
+    <div class="ann-text">${escapeHtml(a.text||'')}</div>
+    <div class="ann-group">For: ${a.group}</div>
+    <div class="ann-footer">
+      <span class="stat-pill"><i class="fas fa-eye"></i> ${a.views||0}</span>
+      <button class="like-btn ${likedCls}" onclick="toggleLike('announcements','${a.id}',this)">
+        <i class="fas fa-heart"></i> <span>${a.likes||0}</span>
+      </button>
+    </div>
+    <div class="comments-section">
+      <button class="comments-toggle-btn" onclick="toggleComments('${a.id}',this)">
+        <i class="fas fa-comment"></i> <span id="cmtCount-${a.id}">Commentaires</span>
+      </button>
+      <div class="comments-box" id="cmtBox-${a.id}">
+        <div id="cmtList-${a.id}" style="margin-bottom:10px;"></div>
+        <div class="comment-input-row">
+          <div class="comment-input-avatar">${getMyUsername().slice(-2).toUpperCase()}</div>
+          <div class="comment-input-wrap">
+            <textarea class="comment-textarea" id="cmtInput-${a.id}" placeholder="Écrire un commentaire... Utilisez @username pour mentionner" rows="1"
+              onkeydown="cmtKeydown(event,'${a.id}',null)"></textarea>
+            <div class="username-tag">Vous commentez en tant que <strong>${getMyUsername()}</strong></div>
+          </div>
+          <button class="comment-send-btn" onclick="submitComment('${a.id}',null)"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+  </div></div>`;
+}
+
+// Escape HTML but preserve newlines as <br>
+function escapeHtml(str){
+  if(!str) return '';
+  let s = str
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;');
+  // Make URLs clickable
+  s = s.replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" style="color:var(--royal);font-weight:600;text-decoration:underline;"><i class=\"fas fa-external-link-alt\" style=\"font-size:10px;margin-right:3px;\"></i>Link</a>');
+  s = s.replace(/\n/g,'<br>');
+  return s;
+}
+
+function filteredAnn(){return announcements.filter(a=>a.group==='Both'||a.group===currentGroup);}
+
+function renderAnnPreview(){
+  const el=document.getElementById('annPreview');
+  const arr=filteredAnn().slice(0,3);
+  el.innerHTML=arr.length?arr.map(annHTML).join(''):'<p style="color:var(--muted);font-size:14px;">No announcements yet.</p>';
+}
+function renderAllAnn(){
+  const el=document.getElementById('annFull');
+  const arr=filteredAnn();
+  el.innerHTML=arr.length?arr.map(annHTML).join(''):'<p style="color:var(--muted);font-size:14px;">No announcements yet.</p>';
+}
+function updateTicker(){
+  const first=filteredAnn()[0];
+  document.getElementById('tickerText').innerHTML=first?`📢 ${first.title}: ${first.text.replace(/\n/g,' ')}`:'📢 Welcome to the English Studies Portal — FLSHM Mohammedia';
+}
+
+// ══ MODULES ══
+function gdriveThumbnailUrl(url){
+  // Extract file ID from various Google Drive URL formats
+  let match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if(!match) match = url.match(/id=([a-zA-Z0-9_-]+)/);
+  if(match) return `https://drive.google.com/file/d/${match[1]}/preview`;
+  return url;
+}
+function gdriveDirectUrl(url){
+  let match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if(!match) match = url.match(/id=([a-zA-Z0-9_-]+)/);
+  if(match) return `https://drive.google.com/file/d/${match[1]}/view`;
+  return url;
+}
+function isGdriveUrl(url){ return url&&(url.includes('drive.google.com')||url.includes('docs.google.com')); }
+
+function renderModules(sem){
+  curModSem=sem;
+  const el=document.getElementById('modList');
+  el.innerHTML=MODS[sem].map((m,i)=>{
+    const files=lessons.filter(f=>f.sem===sem&&f.mod===m&&(f.group==='Both'||f.group===currentGroup));
+    const fh=files.length?files.map(f=>{
+      const viewUrl = isGdriveUrl(f.url) ? gdriveDirectUrl(f.url) : f.url;
+      const fileIcon = isGdriveUrl(f.url) ? `<i class="fab fa-google-drive" style="color:#4285F4;font-size:14px;"></i>` : `<i class="fas fa-file-pdf" style="color:#ef4444;font-size:14px;"></i>`;
+      return `<div class="file-item">${fileIcon}<a href="${viewUrl}" target="_blank">${f.name}</a><span class="file-tag">${f.group}</span></div>`;
+    }).join(''):'<div class="no-files"><i class="fas fa-info-circle" style="margin-right:6px;"></i>No files uploaded yet.</div>';
+    return `<div class="mod-item" id="modItem-${i}"><div class="mod-header" onclick="toggleMod('modItem-${i}')"><span class="mod-name"><i class="fas fa-book-open" style="color:var(--royal);"></i>${m}</span><i class="fas fa-chevron-down mod-toggle"></i></div><div class="mod-files">${fh}</div></div>`;
+  }).join('');
+}
+window.showModSem=function(sem,el){document.querySelectorAll('#page-modules .sem-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');curModSem=sem;renderModules(sem);};
+function renderModSemTabs(){
+  const sems=['S1','S2','S3','S4','S5','S6'];
+  const visible=sems.filter(s=>!siteSettings.hiddenSems.includes(s));
+  const cont=document.getElementById('modSemTabs');
+  if(!cont) return;
+  cont.innerHTML=visible.map((s,i)=>`<div class="sem-tab${i===0?' active':''}" onclick="showModSem('${s}',this)">${s}</div>`).join('');
+  if(visible.length>0&&!visible.includes(curModSem)){curModSem=visible[0];}
+}
+
+// ══ EXAMS ══
+function renderExams(sem){
+  curExamSem=sem;
+  const el=document.getElementById('examList');
+  el.innerHTML=MODS[sem].map((m,i)=>{
+    const files=exams.filter(f=>f.sem===sem&&f.mod===m&&(f.group==='Both'||f.group===currentGroup));
+    const fh=files.length?files.map(f=>`<div class="file-item"><i class="fas fa-file-alt" style="color:#166534;font-size:14px;"></i><a href="${f.url}" target="_blank">${f.name}</a><span class="file-tag">${f.group}</span></div>`).join(''):'<div class="no-files"><i class="fas fa-info-circle" style="margin-right:6px;"></i>No exam files yet.</div>';
+    return `<div class="mod-item" id="examItem-${i}"><div class="mod-header" onclick="toggleMod('examItem-${i}')"><span class="mod-name"><i class="fas fa-file-signature" style="color:#166534;"></i>${m}</span><i class="fas fa-chevron-down mod-toggle"></i></div><div class="mod-files">${fh}</div></div>`;
+  }).join('');
+}
+window.showExamSem=function(sem,el){document.querySelectorAll('#page-exams .sem-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');curExamSem=sem;renderExams(sem);};
+function renderExamSemTabs(){
+  const sems=['S1','S2','S3','S4','S5','S6'];
+  const visible=sems.filter(s=>!siteSettings.hiddenSems.includes(s));
+  const cont=document.getElementById('examSemTabs');
+  if(!cont) return;
+  cont.innerHTML=visible.map((s,i)=>`<div class="sem-tab${i===0?' active':''}" onclick="showExamSem('${s}',this)">${s}</div>`).join('');
+  if(visible.length>0&&!visible.includes(curExamSem)){curExamSem=visible[0];}
+}
+window.toggleMod=function(id){document.getElementById(id).classList.toggle('open');};
+
+// ══ TIMETABLE ══
+function renderTimetable(sem){
+  curTTSem=sem;
+  const el=document.getElementById('ttView');
+  const rows=timetable.filter(r=>r.gr===currentGroup&&r.sem===sem);
+  if(!rows.length){el.innerHTML='<div class="info-alert"><i class="fas fa-info-circle"></i> Timetable for this semester will be uploaded soon.</div>';return;}
+  const showRoom=siteSettings.ttColumns.room!==false;
+  const showProf=siteSettings.ttColumns.prof!==false;
+  const thR=showRoom?'<th>Room</th>':'';
+  const thP=showProf?'<th>Professor</th>':'';
+  const tdR=r=>showRoom?`<td>${r.room||'—'}</td>`:'';
+  const tdP=r=>showProf?`<td>${r.prof||'—'}</td>`:'';
+  el.innerHTML=`<table class="ttable"><thead><tr><th>Day</th><th>Module</th><th>Time</th>${thR}${thP}</tr></thead><tbody>${rows.map(r=>`<tr><td>${r.day}</td><td>${r.module}</td><td><span class="time-chip">${r.time}</span></td>${tdR(r)}${tdP(r)}</tr>`).join('')}</tbody></table>`;
+}
+window.showTTSem=function(sem,el){document.querySelectorAll('#page-timetable .sem-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderTimetable(sem);};
+
+// ══ MAKEUP with views & likes ══
+function makeupHTML(s){
+  recordView('makeup',s.id);
+  const liked=isLiked('makeup',s.id);
+  const likedCls=liked?'liked':'';
+  return `<div class="makeup-item">
+    <div class="makeup-date"><i class="fas fa-calendar-day"></i> ${s.date}</div>
+    <div class="makeup-row">
+      <span class="mk-cell"><i class="fas fa-book-open"></i> <strong>${escapeHtml(s.module||s.desc||'')}</strong></span>
+      <span class="mk-cell"><i class="fas fa-clock"></i> ${escapeHtml(s.mtime||'—')}</span>
+      <span class="mk-cell"><i class="fas fa-door-open"></i> ${escapeHtml(s.amphi||'—')}</span>
+    </div>
+    ${s.desc&&s.module?`<div class="makeup-note">${escapeHtml(s.desc)}</div>`:''}
+    <div class="ann-footer">
+      <span class="ann-group">For: ${s.group}</span>
+      <span class="stat-pill"><i class="fas fa-eye"></i> ${s.views||0}</span>
+      <button class="like-btn ${likedCls}" onclick="toggleLike('makeup','${s.id}',this)">
+        <i class="fas fa-heart"></i> <span>${s.likes||0}</span>
+      </button>
+    </div>
+  </div>`;
+}
+function renderMakeup(){
+  const el=document.getElementById('makeupList');
+  const arr=makeupSessions.filter(x=>x.group==='Both'||x.group===currentGroup);
+  el.innerHTML=arr.length?arr.map(makeupHTML).join(''):'<div class="info-alert"><i class="fas fa-info-circle"></i> No makeup sessions scheduled.</div>';
+}
+
+// ══ SPACE ══
+function renderSpace(){
+  const el=document.getElementById('spaceLinks');
+  el.innerHTML=LINKS[currentGroup].map(l=>`<a href="${l.url}" target="_blank" class="space-link"><div class="space-link-ico ${l.cls}"><i class="${l.ico}"></i></div>${l.label}</a>`).join('')
+    +`<div style="margin-top:20px;border-top:1px solid var(--border);padding-top:20px;"><a href="https://ent.univh2c.ma/uPortal/normal/render.uP" target="_blank" class="space-link"><div class="space-link-ico ent"><i class="fas fa-graduation-cap"></i></div>ENT Student Portal — Hassan II University</a><a href="http://flshm.univh2c.ma/home" target="_blank" class="space-link"><div class="space-link-ico ent"><i class="fas fa-university"></i></div>FLSHM Official Website</a></div>`;
+}
+
+// ══ ARROW REORDER — clean swap of all orders ══
+async function moveItem(col, arr, id, dir){
+  const idx = arr.findIndex(x=>x.id===id);
+  if(idx<0) return;
+  const swapIdx = idx + dir;
+  if(swapIdx<0 || swapIdx>=arr.length) return;
+  const batch = writeBatch(db);
+  arr.forEach((item,i)=>{
+    let newOrder = i;
+    if(i===idx) newOrder = swapIdx;
+    else if(i===swapIdx) newOrder = idx;
+    batch.update(doc(db,col,item.id),{order:newOrder});
+  });
+  await batch.commit();
+}
+
+// ══ ADMIN RENDERS ══
+function renderAdminPanel(){ renderAdminAnn(); renderAdminLessonSemTabs(); renderAdminLessons(lesAdminSem); renderAdminExamSemTabs(); renderAdminExams(exAdminSem); renderAdminTT(); renderAdminMakeup(); }
+
+async function saveSettings(){
+  await setDoc(doc(db,'settings','main'),siteSettings);
+}
+
+function renderAdminSettings(){
+  const el=document.getElementById('admin-settings-content');
+  if(!el) return;
+  const allPages=[
+    {id:'home',label:'🏠 Home'},
+    {id:'modules',label:'📚 Modules'},
+    {id:'exams',label:'📝 Past Exams'},
+    {id:'timetable',label:'📅 Timetable'},
+    {id:'makeup',label:'🔄 Makeup Sessions'},
+    {id:'announcements',label:'📢 Announcements'},
+    {id:'space',label:'👥 Student Space'}
+  ];
+  const order=siteSettings.pageOrder||allPages.map(p=>p.id);
+  const orderedPages=order.map(id=>allPages.find(p=>p.id===id)).filter(Boolean);
+  const sems=['S1','S2','S3','S4','S5','S6'];
+
+  el.innerHTML=`
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+
+      <!-- LEFT: Nav ordering + show/hide -->
+      <div>
+        <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">📄 Header Navigation — Order &amp; Visibility</h4>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">Use ▲/▼ to reorder. Checkbox = visible in header.</p>
+        <div id="navOrderList">
+          ${orderedPages.map((p,i)=>`
+            <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#f8fafc;margin-bottom:6px;">
+              <div style="display:flex;flex-direction:column;gap:2px;">
+                <button class="order-btn" onclick="moveNavPage('${p.id}',-1)" ${i===0?'disabled':''}>▲</button>
+                <button class="order-btn" onclick="moveNavPage('${p.id}',+1)" ${i===orderedPages.length-1?'disabled':''}>▼</button>
+              </div>
+              <label style="display:flex;align-items:center;gap:8px;flex:1;cursor:pointer;margin:0;">
+                <input type="checkbox" ${!siteSettings.hiddenPages.includes(p.id)?'checked':''} onchange="togglePageVisibility('${p.id}',this.checked)" style="width:auto;margin:0;accent-color:var(--navy);">
+                <span style="font-size:14px;font-weight:500;">${p.label}</span>
+              </label>
+            </div>`).join('')}
+        </div>
+      </div>
+
+      <!-- RIGHT: Sems + TT columns -->
+      <div>
+        <h4 style="font-size:14px;color:var(--navy);margin-bottom:12px;font-weight:700;">📚 Show/Hide Semesters</h4>
+        ${sems.map(s=>`
+          <label style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer;">
+            <input type="checkbox" ${!siteSettings.hiddenSems.includes(s)?'checked':''} onchange="toggleSemVisibility('${s}',this.checked)" style="width:auto;margin:0;accent-color:var(--navy);">
+            <span style="font-size:14px;">${s}</span>
+          </label>`).join('')}
+        <h4 style="font-size:14px;color:var(--navy);margin:16px 0 12px;font-weight:700;">📅 Timetable Columns</h4>
+        <label style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer;">
+          <input type="checkbox" ${siteSettings.ttColumns.room!==false?'checked':''} onchange="toggleTTCol('room',this.checked)" style="width:auto;margin:0;accent-color:var(--navy);">
+          <span style="font-size:14px;">Show Room column</span>
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer;">
+          <input type="checkbox" ${siteSettings.ttColumns.prof!==false?'checked':''} onchange="toggleTTCol('prof',this.checked)" style="width:auto;margin:0;accent-color:var(--navy);">
+          <span style="font-size:14px;">Show Professor column</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- MODULES MANAGEMENT — full width -->
+    <div style="margin-top:28px;border-top:2px solid var(--border);padding-top:20px;">
+      <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">📝 Module Management (All Semesters)</h4>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">Add or remove modules for any semester. Changes apply instantly to Modules and Exams pages.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;padding:14px 16px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;">
+        <select id="newModSem" style="padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;background:white;">
+          ${sems.map(s=>`<option value="${s}">${s}</option>`).join('')}
+        </select>
+        <input type="text" id="newModName" placeholder="Module name (e.g., Phonetics)" style="flex:1;min-width:180px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        <button class="add-btn" style="margin:0;" onclick="addCustomMod()"><i class="fas fa-plus"></i> Add Module</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;">
+        ${sems.map(s=>`
+          <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;">
+            <div style="padding:10px 14px;background:var(--navy);color:white;font-weight:700;font-size:13px;display:flex;justify-content:space-between;align-items:center;">
+              <span>${s}</span><span style="font-size:11px;opacity:.7;font-weight:400;">${(siteSettings.customMods[s]||MODS[s]||[]).length} modules</span>
+            </div>
+            <div style="padding:8px 12px;" id="modListSettings_${s}">
+              ${(siteSettings.customMods[s]||MODS[s]||[]).length===0
+                ?'<p style="font-size:12px;color:var(--muted);padding:4px 0;">No modules yet.</p>'
+                :(siteSettings.customMods[s]||MODS[s]||[]).map((m,mi)=>`
+                <div style="display:flex;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid var(--border);">
+                  <div style="display:flex;flex-direction:column;gap:1px;">
+                    <button class="order-btn" style="padding:1px 6px;font-size:10px;" onclick="moveCustomMod('${s}',${mi},-1)" ${mi===0?'disabled':''}>▲</button>
+                    <button class="order-btn" style="padding:1px 6px;font-size:10px;" onclick="moveCustomMod('${s}',${mi},+1)" ${mi===(siteSettings.customMods[s]||MODS[s]||[]).length-1?'disabled':''}>▼</button>
+                  </div>
+                  <span style="flex:1;font-size:13px;">${m}</span>
+                  <button class="del-btn" style="padding:3px 8px;font-size:11px;" onclick="deleteCustomMod('${s}',${mi})"><i class="fas fa-times"></i></button>
+                </div>`).join('')}
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- FOOTER / BRANDING — full width -->
+    <div style="margin-top:28px;border-top:2px solid var(--border);padding-top:20px;">
+      <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">🎨 Footer & Branding</h4>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">Personnalisez le texte du footer, la version affichée et le nom "Made by".</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;flex-wrap:wrap;">
+        <div>
+          <label style="font-size:12px;color:var(--navy);font-weight:700;display:block;margin-bottom:4px;">Texte footer (copyright)</label>
+          <input type="text" id="settingFooterText" value="${(siteSettings.footerText||'').replace(/"/g,'&quot;')}" placeholder="© 2026 English Studies Portal..."
+            style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        </div>
+        <div>
+          <label style="font-size:12px;color:var(--navy);font-weight:700;display:block;margin-bottom:4px;">Version</label>
+          <input type="text" id="settingVersion" value="${(siteSettings.version||'v2.0.1').replace(/"/g,'&quot;')}" placeholder="v2.0.1"
+            style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        </div>
+        <div>
+          <label style="font-size:12px;color:var(--navy);font-weight:700;display:block;margin-bottom:4px;">Made by (laisser vide pour cacher)</label>
+          <input type="text" id="settingMadeBy" value="${(siteSettings.madeBy||'').replace(/"/g,'&quot;')}" placeholder="ex: Mourad"
+            style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        </div>
+      </div>
+      <button class="add-btn" style="margin-top:12px;" onclick="saveFooterSettings()"><i class="fas fa-save"></i> Sauvegarder le Footer</button>
+    </div>`;
+}
+
+window.togglePageVisibility=async function(page,show){
+  if(show) siteSettings.hiddenPages=siteSettings.hiddenPages.filter(p=>p!==page);
+  else if(!siteSettings.hiddenPages.includes(page)) siteSettings.hiddenPages.push(page);
+  await saveSettings(); applyHiddenPages();
+};
+window.toggleSemVisibility=async function(sem,show){
+  if(show) siteSettings.hiddenSems=siteSettings.hiddenSems.filter(s=>s!==sem);
+  else if(!siteSettings.hiddenSems.includes(sem)) siteSettings.hiddenSems.push(sem);
+  await saveSettings(); renderModSemTabs(); renderExamSemTabs();
+};
+window.toggleTTCol=async function(col,show){
+  siteSettings.ttColumns[col]=show;
+  await saveSettings(); renderTimetable(curTTSem);
+};
+// Nav page ordering
+window.moveNavPage=async function(id,dir){
+  const order=siteSettings.pageOrder||['home','modules','exams','timetable','makeup','announcements','space'];
+  const idx=order.indexOf(id); if(idx<0) return;
+  const swap=idx+dir; if(swap<0||swap>=order.length) return;
+  [order[idx],order[swap]]=[order[swap],order[idx]];
+  siteSettings.pageOrder=order;
+  await saveSettings(); applyHiddenPages(); renderAdminSettings();
+};
+// Module add / delete / reorder — works for ALL sems S1-S6
+window.addCustomMod=async function(){
+  const sem=document.getElementById('newModSem').value;
+  const name=document.getElementById('newModName').value.trim();
+  if(!name){alert('Please enter a module name.');return;}
+  if(!siteSettings.customMods[sem]) siteSettings.customMods[sem]=[...MODS[sem]];
+  siteSettings.customMods[sem].push(name);
+  MODS[sem]=siteSettings.customMods[sem];
+  document.getElementById('newModName').value='';
+  await saveSettings(); renderModSemTabs(); renderExamSemTabs(); renderAdminSettings();
+};
+window.deleteCustomMod=async function(sem,idx){
+  if(!confirm('Remove this module?')) return;
+  if(!siteSettings.customMods[sem]) siteSettings.customMods[sem]=[...MODS[sem]];
+  siteSettings.customMods[sem].splice(idx,1);
+  MODS[sem]=siteSettings.customMods[sem];
+  await saveSettings(); renderModSemTabs(); renderExamSemTabs(); renderAdminSettings();
+};
+window.moveCustomMod=async function(sem,idx,dir){
+  if(!siteSettings.customMods[sem]) siteSettings.customMods[sem]=[...MODS[sem]];
+  const arr=siteSettings.customMods[sem];
+  const swap=idx+dir; if(swap<0||swap>=arr.length) return;
+  [arr[idx],arr[swap]]=[arr[swap],arr[idx]];
+  MODS[sem]=arr;
+  await saveSettings(); renderAdminSettings();
+};
+// Keep saveCustomMods for backward compat (no longer primary path)
+window.saveCustomMods=async function(){
+  await saveSettings(); alert('Saved!');
+};
+window.saveFooterSettings=async function(){
+  const ft = document.getElementById('settingFooterText').value.trim();
+  const ver = document.getElementById('settingVersion').value.trim();
+  const mb = document.getElementById('settingMadeBy').value.trim();
+  siteSettings.footerText = ft || '© 2026 English Studies Portal · FLSHM Mohammedia';
+  siteSettings.version = ver || 'v2.0.1';
+  siteSettings.madeBy = mb;
+  await saveSettings();
+  applyFooterSettings();
+  alert('✅ Footer mis à jour !');
+};
+window.switchAdminTab=function(tab,el){
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.admin-section-content').forEach(s=>s.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('admin-'+tab).classList.add('active');
+  if(tab==='settings'){
+    document.getElementById('admin-settings-content').innerHTML='';
+    renderAdminSettings();
+    document.getElementById('admin-settings-content').style.display='block';
+  }
+  if(tab==='comments'){ renderAdminComments(); }
+};
+
+function renderAdminAnn(){
+  const el=document.getElementById('adminAnnList');
+  const adminGR = currentAdmin ? currentAdmin.role : null;
+  const visible = announcements.filter(a=>!adminGR || a.group==='Both' || a.group===adminGR);
+  if(!visible.length){el.innerHTML='<p style="color:var(--muted);font-size:13px;">No announcements.</p>';return;}
+  el.innerHTML=visible.map((a,idx)=>{
+    const dt=[a.date,a.time].filter(Boolean).join(' ');
+    const isFirst=idx===0, isLast=idx===visible.length-1;
+    const grColor=a.group==='GR1'?'#dbeafe':a.group==='GR2'?'#dcfce7':'#f1f5f9';
+    const grText=a.group==='GR1'?'#1e40af':a.group==='GR2'?'#166534':'#475569';
+    return `<div class="admin-item" data-id="${a.id}">
+      <div class="order-btns">
+        <button class="order-btn" onclick="moveAnn('${a.id}',-1)" ${isFirst?'disabled':''}>▲</button>
+        <button class="order-btn" onclick="moveAnn('${a.id}',+1)" ${isLast?'disabled':''}>▼</button>
+      </div>
+      <div class="admin-item-info">
+        <strong>${a.title}</strong>
+        <span>${dt} · <span style="background:${grColor};color:${grText};padding:1px 7px;border-radius:100px;font-weight:700;font-size:11px;">${a.group}</span> · ${a.type} · 👁 ${a.views||0} · ❤️ ${a.likes||0}</span>
+      </div>
+      <div class="admin-item-actions">
+        <button class="edit-btn" onclick="openEditAnn('${a.id}')"><i class="fas fa-pen"></i></button>
+        <button class="del-btn" onclick="deleteAnn('${a.id}')"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+window.switchLessonAdminSem=function(sem,el){document.querySelectorAll('#admin-lessons .sem-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');lesAdminSem=sem;renderAdminLessons(sem);};
+function renderAdminLessonSemTabs(){
+  const cont=document.querySelector('#admin-lessons .sem-tabs');
+  if(!cont) return;
+  const sems=['S1','S2','S3','S4','S5','S6'].filter(s=>!siteSettings.hiddenSems.includes(s));
+  if(!sems.length) return;
+  cont.innerHTML=sems.map((s,i)=>`<div class="sem-tab${i===0?' active':''}" onclick="switchLessonAdminSem('${s}',this)">${s}</div>`).join('');
+  lesAdminSem=sems[0]; renderAdminLessons(sems[0]);
+}
+window.switchExamAdminSem=function(sem,el){document.querySelectorAll('#admin-exams-admin .sem-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');exAdminSem=sem;renderAdminExams(sem);};
+function renderAdminExamSemTabs(){
+  const cont=document.querySelector('#admin-exams-admin .sem-tabs');
+  if(!cont) return;
+  const sems=['S1','S2','S3','S4','S5','S6'].filter(s=>!siteSettings.hiddenSems.includes(s));
+  if(!sems.length) return;
+  cont.innerHTML=sems.map((s,i)=>`<div class="sem-tab${i===0?' active':''}" onclick="switchExamAdminSem('${s}',this)">${s}</div>`).join('');
+  exAdminSem=sems[0]; renderAdminExams(sems[0]);
+}
+window.populateLessonMods=function(){const sem=document.getElementById('lessonSemInput').value;document.getElementById('lessonModInput').innerHTML=MODS[sem].map(m=>`<option value="${m}">${m}</option>`).join('');};
+window.populateExamMods=function(){const sem=document.getElementById('examSemInput').value;document.getElementById('examModInput').innerHTML=MODS[sem].map(m=>`<option value="${m}">${m}</option>`).join('');};
+
+function renderAdminLessons(sem){
+  const el=document.getElementById('adminLessonList');
+  const adminGR = currentAdmin ? currentAdmin.role : null;
+  el.innerHTML=`<button class="add-btn" onclick="openAddLesson('${sem}')"><i class="fas fa-plus"></i> Add Lesson File</button>`;
+  MODS[sem].forEach(m=>{
+    const allFiles=lessons.filter(f=>f.sem===sem&&f.mod===m);
+    const files=allFiles.filter(f=>!adminGR||f.group==='Both'||f.group===adminGR);
+    const key='al-'+sem+'-'+m.replace(/\W/g,'_');
+    const sortedFiles=files.slice().sort((a,b)=>(a.order??99)-(b.order??99));
+    const fh=sortedFiles.length?sortedFiles.map((f,fi)=>{
+      const isF=fi===0, isL=fi===sortedFiles.length-1;
+      return `<div class="admin-file-item" style="flex-wrap:nowrap;">
+        <div class="order-btns" style="flex-direction:row;gap:2px;">
+          <button class="order-btn" onclick="moveLessonFile('${sem}','${m.replace(/'/g,"\'")}',${fi},-1)" ${isF?'disabled style="opacity:.3"':''}>▲</button>
+          <button class="order-btn" onclick="moveLessonFile('${sem}','${m.replace(/'/g,"\'")}',${fi},+1)" ${isL?'disabled style="opacity:.3"':''}>▼</button>
+        </div>
+        <i class="fas fa-file" style="color:var(--royal);"></i>
+        <span>${f.name} <em style="color:var(--muted);">(${f.group})</em></span>
+        <div style="display:flex;gap:4px;">
+          <button class="mod-edit-btn" onclick="openEditLesson('${f.id}')"><i class="fas fa-pen"></i></button>
+          <button class="del-btn" onclick="deleteLesson('${f.id}')"><i class="fas fa-trash"></i></button>
+        </div></div>`;
+    }).join(''):'<p style="color:var(--muted);font-size:12px;padding:6px 0;">No files yet.</p>';
+    const openClass=sortedFiles.length?'open':'';
+    el.innerHTML+=`<div class="admin-mod-group ${openClass}" id="${key}"><div class="admin-mod-head" onclick="toggleAdminMod('${key}')"><span>${m}</span><i class="fas fa-chevron-down" style="font-size:11px;color:var(--muted);"></i></div><div class="admin-mod-body">${fh}</div></div>`;
+  });
+}
+
+function renderAdminExams(sem){
+  const el=document.getElementById('adminExamList');
+  const adminGR = currentAdmin ? currentAdmin.role : null;
+  el.innerHTML=`<button class="add-btn" onclick="openAddExam('${sem}')"><i class="fas fa-plus"></i> Add Exam File</button>`;
+  MODS[sem].forEach(m=>{
+    const allFiles=exams.filter(f=>f.sem===sem&&f.mod===m);
+    const files=allFiles.filter(f=>!adminGR||f.group==='Both'||f.group===adminGR);
+    const key='ae-'+sem+'-'+m.replace(/\W/g,'_');
+    const openClass=files.length?'open':'';
+    const fh=files.length?files.map(f=>`<div class="admin-file-item"><i class="fas fa-file-alt" style="color:#166534;"></i><span>${f.name} <em style="color:var(--muted);">(${f.group})</em></span>
+      <div style="display:flex;gap:4px;">
+        <button class="mod-edit-btn" onclick="openEditExam('${f.id}')"><i class="fas fa-pen"></i></button>
+        <button class="del-btn" onclick="deleteExam('${f.id}')"><i class="fas fa-trash"></i></button>
+      </div></div>`).join(''):'<p style="color:var(--muted);font-size:12px;padding:6px 0;">No files yet.</p>';
+    el.innerHTML+=`<div class="admin-mod-group ${openClass}" id="${key}"><div class="admin-mod-head" onclick="toggleAdminMod('${key}')"><span>${m}</span><i class="fas fa-chevron-down" style="font-size:11px;color:var(--muted);"></i></div><div class="admin-mod-body">${fh}</div></div>`;
+  });
+}
+window.toggleAdminMod=function(id){document.getElementById(id).classList.toggle('open');};
+
+function renderAdminTT(){
+  const el=document.getElementById('adminTTList');let html='';
+  const adminGR = currentAdmin ? currentAdmin.role : null;
+  const groups = adminGR ? [adminGR] : ['GR1','GR2'];
+  groups.forEach(gr=>['S1','S2','S3','S4','S5','S6'].filter(s=>!siteSettings.hiddenSems.includes(s)).forEach(sem=>{
+    const rows=timetable.filter(r=>r.gr===gr&&r.sem===sem);
+    if(rows.length){
+      html+=`<div style="margin-bottom:16px;"><strong style="font-size:13px;color:var(--navy);">${gr} · ${sem}</strong><div style="margin-top:8px;">`;
+      rows.forEach((r,idx)=>{
+        const isFirst=idx===0, isLast=idx===rows.length-1;
+        html+=`<div class="admin-item" data-id="${r.id}">
+          <div class="order-btns">
+            <button class="order-btn" onclick="moveTT('${r.id}','${gr}','${sem}',-1)" ${isFirst?'disabled style="opacity:.3"':''}>▲</button>
+            <button class="order-btn" onclick="moveTT('${r.id}','${gr}','${sem}',+1)" ${isLast?'disabled style="opacity:.3"':''}>▼</button>
+          </div>
+          <div class="admin-item-info"><strong>${r.day} · ${r.module}</strong><span>${r.time}${r.room?' · Room '+r.room:''}${r.prof?' · '+r.prof:''}</span></div>
+          <div class="admin-item-actions">
+            <button class="edit-btn" onclick="openEditTT('${r.id}')"><i class="fas fa-pen"></i></button>
+            <button class="del-btn" onclick="deleteTTRow('${r.id}')"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>`;
+      });
+      html+=`</div></div>`;
+    }
+  }));
+  el.innerHTML=html||'<p style="color:var(--muted);font-size:13px;">No timetable rows.</p>';
+}
+
+// Move timetable row within same gr+sem group
+window.moveItem=moveItem;
+window.moveTT=async function(id,gr,sem,dir){
+  const rows=timetable.filter(r=>r.gr===gr&&r.sem===sem);
+  await moveItem('timetable',rows,id,dir);
+};
+window.moveAnn=async function(id,dir){
+  await moveItem('announcements',announcements,id,dir);
+};
+window.moveMakeup=async function(id,dir){
+  await moveItem('makeup',makeupSessions,id,dir);
+};
+
+function renderAdminMakeup(){
+  const el=document.getElementById('adminMakeupList');
+  const adminGR = currentAdmin ? currentAdmin.role : null;
+  const visible = makeupSessions.filter(s=>!adminGR||s.group==='Both'||s.group===adminGR);
+  if(!visible.length){el.innerHTML='<p style="color:var(--muted);font-size:13px;">No sessions.</p>';return;}
+  el.innerHTML=visible.map((s,idx)=>{
+    const isFirst=idx===0, isLast=idx===visible.length-1;
+    const title=s.module||s.desc||'—';
+    const grColor=s.group==='GR1'?'#dbeafe':s.group==='GR2'?'#dcfce7':'#f1f5f9';
+    const grText=s.group==='GR1'?'#1e40af':s.group==='GR2'?'#166534':'#475569';
+    return `<div class="admin-item" data-id="${s.id}">
+      <div class="order-btns">
+        <button class="order-btn" onclick="moveMakeup('${s.id}',-1)" ${isFirst?'disabled':''}>▲</button>
+        <button class="order-btn" onclick="moveMakeup('${s.id}',+1)" ${isLast?'disabled':''}>▼</button>
+      </div>
+      <div class="admin-item-info">
+        <strong>${title}</strong>
+        <span>${s.date}${s.mtime?' · '+s.mtime:''} · <span style="background:${grColor};color:${grText};padding:1px 7px;border-radius:100px;font-weight:700;font-size:11px;">${s.group}</span> · 👁 ${s.views||0} · ❤️ ${s.likes||0}</span>
+      </div>
+      <div class="admin-item-actions">
+        <button class="edit-btn" onclick="openEditMakeup('${s.id}')"><i class="fas fa-pen"></i></button>
+        <button class="del-btn" onclick="deleteMakeup('${s.id}')"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ══ LESSON FILE ORDERING ══
+window.moveLessonFile=async function(sem,mod,idx,dir){
+  const files=lessons.filter(f=>f.sem===sem&&f.mod===mod).slice().sort((a,b)=>(a.order??99)-(b.order??99));
+  const swapIdx=idx+dir;
+  if(swapIdx<0||swapIdx>=files.length) return;
+  const batch=writeBatch(db);
+  files.forEach((item,i)=>{
+    let newOrder=i;
+    if(i===idx) newOrder=swapIdx;
+    else if(i===swapIdx) newOrder=idx;
+    batch.update(doc(db,'lessons',item.id),{order:newOrder});
+  });
+  await batch.commit();
+};
+
+// ══ OPEN HELPERS ══
+window.openAddLesson=function(sem){document.getElementById('lessonSemInput').value=sem;window.populateLessonMods();openModal('addLessonModal');};
+window.openAddExam=function(sem){document.getElementById('examSemInput').value=sem;window.populateExamMods();openModal('addExamModal');};
+
+window.openEditAnn=function(id){
+  const a=announcements.find(x=>x.id===id); if(!a) return;
+  document.getElementById('editAnnId').value=id;
+  document.getElementById('editAnnTitle').value=a.title||'';
+  document.getElementById('editAnnText').value=a.text||'';
+  document.getElementById('editAnnGroup').value=a.group||'Both';
+  document.getElementById('editAnnType').value=a.type||'general';
+  document.getElementById('editAnnDate').value=a.date||'';
+  document.getElementById('editAnnTime').value=a.time||'';
+  document.getElementById('editAnnViews').value=a.views||0;
+  document.getElementById('editAnnLikes').value=a.likes||0;
+  openModal('editAnnModal');
+};
+window.updateAnn=async function(){
+  const id=document.getElementById('editAnnId').value;
+  const title=document.getElementById('editAnnTitle').value.trim();
+  const text=document.getElementById('editAnnText').value.trim();
+  if(!title||!text){alert('Please fill all fields.');return;}
+  const views_a=parseInt(document.getElementById('editAnnViews').value)||0;
+  const likes_a=parseInt(document.getElementById('editAnnLikes').value)||0;
+  await updateDoc(doc(db,'announcements',id),{title,text,group:document.getElementById('editAnnGroup').value,type:document.getElementById('editAnnType').value,date:document.getElementById('editAnnDate').value,time:document.getElementById('editAnnTime').value,views:views_a,likes:likes_a});
+  closeModal('editAnnModal');
+};
+
+window.openEditTT=function(id){
+  const r=timetable.find(x=>x.id===id); if(!r) return;
+  document.getElementById('editTTId').value=id;
+  document.getElementById('editTTDay').value=r.day||'';
+  document.getElementById('editTTMod').value=r.module||'';
+  document.getElementById('editTTTime').value=r.time||'';
+  document.getElementById('editTTRoom').value=r.room||'';
+  document.getElementById('editTTProf').value=r.prof||'';
+  openModal('editTTModal');
+};
+window.updateTTRow=async function(){
+  const id=document.getElementById('editTTId').value;
+  const day=document.getElementById('editTTDay').value.trim();
+  const module=document.getElementById('editTTMod').value.trim();
+  const time=document.getElementById('editTTTime').value.trim();
+  const room=document.getElementById('editTTRoom').value.trim();
+  const prof=document.getElementById('editTTProf').value.trim();
+  if(!day||!module||!time){alert('Please fill all fields.');return;}
+  await updateDoc(doc(db,'timetable',id),{day,module,time,room,prof});
+  closeModal('editTTModal');
+};
+
+window.openEditMakeup=function(id){
+  const s=makeupSessions.find(x=>x.id===id); if(!s) return;
+  document.getElementById('editMakeupId').value=id;
+  document.getElementById('editMakeupDate').value=s.date||'';
+  document.getElementById('editMakeupMod').value=s.module||'';
+  document.getElementById('editMakeupTime').value=s.mtime||'';
+  document.getElementById('editMakeupAmphi').value=s.amphi||'';
+  document.getElementById('editMakeupDesc').value=s.desc||'';
+  document.getElementById('editMakeupGroup').value=s.group||'Both';
+  document.getElementById('editMakeupViews').value=s.views||0;
+  document.getElementById('editMakeupLikes').value=s.likes||0;
+  openModal('editMakeupModal');
+};
+window.updateMakeup=async function(){
+  const id=document.getElementById('editMakeupId').value;
+  const date=document.getElementById('editMakeupDate').value;
+  const desc=document.getElementById('editMakeupDesc').value.trim();
+  if(!date){alert('Please fill the date.');return;}
+  const views_m=parseInt(document.getElementById('editMakeupViews').value)||0;
+  const likes_m=parseInt(document.getElementById('editMakeupLikes').value)||0;
+  const module_m=document.getElementById('editMakeupMod').value.trim();
+  const mtime_m=document.getElementById('editMakeupTime').value.trim();
+  const amphi_m=document.getElementById('editMakeupAmphi').value.trim();
+  await updateDoc(doc(db,'makeup',id),{date,desc,module:module_m,mtime:mtime_m,amphi:amphi_m,group:document.getElementById('editMakeupGroup').value,views:views_m,likes:likes_m});
+  closeModal('editMakeupModal');
+};
+
+window.openEditLesson=function(id){
+  const f=lessons.find(x=>x.id===id); if(!f) return;
+  document.getElementById('editLessonId').value=id;
+  document.getElementById('editLessonName').value=f.name||'';
+  document.getElementById('editLessonUrl').value=f.url||'';
+  document.getElementById('editLessonGroup').value=f.group||'Both';
+  openModal('editLessonModal');
+};
+window.updateLesson=async function(){
+  const id=document.getElementById('editLessonId').value;
+  const name=document.getElementById('editLessonName').value.trim();
+  const url=document.getElementById('editLessonUrl').value.trim();
+  if(!name||!url){alert('Please fill all fields.');return;}
+  await updateDoc(doc(db,'lessons',id),{name,url,group:document.getElementById('editLessonGroup').value});
+  closeModal('editLessonModal');
+};
+
+window.openEditExam=function(id){
+  const f=exams.find(x=>x.id===id); if(!f) return;
+  document.getElementById('editExamId').value=id;
+  document.getElementById('editExamName').value=f.name||'';
+  document.getElementById('editExamUrl').value=f.url||'';
+  document.getElementById('editExamGroup').value=f.group||'Both';
+  openModal('editExamModal');
+};
+window.updateExam=async function(){
+  const id=document.getElementById('editExamId').value;
+  const name=document.getElementById('editExamName').value.trim();
+  const url=document.getElementById('editExamUrl').value.trim();
+  if(!name||!url){alert('Please fill all fields.');return;}
+  await updateDoc(doc(db,'exams',id),{name,url,group:document.getElementById('editExamGroup').value});
+  closeModal('editExamModal');
+};
+
+// ══ CRUD ══
+window.saveAnn=async function(){
+  const title=document.getElementById('annTitleInput').value.trim();
+  const text=document.getElementById('annTextInput').value.trim();
+  if(!title||!text){alert('Please fill all fields.');return;}
+  await addDoc(collection(db,'announcements'),{
+    title,text,
+    group:document.getElementById('annGroupInput').value,
+    type:document.getElementById('annTypeInput').value,
+    date:document.getElementById('annDateInput').value,
+    time:document.getElementById('annTimeInput').value,
+    order:announcements.length,views:0,likes:0
+  });
+  closeModal('addAnnModal');
+  ['annTitleInput','annTextInput','annDateInput','annTimeInput'].forEach(id=>document.getElementById(id).value='');
+};
+window.deleteAnn=async function(id){if(!confirm('Delete?'))return;await deleteDoc(doc(db,'announcements',id));};
+window.saveLesson=async function(){
+  const name=document.getElementById('lessonNameInput').value.trim();
+  const url=document.getElementById('lessonUrlInput').value.trim();
+  if(!name||!url){alert('Please fill all fields.');return;}
+  const sem_l=document.getElementById('lessonSemInput').value, mod_l=document.getElementById('lessonModInput').value;
+  const lesOrder=lessons.filter(f=>f.sem===sem_l&&f.mod===mod_l).length;
+  await addDoc(collection(db,'lessons'),{sem:sem_l,mod:mod_l,name,url,group:document.getElementById('lessonGroupInput').value,order:lesOrder});
+  closeModal('addLessonModal');document.getElementById('lessonNameInput').value='';document.getElementById('lessonUrlInput').value='';
+};
+window.deleteLesson=async function(id){if(!confirm('Delete?'))return;await deleteDoc(doc(db,'lessons',id));};
+window.saveExam=async function(){
+  const name=document.getElementById('examNameInput').value.trim();
+  const url=document.getElementById('examUrlInput').value.trim();
+  if(!name||!url){alert('Please fill all fields.');return;}
+  await addDoc(collection(db,'exams'),{sem:document.getElementById('examSemInput').value,mod:document.getElementById('examModInput').value,name,url,group:document.getElementById('examGroupInput').value});
+  closeModal('addExamModal');document.getElementById('examNameInput').value='';document.getElementById('examUrlInput').value='';
+};
+window.deleteExam=async function(id){if(!confirm('Delete?'))return;await deleteDoc(doc(db,'exams',id));};
+window.saveMakeup=async function(){
+  const date=document.getElementById('makeupDateInput').value;
+  const module=document.getElementById('makeupModInput').value.trim();
+  const mtime=document.getElementById('makeupTimeInput').value.trim();
+  const amphi=document.getElementById('makeupAmphiInput').value.trim();
+  const desc=document.getElementById('makeupDescInput').value.trim();
+  if(!date||!module){alert('Please fill at least date and module.');return;}
+  await addDoc(collection(db,'makeup'),{date,module,mtime,amphi,desc,group:document.getElementById('makeupGroupInput').value,order:makeupSessions.length,views:0,likes:0});
+  closeModal('addMakeupModal');
+  ['makeupDateInput','makeupModInput','makeupTimeInput','makeupAmphiInput','makeupDescInput'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+};
+window.deleteMakeup=async function(id){if(!confirm('Delete?'))return;await deleteDoc(doc(db,'makeup',id));};
+window.saveTTRow=async function(){
+  const sem=document.getElementById('ttSemInput').value;
+  const gr=document.getElementById('ttGrInput').value;
+  const day=document.getElementById('ttDayInput').value.trim();
+  const module=document.getElementById('ttModInput').value.trim();
+  const time=document.getElementById('ttTimeInput').value.trim();
+  if(!day||!module||!time){alert('Please fill all fields.');return;}
+  const room=document.getElementById('ttRoomInput').value.trim();
+  const prof=document.getElementById('ttProfInput').value.trim();
+  const order=timetable.filter(r=>r.gr===gr&&r.sem===sem).length;
+  await addDoc(collection(db,'timetable'),{sem,gr,day,module,time,room,prof,order});
+  closeModal('addTTModal');['ttDayInput','ttModInput','ttTimeInput','ttRoomInput','ttProfInput'].forEach(id=>document.getElementById(id).value='');
+};
+window.deleteTTRow=async function(id){if(!confirm('Delete?'))return;await deleteDoc(doc(db,'timetable',id));};
+
+// ══ MODALS ══
+window.openModal=function(id){document.getElementById(id).classList.add('open');};
+window.closeModal=function(id){document.getElementById(id).classList.remove('open');};
+document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
+
+</script>
+</body>
+</html>
