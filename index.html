@@ -1666,6 +1666,8 @@ function applySettingsData(d){
   siteSettings.grFontSize    = d.grFontSize||11;
   siteSettings.grPadding     = d.grPadding||'5px 12px';
   siteSettings.bellSize      = d.bellSize||38;
+  siteSettings.hideGR1       = d.hideGR1||false;
+  siteSettings.hideGR2       = d.hideGR2||false;
   siteSettings.activeTheme   = d.activeTheme||'vivid';
   ['S1','S2','S3','S4','S5','S6'].forEach(s=>{
     if(Object.prototype.hasOwnProperty.call(siteSettings.customMods, s)){
@@ -1847,8 +1849,11 @@ function applyHeaderBranding(){
   // GR labels
   const b1 = document.getElementById('grBtn1');
   const b2 = document.getElementById('grBtn2');
-  if(b1){ b1.textContent = s.gr1Label||'GR1'; b1.style.fontSize=(s.grFontSize||11)+'px'; b1.style.padding=s.grPadding||'5px 12px'; }
-  if(b2){ b2.textContent = s.gr2Label||'GR2'; b2.style.fontSize=(s.grFontSize||11)+'px'; b2.style.padding=s.grPadding||'5px 12px'; }
+  if(b1){ b1.textContent = s.gr1Label||'GR1'; b1.style.fontSize=(s.grFontSize||11)+'px'; b1.style.padding=s.grPadding||'5px 12px'; b1.style.display=s.hideGR1?'none':''; }
+  if(b2){ b2.textContent = s.gr2Label||'GR2'; b2.style.fontSize=(s.grFontSize||11)+'px'; b2.style.padding=s.grPadding||'5px 12px'; b2.style.display=s.hideGR2?'none':''; }
+  // Hide entire switcher if both hidden
+  const switcher = document.querySelector('.group-switcher');
+  if(switcher) switcher.style.display = (s.hideGR1 && s.hideGR2) ? 'none' : '';
   // Bell size
   const bellBtn = document.querySelector('.notif-bell-btn');
   if(bellBtn){ const bs=(s.bellSize||38)+'px'; bellBtn.style.width=bs; bellBtn.style.height=bs; }
@@ -1864,6 +1869,8 @@ window.saveHeaderBranding = async function(){
   siteSettings.grFontSize   = parseInt(document.getElementById('hbGrFontSize').value)||11;
   siteSettings.grPadding    = document.getElementById('hbGrPadding').value.trim()||'5px 12px';
   siteSettings.bellSize     = parseInt(document.getElementById('hbBellSize').value)||38;
+  siteSettings.hideGR1      = document.getElementById('hbHideGR1').checked;
+  siteSettings.hideGR2      = document.getElementById('hbHideGR2').checked;
   await saveSettings();
   applyHeaderBranding();
   alert('✅ Header branding saved!');
@@ -2721,7 +2728,7 @@ function renderModules(sem){
   curModSem=sem;
   const el=document.getElementById('modList');
   el.innerHTML=MODS[sem].map((m,i)=>{
-    const files=lessons.filter(f=>f.sem===sem&&f.mod===m&&(f.group==='Both'||f.group===currentGroup));
+    const files=lessons.filter(f=>f.sem===sem&&f.mod===m&&(f.group==='Both'||f.group===currentGroup)).sort((a,b)=>(a.order??99)-(b.order??99));
     const fh=files.length?files.map(f=>{
       const viewUrl = isGdriveUrl(f.url) ? gdriveDirectUrl(f.url) : f.url;
       const fileIcon = isGdriveUrl(f.url) ? `<i class="fab fa-google-drive" style="color:#4285F4;font-size:14px;"></i>` : `<i class="fas fa-file-pdf" style="color:#ef4444;font-size:14px;"></i>`;
@@ -3135,6 +3142,22 @@ function renderAdminSettings(){
           <input type="text" id="hbGrPadding" value="${(siteSettings.grPadding||'5px 12px').replace(/"/g,'&quot;')}" placeholder="5px 12px"
             style="width:200px;padding:7px 10px;border:1px solid var(--border);border-radius:8px;font-family:monospace;font-size:12px;">
         </div>
+      </div>
+
+      <!-- Hide GR1 / GR2 individual toggles -->
+      <div style="padding:14px 16px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;margin-bottom:14px;">
+        <label style="font-size:12px;color:var(--navy);font-weight:700;display:block;margin-bottom:10px;">👁 Show / Hide Group Buttons</label>
+        <div style="display:flex;gap:24px;flex-wrap:wrap;">
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:600;color:var(--navy);">
+            <input type="checkbox" id="hbHideGR1" ${siteSettings.hideGR1?'checked':''} style="width:auto;margin:0;accent-color:var(--navy);">
+            Hide GR1 button
+          </label>
+          <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px;font-weight:600;color:var(--navy);">
+            <input type="checkbox" id="hbHideGR2" ${siteSettings.hideGR2?'checked':''} style="width:auto;margin:0;accent-color:var(--navy);">
+            Hide GR2 button
+          </label>
+        </div>
+        <p style="font-size:11px;color:var(--muted);margin-top:8px;">If both are hidden, the entire switcher is removed from the header. Hit "Save Header Branding" below to apply.</p>
       </div>
 
       <button class="add-btn" onclick="saveHeaderBranding()"><i class="fas fa-save"></i> Save Header Branding</button>
@@ -3595,7 +3618,8 @@ window.saveAnn=async function(){
     type:document.getElementById('annTypeInput').value,
     date:document.getElementById('annDateInput').value,
     time:document.getElementById('annTimeInput').value,
-    order:announcements.length,views:0,likes:0
+    order: announcements.length ? Math.min(...announcements.map(a=>a.order??0)) - 1 : 0,
+    views:0,likes:0
   });
   // ── Broadcast notification to all users ──
   try{
