@@ -448,6 +448,32 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 .wsp{background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#15803d;}
 .gc{background:linear-gradient(135deg,#fee2e2,#fecaca);color:#dc2626;}
 .ent{background:linear-gradient(135deg,#fff0e8,#ffd8c2);color:var(--gold);}
+.gd{background:linear-gradient(135deg,#e0f2fe,#bae6fd);color:#0284c7;}
+.fb{background:linear-gradient(135deg,#dbeafe,#bfdbfe);color:#1d4ed8;}
+.insta{background:linear-gradient(135deg,#fce7f3,#fbcfe8);color:#be185d;}
+.tg{background:linear-gradient(135deg,#cffafe,#a5f3fc);color:#0e7490;}
+.yt{background:linear-gradient(135deg,#fee2e2,#fca5a5);color:#dc2626;}
+.dc{background:linear-gradient(135deg,#ede9fe,#ddd6fe);color:#7c3aed;}
+.tw{background:linear-gradient(135deg,#dbeafe,#93c5fd);color:#1d4ed8;}
+.tk{background:linear-gradient(135deg,#f3f4f6,#e5e7eb);color:#111827;}
+.bus{background:linear-gradient(135deg,#fef9c3,#fde047);color:#b45309;}
+.li{background:linear-gradient(135deg,#dbeafe,#93c5fd);color:#0e5a8a;}
+.sc{background:linear-gradient(135deg,#fef9c3,#fde68a);color:#78350f;}
+.pin{background:linear-gradient(135deg,#fee2e2,#fca5a5);color:#9f1239;}
+.rd{background:linear-gradient(135deg,#ffedd5,#fdba74);color:#c2410c;}
+.tv{background:linear-gradient(135deg,#ede9fe,#c4b5fd);color:#6d28d9;}
+.gh{background:linear-gradient(135deg,#f1f5f9,#e2e8f0);color:#1e293b;}
+.sl{background:linear-gradient(135deg,#fce7f3,#f9a8d4);color:#9d174d;}
+.bk{background:linear-gradient(135deg,#fef3c7,#fde68a);color:#92400e;}
+.study{background:linear-gradient(135deg,#e0e7ff,#c7d2fe);color:#3730a3;}
+.sci{background:linear-gradient(135deg,#d1fae5,#6ee7b7);color:#065f46;}
+.lib{background:linear-gradient(135deg,#ede9fe,#ddd6fe);color:#5b21b6;}
+.gl{background:linear-gradient(135deg,#e0f2fe,#7dd3fc);color:#075985;}
+.aud{background:linear-gradient(135deg,#fce7f3,#fbcfe8);color:#9d174d;}
+.cert{background:linear-gradient(135deg,#fef9c3,#fcd34d);color:#78350f;}
+.lnk{background:linear-gradient(135deg,#f1f5f9,#cbd5e1);color:#475569;}
+.alsa{background:linear-gradient(135deg,#ff8c00,#ffa500);color:white;}
+.foughal{background:linear-gradient(135deg,#1a5276,#2e86c1);color:white;}
 .info-alert{
   background:linear-gradient(135deg,#fff8f5,#fff0e8);
   border:1px solid #ffd8c2;border-radius:var(--r);padding:14px 18px;
@@ -589,6 +615,7 @@ footer::after{
 .fade-in{animation:fadeIn .4s ease forwards;}
 @keyframes fadeIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes spin{to{transform:rotate(360deg);}}
 .pulse-dot{
   display:inline-block;width:7px;height:7px;background:#22c55e;
   border-radius:50%;margin-right:7px;animation:pulse 2.5s ease-in-out infinite;
@@ -959,13 +986,13 @@ footer::after{
       </svg>
     </div>
     <div class="hero-text">
-      <div class="hero-badge"><span class="pulse-dot"></span> Academic Year 2025–2026</div>
-      <h1>Faculty of Letters<br>&amp; <span>Humanities</span></h1>
-      <p>Your official portal for the English Studies Department — GR1 &amp; GR2. Access timetables, modules, past exams, announcements, and more.</p>
+      <div class="hero-badge"><span class="pulse-dot"></span> <span id="heroAcademicYear">Academic Year 2025–2026</span></div>
+      <h1><span id="heroTitle1">Faculty of Letters</span><br>&amp; <span id="heroTitle2">Humanities</span></h1>
+      <p id="heroSubtitle">Your official portal for the English Studies Department — GR1 &amp; GR2. Access timetables, modules, past exams, announcements, and more.</p>
       <div class="hero-stats">
-        <div class="stat-item"><div class="stat-num">7</div><div class="stat-label">Modules</div></div>
-        <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Groups</div></div>
-        <div class="stat-item"><div class="stat-num">2</div><div class="stat-label">Semesters</div></div>
+        <div class="stat-item"><div class="stat-num" id="heroStat1Num">7</div><div class="stat-label" id="heroStat1Label">Modules</div></div>
+        <div class="stat-item"><div class="stat-num" id="heroStat2Num">2</div><div class="stat-label" id="heroStat2Label">Groups</div></div>
+        <div class="stat-item"><div class="stat-num" id="heroStat3Num">2</div><div class="stat-label" id="heroStat3Label">Semesters</div></div>
       </div>
     </div>
     <div class="hero-card">
@@ -1140,6 +1167,7 @@ footer::after{
     <div class="admin-tab" onclick="switchAdminTab('makeup',this)">🔄 Makeup</div>
     <div class="admin-tab" onclick="switchAdminTab('settings',this)">⚙️ Settings</div>
     <div class="admin-tab" onclick="switchAdminTab('comments',this)">💬 Comments</div>
+    <div class="admin-tab" onclick="switchAdminTab('space-admin',this);renderAdminSpace();">👥 Student Space</div>
     <div class="admin-tab" onclick="switchAdminTab('sondage-admin',this)">📋 Sondage</div>
     <div class="admin-tab" onclick="switchAdminTab('notifs-admin',this);renderAdminNotifs();">🔔 Notifications</div>
   </div>
@@ -1188,6 +1216,10 @@ footer::after{
 
     <button class="add-btn" onclick="renderAdminComments()"><i class="fas fa-sync"></i> Refresh Comments</button>
     <div id="adminCommentsList" style="margin-top:12px;"></div>
+  </div>
+
+  <div class="admin-section-content" id="admin-space-admin">
+    <div id="admin-space-content"></div>
   </div>
 
   <div class="admin-section-content" id="admin-sondage-admin">
@@ -1423,6 +1455,27 @@ footer::after{
   </div>
 </div>
 
+<!-- EDIT SPACE LINK -->
+<div class="modal-overlay" id="editSpaceLinkModal">
+  <div class="modal">
+    <h3>Edit Link</h3><p class="sub">Modify this student space link.</p>
+    <label style="font-size:12px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">Label</label>
+    <input type="text" id="eslLabel" placeholder="Link label">
+    <label style="font-size:12px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">URL</label>
+    <input type="url" id="eslUrl" placeholder="https://...">
+    <label style="font-size:12px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">Group</label>
+    <select id="eslGroup"><option value="Both">Both GR1 &amp; GR2</option><option value="GR1">GR1 Only</option><option value="GR2">GR2 Only</option></select>
+    <label style="font-size:12px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">Section Header (optional)</label>
+    <input type="text" id="eslSection" placeholder="e.g. Official Channels">
+    <label style="font-size:12px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">Icon</label>
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:12px;">
+      <select id="eslIconSel" style="flex:1;" onchange="previewSpaceIcon(this.value,'eslIconPreview')"></select>
+      <div id="eslIconPreview" style="width:40px;height:40px;border-radius:10px;background:var(--sky);display:flex;align-items:center;justify-content:center;color:white;font-size:18px;flex-shrink:0;"></div>
+    </div>
+    <div class="modal-actions"><button class="modal-btn modal-btn-cancel" onclick="closeModal('editSpaceLinkModal')">Cancel</button><button class="modal-btn modal-btn-save" onclick="saveEditSpaceLink()">Save Changes</button></div>
+  </div>
+</div>
+
 <!-- LOADING SCREEN ANIMATIONS -->
 <script>
 (function(){
@@ -1518,7 +1571,7 @@ const LINKS = {
 let currentGroup='GR1', adminUnlocked=false, currentAdmin=null;
 let curModSem='S1', curExamSem='S1', curTTSem='S1';
 let lesAdminSem='S1', exAdminSem='S1';
-let announcements=[], makeupSessions=[], timetable=[], lessons=[], exams=[];
+let announcements=[], makeupSessions=[], timetable=[], lessons=[], exams=[], spaceLinks=[];
 // Site settings stored in Firebase
 let siteSettings = {
   hiddenPages: [],
@@ -1545,7 +1598,15 @@ let siteSettings = {
   grFontSize: 11,
   grPadding: '5px 12px',
   bellSize: 38,
-  activeTheme: 'vivid'
+  activeTheme: 'vivid',
+  // Hero content
+  heroAcademicYear: 'Academic Year 2025–2026',
+  heroTitle1: 'Faculty of Letters',
+  heroTitle2: 'Humanities',
+  heroSubtitle: 'Your official portal for the English Studies Department — GR1 & GR2. Access timetables, modules, past exams, announcements, and more.',
+  heroStat1Num: '7', heroStat1Label: 'Modules',
+  heroStat2Num: '2', heroStat2Label: 'Groups',
+  heroStat3Num: '2', heroStat3Label: 'Semesters',
 };
 
 // Session visitor ID (unique per browser session)
@@ -1634,6 +1695,11 @@ function setupListeners(){
     renderExams(curExamSem);
     if(adminUnlocked) renderAdminExams(exAdminSem);
   });
+  onSnapshot(query(collection(db,'spaceLinks'),orderBy('order','asc')),snap=>{
+    spaceLinks=snap.docs.map(d=>({id:d.id,...d.data()}));
+    renderSpace();
+    if(adminUnlocked) renderAdminSpace();
+  });
   // Settings — realtime updates after initial load
   onSnapshot(doc(db,'settings','main'),snap=>{
     if(snap.exists()){ applySettingsData(snap.data()); }
@@ -1669,6 +1735,14 @@ function applySettingsData(d){
   siteSettings.hideGR1       = d.hideGR1||false;
   siteSettings.hideGR2       = d.hideGR2||false;
   siteSettings.activeTheme   = d.activeTheme||'vivid';
+  // Hero content
+  siteSettings.heroAcademicYear = d.heroAcademicYear||'Academic Year 2025–2026';
+  siteSettings.heroTitle1    = d.heroTitle1||'Faculty of Letters';
+  siteSettings.heroTitle2    = d.heroTitle2||'Humanities';
+  siteSettings.heroSubtitle  = d.heroSubtitle||'Your official portal for the English Studies Department — GR1 & GR2. Access timetables, modules, past exams, announcements, and more.';
+  siteSettings.heroStat1Num  = d.heroStat1Num||'7';  siteSettings.heroStat1Label = d.heroStat1Label||'Modules';
+  siteSettings.heroStat2Num  = d.heroStat2Num||'2';  siteSettings.heroStat2Label = d.heroStat2Label||'Groups';
+  siteSettings.heroStat3Num  = d.heroStat3Num||'2';  siteSettings.heroStat3Label = d.heroStat3Label||'Semesters';
   ['S1','S2','S3','S4','S5','S6'].forEach(s=>{
     if(Object.prototype.hasOwnProperty.call(siteSettings.customMods, s)){
       MODS[s] = siteSettings.customMods[s];
@@ -1682,6 +1756,7 @@ function applySettingsData(d){
   applyFooterSettings();
   applySondageVisibility();
   applyHeaderBranding();
+  applyHeroContent();
   applyTheme(siteSettings.activeTheme||'original');
   if(adminUnlocked){ renderAdminLessonSemTabs(); renderAdminExamSemTabs(); renderAdminSettings(); }
 }
@@ -1749,6 +1824,7 @@ async function init(){
     applyFooterSettings();
     applySondageVisibility();
     applyHeaderBranding();
+    applyHeroContent();
     applyTheme(siteSettings.activeTheme||'original');
     showNewBadgeOnce();
     startNotifListener();
@@ -1858,6 +1934,35 @@ function applyHeaderBranding(){
   const bellBtn = document.querySelector('.notif-bell-btn');
   if(bellBtn){ const bs=(s.bellSize||38)+'px'; bellBtn.style.width=bs; bellBtn.style.height=bs; }
 }
+
+function applyHeroContent(){
+  const s = siteSettings;
+  const set = (id, val) => { const el = document.getElementById(id); if(el) el.textContent = val; };
+  set('heroAcademicYear', s.heroAcademicYear||'Academic Year 2025–2026');
+  set('heroTitle1', s.heroTitle1||'Faculty of Letters');
+  set('heroTitle2', s.heroTitle2||'Humanities');
+  set('heroStat1Num', s.heroStat1Num||'7');   set('heroStat1Label', s.heroStat1Label||'Modules');
+  set('heroStat2Num', s.heroStat2Num||'2');   set('heroStat2Label', s.heroStat2Label||'Groups');
+  set('heroStat3Num', s.heroStat3Num||'2');   set('heroStat3Label', s.heroStat3Label||'Semesters');
+  const subEl = document.getElementById('heroSubtitle');
+  if(subEl) subEl.textContent = s.heroSubtitle||'Your official portal for the English Studies Department — GR1 & GR2. Access timetables, modules, past exams, announcements, and more.';
+}
+
+window.saveHeroContent = async function(){
+  siteSettings.heroAcademicYear = document.getElementById('hcAcademicYear').value.trim()||'Academic Year 2025–2026';
+  siteSettings.heroTitle1       = document.getElementById('hcTitle1').value.trim()||'Faculty of Letters';
+  siteSettings.heroTitle2       = document.getElementById('hcTitle2').value.trim()||'Humanities';
+  siteSettings.heroSubtitle     = document.getElementById('hcSubtitle').value.trim()||siteSettings.heroSubtitle;
+  siteSettings.heroStat1Num     = document.getElementById('hcStat1Num').value.trim()||'7';
+  siteSettings.heroStat1Label   = document.getElementById('hcStat1Label').value.trim()||'Modules';
+  siteSettings.heroStat2Num     = document.getElementById('hcStat2Num').value.trim()||'2';
+  siteSettings.heroStat2Label   = document.getElementById('hcStat2Label').value.trim()||'Groups';
+  siteSettings.heroStat3Num     = document.getElementById('hcStat3Num').value.trim()||'2';
+  siteSettings.heroStat3Label   = document.getElementById('hcStat3Label').value.trim()||'Semesters';
+  applyHeroContent();
+  await saveSettings();
+  alert('✅ Home page content saved!');
+};
 
 window.saveHeaderBranding = async function(){
   siteSettings.logoIcon     = document.getElementById('hbLogoIcon').value.trim()||'fas fa-graduation-cap';
@@ -2050,8 +2155,20 @@ window.toggleComments = function(annId, btn){
   if(!box) return;
   const isOpen = box.classList.toggle('open');
   btn.querySelector('i').className = isOpen ? 'fas fa-comment-slash' : 'fas fa-comment';
-  if(isOpen && !commentsListeners[annId]){
-    loadComments(annId);
+  if(isOpen){
+    if(!commentsListeners[annId]){
+      // Show loading spinner immediately — no lag
+      const listEl = document.getElementById('cmtList-'+annId);
+      if(listEl) listEl.innerHTML=`
+        <div style="display:flex;align-items:center;gap:10px;padding:14px 0;color:var(--muted);font-size:13px;">
+          <span style="display:inline-block;width:18px;height:18px;border:2.5px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0;"></span>
+          Loading comments...
+        </div>`;
+      loadComments(annId);
+    } else if(commentsCache[annId]){
+      // Already loaded — re-render instantly from cache
+      renderCommentsList(annId, commentsCache[annId]);
+    }
   }
 }
 
@@ -2822,13 +2939,334 @@ function renderMakeup(){
 }
 
 // ══ SPACE ══
-function renderSpace(){
-  const el=document.getElementById('spaceLinks');
-  el.innerHTML=LINKS[currentGroup].map(l=>`<a href="${l.url}" target="_blank" class="space-link"><div class="space-link-ico ${l.cls}"><i class="${l.ico}"></i></div>${l.label}</a>`).join('')
-    +`<div style="margin-top:20px;border-top:1px solid var(--border);padding-top:20px;"><a href="https://ent.univh2c.ma/uPortal/normal/render.uP" target="_blank" class="space-link"><div class="space-link-ico ent"><i class="fas fa-graduation-cap"></i></div>ENT Student Portal — Hassan II University</a><a href="http://flshm.univh2c.ma/home" target="_blank" class="space-link"><div class="space-link-ico ent"><i class="fas fa-university"></i></div>FLSHM Official Website</a></div>`;
+// Available icons catalogue
+const SPACE_ICONS = [
+  // ── Social media ──
+  {ico:'fab fa-whatsapp',        cls:'wsp',   label:'WhatsApp'},
+  {ico:'fab fa-facebook',        cls:'fb',    label:'Facebook'},
+  {ico:'fab fa-instagram',       cls:'insta', label:'Instagram'},
+  {ico:'fab fa-telegram',        cls:'tg',    label:'Telegram'},
+  {ico:'fab fa-youtube',         cls:'yt',    label:'YouTube'},
+  {ico:'fab fa-discord',         cls:'dc',    label:'Discord'},
+  {ico:'fab fa-twitter',         cls:'tw',    label:'Twitter / X'},
+  {ico:'fab fa-tiktok',          cls:'tk',    label:'TikTok'},
+  {ico:'fab fa-linkedin',        cls:'li',    label:'LinkedIn'},
+  {ico:'fab fa-snapchat',        cls:'sc',    label:'Snapchat'},
+  {ico:'fab fa-pinterest',       cls:'pin',   label:'Pinterest'},
+  {ico:'fab fa-reddit',          cls:'rd',    label:'Reddit'},
+  {ico:'fab fa-twitch',          cls:'tv',    label:'Twitch'},
+  {ico:'fab fa-github',          cls:'gh',    label:'GitHub'},
+  {ico:'fab fa-slack',           cls:'sl',    label:'Slack'},
+  // ── Academic & tools ──
+  {ico:'fab fa-google',          cls:'gc',    label:'Google Classroom'},
+  {ico:'fab fa-google-drive',    cls:'gd',    label:'Google Drive'},
+  {ico:'fas fa-graduation-cap',  cls:'ent',   label:'Graduation / ENT'},
+  {ico:'fas fa-university',      cls:'ent',   label:'University / FLSHM'},
+  {ico:'fas fa-book',            cls:'bk',    label:'Book'},
+  {ico:'fas fa-book-open',       cls:'bk',    label:'Open Book'},
+  {ico:'fas fa-file-alt',        cls:'gd',    label:'Document / File'},
+  {ico:'fas fa-file-pdf',        cls:'gc',    label:'PDF File'},
+  {ico:'fas fa-scroll',          cls:'ent',   label:'Scroll / Parchment'},
+  {ico:'fas fa-pencil-alt',      cls:'study', label:'Pencil / Study'},
+  {ico:'fas fa-pen-nib',         cls:'study', label:'Pen / Write'},
+  {ico:'fas fa-clipboard',       cls:'gd',    label:'Clipboard'},
+  {ico:'fas fa-clipboard-list',  cls:'gd',    label:'Clipboard List'},
+  {ico:'fas fa-chalkboard-teacher',cls:'ent', label:'Classroom Teacher'},
+  {ico:'fas fa-laptop',          cls:'gc',    label:'Laptop'},
+  {ico:'fas fa-laptop-code',     cls:'gc',    label:'Laptop Code'},
+  {ico:'fas fa-microscope',      cls:'sci',   label:'Microscope / Science'},
+  {ico:'fas fa-flask',           cls:'sci',   label:'Flask / Lab'},
+  {ico:'fas fa-atom',            cls:'sci',   label:'Atom / Physics'},
+  {ico:'fas fa-calculator',      cls:'study', label:'Calculator / Maths'},
+  {ico:'fas fa-brain',           cls:'study', label:'Brain / Learning'},
+  {ico:'fas fa-archive',         cls:'lib',   label:'Library / Archive'},
+  {ico:'fas fa-landmark',        cls:'lib',   label:'Library / Landmark'},
+  {ico:'fas fa-globe',           cls:'gl',    label:'Globe / International'},
+  {ico:'fas fa-language',        cls:'gl',    label:'Language'},
+  {ico:'fas fa-headphones',      cls:'aud',   label:'Headphones / Audio'},
+  {ico:'fas fa-music',           cls:'aud',   label:'Music / Audio'},
+  {ico:'fas fa-certificate',     cls:'cert',  label:'Certificate / Award'},
+  {ico:'fas fa-award',           cls:'cert',  label:'Award / Medal'},
+  {ico:'fas fa-star',            cls:'cert',  label:'Star / Featured'},
+  {ico:'fas fa-chart-bar',       cls:'study', label:'Charts / Stats'},
+  {ico:'fas fa-map',             cls:'gl',    label:'Map / Geography'},
+  {ico:'fas fa-newspaper',       cls:'lib',   label:'Newspaper / News'},
+  {ico:'fas fa-search',          cls:'gd',    label:'Search / Research'},
+  {ico:'fas fa-lightbulb',       cls:'study', label:'Lightbulb / Ideas'},
+  {ico:'fas fa-calendar-alt',    cls:'gd',    label:'Calendar / Schedule'},
+  {ico:'fas fa-comments',        cls:'wsp',   label:'Comments / Forum'},
+  // ── Transport ──
+  {ico:'fas fa-bus',             cls:'bus',   label:'Bus (general)'},
+  {ico:'fas fa-bus-alt',         cls:'alsa',  label:'ALSA — Bus Company'},
+  {ico:'fas fa-shuttle-van',     cls:'foughal',label:'Foughal — Bus Company'},
+  // ── General ──
+  {ico:'fas fa-link',            cls:'lnk',   label:'General Link'},
+  {ico:'fas fa-external-link-alt',cls:'lnk',  label:'External Link'},
+  {ico:'fas fa-info-circle',     cls:'lnk',   label:'Info / About'},
+];
+
+function getSpaceIconCls(ico){
+  const found = SPACE_ICONS.find(x=>x.ico===ico);
+  return found ? found.cls : 'ent';
 }
 
-// ══ ARROW REORDER — clean swap of all orders ══
+function renderSpace(){
+  const el=document.getElementById('spaceLinks');
+  if(!el) return;
+  const gr = currentGroup;
+  let links = spaceLinks.filter(l=>l.group==='Both'||l.group===gr);
+  // Fallback to hardcoded LINKS if no Firebase data yet
+  if(!links.length && LINKS[gr]){
+    links = LINKS[gr].map((l,i)=>({...l, id:'fallback_'+i, group:gr, order:i}));
+  }
+  if(!links.length){
+    el.innerHTML='<div class="info-alert"><i class="fas fa-info-circle"></i> No links added yet. Admin can add links from the Student Space panel.</div>';
+    return;
+  }
+  // Group by section (category field, optional)
+  const bySection = {};
+  links.forEach(l=>{
+    const sec = l.section||'';
+    if(!bySection[sec]) bySection[sec]=[];
+    bySection[sec].push(l);
+  });
+  let html='';
+  Object.keys(bySection).forEach(sec=>{
+    if(sec) html+=`<div style="font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:800;margin:18px 0 8px;padding-bottom:6px;border-bottom:1px solid var(--border);">${escapeHtml(sec)}</div>`;
+    html+=bySection[sec].map(l=>`<a href="${l.url||'#'}" target="_blank" class="space-link"><div class="space-link-ico ${getSpaceIconCls(l.ico||l.icon||'fas fa-link')}"><i class="${l.ico||l.icon||'fas fa-link'}"></i></div>${escapeHtml(l.label||'Link')}</a>`).join('');
+  });
+  el.innerHTML=html;
+}
+
+// ══ ADMIN SPACE ══
+window.renderAdminSpace = function(){
+  const el = document.getElementById('admin-space-content');
+  if(!el) return;
+  const iconOptions = SPACE_ICONS.map(ic=>
+    `<option value="${ic.ico}">${ic.label}</option>`
+  ).join('');
+
+  const renderGroupLinks = (gr) => {
+    const links = spaceLinks.filter(l=>l.group===gr);
+    if(!links.length) return `<p style="font-size:12px;color:var(--muted);padding:8px 0;font-style:italic;">No ${gr}-only links yet.</p>`;
+    return links.map((l)=>`
+      <div class="admin-item" style="gap:8px;cursor:default;">
+        <div class="space-link-ico ${getSpaceIconCls(l.ico||l.icon||'fas fa-link')}" style="width:36px;height:36px;font-size:15px;flex-shrink:0;border-radius:10px;"><i class="${l.ico||l.icon||'fas fa-link'}"></i></div>
+        <div class="admin-item-info" style="min-width:0;">
+          <strong>${escapeHtml(l.label||'Link')}</strong>
+          <span style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:2px;">
+            <span style="background:#f1f5f9;padding:1px 7px;border-radius:100px;font-size:10px;font-weight:700;">${l.group}</span>
+            ${l.section?`<span style="background:#fff3ef;color:var(--gold);padding:1px 7px;border-radius:100px;font-size:10px;font-weight:700;">${escapeHtml(l.section)}</span>`:''}
+            <span style="font-size:10px;color:var(--sky);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:150px;" title="${l.url||''}">${l.url||'No URL'}</span>
+          </span>
+        </div>
+        <div class="admin-item-actions">
+          <button class="edit-btn" onclick="openEditSpaceLink('${l.id}')"><i class="fas fa-pen"></i></button>
+          <button class="del-btn" onclick="deleteSpaceLink('${l.id}')"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>`).join('');
+  };
+
+  const renderBothLinks = () => {
+    const links = spaceLinks.filter(l=>l.group==='Both');
+    if(!links.length) return `<p style="font-size:12px;color:var(--muted);padding:8px 0;font-style:italic;">No shared links yet.</p>`;
+    return links.map(l=>`
+      <div class="admin-item" style="gap:8px;cursor:default;">
+        <div class="space-link-ico ${getSpaceIconCls(l.ico||l.icon||'fas fa-link')}" style="width:36px;height:36px;font-size:15px;flex-shrink:0;border-radius:10px;"><i class="${l.ico||l.icon||'fas fa-link'}"></i></div>
+        <div class="admin-item-info" style="min-width:0;">
+          <strong>${escapeHtml(l.label||'Link')}</strong>
+          <span style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-top:2px;">
+            <span style="background:#fff3ef;color:var(--gold);padding:1px 7px;border-radius:100px;font-size:10px;font-weight:700;">GR1 + GR2</span>
+            ${l.section?`<span style="background:#f1f5f9;padding:1px 7px;border-radius:100px;font-size:10px;font-weight:700;">${escapeHtml(l.section)}</span>`:''}
+            <span style="font-size:10px;color:var(--sky);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:150px;" title="${l.url||''}">${l.url||'No URL'}</span>
+          </span>
+        </div>
+        <div class="admin-item-actions">
+          <button class="edit-btn" onclick="openEditSpaceLink('${l.id}')"><i class="fas fa-pen"></i></button>
+          <button class="del-btn" onclick="deleteSpaceLink('${l.id}')"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>`).join('');
+  };
+
+  const importBanner = spaceLinks.length === 0 ? `
+    <div style="background:linear-gradient(135deg,#fff8f0,#fff3e0);border:1.5px solid #ffcc80;border-radius:14px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+      <div style="font-size:28px;">📥</div>
+      <div style="flex:1;min-width:180px;">
+        <div style="font-size:13px;font-weight:800;color:var(--navy);margin-bottom:3px;">Import your existing links</div>
+        <div style="font-size:12px;color:var(--muted);">The current WhatsApp &amp; Classroom links are hardcoded. Click below to import them into Firebase so you can edit them here.</div>
+      </div>
+      <button class="add-btn" style="margin:0;background:linear-gradient(135deg,#ff8c00,#ff6b35);" onclick="importDefaultLinks()">
+        <i class="fas fa-file-import"></i> Import Default Links
+      </button>
+    </div>` : '';
+
+  el.innerHTML=`
+    <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">👥 Student Space — Links Manager</h4>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Manage all links shown on the Student Space page. Separate for GR1, GR2, or Both. Each link has a custom icon, label, URL, and optional section header.</p>
+
+    ${importBanner}
+
+    <!-- ADD LINK FORM -->
+    <div style="background:#f8fafc;border:1.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:24px;">
+      <h5 style="font-size:13px;color:var(--navy);font-weight:800;margin-bottom:14px;">➕ Add New Link</h5>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div>
+          <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">Label (display name) *</label>
+          <input type="text" id="spLabelInput" placeholder="e.g. English Studies GR1 WhatsApp" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">URL</label>
+          <input type="url" id="spUrlInput" placeholder="https://chat.whatsapp.com/..." style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">Group *</label>
+          <select id="spGroupInput" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+            <option value="GR1">GR1 Only</option>
+            <option value="GR2">GR2 Only</option>
+            <option value="Both">Both GR1 &amp; GR2</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">Section Header <em style="font-weight:400;">(optional)</em></label>
+          <input type="text" id="spSectionInput" placeholder="e.g. Official Channels / Bus Lines" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        </div>
+      </div>
+      <div style="margin-bottom:14px;">
+        <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:6px;">🎨 Icon — choose from ${SPACE_ICONS.length} icons</label>
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+          <select id="spIconInput" style="flex:1;min-width:220px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;" onchange="previewSpaceIcon(this.value,'spIconPreview')">
+            ${iconOptions}
+          </select>
+          <div id="spIconPreview" style="width:44px;height:44px;border-radius:12px;background:#25d366;display:flex;align-items:center;justify-content:center;color:white;font-size:18px;flex-shrink:0;">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+        </div>
+        <!-- Icon quick-pick grid -->
+        <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;max-height:120px;overflow-y:auto;padding:10px;background:white;border:1px solid var(--border);border-radius:10px;">
+          ${SPACE_ICONS.map(ic=>`
+            <button title="${ic.label}" onclick="quickPickIcon('${ic.ico}')" style="width:36px;height:36px;border:none;border-radius:9px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:.15s;" class="space-link-ico ${ic.cls}">
+              <i class="${ic.ico}"></i>
+            </button>`).join('')}
+        </div>
+        <p style="font-size:10px;color:var(--muted);margin-top:5px;"><i class="fas fa-hand-pointer"></i> Click an icon above to quick-select it, or use the dropdown</p>
+      </div>
+      <button class="add-btn" style="margin:0;" onclick="addSpaceLink()"><i class="fas fa-plus"></i> Add Link</button>
+    </div>
+
+    <!-- EXISTING LINKS GROUPED -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+      <div>
+        <h5 style="font-size:13px;color:#1e40af;font-weight:800;margin-bottom:10px;padding:8px 12px;background:#dbeafe;border-radius:10px;">
+          <i class="fas fa-users" style="margin-right:6px;"></i>GR1 Only — ${spaceLinks.filter(l=>l.group==='GR1').length} links
+        </h5>
+        <div id="spaceAdminGR1">${renderGroupLinks('GR1')}</div>
+      </div>
+      <div>
+        <h5 style="font-size:13px;color:#166534;font-weight:800;margin-bottom:10px;padding:8px 12px;background:#dcfce7;border-radius:10px;">
+          <i class="fas fa-users" style="margin-right:6px;"></i>GR2 Only — ${spaceLinks.filter(l=>l.group==='GR2').length} links
+        </h5>
+        <div id="spaceAdminGR2">${renderGroupLinks('GR2')}</div>
+      </div>
+    </div>
+    <div>
+      <h5 style="font-size:13px;color:#92400e;font-weight:800;margin-bottom:10px;padding:8px 12px;background:#fef3c7;border-radius:10px;">
+        <i class="fas fa-users" style="margin-right:6px;"></i>Both GR1 &amp; GR2 — ${spaceLinks.filter(l=>l.group==='Both').length} links
+      </h5>
+      <div id="spaceAdminBoth" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">${renderBothLinks()}</div>
+    </div>
+  `;
+};
+
+window.quickPickIcon = function(ico){
+  const sel = document.getElementById('spIconInput');
+  if(sel){ sel.value = ico; }
+  previewSpaceIcon(ico, 'spIconPreview');
+};
+
+window.importDefaultLinks = async function(){
+  if(!confirm('This will import your 6 default WhatsApp & Classroom links into Firebase so you can edit them here. Continue?')) return;
+  const defaults = [
+    {label:'English Studies GR1 · S1/2', url:'https://chat.whatsapp.com/KC8H6nooswS9j3Gg9yozZt', ico:'fab fa-whatsapp', group:'GR1', section:'WhatsApp Groups', order:0},
+    {label:'Announcements GR1 · S1/2',   url:'https://chat.whatsapp.com/DGysm3YhQnpE7nGQLDd5km', ico:'fab fa-whatsapp', group:'GR1', section:'WhatsApp Groups', order:1},
+    {label:'Google Classroom GR1',        url:'https://classroom.google.com/c/ODM0OTEzMjY5NTEz?cjc=amozilem', ico:'fab fa-google', group:'GR1', section:'Academic Tools', order:2},
+    {label:'English Studies GR2 · S1/2', url:'https://chat.whatsapp.com/D8EFIBAoCqh9MatabkO1oN', ico:'fab fa-whatsapp', group:'GR2', section:'WhatsApp Groups', order:0},
+    {label:'Announcements GR2 · S1/2',   url:'https://chat.whatsapp.com/EKZ56fLFPevJ4NvoSkDMV6', ico:'fab fa-whatsapp', group:'GR2', section:'WhatsApp Groups', order:1},
+    {label:'Google Classroom GR2',        url:'https://classroom.google.com/c/NzkyNjU3NjkxNTM0?cjc=ldqb36iw', ico:'fab fa-google', group:'GR2', section:'Academic Tools', order:2},
+    {label:'ENT Student Portal',          url:'https://ent.univh2c.ma/uPortal/normal/render.uP', ico:'fas fa-graduation-cap', group:'Both', section:'University Links', order:3},
+    {label:'FLSHM Official Website',      url:'http://flshm.univh2c.ma/home', ico:'fas fa-university', group:'Both', section:'University Links', order:4},
+  ];
+  try {
+    for(const d of defaults) await addDoc(collection(db,'spaceLinks'),{...d, ts:Date.now()});
+    alert('✅ Default links imported! You can now edit them from this panel.');
+  } catch(e){ alert('Error: '+e.message); }
+};
+
+window.previewSpaceIcon = function(ico, previewId){
+  const el = document.getElementById(previewId);
+  if(!el) return;
+  const cls = getSpaceIconCls(ico);
+  const colorMap = {
+    wsp:'#25d366',fb:'#1877f2',insta:'#e1306c',tg:'#0088cc',yt:'#ff0000',
+    dc:'#5865f2',tw:'#1da1f2',tk:'#010101',li:'#0a66c2',sc:'#fffc00',
+    pin:'#e60023',rd:'#ff4500',tv:'#9146ff',gh:'#24292e',sl:'#4a154b',
+    gc:'#ea4335',gd:'#34a853',ent:'#ff6b35',bk:'#d97706',study:'#4338ca',
+    sci:'#059669',lib:'#7c3aed',gl:'#0369a1',aud:'#db2777',cert:'#d97706',
+    lnk:'#64748b',bus:'#d97706',alsa:'#ff8c00',foughal:'#1a5276'
+  };
+  const bg = colorMap[cls]||'var(--sky)';
+  el.style.background = bg;
+  el.innerHTML = `<i class="${ico}" style="color:white;font-size:16px;"></i>`;
+};
+
+window.addSpaceLink = async function(){
+  const label   = document.getElementById('spLabelInput').value.trim();
+  const url     = document.getElementById('spUrlInput').value.trim();
+  const group   = document.getElementById('spGroupInput').value;
+  const section = document.getElementById('spSectionInput').value.trim();
+  const ico     = document.getElementById('spIconInput').value;
+  if(!label){ alert('Please enter a label.'); return; }
+  await addDoc(collection(db,'spaceLinks'),{label,url,group,section,ico,order:spaceLinks.length,ts:Date.now()});
+  document.getElementById('spLabelInput').value='';
+  document.getElementById('spUrlInput').value='';
+  document.getElementById('spSectionInput').value='';
+};
+
+window.deleteSpaceLink = async function(id){
+  if(!confirm('Delete this link?')) return;
+  await deleteDoc(doc(db,'spaceLinks',id));
+};
+
+let _editSpaceLinkId=null;
+window.openEditSpaceLink = function(id){
+  const link = spaceLinks.find(l=>l.id===id);
+  if(!link) return;
+  _editSpaceLinkId = id;
+  const iconOptions = SPACE_ICONS.map(ic=>
+    `<option value="${ic.ico}" ${(link.ico||link.icon||'')==ic.ico?'selected':''}>${ic.label}</option>`
+  ).join('');
+  const modal = document.getElementById('editSpaceLinkModal');
+  if(!modal) return;
+  modal.querySelector('#eslLabel').value = link.label||'';
+  modal.querySelector('#eslUrl').value = link.url||'';
+  modal.querySelector('#eslSection').value = link.section||'';
+  modal.querySelector('#eslGroup').value = link.group||'Both';
+  modal.querySelector('#eslIconSel').innerHTML = iconOptions;
+  previewSpaceIcon(link.ico||link.icon||'fas fa-link','eslIconPreview');
+  modal.classList.add('open');
+};
+
+window.saveEditSpaceLink = async function(){
+  if(!_editSpaceLinkId) return;
+  const label   = document.getElementById('eslLabel').value.trim();
+  const url     = document.getElementById('eslUrl').value.trim();
+  const group   = document.getElementById('eslGroup').value;
+  const section = document.getElementById('eslSection').value.trim();
+  const ico     = document.getElementById('eslIconSel').value;
+  if(!label){ alert('Please enter a label.'); return; }
+  await updateDoc(doc(db,'spaceLinks',_editSpaceLinkId),{label,url,group,section,ico});
+  closeModal('editSpaceLinkModal');
+  _editSpaceLinkId=null;
+};
 async function moveItem(col, arr, id, dir){
   const idx = arr.findIndex(x=>x.id===id);
   if(idx<0) return;
@@ -2941,6 +3379,48 @@ function renderAdminSettings(){
   const sems=['S1','S2','S3','S4','S5','S6'];
 
   el.innerHTML=`
+    <!-- HOME PAGE CONTENT EDITOR -->
+    <div style="margin-bottom:28px;padding:20px;background:#fff8f5;border:1.5px solid #ffd8c2;border-radius:14px;">
+      <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">🏠 Home Page Content</h4>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Edit the hero section text, stats, and academic year displayed on the homepage.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;">
+        <div>
+          <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">📅 Academic Year (badge)</label>
+          <input type="text" id="hcAcademicYear" value="${(siteSettings.heroAcademicYear||'Academic Year 2025–2026').replace(/"/g,'&quot;')}" placeholder="Academic Year 2025–2026" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">✏️ Title Line 1</label>
+          <input type="text" id="hcTitle1" value="${(siteSettings.heroTitle1||'Faculty of Letters').replace(/"/g,'&quot;')}" placeholder="Faculty of Letters" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">✏️ Title Line 2 <em style="font-weight:400;color:var(--gold)">(highlighted)</em></label>
+          <input type="text" id="hcTitle2" value="${(siteSettings.heroTitle2||'Humanities').replace(/"/g,'&quot;')}" placeholder="Humanities" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        </div>
+        <div>
+          <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">📝 Subtitle / Description</label>
+          <input type="text" id="hcSubtitle" value="${(siteSettings.heroSubtitle||'').replace(/"/g,'&quot;')}" placeholder="Your official portal..." style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;">
+        <div style="border:1px solid var(--border);border-radius:10px;padding:10px 12px;background:white;">
+          <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:6px;">Stat 1</label>
+          <input type="text" id="hcStat1Num" value="${(siteSettings.heroStat1Num||'7').replace(/"/g,'&quot;')}" placeholder="7" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:22px;font-weight:800;text-align:center;margin-bottom:5px;">
+          <input type="text" id="hcStat1Label" value="${(siteSettings.heroStat1Label||'Modules').replace(/"/g,'&quot;')}" placeholder="Modules" style="width:100%;padding:6px 10px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:12px;text-align:center;">
+        </div>
+        <div style="border:1px solid var(--border);border-radius:10px;padding:10px 12px;background:white;">
+          <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:6px;">Stat 2</label>
+          <input type="text" id="hcStat2Num" value="${(siteSettings.heroStat2Num||'2').replace(/"/g,'&quot;')}" placeholder="2" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:22px;font-weight:800;text-align:center;margin-bottom:5px;">
+          <input type="text" id="hcStat2Label" value="${(siteSettings.heroStat2Label||'Groups').replace(/"/g,'&quot;')}" placeholder="Groups" style="width:100%;padding:6px 10px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:12px;text-align:center;">
+        </div>
+        <div style="border:1px solid var(--border);border-radius:10px;padding:10px 12px;background:white;">
+          <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:6px;">Stat 3</label>
+          <input type="text" id="hcStat3Num" value="${(siteSettings.heroStat3Num||'2').replace(/"/g,'&quot;')}" placeholder="2" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:22px;font-weight:800;text-align:center;margin-bottom:5px;">
+          <input type="text" id="hcStat3Label" value="${(siteSettings.heroStat3Label||'Semesters').replace(/"/g,'&quot;')}" placeholder="Semesters" style="width:100%;padding:6px 10px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:12px;text-align:center;">
+        </div>
+      </div>
+      <button class="add-btn" onclick="saveHeroContent()" style="margin:0;"><i class="fas fa-save"></i> Save Home Page</button>
+    </div>
+
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
 
       <!-- LEFT: Nav ordering + show/hide -->
