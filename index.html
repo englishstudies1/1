@@ -368,6 +368,87 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 .ann-text{font-size:13.5px;color:var(--text);line-height:1.7;white-space:pre-wrap;word-break:break-word;font-weight:400;}
 .ann-group{font-size:11px;color:var(--muted);margin-top:5px;font-weight:600;}
 
+/* ══ THREADS-STYLE POST CARD ══ */
+.post-card{
+  background:white;border:1.5px solid var(--border);
+  border-radius:var(--r);padding:18px 20px 14px;
+  box-shadow:var(--card-shadow);
+  transition:box-shadow .2s,transform .2s,border-color .2s;
+  position:relative;overflow:hidden;
+  margin-bottom:12px;
+}
+.post-card:hover{box-shadow:var(--card-hover);transform:translateY(-2px);border-color:rgba(0,180,160,.3);}
+.post-header{display:flex;align-items:center;gap:12px;margin-bottom:13px;}
+.post-site-avatar{
+  width:42px;height:42px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;color:white;
+  box-shadow:0 3px 12px rgba(255,107,53,.35);
+  position:relative;
+}
+.post-site-avatar-icon{position:relative;z-index:1;}
+.post-site-avatar-ring{
+  position:absolute;inset:-3px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--sky));
+  z-index:0;padding:2px;
+}
+.post-site-avatar-inner{
+  width:100%;height:100%;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;color:white;position:relative;z-index:1;
+}
+.post-header-info{flex:1;min-width:0;}
+.post-publisher-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.post-admin-symbol{
+  width:18px;height:18px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:9px;color:white;flex-shrink:0;
+  box-shadow:0 1px 5px rgba(255,107,53,.4);
+}
+.post-admin-name{font-family:var(--theme-font-display);font-size:14.5px;font-weight:800;color:var(--navy);line-height:1.2;}
+.post-pub-name{font-size:12px;color:var(--muted);font-weight:600;margin-top:1px;}
+.post-time{font-size:11px;color:var(--muted);font-weight:600;margin-left:auto;flex-shrink:0;}
+.post-tag{font-size:10px;padding:3px 10px;border-radius:var(--r-pill);font-weight:700;letter-spacing:.3px;}
+.post-thread-line{
+  position:absolute;left:38px;top:72px;bottom:auto;height:calc(100% - 130px);
+  width:2px;background:var(--border);border-radius:2px;
+  pointer-events:none;max-height:80px;
+}
+.post-content{margin-left:54px;margin-bottom:14px;}
+.post-title{font-weight:800;font-size:15px;color:var(--navy);margin-bottom:6px;line-height:1.4;}
+.post-text{font-size:13.5px;color:var(--text);line-height:1.75;white-space:pre-wrap;word-break:break-word;}
+.post-actions{margin-left:54px;display:flex;align-items:center;gap:4px;margin-bottom:10px;}
+.post-action-btn{
+  display:flex;align-items:center;gap:5px;
+  background:none;border:none;cursor:pointer;
+  color:var(--muted);padding:6px 10px;border-radius:var(--r-pill);
+  transition:.2s;font-weight:700;font-size:12.5px;
+}
+.post-action-btn:hover{background:#f5f3ef;color:var(--navy);}
+.post-action-btn.liked{color:#e11d48;}
+.post-action-btn.liked:hover{background:#fee2e2;color:#e11d48;}
+.post-action-btn i{font-size:16px;}
+.post-action-btn .post-count{font-size:12px;font-weight:700;}
+.post-footer{margin-left:54px;display:flex;align-items:center;gap:8px;}
+.post-reply-avatars{display:flex;}
+.post-reply-avatar{
+  width:22px;height:22px;border-radius:50%;
+  border:2px solid white;background:linear-gradient(135deg,var(--royal),var(--sky));
+  display:flex;align-items:center;justify-content:center;
+  font-size:8px;font-weight:800;color:white;
+  margin-left:-7px;flex-shrink:0;
+}
+.post-reply-avatar:first-child{margin-left:0;}
+.post-footer-text{font-size:12px;color:var(--muted);font-weight:600;}
+.post-action-btn.saved-active{color:var(--gold);}
+.post-action-btn.saved-active:hover{background:#fff7ed;color:var(--gold);}
+[data-theme="midnight"] .post-card{background:#1e1e32;border-color:var(--border);}
+[data-theme="midnight"] .post-title,[data-theme="midnight"] .post-admin-name{color:var(--text);}
+[data-theme="midnight"] .post-text{color:var(--text);}
+
 /* ══ TABS ══ */
 .sem-tabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;}
 .sem-tab{
@@ -798,6 +879,36 @@ footer::after{
 .ld-corner path{stroke:rgba(255,107,53,.18);stroke-width:1.5;fill:none;stroke-dasharray:200;stroke-dashoffset:200;animation:drawLine 2s ease .3s forwards;}
 @keyframes drawLine{to{stroke-dashoffset:0;}}
 .comments-section{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);}
+/* ══ FB/IG COMMENT STYLES ══ */
+.fb-comment{display:flex;gap:8px;margin-bottom:10px;align-items:flex-start;}
+.fb-reply{margin-left:38px;margin-top:6px;}
+.fb-comment-avatar{
+  width:32px;height:32px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--royal),var(--sky));
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:white;
+}
+.fb-comment-main{flex:1;min-width:0;}
+.fb-comment-bubble{
+  background:#f0f2f5;border-radius:18px;padding:8px 14px;display:inline-block;max-width:100%;
+}
+[data-theme="midnight"] .fb-comment-bubble{background:#2a2a45;}
+.fb-comment-name{font-size:12.5px;font-weight:800;color:var(--navy);display:block;margin-bottom:2px;}
+[data-theme="midnight"] .fb-comment-name{color:var(--text);}
+.fb-comment-text{font-size:13px;color:var(--text);line-height:1.5;white-space:pre-wrap;word-break:break-word;}
+.fb-comment-text .mention{color:var(--gold);font-weight:700;}
+.fb-comment-actions{display:flex;align-items:center;gap:2px;margin-top:4px;padding-left:4px;flex-wrap:wrap;}
+.fb-action-btn{
+  font-size:11.5px;font-weight:700;color:var(--muted);background:none;border:none;
+  cursor:pointer;padding:3px 8px;border-radius:var(--r-pill);transition:.15s;
+  display:flex;align-items:center;gap:4px;
+}
+.fb-action-btn:hover{background:#f0f2f5;color:var(--navy);}
+.fb-action-btn.liked{color:#1877f2;}
+.fb-action-btn.liked:hover{background:#e7f3ff;}
+.fb-time{font-size:11px;color:var(--muted);font-weight:600;padding:3px 6px;}
+.fb-replies{margin-top:4px;}
+
 .comments-toggle-btn{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gold);background:none;border:none;cursor:pointer;padding:5px 12px;border-radius:var(--r-pill);transition:.2s;font-weight:700;}
 .comments-toggle-btn:hover{background:#fff0e8;}
 .comments-box{margin-top:12px;display:none;}.comments-box.open{display:block;}
@@ -1061,7 +1172,13 @@ footer::after{
 <div id="page-announcements" class="page">
   <main>
     <div class="sec-header" style="margin-top:8px;"><h2><i class="fas fa-bullhorn"></i> All Announcements</h2><p>Official updates from the English Studies Department</p><div class="section-divider"></div></div>
-    <div class="ann-list" id="annFull"></div>
+    <!-- Tabs: All / Saved -->
+    <div style="display:flex;gap:8px;margin-bottom:18px;">
+      <button id="annTab-all" class="sem-tab active" onclick="switchAnnTab('all')"><i class="fas fa-list" style="margin-right:5px;"></i>All Posts</button>
+      <button id="annTab-saved" class="sem-tab" onclick="switchAnnTab('saved')"><i class="fas fa-bookmark" style="margin-right:5px;"></i>Saved</button>
+    </div>
+    <div id="annFull"></div>
+    <div id="annSaved" style="display:none;"></div>
   </main>
 </div>
 
@@ -1205,6 +1322,64 @@ footer::after{
   <div class="admin-section-content" id="admin-comments">
     <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">💬 Comments Management</h4>
     <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">All comments across all announcements. Delete any inappropriate ones.</p>
+
+    <!-- Admin display names for comments -->
+    <div style="background:#f8fafc;border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:20px;">
+      <h5 style="font-size:13px;color:var(--navy);font-weight:700;margin-bottom:4px;">📢 Post Publisher Identity</h5>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">The name and icon shown on every announcement post card — fully separate from the site header.</p>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap;">
+        <div id="pubPreviewAvatar" style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 12px rgba(255,107,53,.35);">
+          <i id="pubPreviewIcon" class="${siteSettings.pubIcon||'fas fa-university'}" style="font-size:20px;color:white;"></i>
+        </div>
+        <div>
+          <div style="font-weight:800;font-size:15px;color:var(--navy);" id="pubPreviewName">${siteSettings.pubName||'English Studies'}</div>
+          <div style="font-size:11px;color:var(--muted);font-weight:600;">Live preview</div>
+        </div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">Publisher Name</label>
+        <input type="text" id="pubNameInput" value="${(siteSettings.pubName||'English Studies').replace(/"/g,'&quot;')}" placeholder="English Studies"
+          style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;"
+          oninput="document.getElementById('pubPreviewName').textContent=this.value||'English Studies'">
+      </div>
+      <div style="margin-bottom:14px;">
+        <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:8px;">Publisher Logo — Administration &amp; Faculty Icons</label>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
+          ${[
+            {i:'fas fa-university',t:'University'},
+            {i:'fas fa-landmark',t:'Administration'},
+            {i:'fas fa-building-columns',t:'Faculty'},
+            {i:'fas fa-graduation-cap',t:'Graduation'},
+            {i:'fas fa-scroll',t:'Diploma'},
+            {i:'fas fa-book-open',t:'Studies'},
+            {i:'fas fa-chalkboard-teacher',t:'Teaching'},
+            {i:'fas fa-user-tie',t:'Dean'},
+            {i:'fas fa-sitemap',t:'Department'},
+            {i:'fas fa-school',t:'School'},
+            {i:'fas fa-building',t:'Building'},
+            {i:'fas fa-flag',t:'Faculty Flag'},
+            {i:'fas fa-shield-halved',t:'Official'},
+            {i:'fas fa-stamp',t:'Official Stamp'},
+            {i:'fas fa-certificate',t:'Certificate'},
+            {i:'fas fa-award',t:'Award'},
+            {i:'fas fa-id-badge',t:'Badge'},
+            {i:'fas fa-gavel',t:'Authority'},
+            {i:'fas fa-balance-scale',t:'Justice'},
+            {i:'fas fa-globe-africa',t:'International'},
+          ].map(ic=>`<button class="icon-pick-btn${(siteSettings.pubIcon||'fas fa-university')===ic.i?' icon-pick-selected':''}"
+            data-pub-icon="${ic.i}"
+            onclick="document.querySelectorAll('[data-pub-icon]').forEach(b=>b.classList.remove('icon-pick-selected'));this.classList.add('icon-pick-selected');document.getElementById('pubIconInput').value='${ic.i}';document.getElementById('pubPreviewIcon').className='${ic.i}';"
+            title="${ic.t}"><i class="${ic.i}"></i></button>`).join('')}
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span style="font-size:11px;color:var(--muted);font-weight:600;">Custom FA class:</span>
+          <input type="text" id="pubIconInput" value="${(siteSettings.pubIcon||'fas fa-university').replace(/"/g,'&quot;')}" placeholder="fas fa-university"
+            style="flex:1;padding:7px 12px;border:1px solid var(--border);border-radius:8px;font-family:monospace;font-size:12px;"
+            oninput="document.getElementById('pubPreviewIcon').className=this.value||'fas fa-university'">
+        </div>
+      </div>
+      <button class="add-btn" style="margin:0;" onclick="savePubIdentity()"><i class="fas fa-save"></i> Save Publisher Identity</button>
+    </div>
 
     <!-- Admin display names for comments -->
     <div style="background:#f8fafc;border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:20px;">
@@ -1599,6 +1774,9 @@ let siteSettings = {
   grPadding: '5px 12px',
   bellSize: 38,
   activeTheme: 'vivid',
+  // Post publisher identity (separate from header)
+  pubName: 'English Studies',
+  pubIcon: 'fas fa-university',
   // Hero content
   heroAcademicYear: 'Academic Year 2025–2026',
   heroTitle1: 'Faculty of Letters',
@@ -1733,6 +1911,9 @@ function applySettingsData(d){
   siteSettings.grFontSize    = d.grFontSize||11;
   siteSettings.grPadding     = d.grPadding||'5px 12px';
   siteSettings.bellSize      = d.bellSize||38;
+  // Post publisher identity (separate from header)
+  siteSettings.pubName       = d.pubName||d.siteName||'English Studies';
+  siteSettings.pubIcon       = d.pubIcon||'fas fa-university';
   siteSettings.hideGR1       = d.hideGR1||false;
   siteSettings.hideGR2       = d.hideGR2||false;
   siteSettings.activeTheme   = d.activeTheme||'vivid';
@@ -2063,34 +2244,120 @@ async function recordView(col, id){
 let likedSet = JSON.parse(localStorage.getItem('flshm_liked')||'{}');
 function saveLikedSet(){ localStorage.setItem('flshm_liked', JSON.stringify(likedSet)); }
 
+// ══ SAVED POSTS ══
+let savedPostsSet = new Set(JSON.parse(localStorage.getItem('flshm_saved_posts')||'[]'));
+function saveSavedSet(){ localStorage.setItem('flshm_saved_posts', JSON.stringify([...savedPostsSet])); }
+function isSaved(id){ return savedPostsSet.has(id); }
+
+window.toggleSave = async function(id, btnEl){
+  const icoEl = btnEl.querySelector('i');
+  if(savedPostsSet.has(id)){
+    savedPostsSet.delete(id);
+    saveSavedSet();
+    btnEl.classList.remove('saved-active');
+    if(icoEl) icoEl.className='far fa-bookmark';
+    // Decrement saves count in Firebase
+    try{ await updateDoc(doc(db,'announcements',id),{saves:increment(-1)}); }catch(e){}
+    const sc=document.getElementById('saveCount-'+id);
+    if(sc) sc.textContent=Math.max(0,(parseInt(sc.textContent)||1)-1);
+  } else {
+    savedPostsSet.add(id);
+    saveSavedSet();
+    btnEl.classList.add('saved-active');
+    if(icoEl) icoEl.className='fas fa-bookmark';
+    try{ await updateDoc(doc(db,'announcements',id),{saves:increment(1)}); }catch(e){}
+    const sc=document.getElementById('saveCount-'+id);
+    if(sc) sc.textContent=(parseInt(sc.textContent)||0)+1;
+    // Quick toast
+    showToast('📌 Post saved!');
+  }
+  // Refresh saved tab if visible
+  if(document.getElementById('annSaved')&&document.getElementById('annSaved').style.display!=='none'){
+    renderSavedPosts();
+  }
+};
+
+window.sharePost = async function(id, title, text){
+  try{
+    await navigator.share({title, text, url: window.location.href});
+    // Increment share count
+    try{ await updateDoc(doc(db,'announcements',id),{shares:increment(1)}); }catch(e){}
+    const sc=document.getElementById('shareCount-'+id);
+    if(sc) sc.textContent=(parseInt(sc.textContent)||0)+1;
+  } catch(e){
+    // Fallback: copy link
+    try{ await navigator.clipboard.writeText(window.location.href); showToast('🔗 Link copied!'); }catch(ee){}
+  }
+};
+
+function showToast(msg){
+  let t=document.getElementById('flshm-toast');
+  if(!t){ t=document.createElement('div'); t.id='flshm-toast';
+    t.style.cssText='position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--navy);color:white;padding:10px 22px;border-radius:100px;font-size:13px;font-weight:700;z-index:99999;opacity:0;transition:.3s;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(0,0,0,.2);';
+    document.body.appendChild(t);
+  }
+  t.textContent=msg; t.style.opacity='1'; t.style.transform='translateX(-50%) translateY(0)';
+  clearTimeout(t._to);
+  t._to=setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateX(-50%) translateY(20px)'; },2200);
+}
+
+window.switchAnnTab = function(tab){
+  const allEl=document.getElementById('annFull');
+  const savedEl=document.getElementById('annSaved');
+  document.getElementById('annTab-all').classList.toggle('active',tab==='all');
+  document.getElementById('annTab-saved').classList.toggle('active',tab==='saved');
+  if(tab==='all'){
+    allEl.style.display=''; savedEl.style.display='none';
+  } else {
+    allEl.style.display='none'; savedEl.style.display='';
+    renderSavedPosts();
+  }
+};
+
+function renderSavedPosts(){
+  const el=document.getElementById('annSaved');
+  if(!el) return;
+  const saved=[...savedPostsSet];
+  if(!saved.length){
+    el.innerHTML=`<div style="text-align:center;padding:48px 24px;color:var(--muted);">
+      <i class="far fa-bookmark" style="font-size:40px;margin-bottom:12px;display:block;opacity:.4;"></i>
+      <p style="font-weight:600;">No saved posts yet</p>
+      <p style="font-size:12px;margin-top:4px;">Tap 🔖 on any post to save it here</p>
+    </div>`;
+    return;
+  }
+  const posts=announcements.filter(a=>saved.includes(a.id));
+  if(!posts.length){
+    el.innerHTML='<p style="color:var(--muted);font-size:13px;">Saved posts not found — they may have been deleted.</p>';
+    return;
+  }
+  el.innerHTML=posts.map(a=>annHTML(a)).join('');
+}
+
 window.toggleLike = async function(col, id, btnEl){
   const key = col+'_'+id;
   const likeDocId = USER_ID+'_'+col+'_'+id;
+  const heartIcon = btnEl.querySelector('i');
+  // footer like count span (announcements only)
+  const likeCountEl = document.getElementById('likeCount-'+id);
   if(likedSet[key]){
-    // Unlike
     likedSet[key] = false;
     saveLikedSet();
     btnEl.classList.remove('liked');
-    // Update like count on item
+    if(heartIcon){ heartIcon.className='far fa-heart'; }
     try { await updateDoc(doc(db,col,id),{likes: increment(-1)}); } catch(e){}
-    // Remove like doc from Firebase
     try { await deleteDoc(doc(db,'userLikes',likeDocId)); } catch(e){}
-    // Update displayed count
-    const countSpan = btnEl.querySelector('span');
-    if(countSpan) countSpan.textContent = Math.max(0,(parseInt(countSpan.textContent)||1)-1);
+    if(likeCountEl) likeCountEl.textContent = Math.max(0,(parseInt(likeCountEl.textContent)||1)-1);
+    else { const s=btnEl.querySelector('span'); if(s) s.textContent=Math.max(0,(parseInt(s.textContent)||1)-1); }
   } else {
-    // Like
     likedSet[key] = true;
     saveLikedSet();
     btnEl.classList.add('liked');
+    if(heartIcon){ heartIcon.className='fas fa-heart'; }
     try { await updateDoc(doc(db,col,id),{likes: increment(1)}); } catch(e){}
-    // Save like doc in Firebase permanently
-    try {
-      await setDoc(doc(db,'userLikes',likeDocId),{uid:USER_ID,col,itemId:id,ts:Date.now()});
-    } catch(e){}
-    // Update displayed count
-    const countSpan = btnEl.querySelector('span');
-    if(countSpan) countSpan.textContent = (parseInt(countSpan.textContent)||0)+1;
+    try { await setDoc(doc(db,'userLikes',likeDocId),{uid:USER_ID,col,itemId:id,ts:Date.now()}); } catch(e){}
+    if(likeCountEl) likeCountEl.textContent = (parseInt(likeCountEl.textContent)||0)+1;
+    else { const s=btnEl.querySelector('span'); if(s) s.textContent=(parseInt(s.textContent)||0)+1; }
   }
 };
 
@@ -2166,13 +2433,14 @@ const commentsCache = {};
 const commentsListeners = {};
 
 window.toggleComments = function(annId, btn){
-  const box = document.getElementById('cmtBox-'+annId);
-  if(!box) return;
-  const isOpen = box.classList.toggle('open');
-  btn.querySelector('i').className = isOpen ? 'fas fa-comment-slash' : 'fas fa-comment';
+  const section = document.getElementById('cmtSection-'+annId);
+  if(!section) return;
+  const isOpen = section.style.display === 'none' || section.style.display === '';
+  section.style.display = isOpen ? 'block' : 'none';
+  btn.querySelector('i').className = isOpen ? 'fas fa-comment-slash' : 'far fa-comment';
   if(isOpen){
     if(!commentsListeners[annId]){
-      // Show loading spinner immediately — no lag
+      // Show loading spinner immediately
       const listEl = document.getElementById('cmtList-'+annId);
       if(listEl) listEl.innerHTML=`
         <div style="display:flex;align-items:center;gap:10px;padding:14px 0;color:var(--muted);font-size:13px;">
@@ -2181,7 +2449,6 @@ window.toggleComments = function(annId, btn){
         </div>`;
       loadComments(annId);
     } else if(commentsCache[annId]){
-      // Already loaded — re-render instantly from cache
       renderCommentsList(annId, commentsCache[annId]);
     }
   }
@@ -2197,50 +2464,66 @@ function loadComments(annId){
     comments.sort((a,b)=>(a.ts||0)-(b.ts||0));
     commentsCache[annId] = comments;
     renderCommentsList(annId, comments);
-    // Update count badge
+    // Update comment count in footer
     const countEl = document.getElementById('cmtCount-'+annId);
-    if(countEl) countEl.textContent = comments.length > 0 ? `${comments.length} comment${comments.length>1?'s':''}` : 'Comments';
+    if(countEl) countEl.textContent = comments.length;
   });
 }
 
 async function renderCommentsList(annId, comments){
   const listEl = document.getElementById('cmtList-'+annId);
   if(!listEl) return;
-  if(!comments.length){ listEl.innerHTML='<p style="font-size:12px;color:var(--muted);padding:6px 0;">Be the first to comment!</p>'; return; }
+
+  // Update reply avatars in post footer
+  const avatarsEl = document.getElementById('replyAvatars-'+annId);
+  if(avatarsEl){
+    const shown = comments.slice(0,3);
+    if(shown.length){
+      avatarsEl.innerHTML = shown.map(c=>{
+        const initials=(c.username||'?').slice(0,2).toUpperCase();
+        const bg = c.isAdmin ? 'background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);' : '';
+        return `<div class="post-reply-avatar" style="${bg}">${initials}</div>`;
+      }).join('');
+    } else { avatarsEl.innerHTML=''; }
+  }
+
+  if(!comments.length){ listEl.innerHTML='<p style="font-size:12px;color:var(--muted);padding:8px 0 4px;">Be the first to comment!</p>'; return; }
 
   let html = '';
   for(const c of comments){
-    // Fetch replies count for each comment
     const likedKey = 'cmt_'+c.id;
     const likedCls = likedSet[likedKey] ? 'liked' : '';
     const isAdmin = c.isAdmin;
-    const avatarStyle = isAdmin ? 'background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);' : '';
-    const adminBadge = isAdmin ? ' <span class="admin-badge" style="vertical-align:middle;font-size:9px;">ADMIN</span>' : '';
-    html += `<div class="comment-item" id="cmt-${c.id}">
-      <div class="comment-avatar" style="${avatarStyle}">${(c.username||'?').slice(0,2).toUpperCase()}</div>
-      <div class="comment-body">
-        <span class="comment-username">${escapeUsername(c.username)}${adminBadge}</span>
-        <div class="comment-text">${formatCommentText(c.text||'')}</div>
-        <div class="comment-meta">
-          <span class="comment-time">${relTime(c.ts||Date.now())}</span>
-          <button class="comment-like-btn ${likedCls}" onclick="toggleCommentLike('${c.id}','${annId}',this)">
-            <i class="fas fa-heart"></i> <span>${c.likes||0}</span>
+    const avatarBg = isAdmin ? 'background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);' : '';
+    const adminBadge = isAdmin ? `<span style="background:var(--gold);color:white;font-size:8.5px;font-weight:800;padding:1px 7px;border-radius:100px;letter-spacing:.3px;margin-left:5px;">ADMIN</span>` : '';
+    html += `<div class="fb-comment" id="cmt-${c.id}">
+      <div class="fb-comment-avatar" style="${avatarBg}">${(c.username||'?').slice(0,2).toUpperCase()}</div>
+      <div class="fb-comment-main">
+        <div class="fb-comment-bubble">
+          <span class="fb-comment-name">${escapeUsername(c.username)}${adminBadge}</span>
+          <div class="fb-comment-text">${formatCommentText(c.text||'')}</div>
+        </div>
+        <div class="fb-comment-actions">
+          <button class="fb-action-btn comment-like-btn ${likedCls}" onclick="toggleCommentLike('${c.id}','${annId}',this)">
+            <i class="${likedSet['cmt_'+c.id]?'fas':'far'} fa-thumbs-up"></i> Like${c.likes>0?` · <strong>${c.likes}</strong>`:''}
           </button>
-          <button class="comment-reply-btn" onclick="showReplyInput('${annId}','${c.id}','${escapeUsername(c.username)}')">
+          <button class="fb-action-btn" onclick="showReplyInput('${annId}','${c.id}','${escapeUsername(c.username)}')">
             <i class="fas fa-reply"></i> Reply
           </button>
-          ${adminUnlocked ? `<button class="comment-del-btn" onclick="deleteComment('${c.id}','${annId}')"><i class="fas fa-trash"></i></button>` : ''}
+          <span class="fb-time">${relTime(c.ts||Date.now())}</span>
+          ${adminUnlocked ? `<button class="fb-action-btn" style="color:#ef4444;" onclick="deleteComment('${c.id}','${annId}')"><i class="fas fa-trash"></i></button>` : ''}
         </div>
-        <div class="replies-section" id="replies-${c.id}">
+        <!-- Replies -->
+        <div class="fb-replies" id="replies-${c.id}">
           <div id="replyList-${c.id}"></div>
-          <div id="replyInput-${c.id}" style="display:none;">
-            <div class="comment-input-row" style="margin-top:8px;">
-              <div class="comment-input-avatar" style="width:22px;height:22px;font-size:9px;">${(getCommentName()||'?').slice(0,2).toUpperCase()}</div>
+          <div id="replyInput-${c.id}" style="display:none;margin-top:8px;">
+            <div class="comment-input-row">
+              <div class="fb-comment-avatar" style="width:26px;height:26px;font-size:10px;${isAdmin?avatarBg:''}">${(getCommentName()||'?').slice(0,2).toUpperCase()}</div>
               <div class="comment-input-wrap">
                 <textarea class="comment-textarea" id="replyTA-${c.id}" placeholder="Reply to @${escapeUsername(c.username)}..." rows="1"
                   onkeydown="cmtKeydown(event,'${annId}','${c.id}')"></textarea>
               </div>
-              <button class="comment-send-btn" style="padding:5px 10px;font-size:11px;" onclick="submitComment('${annId}','${c.id}')"><i class="fas fa-paper-plane"></i></button>
+              <button class="comment-send-btn" style="padding:6px 12px;font-size:11px;" onclick="submitComment('${annId}','${c.id}')"><i class="fas fa-paper-plane"></i></button>
             </div>
           </div>
         </div>
@@ -2270,19 +2553,21 @@ function renderReplies(annId, parentId, replies){
     const likedKey='cmt_'+r.id;
     const likedCls=likedSet[likedKey]?'liked':'';
     const isAdmin = r.isAdmin;
-    const avatarStyle = isAdmin ? 'background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);' : '';
-    const adminBadge = isAdmin ? ' <span class="admin-badge" style="vertical-align:middle;font-size:9px;">ADMIN</span>' : '';
-    return `<div class="comment-item" id="cmt-${r.id}" style="padding:6px 0;">
-      <div class="comment-avatar" style="width:24px;height:24px;font-size:9px;${avatarStyle}">${(r.username||'?').slice(0,2).toUpperCase()}</div>
-      <div class="comment-body">
-        <span class="comment-username">${escapeUsername(r.username)}${adminBadge}</span>
-        <div class="comment-text">${formatCommentText(r.text||'')}</div>
-        <div class="comment-meta">
-          <span class="comment-time">${relTime(r.ts||Date.now())}</span>
-          <button class="comment-like-btn ${likedCls}" onclick="toggleCommentLike('${r.id}','${annId}',this)">
-            <i class="fas fa-heart"></i> <span>${r.likes||0}</span>
+    const avatarBg = isAdmin ? 'background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);' : '';
+    const adminBadge = isAdmin ? `<span style="background:var(--gold);color:white;font-size:8.5px;font-weight:800;padding:1px 7px;border-radius:100px;letter-spacing:.3px;margin-left:5px;">ADMIN</span>` : '';
+    return `<div class="fb-comment fb-reply" id="cmt-${r.id}">
+      <div class="fb-comment-avatar" style="width:26px;height:26px;font-size:10px;${avatarBg}">${(r.username||'?').slice(0,2).toUpperCase()}</div>
+      <div class="fb-comment-main">
+        <div class="fb-comment-bubble">
+          <span class="fb-comment-name">${escapeUsername(r.username)}${adminBadge}</span>
+          <div class="fb-comment-text">${formatCommentText(r.text||'')}</div>
+        </div>
+        <div class="fb-comment-actions">
+          <button class="fb-action-btn comment-like-btn ${likedCls}" onclick="toggleCommentLike('${r.id}','${annId}',this)">
+            <i class="${likedSet['cmt_'+r.id]?'fas':'far'} fa-thumbs-up"></i> Like${r.likes>0?` · <strong>${r.likes}</strong>`:''}
           </button>
-          ${adminUnlocked ? `<button class="comment-del-btn" onclick="deleteComment('${r.id}','${annId}')"><i class="fas fa-trash"></i></button>` : ''}
+          <span class="fb-time">${relTime(r.ts||Date.now())}</span>
+          ${adminUnlocked ? `<button class="fb-action-btn" style="color:#ef4444;" onclick="deleteComment('${r.id}','${annId}')"><i class="fas fa-trash"></i></button>` : ''}
         </div>
       </div>
     </div>`;
@@ -2376,16 +2661,15 @@ window.submitComment = async function(annId, parentId){
 
 window.toggleCommentLike = async function(cmtId, annId, btnEl){
   const key = 'cmt_'+cmtId;
-  const countSpan = btnEl.querySelector('span');
   if(likedSet[key]){
     likedSet[key]=false; saveLikedSet(); btnEl.classList.remove('liked');
-    const cur = parseInt(countSpan.textContent)||0;
-    countSpan.textContent = Math.max(0,cur-1);
+    const iEl = btnEl.querySelector('i');
+    if(iEl) iEl.className='far fa-thumbs-up';
     try{ await updateDoc(doc(db,'comments',cmtId),{likes:increment(-1)}); }catch(e){}
   } else {
     likedSet[key]=true; saveLikedSet(); btnEl.classList.add('liked');
-    const cur = parseInt(countSpan.textContent)||0;
-    countSpan.textContent = cur+1;
+    const iEl = btnEl.querySelector('i');
+    if(iEl) iEl.className='fas fa-thumbs-up';
     try{ await updateDoc(doc(db,'comments',cmtId),{likes:increment(1)}); }catch(e){}
   }
 };
@@ -2455,6 +2739,17 @@ window.saveAdminCommentNames = async function(){
   });
   await saveSettings();
   alert('✅ Display names saved!');
+};
+
+window.savePubIdentity = async function(){
+  const name = (document.getElementById('pubNameInput')||{}).value||'';
+  const icon = (document.getElementById('pubIconInput')||{}).value||'';
+  if(name.trim()) siteSettings.pubName = name.trim();
+  if(icon.trim()) siteSettings.pubIcon = icon.trim();
+  await saveSettings();
+  showToast('✅ Publisher identity saved!');
+  renderAllAnn();
+  renderAnnPreview();
 };
 
 
@@ -2753,58 +3048,110 @@ function annHTML(a){
   recordView('announcements',a.id);
   const liked = isLiked('announcements',a.id);
   const likedCls = liked?'liked':'';
-  return `<div class="ann-item"><div class="ann-dot ${d}"></div><div class="ann-body">
-    <div class="ann-meta"><span class="ann-date">${dt}</span><span class="ann-tag tag-${a.type}">${a.type[0].toUpperCase()+a.type.slice(1)}</span></div>
-    <div style="font-weight:700;font-size:15px;color:var(--navy);margin-bottom:5px;">${escapeHtml(a.title||'')}</div>
-    <div class="ann-text">${escapeHtml(a.text||'')}</div>
-    <div class="ann-group">For: ${a.group}</div>
-    <div class="ann-footer">
-      <span class="stat-pill"><i class="fas fa-eye"></i> ${a.views||0}</span>
-      <button class="like-btn ${likedCls}" onclick="toggleLike('announcements','${a.id}',this)">
-        <i class="fas fa-heart"></i> <span>${a.likes||0}</span>
-      </button>
-    </div>
-    <div class="comments-section">
-      <button class="comments-toggle-btn" onclick="toggleComments('${a.id}',this)">
-        <i class="fas fa-comment"></i> <span id="cmtCount-${a.id}">Comments</span>
-      </button>
-      <div class="comments-box" id="cmtBox-${a.id}">
-        <div id="cmtList-${a.id}" style="margin-bottom:10px;"></div>
-        ${(()=>{
-          if(adminUnlocked && currentAdmin){
-            const adminName = getCommentName();
-            const initials = adminName.slice(0,2).toUpperCase();
-            return `<div class="comment-input-row">
-              <div class="comment-input-avatar" style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);">${initials}</div>
-              <div class="comment-input-wrap">
-                <textarea class="comment-textarea" id="cmtInput-${a.id}" placeholder="Write a comment... Use @name to mention someone" rows="1"
-                  onkeydown="cmtKeydown(event,'${a.id}',null)"></textarea>
-                <div class="username-tag">Commenting as <strong>${adminName}</strong> <span class="admin-badge" style="vertical-align:middle;">ADMIN</span></div>
-              </div>
-              <button class="comment-send-btn" onclick="submitComment('${a.id}',null)"><i class="fas fa-paper-plane"></i></button>
-            </div>`;
-          } else {
-            const savedName = (localStorage.getItem('flshm_comment_name')||'');
-            const initials = savedName ? savedName.slice(0,2).toUpperCase() : '?';
-            return `<div style="margin-bottom:8px;">
-              <input type="text" id="cmtName-${a.id}" class="cmt-name-input comment-textarea"
-                placeholder="Your name (required)..." value="${savedName.replace(/"/g,'&quot;')}" maxlength="40"
-                style="min-height:auto;padding:7px 12px;resize:none;"
-                oninput="updateCommentName(this.value,'${a.id}')">
-            </div>
-            <div class="comment-input-row">
-              <div class="comment-input-avatar" id="cmtAvatar-${a.id}">${initials}</div>
-              <div class="comment-input-wrap">
-                <textarea class="comment-textarea" id="cmtInput-${a.id}" placeholder="Write a comment... Use @name to mention someone" rows="1"
-                  onkeydown="cmtKeydown(event,'${a.id}',null)"></textarea>
-              </div>
-              <button class="comment-send-btn" onclick="submitComment('${a.id}',null)"><i class="fas fa-paper-plane"></i></button>
-            </div>`;
-          }
-        })()}
+  // Post publisher identity (separate from header branding)
+  const logoIco = siteSettings.pubIcon||'fas fa-university';
+  const pubName = siteSettings.pubName||'English Studies';
+  // Tag color
+  const tagClass = `tag-${a.type}`;
+  // Group badge
+  const grColor=a.group==='GR1'?'#1e40af':a.group==='GR2'?'#166534':'#475569';
+  const grBg=a.group==='GR1'?'#dbeafe':a.group==='GR2'?'#dcfce7':'#f1f5f9';
+
+  return `<div class="post-card">
+    <!-- Thread line decoration -->
+    <div class="post-thread-line"></div>
+
+    <!-- Header -->
+    <div class="post-header">
+      <div class="post-site-avatar">
+        <div class="post-site-avatar-ring">
+          <div class="post-site-avatar-inner">
+            <i class="${logoIco}" style="font-size:16px;"></i>
+          </div>
+        </div>
       </div>
+      <div class="post-header-info">
+        <div class="post-publisher-row">
+          <span class="post-admin-symbol" title="Admin post"><i class="fas fa-shield-alt" style="font-size:8px;"></i></span>
+          <span class="post-admin-name">${escapeHtml(pubName)}</span>
+          <span class="ann-tag ${tagClass}" style="margin-left:4px;">${a.type[0].toUpperCase()+a.type.slice(1)}</span>
+          <span style="background:${grBg};color:${grColor};font-size:10px;padding:2px 8px;border-radius:100px;font-weight:700;">${a.group}</span>
+        </div>
+        <div class="post-pub-name">${dt||'&nbsp;'}</div>
+      </div>
+      <span class="post-time"><i class="fas fa-eye" style="margin-right:4px;font-size:10px;"></i>${a.views||0}</span>
     </div>
-  </div></div>`;
+
+    <!-- Content -->
+    <div class="post-content">
+      <div class="post-title">${escapeHtml(a.title||'')}</div>
+      <div class="post-text">${escapeHtml(a.text||'')}</div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="post-actions">
+      <button class="post-action-btn ${likedCls}" onclick="toggleLike('announcements','${a.id}',this)" title="Like">
+        <i class="${liked?'fas':'far'} fa-heart"></i>
+      </button>
+      <button class="post-action-btn" onclick="toggleComments('${a.id}',this)" title="Comment">
+        <i class="far fa-comment"></i>
+      </button>
+      <button class="post-action-btn" title="Share" onclick="sharePost('${a.id}','${escapeHtml((a.title||'').replace(/'/g,'').replace(/"/g,''))}','${escapeHtml((a.text||'').slice(0,120).replace(/'/g,'').replace(/"/g,''))}')">
+        <i class="fas fa-share-nodes"></i>
+      </button>
+      <button class="post-action-btn ${isSaved(a.id)?'saved-active':''}" id="saveBtn-${a.id}" onclick="toggleSave('${a.id}',this)" title="Save">
+        <i class="${isSaved(a.id)?'fas':'far'} fa-bookmark"></i>
+      </button>
+    </div>
+
+    <!-- Footer: stats -->
+    <div class="post-footer">
+      <span class="post-footer-text">
+        <span id="likeCount-${a.id}">${a.likes||0}</span> likes
+        &nbsp;·&nbsp; <span id="cmtCount-${a.id}">0</span> comments
+        &nbsp;·&nbsp; <span id="shareCount-${a.id}">${a.shares||0}</span> shares
+        &nbsp;·&nbsp; <span id="viewCount-${a.id}">${a.views||0}</span> views
+        &nbsp;·&nbsp; <span id="saveCount-${a.id}">${a.saves||0}</span> saved
+      </span>
+    </div>
+
+    <!-- Comments section — toggled on click -->
+    <div class="comments-section" id="cmtSection-${a.id}" style="display:none;border-top:1px solid var(--border);margin-top:10px;padding-top:12px;">
+      <div id="cmtList-${a.id}" style="margin-bottom:10px;"></div>
+      ${(()=>{
+        if(adminUnlocked && currentAdmin){
+          const adminName = getCommentName();
+          const initials = adminName.slice(0,2).toUpperCase();
+          return `<div class="comment-input-row">
+            <div class="comment-input-avatar" style="background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);">${initials}</div>
+            <div class="comment-input-wrap">
+              <textarea class="comment-textarea" id="cmtInput-${a.id}" placeholder="Write a comment..." rows="1"
+                onkeydown="cmtKeydown(event,'${a.id}',null)"></textarea>
+              <div class="username-tag">Commenting as <strong>${adminName}</strong> <span class="admin-badge" style="vertical-align:middle;">ADMIN</span></div>
+            </div>
+            <button class="comment-send-btn" onclick="submitComment('${a.id}',null)"><i class="fas fa-paper-plane"></i></button>
+          </div>`;
+        } else {
+          const savedName = (localStorage.getItem('flshm_comment_name')||'');
+          const initials = savedName ? savedName.slice(0,2).toUpperCase() : '?';
+          return `<div style="margin-bottom:8px;">
+            <input type="text" id="cmtName-${a.id}" class="cmt-name-input comment-textarea"
+              placeholder="Your name (required)..." value="${savedName.replace(/"/g,'&quot;')}" maxlength="40"
+              style="min-height:auto;padding:7px 12px;resize:none;"
+              oninput="updateCommentName(this.value,'${a.id}')">
+          </div>
+          <div class="comment-input-row">
+            <div class="comment-input-avatar" id="cmtAvatar-${a.id}">${initials}</div>
+            <div class="comment-input-wrap">
+              <textarea class="comment-textarea" id="cmtInput-${a.id}" placeholder="Write a comment..." rows="1"
+                onkeydown="cmtKeydown(event,'${a.id}',null)"></textarea>
+            </div>
+            <button class="comment-send-btn" onclick="submitComment('${a.id}',null)"><i class="fas fa-paper-plane"></i></button>
+          </div>`;
+        }
+      })()}
+    </div>
+  </div>`;
 }
 
 // Escape HTML but preserve newlines as <br>
@@ -3937,6 +4284,7 @@ function renderAdminAnn(){
   const adminGR = currentAdmin ? currentAdmin.role : null;
   const visible = announcements.filter(a=>!adminGR || a.group==='Both' || a.group===adminGR);
   if(!visible.length){el.innerHTML='<p style="color:var(--muted);font-size:13px;">No announcements.</p>';return;}
+  const logoIco = siteSettings.pubIcon||'fas fa-university';
   el.innerHTML=visible.map((a,idx)=>{
     const dt=[a.date,a.time].filter(Boolean).join(' ');
     const isFirst=idx===0, isLast=idx===visible.length-1;
@@ -3947,8 +4295,15 @@ function renderAdminAnn(){
         <button class="order-btn" onclick="moveAnn('${a.id}',-1)" ${isFirst?'disabled':''}>▲</button>
         <button class="order-btn" onclick="moveAnn('${a.id}',+1)" ${isLast?'disabled':''}>▼</button>
       </div>
+      <!-- Site logo avatar -->
+      <div style="width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(255,107,53,.3);">
+        <i class="${logoIco}" style="font-size:14px;color:white;"></i>
+      </div>
       <div class="admin-item-info">
-        <strong>${a.title}</strong>
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:3px;">
+          <span class="post-admin-symbol" title="Admin post"><i class="fas fa-shield-alt" style="font-size:8px;"></i></span>
+          <strong>${a.title}</strong>
+        </div>
         <span>${dt} · <span style="background:${grColor};color:${grText};padding:1px 7px;border-radius:100px;font-weight:700;font-size:11px;">${a.group}</span> · ${a.type} · 👁 ${a.views||0} · ❤️ ${a.likes||0}</span>
       </div>
       <div class="admin-item-actions">
