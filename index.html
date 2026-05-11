@@ -204,10 +204,31 @@ header::after{
 }
 .ticker-content{flex:1;overflow:hidden;height:100%;display:flex;align-items:center;}
 .ticker-inner{
-  display:inline-block;animation:ticker 22s linear infinite;
+  display:inline-block;animation:ticker var(--ticker-speed,22s) linear infinite;
   white-space:nowrap;padding:0 20px;font-size:12.5px;font-weight:600;color:white;
 }
 @keyframes ticker{0%{transform:translateX(60vw);}100%{transform:translateX(-100%);}}
+
+/* ══ POST CARD EXPAND ══ */
+.post-card{
+  cursor:pointer;
+  transform-origin:top center;
+  transition:box-shadow .25s,transform .25s,border-color .25s;
+}
+.post-card.post-expanded{
+  cursor:default;
+  transform:scale(1.025);
+  box-shadow:0 16px 48px rgba(18,22,58,.18);
+  border-color:var(--gold);
+  z-index:10;
+  position:relative;
+}
+@keyframes postPop{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.035);}
+  100%{transform:scale(1.025);}
+}
+.post-card.post-expanded{ animation:postPop .3s ease forwards; }
 
 /* ══ LAYOUT ══ */
 main{max-width:1180px;margin:0 auto;padding:40px 24px;}
@@ -1324,62 +1345,7 @@ footer::after{
     <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">All comments across all announcements. Delete any inappropriate ones.</p>
 
     <!-- Admin display names for comments -->
-    <div style="background:#f8fafc;border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:20px;">
-      <h5 style="font-size:13px;color:var(--navy);font-weight:700;margin-bottom:4px;">📢 Post Publisher Identity</h5>
-      <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">The name and icon shown on every announcement post card — fully separate from the site header.</p>
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;flex-wrap:wrap;">
-        <div id="pubPreviewAvatar" style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 12px rgba(255,107,53,.35);">
-          <i id="pubPreviewIcon" class="${siteSettings.pubIcon||'fas fa-university'}" style="font-size:20px;color:white;"></i>
-        </div>
-        <div>
-          <div style="font-weight:800;font-size:15px;color:var(--navy);" id="pubPreviewName">${siteSettings.pubName||'English Studies'}</div>
-          <div style="font-size:11px;color:var(--muted);font-weight:600;">Live preview</div>
-        </div>
-      </div>
-      <div style="margin-bottom:12px;">
-        <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">Publisher Name</label>
-        <input type="text" id="pubNameInput" value="${(siteSettings.pubName||'English Studies').replace(/"/g,'&quot;')}" placeholder="English Studies"
-          style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;"
-          oninput="document.getElementById('pubPreviewName').textContent=this.value||'English Studies'">
-      </div>
-      <div style="margin-bottom:14px;">
-        <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:8px;">Publisher Logo — Administration &amp; Faculty Icons</label>
-        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
-          ${[
-            {i:'fas fa-university',t:'University'},
-            {i:'fas fa-landmark',t:'Administration'},
-            {i:'fas fa-building-columns',t:'Faculty'},
-            {i:'fas fa-graduation-cap',t:'Graduation'},
-            {i:'fas fa-scroll',t:'Diploma'},
-            {i:'fas fa-book-open',t:'Studies'},
-            {i:'fas fa-chalkboard-teacher',t:'Teaching'},
-            {i:'fas fa-user-tie',t:'Dean'},
-            {i:'fas fa-sitemap',t:'Department'},
-            {i:'fas fa-school',t:'School'},
-            {i:'fas fa-building',t:'Building'},
-            {i:'fas fa-flag',t:'Faculty Flag'},
-            {i:'fas fa-shield-halved',t:'Official'},
-            {i:'fas fa-stamp',t:'Official Stamp'},
-            {i:'fas fa-certificate',t:'Certificate'},
-            {i:'fas fa-award',t:'Award'},
-            {i:'fas fa-id-badge',t:'Badge'},
-            {i:'fas fa-gavel',t:'Authority'},
-            {i:'fas fa-balance-scale',t:'Justice'},
-            {i:'fas fa-globe-africa',t:'International'},
-          ].map(ic=>`<button class="icon-pick-btn${(siteSettings.pubIcon||'fas fa-university')===ic.i?' icon-pick-selected':''}"
-            data-pub-icon="${ic.i}"
-            onclick="document.querySelectorAll('[data-pub-icon]').forEach(b=>b.classList.remove('icon-pick-selected'));this.classList.add('icon-pick-selected');document.getElementById('pubIconInput').value='${ic.i}';document.getElementById('pubPreviewIcon').className='${ic.i}';"
-            title="${ic.t}"><i class="${ic.i}"></i></button>`).join('')}
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span style="font-size:11px;color:var(--muted);font-weight:600;">Custom FA class:</span>
-          <input type="text" id="pubIconInput" value="${(siteSettings.pubIcon||'fas fa-university').replace(/"/g,'&quot;')}" placeholder="fas fa-university"
-            style="flex:1;padding:7px 12px;border:1px solid var(--border);border-radius:8px;font-family:monospace;font-size:12px;"
-            oninput="document.getElementById('pubPreviewIcon').className=this.value||'fas fa-university'">
-        </div>
-      </div>
-      <button class="add-btn" style="margin:0;" onclick="savePubIdentity()"><i class="fas fa-save"></i> Save Publisher Identity</button>
-    </div>
+    <div id="pubIdentitySection"></div>
 
     <!-- Admin display names for comments -->
     <div style="background:#f8fafc;border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:20px;">
@@ -1914,6 +1880,8 @@ function applySettingsData(d){
   // Post publisher identity (separate from header)
   siteSettings.pubName       = d.pubName||d.siteName||'English Studies';
   siteSettings.pubIcon       = d.pubIcon||'fas fa-university';
+  siteSettings.tickerSpeed   = d.tickerSpeed||22;
+  applyTickerSpeed();
   siteSettings.hideGR1       = d.hideGR1||false;
   siteSettings.hideGR2       = d.hideGR2||false;
   siteSettings.activeTheme   = d.activeTheme||'vivid';
@@ -2160,6 +2128,14 @@ window.saveHeroContent = async function(){
   alert('✅ Home page content saved!');
 };
 
+window.saveTickerSpeed = async function(){
+  const val = parseInt(document.getElementById('tickerSpeedSlider').value)||22;
+  siteSettings.tickerSpeed = val;
+  applyTickerSpeed();
+  await saveSettings();
+  showToast('✅ Ticker speed saved!');
+};
+
 window.saveHeaderBranding = async function(){
   siteSettings.logoIcon     = document.getElementById('hbLogoIcon').value.trim()||'fas fa-graduation-cap';
   siteSettings.logoIconSize = parseInt(document.getElementById('hbLogoIconSize').value)||20;
@@ -2179,11 +2155,15 @@ window.saveHeaderBranding = async function(){
 
 window.previewIcon = function(iconClass){
   document.getElementById('hbLogoIcon').value = iconClass;
-  // update preview
   const prev = document.getElementById('hbIconPreview');
-  if(prev){ prev.className = iconClass; prev.style.fontSize='20px'; }
-  // highlight selected
-  document.querySelectorAll('.icon-pick-btn').forEach(b=>b.classList.toggle('icon-pick-selected', b.dataset.icon===iconClass));
+  if(prev){ prev.className = iconClass; }
+  // highlight selected button in header branding grid
+  document.querySelectorAll('[data-hb-icon]').forEach(b=>{
+    const active = b.dataset.hbIcon === iconClass;
+    b.style.background = active ? 'var(--navy)' : 'white';
+    b.style.borderColor = active ? 'var(--navy)' : 'var(--border)';
+    b.style.color = active ? 'white' : 'var(--navy)';
+  });
 };
 
 function applySondageVisibility(){
@@ -2251,27 +2231,35 @@ function isSaved(id){ return savedPostsSet.has(id); }
 
 window.toggleSave = async function(id, btnEl){
   const icoEl = btnEl.querySelector('i');
+  const sc = document.getElementById('saveCount-'+id);
   if(savedPostsSet.has(id)){
+    // Already saved — unsave
     savedPostsSet.delete(id);
     saveSavedSet();
     btnEl.classList.remove('saved-active');
     if(icoEl) icoEl.className='far fa-bookmark';
-    // Decrement saves count in Firebase
-    try{ await updateDoc(doc(db,'announcements',id),{saves:increment(-1)}); }catch(e){}
-    const sc=document.getElementById('saveCount-'+id);
-    if(sc) sc.textContent=Math.max(0,(parseInt(sc.textContent)||1)-1);
+    try{
+      const ref = doc(db,'announcements',id);
+      const snap = await getDoc(ref);
+      const cur = snap.exists() ? (snap.data().saves||0) : 0;
+      await updateDoc(ref,{saves: Math.max(0,cur-1)});
+      if(sc) sc.textContent = Math.max(0,cur-1);
+    }catch(e){ if(sc) sc.textContent=Math.max(0,(parseInt(sc.textContent)||1)-1); }
   } else {
+    // Not saved — save
     savedPostsSet.add(id);
     saveSavedSet();
     btnEl.classList.add('saved-active');
     if(icoEl) icoEl.className='fas fa-bookmark';
-    try{ await updateDoc(doc(db,'announcements',id),{saves:increment(1)}); }catch(e){}
-    const sc=document.getElementById('saveCount-'+id);
-    if(sc) sc.textContent=(parseInt(sc.textContent)||0)+1;
-    // Quick toast
+    try{
+      const ref = doc(db,'announcements',id);
+      const snap = await getDoc(ref);
+      const cur = snap.exists() ? (snap.data().saves||0) : 0;
+      await updateDoc(ref,{saves: cur+1});
+      if(sc) sc.textContent = cur+1;
+    }catch(e){ if(sc) sc.textContent=(parseInt(sc.textContent)||0)+1; }
     showToast('📌 Post saved!');
   }
-  // Refresh saved tab if visible
   if(document.getElementById('annSaved')&&document.getElementById('annSaved').style.display!=='none'){
     renderSavedPosts();
   }
@@ -2289,6 +2277,25 @@ window.sharePost = async function(id, title, text){
     try{ await navigator.clipboard.writeText(window.location.href); showToast('🔗 Link copied!'); }catch(ee){}
   }
 };
+
+// ══ POST CARD EXPAND ══
+window.expandPostCard = function(e, card){
+  // Don't expand when clicking buttons, links, inputs, textareas
+  if(e.target.closest('button,a,input,textarea,select')) return;
+  const isExpanded = card.classList.contains('post-expanded');
+  // Collapse all others
+  document.querySelectorAll('.post-card.post-expanded').forEach(c=>c.classList.remove('post-expanded'));
+  if(!isExpanded){
+    card.classList.add('post-expanded');
+    card.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+};
+
+// ══ TICKER SPEED ══
+function applyTickerSpeed(){
+  const spd = siteSettings.tickerSpeed||22;
+  document.documentElement.style.setProperty('--ticker-speed', spd+'s');
+}
 
 function showToast(msg){
   let t=document.getElementById('flshm-toast');
@@ -2741,9 +2748,136 @@ window.saveAdminCommentNames = async function(){
   alert('✅ Display names saved!');
 };
 
+// ══ ICON PICKER RENDERERS (avoid nested template literals) ══
+
+function buildIconGrid(icons, currentIcon, dataAttr, hiddenId, previewId){
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:8px;';
+  icons.forEach(function(ic){
+    const active = currentIcon === ic.i;
+    const btn = document.createElement('button');
+    btn.setAttribute('data-'+dataAttr, ic.i);
+    btn.style.cssText = 'display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 6px;border-radius:10px;border:1.5px solid '+(active?'var(--navy)':'var(--border)')+';background:'+(active?'var(--navy)':'white')+';cursor:pointer;transition:.15s;font-family:inherit;';
+    btn.innerHTML = '<i class="'+ic.i+'" style="font-size:20px;color:'+(active?'white':'var(--navy)')+'"></i><span style="font-size:9.5px;font-weight:700;text-align:center;line-height:1.2;color:'+(active?'white':'var(--muted)')+'">'+ic.t+'</span>';
+    btn.onclick = function(){
+      wrap.querySelectorAll('[data-'+dataAttr+']').forEach(function(b){
+        b.style.background='white'; b.style.borderColor='var(--border)';
+        var i=b.querySelector('i'); if(i) i.style.color='var(--navy)';
+        var s=b.querySelector('span'); if(s) s.style.color='var(--muted)';
+      });
+      btn.style.background='var(--navy)'; btn.style.borderColor='var(--navy)';
+      var i=btn.querySelector('i'); if(i) i.style.color='white';
+      var s=btn.querySelector('span'); if(s) s.style.color='white';
+      var hid=document.getElementById(hiddenId); if(hid) hid.value=ic.i;
+      var prev=document.getElementById(previewId); if(prev) prev.className=ic.i;
+    };
+    wrap.appendChild(btn);
+  });
+  return wrap;
+}
+
+function renderHbLogoPicker(){
+  const el = document.getElementById('hbLogoPickerSection');
+  if(!el) return;
+  const cur = siteSettings.logoIcon||'fas fa-graduation-cap';
+  el.innerHTML = '';
+
+  const container = document.createElement('div');
+  container.style.cssText = 'margin-bottom:18px;padding:14px 16px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;';
+
+  const label = document.createElement('label');
+  label.style.cssText = 'font-size:12px;color:var(--navy);font-weight:700;display:block;margin-bottom:10px;';
+  label.textContent = 'Site Logo — tap to select';
+  container.appendChild(label);
+
+  const icons = [
+    {i:'fas fa-graduation-cap',t:'Graduation'},{i:'fas fa-university',t:'University'},
+    {i:'fas fa-book-open',t:'Library'},{i:'fas fa-book',t:'Book'},
+    {i:'fas fa-scroll',t:'Scroll'},{i:'fas fa-pen-nib',t:'Pen'},
+    {i:'fas fa-landmark',t:'Landmark'},{i:'fas fa-globe',t:'Globe'},
+    {i:'fas fa-atom',t:'Atom'},{i:'fas fa-star',t:'Star'},
+    {i:'fas fa-crown',t:'Crown'},{i:'fas fa-shield-alt',t:'Shield'},
+    {i:'fas fa-feather-alt',t:'Feather'},{i:'fas fa-brain',t:'Brain'},
+    {i:'fas fa-lightbulb',t:'Idea'},{i:'fas fa-chalkboard-teacher',t:'Teacher'},
+    {i:'fas fa-language',t:'Language'},{i:'fas fa-spell-check',t:'Spell'},
+    {i:'fas fa-comments',t:'Chat'},{i:'fas fa-flag',t:'Flag'},
+  ];
+  container.appendChild(buildIconGrid(icons, cur, 'hb-icon', 'hbLogoIcon', 'hbIconPreview'));
+
+  // Hidden input
+  const hidden = document.createElement('input');
+  hidden.type='hidden'; hidden.id='hbLogoIcon'; hidden.value=cur;
+  container.appendChild(hidden);
+
+  // Size slider
+  const sizeRow = document.createElement('div');
+  sizeRow.style.cssText = 'margin-top:10px;display:flex;align-items:center;gap:10px;';
+  sizeRow.innerHTML = '<label style="font-size:11px;color:var(--muted);font-weight:600;white-space:nowrap;">Icon size: <span id="hbLogoIconSizeVal">'+(siteSettings.logoIconSize||20)+'</span>px</label>'
+    +'<input type="range" id="hbLogoIconSize" min="12" max="30" value="'+(siteSettings.logoIconSize||20)+'" oninput="document.getElementById(\'hbLogoIconSizeVal\').textContent=this.value;document.getElementById(\'hbIconPreview\').style.fontSize=this.value+\'px\'" style="flex:1;accent-color:var(--navy);">';
+  container.appendChild(sizeRow);
+  el.appendChild(container);
+}
+
+function renderPubIdentitySection(){
+  const el = document.getElementById('pubIdentitySection');
+  if(!el) return;
+  const curIcon = siteSettings.pubIcon||'fas fa-university';
+  const curName = siteSettings.pubName||'English Studies';
+  el.innerHTML = '';
+
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'background:#f8fafc;border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:20px;';
+
+  wrap.innerHTML = '<h5 style="font-size:13px;color:var(--navy);font-weight:700;margin-bottom:4px;">📢 Post Publisher Identity</h5>'
+    +'<p style="font-size:12px;color:var(--muted);margin-bottom:14px;">The name and logo shown on announcement post cards — separate from the site header.</p>'
+    // Preview
+    +'<div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:12px 14px;background:white;border:1px solid var(--border);border-radius:10px;">'
+    +'<div style="width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(255,107,53,.3);">'
+    +'<i id="pubPreviewIcon" class="'+curIcon+'" style="font-size:20px;color:white;"></i></div>'
+    +'<div><div id="pubPreviewName" style="font-weight:800;font-size:15px;color:var(--navy);">'+curName+'</div>'
+    +'<div style="font-size:11px;color:var(--muted);">Preview — how it looks on posts</div></div></div>'
+    // Name input
+    +'<div style="margin-bottom:14px;">'
+    +'<label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">Publisher Name</label>'
+    +'<input type="text" id="pubNameInput" value="'+curName.replace(/"/g,'&quot;')+'" placeholder="e.g. English Studies Dept" '
+    +'style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;" '
+    +'oninput="document.getElementById(\'pubPreviewName\').textContent=this.value||\'English Studies\'"></div>'
+    // Logo label
+    +'<label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:8px;">Publisher Logo — tap to select</label>';
+
+  // Icon grid
+  const pubIcons = [
+    {i:'fas fa-university',t:'University'},{i:'fas fa-landmark',t:'Administration'},
+    {i:'fas fa-building-columns',t:'Faculty'},{i:'fas fa-graduation-cap',t:'Graduation'},
+    {i:'fas fa-scroll',t:'Diploma'},{i:'fas fa-book-open',t:'Library'},
+    {i:'fas fa-chalkboard-teacher',t:'Teaching'},{i:'fas fa-user-tie',t:'Dean'},
+    {i:'fas fa-sitemap',t:'Department'},{i:'fas fa-school',t:'School'},
+    {i:'fas fa-building',t:'Building'},{i:'fas fa-flag',t:'Faculty'},
+    {i:'fas fa-shield-halved',t:'Official'},{i:'fas fa-stamp',t:'Stamp'},
+    {i:'fas fa-certificate',t:'Certificate'},{i:'fas fa-award',t:'Award'},
+    {i:'fas fa-id-badge',t:'Badge'},{i:'fas fa-gavel',t:'Authority'},
+    {i:'fas fa-globe-africa',t:'Global'},{i:'fas fa-language',t:'Languages'},
+  ];
+  wrap.appendChild(buildIconGrid(pubIcons, curIcon, 'pub-icon', 'pubIconHidden', 'pubPreviewIcon'));
+
+  // Hidden input
+  const hidden = document.createElement('input');
+  hidden.type='hidden'; hidden.id='pubIconHidden'; hidden.value=curIcon;
+  wrap.appendChild(hidden);
+
+  // Save button
+  const saveBtn = document.createElement('button');
+  saveBtn.className='add-btn'; saveBtn.style.cssText='margin:14px 0 0;';
+  saveBtn.innerHTML='<i class="fas fa-save"></i> Save Publisher Identity';
+  saveBtn.onclick = savePubIdentity;
+  wrap.appendChild(saveBtn);
+
+  el.appendChild(wrap);
+}
+
 window.savePubIdentity = async function(){
   const name = (document.getElementById('pubNameInput')||{}).value||'';
-  const icon = (document.getElementById('pubIconInput')||{}).value||'';
+  const icon = (document.getElementById('pubIconHidden')||{}).value||'';
   if(name.trim()) siteSettings.pubName = name.trim();
   if(icon.trim()) siteSettings.pubIcon = icon.trim();
   await saveSettings();
@@ -3057,7 +3191,7 @@ function annHTML(a){
   const grColor=a.group==='GR1'?'#1e40af':a.group==='GR2'?'#166534':'#475569';
   const grBg=a.group==='GR1'?'#dbeafe':a.group==='GR2'?'#dcfce7':'#f1f5f9';
 
-  return `<div class="post-card">
+  return `<div class="post-card" onclick="expandPostCard(event,this)">
     <!-- Thread line decoration -->
     <div class="post-thread-line"></div>
 
@@ -4012,64 +4146,27 @@ function renderAdminSettings(){
     <!-- HEADER BRANDING — full width -->
     <div style="margin-top:28px;border-top:2px solid var(--border);padding-top:20px;">
       <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">🎨 Header Branding</h4>
-      <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">Customize the logo icon, site name, group labels and sizes.</p>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">Customize the site name and logo shown in the header.</p>
 
-      <!-- Row 1: Logo icon picker -->
-      <div style="margin-bottom:18px;padding:14px 16px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;">
-        <label style="font-size:12px;color:var(--navy);font-weight:700;display:block;margin-bottom:10px;">Logo Icon — click to select</label>
-        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;">
-          ${[
-            {i:'fas fa-graduation-cap',t:'Graduation'},
-            {i:'fas fa-university',t:'University'},
-            {i:'fas fa-book-open',t:'Book Open'},
-            {i:'fas fa-book',t:'Book'},
-            {i:'fas fa-scroll',t:'Scroll'},
-            {i:'fas fa-pen-nib',t:'Pen'},
-            {i:'fas fa-landmark',t:'Landmark'},
-            {i:'fas fa-globe',t:'Globe'},
-            {i:'fas fa-atom',t:'Atom'},
-            {i:'fas fa-star',t:'Star'},
-            {i:'fas fa-crown',t:'Crown'},
-            {i:'fas fa-shield-alt',t:'Shield'},
-            {i:'fas fa-feather-alt',t:'Feather'},
-            {i:'fas fa-brain',t:'Brain'},
-            {i:'fas fa-lightbulb',t:'Idea'},
-            {i:'fas fa-chalkboard-teacher',t:'Teacher'},
-            {i:'fas fa-language',t:'Language'},
-            {i:'fas fa-spell-check',t:'Spell'},
-            {i:'fas fa-comments',t:'Chat'},
-            {i:'fas fa-flag',t:'Flag'},
-          ].map(ic=>`<button class="icon-pick-btn${(siteSettings.logoIcon||'fas fa-graduation-cap')===ic.i?' icon-pick-selected':''}" data-icon="${ic.i}" onclick="previewIcon('${ic.i}')" title="${ic.t}"><i class="${ic.i}"></i></button>`).join('')}
+      <!-- Site name + live preview -->
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;">
+        <div id="hbPreviewWrap" style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 3px 10px rgba(255,107,53,.3);">
+          <i id="hbIconPreview" class="${siteSettings.logoIcon||'fas fa-graduation-cap'}" style="font-size:${siteSettings.logoIconSize||20}px;color:white;"></i>
         </div>
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-          <span style="font-size:12px;color:var(--muted);">Custom FA class:</span>
-          <input type="text" id="hbLogoIcon" value="${(siteSettings.logoIcon||'fas fa-graduation-cap').replace(/"/g,'&quot;')}" placeholder="fas fa-graduation-cap"
-            style="flex:1;min-width:180px;padding:7px 12px;border:1px solid var(--border);border-radius:8px;font-family:monospace;font-size:13px;" oninput="previewIcon(this.value)">
-          <div style="width:40px;height:40px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:10px;display:flex;align-items:center;justify-content:center;">
-            <i id="hbIconPreview" class="${siteSettings.logoIcon||'fas fa-graduation-cap'}" style="font-size:20px;color:var(--navy);"></i>
-          </div>
-        </div>
-        <div style="margin-top:10px;display:flex;align-items:center;gap:10px;">
-          <label style="font-size:12px;color:var(--navy);font-weight:600;white-space:nowrap;">Icon size: <span id="hbLogoIconSizeVal">${siteSettings.logoIconSize||20}</span>px</label>
-          <input type="range" id="hbLogoIconSize" min="12" max="30" value="${siteSettings.logoIconSize||20}"
-            oninput="document.getElementById('hbLogoIconSizeVal').textContent=this.value;document.getElementById('hbIconPreview').style.fontSize=this.value+'px'"
-            style="flex:1;accent-color:var(--navy);">
-        </div>
-      </div>
-
-      <!-- Row 2: Site name & sub -->
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
-        <div>
-          <label style="font-size:12px;color:var(--navy);font-weight:700;display:block;margin-bottom:4px;">Site Name</label>
+        <div style="flex:1;">
+          <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">Site Name</label>
           <input type="text" id="hbSiteName" value="${(siteSettings.siteName||'English Studies').replace(/"/g,'&quot;')}" placeholder="English Studies"
             style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
         </div>
         <div>
-          <label style="font-size:12px;color:var(--navy);font-weight:700;display:block;margin-bottom:4px;">Subtitle</label>
+          <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">Subtitle</label>
           <input type="text" id="hbSiteSub" value="${(siteSettings.siteSub||'FLSHM · Mohammedia').replace(/"/g,'&quot;')}" placeholder="FLSHM · Mohammedia"
-            style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+            style="width:200px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
         </div>
       </div>
+
+      <!-- Visual logo picker -->
+      <div id="hbLogoPickerSection"></div>
 
       <!-- Row 3: GR labels + sizes -->
       <div style="padding:14px 16px;background:#f8fafc;border:1px solid var(--border);border-radius:10px;margin-bottom:14px;">
@@ -4122,6 +4219,26 @@ function renderAdminSettings(){
       </div>
 
       <button class="add-btn" onclick="saveHeaderBranding()"><i class="fas fa-save"></i> Save Header Branding</button>
+    </div>
+
+    <!-- NEWS TICKER SPEED -->
+    <div style="margin-top:28px;border-top:2px solid var(--border);padding-top:20px;margin-bottom:28px;">
+      <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">📰 News Ticker Speed</h4>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Control how fast the news banner scrolls. Lower = faster.</p>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-weight:600;margin-bottom:6px;">
+            <span>⚡ Very Fast</span><span>Current: <strong id="tickerSpeedVal">${siteSettings.tickerSpeed||22}s</strong></span><span>Slow 🐢</span>
+          </div>
+          <input type="range" id="tickerSpeedSlider" min="6" max="60" value="${siteSettings.tickerSpeed||22}"
+            oninput="document.getElementById('tickerSpeedVal').textContent=this.value+'s';document.documentElement.style.setProperty('--ticker-speed',this.value+'s')"
+            style="width:100%;accent-color:var(--navy);height:6px;">
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:4px;">
+            <span>6s</span><span>22s (default)</span><span>60s</span>
+          </div>
+        </div>
+        <button class="add-btn" style="margin:0;white-space:nowrap;" onclick="saveTickerSpeed()"><i class="fas fa-save"></i> Save Speed</button>
+      </div>
     </div>
 
     <!-- THEME SWITCHER — full width -->
@@ -4273,9 +4390,10 @@ window.switchAdminTab=function(tab,el){
   if(tab==='settings'){
     document.getElementById('admin-settings-content').innerHTML='';
     renderAdminSettings();
+    renderHbLogoPicker();
     document.getElementById('admin-settings-content').style.display='block';
   }
-  if(tab==='comments'){ renderAdminComments(); renderAdminCmtNamesList(); }
+  if(tab==='comments'){ renderAdminComments(); renderAdminCmtNamesList(); renderPubIdentitySection(); }
   if(tab==='sondage-admin'){ renderAdminSondage(); }
 };
 
