@@ -82,6 +82,125 @@
 [data-theme="original"] .modal-btn-save{background:#0a2342;}
 [data-theme="original"] .modal-btn-save:hover{background:#1a4480;}
 
+/* ══ ABOUT PAGE ══ */
+.about-hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(140deg,var(--navy) 0%,var(--royal) 55%,#2e3a82 100%);
+  padding:64px 48px 56px;text-align:center;
+}
+.about-hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.about-orb{position:absolute;border-radius:50%;filter:blur(60px);}
+.about-orb-1{width:400px;height:400px;top:-100px;left:-80px;background:radial-gradient(circle,rgba(255,107,53,.22) 0%,transparent 70%);animation:orbFloat1 8s ease-in-out infinite;}
+.about-orb-2{width:360px;height:360px;bottom:-120px;right:-60px;background:radial-gradient(circle,rgba(0,180,160,.18) 0%,transparent 70%);animation:orbFloat2 10s ease-in-out infinite;}
+.about-orb-3{width:240px;height:240px;top:50%;right:25%;transform:translateY(-50%);background:radial-gradient(circle,rgba(255,180,100,.1) 0%,transparent 70%);animation:orbFloat3 12s ease-in-out infinite;}
+@keyframes orbFloat1{0%,100%{transform:translate(0,0);}50%{transform:translate(20px,-20px);}}
+@keyframes orbFloat2{0%,100%{transform:translate(0,0);}50%{transform:translate(-18px,18px);}}
+@keyframes orbFloat3{0%,100%{transform:translateY(-50%);}50%{transform:translateY(calc(-50% - 14px));}}
+.about-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:100px;padding:5px 16px;font-size:11px;color:rgba(255,255,255,.88);font-weight:700;letter-spacing:.4px;margin-bottom:20px;}
+.about-hero-title{font-family:var(--theme-font-display);font-size:clamp(34px,5vw,58px);font-weight:800;color:white;letter-spacing:-1.5px;line-height:1.05;margin-bottom:14px;animation:fadeUp .6s ease both;}
+.about-hero-sub{color:rgba(255,255,255,.7);font-size:15px;line-height:1.7;max-width:520px;margin:0 auto;font-weight:400;animation:fadeUp .7s .1s ease both;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+.about-hero-inner{position:relative;z-index:2;}
+/* Card */
+.about-card-wrap{max-width:780px;margin:0 auto 40px;padding:0 24px;}
+.about-story-card{
+  position:relative;border-radius:28px;overflow:hidden;
+  background:white;border:1.5px solid var(--border);
+  box-shadow:0 24px 72px rgba(18,22,58,.13),0 4px 24px rgba(18,22,58,.07);
+  animation:fadeUp .5s .15s ease both;
+  transform-style:preserve-3d;
+  transition:box-shadow .4s,transform .4s;
+}
+.about-story-card:hover{box-shadow:0 32px 90px rgba(18,22,58,.18),0 8px 32px rgba(18,22,58,.1);transform:translateY(-4px);}
+.about-card-glow{position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--gold),var(--sky),var(--gold));border-radius:4px 4px 0 0;}
+.about-card-inner{padding:32px 36px;}
+.about-card-header{display:flex;align-items:center;gap:18px;margin-bottom:20px;}
+.about-card-ico{width:58px;height:58px;border-radius:18px;background:linear-gradient(135deg,#fff0e8,#ffd8c2);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 14px rgba(255,107,53,.2);}
+.about-card-eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--gold);font-weight:800;margin-bottom:4px;}
+.about-card-title{font-family:var(--theme-font-display);font-size:22px;font-weight:800;color:var(--navy);line-height:1.2;margin:0;}
+.about-card-divider{height:1.5px;background:linear-gradient(90deg,var(--gold),var(--sky),transparent);border-radius:2px;margin-bottom:22px;}
+.about-card-body{font-size:14.5px;color:var(--text);line-height:1.82;font-weight:400;}
+.about-card-body p{margin-bottom:14px;}
+.about-card-body p:last-child{margin-bottom:0;}
+.about-card-footer{display:flex;align-items:center;justify-content:center;gap:0;margin-top:28px;padding-top:22px;border-top:1.5px solid var(--border);}
+.about-stat{text-align:center;padding:0 28px;}
+.about-stat-n{display:block;font-family:var(--theme-font-display);font-size:30px;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--sky));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.about-stat-l{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.4px;font-weight:700;margin-top:4px;}
+.about-stat-sep{width:1.5px;height:48px;background:var(--border);}
+/* Grid cards */
+.about-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:780px;margin:0 auto 40px;padding:0 24px;}
+.about-grid-card{background:white;border:1.5px solid var(--border);border-radius:20px;padding:24px 20px;box-shadow:var(--card-shadow);transition:transform .3s,box-shadow .3s,border-color .3s;animation:fadeUp .5s ease both;}
+.about-grid-card:nth-child(2){animation-delay:.1s;}
+.about-grid-card:nth-child(3){animation-delay:.2s;}
+.about-grid-card:hover{transform:translateY(-6px);box-shadow:var(--card-hover);border-color:transparent;}
+.about-grid-ico{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:14px;}
+.about-grid-card h3{font-family:var(--theme-font-display);font-size:15px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.about-grid-card p{font-size:13px;color:var(--muted);line-height:1.7;font-weight:400;}
+[data-theme="midnight"] .about-story-card,[data-theme="midnight"] .about-grid-card{background:#1e1e32;border-color:var(--border);}
+[data-theme="midnight"] .about-card-title,[data-theme="midnight"] .about-grid-card h3{color:var(--text);}
+[data-theme="midnight"] .about-card-body{color:var(--text);}
+/* About — Live Stats Strip */
+.about-stats-strip{
+  display:flex;justify-content:center;gap:0;
+  max-width:780px;margin:0 auto 32px;padding:0 24px;
+}
+.about-stats-strip-inner{
+  display:flex;width:100%;
+  background:white;border:1.5px solid var(--border);
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 8px 32px rgba(18,22,58,.09);
+  animation:fadeUp .4s ease both;
+}
+.ab-stat-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  padding:18px 12px;position:relative;
+  border-right:1.5px solid var(--border);transition:background .2s;
+}
+.ab-stat-item:last-child{border-right:none;}
+.ab-stat-item:hover{background:#f8fafc;}
+.ab-stat-ico{font-size:16px;margin-bottom:6px;}
+.ab-stat-num{
+  font-family:var(--theme-font-display);font-size:22px;font-weight:800;
+  line-height:1;background:linear-gradient(135deg,var(--navy),var(--sky));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.ab-stat-lbl{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+[data-theme="midnight"] .about-stats-strip-inner,[data-theme="midnight"] .about-bus-block{background:#1e1e32;border-color:var(--border);}
+[data-theme="midnight"] .ab-stat-item:hover{background:#252540;}
+
+/* About — Location & Buses */
+.about-section-wrap{max-width:780px;margin:0 auto 40px;padding:0 24px;}
+.about-section-head{font-family:var(--theme-font-display);font-size:16px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:10px;margin-bottom:18px;}
+.about-section-head i{color:var(--gold);}
+.about-location-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.about-map-wrap{display:flex;flex-direction:column;gap:10px;}
+.about-address{font-size:12.5px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:7px;}
+.about-address i{color:var(--gold);}
+.about-buses-wrap{display:flex;flex-direction:column;}
+.about-bus-block{background:white;border:1.5px solid var(--border);border-radius:16px;padding:16px 18px;box-shadow:var(--card-shadow);}
+.about-bus-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.about-bus-logo{height:28px;width:auto;object-fit:contain;}
+.foughal-logo{height:24px;}
+.about-bus-name{font-family:var(--theme-font-display);font-size:15px;font-weight:800;color:#e85b1a;}
+.about-bus-lines{display:flex;flex-wrap:wrap;gap:8px;}
+.bus-line{display:inline-flex;align-items:center;justify-content:center;min-width:48px;height:32px;border-radius:8px;font-size:12px;font-weight:800;letter-spacing:.3px;cursor:default;padding:0 10px;transition:transform .2s;font-family:var(--theme-font-display);}
+.bus-line:hover{transform:scale(1.07);}
+.bus-line-dyn{display:inline-flex;align-items:center;justify-content:center;min-width:48px;height:32px;border-radius:8px;font-size:12px;font-weight:800;letter-spacing:.3px;cursor:default;padding:0 10px;transition:transform .2s;font-family:var(--theme-font-display);color:white;}
+.bus-line-dyn:hover{transform:scale(1.09) translateY(-2px);}
+/* Casabus line colors */
+.cb-l800{background:linear-gradient(135deg,#1e40af,#3b82f6);color:white;box-shadow:0 3px 10px rgba(59,130,246,.35);}
+.cb-l900{background:linear-gradient(135deg,#7c3aed,#a78bfa);color:white;box-shadow:0 3px 10px rgba(124,58,237,.35);}
+.cb-l904{background:linear-gradient(135deg,#0e8a70,#2dd4bf);color:white;box-shadow:0 3px 10px rgba(14,138,112,.35);}
+.cb-l905{background:linear-gradient(135deg,#c2410c,#fb923c);color:white;box-shadow:0 3px 10px rgba(194,65,12,.35);}
+.cb-l907{background:linear-gradient(135deg,#be185d,#f472b6);color:white;box-shadow:0 3px 10px rgba(190,24,93,.35);}
+.cb-l32d{background:linear-gradient(135deg,#0f6d56,#34d399);color:white;box-shadow:0 3px 10px rgba(15,109,86,.35);}
+/* Foughal line colors */
+.fg-l01{background:linear-gradient(135deg,#1a5276,#2e86c1);color:white;box-shadow:0 3px 10px rgba(26,82,118,.35);}
+.fg-l02{background:linear-gradient(135deg,#117a65,#27ae60);color:white;box-shadow:0 3px 10px rgba(17,122,101,.35);}
+.fg-l03{background:linear-gradient(135deg,#922b21,#e74c3c);color:white;box-shadow:0 3px 10px rgba(146,43,33,.35);}
+.fg-l08{background:linear-gradient(135deg,#6c3483,#9b59b6);color:white;box-shadow:0 3px 10px rgba(108,52,131,.35);}
+[data-theme="midnight"] .about-bus-block{background:#1e1e32;border-color:var(--border);}
+
 /* ── RESET ── */
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:var(--theme-font-body);background:var(--cream);color:var(--text);min-height:100vh;transition:background .4s,color .4s;}
@@ -184,12 +303,20 @@ header::after{
   padding:10px 16px;cursor:pointer;
   color:rgba(255,255,255,.6);font-size:12.5px;font-weight:600;
   white-space:nowrap;border-bottom:3px solid transparent;
-  transition:.2s;display:flex;align-items:center;gap:7px;
+  transition:color .2s,background .2s,transform .3s,box-shadow .2s;
+  display:flex;align-items:center;gap:7px;
   border-radius:10px 10px 0 0;letter-spacing:.2px;
 }
 .nav-item:hover{color:white;background:rgba(255,255,255,.08);}
 .nav-item.active{color:white;background:rgba(255,255,255,.12);border-bottom-color:var(--gold);}
 .nav-item i{font-size:11px;opacity:.85;}
+.nav-item{transition:all .25s ease,order .3s ease;}
+.nav-item.nav-moved{animation:navMoveFlash .5s ease both;}
+@keyframes navMoveFlash{
+  0%{background:rgba(var(--gold-rgb,201,168,76),.45);transform:scale(.96);color:white;}
+  60%{background:rgba(255,255,255,.18);transform:scale(1.04);color:white;}
+  100%{background:transparent;transform:scale(1);}
+}
 
 /* ══ TICKER ══ */
 .ticker-bar{
@@ -1092,6 +1219,7 @@ footer::after{
     <div class="nav-item" onclick="showPage('announcements')" id="nav-announcements"><i class="fas fa-bullhorn"></i> Announcements</div>
     <div class="nav-item" onclick="showPage('sondage')" id="nav-sondage"><i class="fas fa-poll"></i> Sondage</div>
     <div class="nav-item" onclick="showPage('space')" id="nav-space"><i class="fas fa-users"></i> Student Space</div>
+    <div class="nav-item" onclick="showPage('about')" id="nav-about"><i class="fas fa-info-circle"></i> About</div>
   </nav>
 </header>
 
@@ -1211,6 +1339,59 @@ footer::after{
   </main>
 </div>
 
+
+<!-- ABOUT -->
+<div id="page-about" class="page">
+  <section class="about-hero">
+    <div class="about-hero-bg">
+      <div class="about-orb about-orb-1"></div>
+      <div class="about-orb about-orb-2"></div>
+      <div class="about-orb about-orb-3"></div>
+    </div>
+    <div class="about-hero-inner">
+      <div class="about-eyebrow"><span class="pulse-dot"></span> <span id="aboutEyebrow">English Studies Portal</span></div>
+      <h1 class="about-hero-title" id="aboutPageTitle">About Us</h1>
+      <p class="about-hero-sub" id="aboutPageSubtitle">Discover the story behind the English Studies Department at FLSHM Mohammedia.</p>
+    </div>
+  </section>
+  <main>
+    <div class="about-card-wrap">
+      <div class="about-story-card" id="aboutStoryCard">
+        <div class="about-card-glow"></div>
+        <div class="about-card-inner">
+          <div class="about-card-header">
+            <div class="about-card-ico"><i class="fas fa-book-open"></i></div>
+            <div>
+              <div class="about-card-eyebrow">Our Story</div>
+              <h2 class="about-card-title" id="aboutCardTitle">English Studies at FLSHM</h2>
+            </div>
+          </div>
+          <div class="about-card-divider"></div>
+          <div class="about-card-body" id="aboutCardBody"><p>Welcome to the English Studies Department at the Faculty of Letters and Humanities. This portal centralises all academic resources for our students.</p><p>Our department is committed to providing high-quality education in linguistics, literature, and language skills across GR1 and GR2.</p><p>This platform is your one-stop hub: access your weekly schedule, study materials, makeup sessions, and stay connected with your fellow students.</p></div>
+          <div class="about-card-footer">
+            <div class="about-stat"><span class="about-stat-n" id="abStatN1">2</span><span class="about-stat-l" id="abStatL1">Groups</span></div>
+            <div class="about-stat-sep"></div>
+            <div class="about-stat"><span class="about-stat-n" id="abStatN2">6</span><span class="about-stat-l" id="abStatL2">Semesters</span></div>
+            <div class="about-stat-sep"></div>
+            <div class="about-stat"><span class="about-stat-n" id="abStatN3">7+</span><span class="about-stat-l" id="abStatL3">Modules</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-grid">
+      <div class="about-grid-card"><div class="about-grid-ico ico-blue"><i class="fas fa-lightbulb"></i></div><h3 id="aboutVal1Title">Our Mission</h3><p id="aboutVal1Text">Empower English Studies students with the tools and resources they need to succeed academically and professionally.</p></div>
+      <div class="about-grid-card"><div class="about-grid-ico ico-green"><i class="fas fa-users"></i></div><h3 id="aboutVal2Title">Community</h3><p id="aboutVal2Text">Fostering connection between students and faculty through transparent communication and shared academic spaces.</p></div>
+      <div class="about-grid-card"><div class="about-grid-ico ico-orange"><i class="fas fa-award"></i></div><h3 id="aboutVal3Title">Excellence</h3><p id="aboutVal3Text">Committed to maintaining the highest academic standards across all modules, semesters, and evaluation processes.</p></div>
+    </div>
+
+    <!-- LIVE STATS STRIP — below value cards -->
+    <div class="about-stats-strip" id="aboutLiveStats"></div>
+
+    <!-- FIND US — dynamic -->
+    <div class="about-section-wrap" id="aboutLocationSection"></div>
+  </main>
+</div>
+
 <!-- SONDAGE -->
 <div id="page-sondage" class="page">
   <main>
@@ -1308,6 +1489,8 @@ footer::after{
     <div class="admin-tab" onclick="switchAdminTab('space-admin',this);renderAdminSpace();">👥 Student Space</div>
     <div class="admin-tab" onclick="switchAdminTab('sondage-admin',this)">📋 Sondage</div>
     <div class="admin-tab" onclick="switchAdminTab('notifs-admin',this);renderAdminNotifs();">🔔 Notifications</div>
+    <div class="admin-tab" onclick="switchAdminTab('about-admin',this);renderAdminAbout();">ℹ️ About</div>
+    <div class="admin-tab" onclick="switchAdminTab('stats-admin',this);renderAdminStats();">📊 Stats</div>
   </div>
   <div class="admin-section-content active" id="admin-announcements">
     <button class="add-btn" onclick="openModal('addAnnModal')"><i class="fas fa-plus"></i> New Announcement</button>
@@ -1417,6 +1600,18 @@ footer::after{
       </div>
     </div>
     <div id="adminNotifsList"></div>
+  </div>
+
+  <!-- ABOUT ADMIN -->
+  <div class="admin-section-content" id="admin-about-admin">
+    <div id="admin-about-content"></div>
+  </div>
+
+  <!-- STATS ADMIN -->
+  <div class="admin-section-content" id="admin-stats-admin">
+    <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">📊 Vue d'ensemble — Statistiques</h4>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">Résumé des vues, likes et commentaires de toutes vos publications.</p>
+    <div id="adminStatsContent"><p style="color:var(--muted);font-size:13px;"><i class="fas fa-spinner fa-spin"></i> Chargement...</p></div>
   </div>
 </div>
 
@@ -1720,9 +1915,9 @@ let siteSettings = {
   hiddenTTSems: [],
   ttColumns: {room:true, prof:true},
   customMods: {},
-  pageOrder: ['home','modules','exams','timetable','makeup','announcements','sondage','space'],
+  pageOrder: ['home','modules','exams','timetable','makeup','announcements','sondage','space','about'],
   version: 'v2.0.1',
-  madeBy: '',
+  madeBy: 'Mourad Projects',
   footerText: '© 2026 English Studies Portal · FLSHM Mohammedia',
   sondageVisible: true,
   presTitle: '',
@@ -1751,6 +1946,28 @@ let siteSettings = {
   heroStat1Num: '7', heroStat1Label: 'Modules',
   heroStat2Num: '2', heroStat2Label: 'Groups',
   heroStat3Num: '2', heroStat3Label: 'Semesters',
+  // About page content
+  aboutPageTitle: 'About Us',
+  aboutPageSubtitle: 'Discover the story behind the English Studies Department at FLSHM Mohammedia.',
+  aboutEyebrow: 'English Studies Portal',
+  aboutFindUsTitle: 'Find Us',
+  aboutStat1Num: '2',   aboutStat1Label: 'Groups',
+  aboutStat2Num: '6',   aboutStat2Label: 'Semesters',
+  aboutStat3Num: '7+',  aboutStat3Label: 'Modules',
+  aboutCardTitle: 'English Studies at FLSHM',
+  aboutCardBody: 'Welcome to the English Studies Department at the Faculty of Letters and Humanities. This portal centralises all academic resources for our students.\n\nOur department is committed to providing high-quality education in linguistics, literature, and language skills across GR1 and GR2.\n\nThis platform is your one-stop hub: access your weekly schedule, study materials, makeup sessions, and stay connected with your fellow students.',
+  aboutVal1Title: 'Our Mission', aboutVal1Text: 'Empower English Studies students with the tools and resources they need to succeed academically and professionally.',
+  aboutVal2Title: 'Community',   aboutVal2Text: 'Fostering connection between students and faculty through transparent communication and shared academic spaces.',
+  aboutVal3Title: 'Excellence',  aboutVal3Text: 'Committed to maintaining the highest academic standards across all modules, semesters, and evaluation processes.',
+  // Location / map / bus
+  mapEmbedSrc: 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1659.613313909794!2d-7.376425176252986!3d33.70308424551225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x849ff06389fa1f5d!2sFacult%C3%A9+des+Lettres+et+des+Sciences+Humaines+-+Mohammedia!5e0!3m2!1sen!2suk!4v1497403782132',
+  mapAddress: 'Faculty of Letters and Humanities — Mohammedia, Morocco',
+  busOperators: [
+    { id:'casabus', name:'Casabus', logoUrl:'https://www.casabus.ma/media/c3nbibgi/logo-casabus.png', nameColor:'#e85b1a',
+      lines:[{label:'L800',color:'#1e40af',desc:'Casablanca → Mohammedia'},{label:'L900',color:'#7c3aed',desc:''},{label:'L904',color:'#0e8a70',desc:''},{label:'L905',color:'#c2410c',desc:''},{label:'L907',color:'#be185d',desc:''},{label:'L32D',color:'#0f6d56',desc:''}]},
+    { id:'foughal', name:'Foughal Bus', logoUrl:'https://foughalbus.ma/wp-content/uploads/2024/07/Groupe-236.svg', nameColor:'#1a5276',
+      lines:[{label:'L01',color:'#1a5276',desc:''},{label:'L02',color:'#117a65',desc:''},{label:'L03',color:'#922b21',desc:''},{label:'L08',color:'#6c3483',desc:''}]}
+  ],
 };
 
 // Session visitor ID (unique per browser session)
@@ -1816,12 +2033,14 @@ function setupListeners(){
     announcements.sort((a,b)=>(a.order??99)-(b.order??99));
     renderAnnPreview(); renderAllAnn(); updateTicker();
     if(adminUnlocked) renderAdminAnn();
+    updateAboutLiveStats();
   });
   onSnapshot(collection(db,'makeup'),snap=>{
     makeupSessions=snap.docs.map(d=>({id:d.id,...d.data()}));
     makeupSessions.sort((a,b)=>(a.order??99)-(b.order??99));
     renderMakeup();
     if(adminUnlocked) renderAdminMakeup();
+    updateAboutLiveStats();
   });
   onSnapshot(collection(db,'timetable'),snap=>{
     timetable=snap.docs.map(d=>({id:d.id,...d.data()}));
@@ -1857,9 +2076,9 @@ function applySettingsData(d){
   siteSettings.hiddenTTSems  = d.hiddenTTSems||[];
   siteSettings.ttColumns     = d.ttColumns||{room:true,prof:true};
   siteSettings.customMods    = d.customMods||{};
-  siteSettings.pageOrder     = d.pageOrder||['home','modules','exams','timetable','makeup','announcements','sondage','space'];
+  siteSettings.pageOrder     = d.pageOrder||['home','modules','exams','timetable','makeup','announcements','sondage','space','about'];
   siteSettings.version       = d.version||'v2.0.1';
-  siteSettings.madeBy        = d.madeBy||'';
+  siteSettings.madeBy        = d.madeBy||'Mourad Projects';
   siteSettings.footerText    = d.footerText||'© 2026 English Studies Portal · FLSHM Mohammedia';
   siteSettings.sondageVisible= d.sondageVisible!==false;
   siteSettings.presTitle     = d.presTitle||'';
@@ -1867,6 +2086,33 @@ function applySettingsData(d){
   siteSettings.subDriveLink  = d.subDriveLink||'';
   siteSettings.adminCommentNames = d.adminCommentNames||{};
   siteSettings.sectionOrder      = d.sectionOrder||[];
+  // About page content
+  siteSettings.aboutPageTitle    = d.aboutPageTitle||'About Us';
+  siteSettings.aboutPageSubtitle = d.aboutPageSubtitle||'Discover the story behind the English Studies Department at FLSHM Mohammedia.';
+  siteSettings.aboutEyebrow      = d.aboutEyebrow||'English Studies Portal';
+  siteSettings.aboutFindUsTitle  = d.aboutFindUsTitle||'Find Us';
+  siteSettings.aboutStat1Num     = d.aboutStat1Num||'2';
+  siteSettings.aboutStat1Label   = d.aboutStat1Label||'Groups';
+  siteSettings.aboutStat2Num     = d.aboutStat2Num||'6';
+  siteSettings.aboutStat2Label   = d.aboutStat2Label||'Semesters';
+  siteSettings.aboutStat3Num     = d.aboutStat3Num||'7+';
+  siteSettings.aboutStat3Label   = d.aboutStat3Label||'Modules';
+  siteSettings.aboutCardTitle    = d.aboutCardTitle||'English Studies at FLSHM';
+  siteSettings.aboutCardBody     = d.aboutCardBody||'Welcome to the English Studies Department at the Faculty of Letters and Humanities. This portal centralises all academic resources for our students.\n\nOur department is committed to providing high-quality education in linguistics, literature, and language skills across GR1 and GR2.\n\nThis platform is your one-stop hub: access your weekly schedule, study materials, makeup sessions, and stay connected with your fellow students.';
+  siteSettings.aboutVal1Title    = d.aboutVal1Title||'Our Mission';
+  siteSettings.aboutVal1Text     = d.aboutVal1Text||'Empower English Studies students with the tools and resources they need to succeed academically and professionally.';
+  siteSettings.aboutVal2Title    = d.aboutVal2Title||'Community';
+  siteSettings.aboutVal2Text     = d.aboutVal2Text||'Fostering connection between students and faculty through transparent communication and shared academic spaces.';
+  siteSettings.aboutVal3Title    = d.aboutVal3Title||'Excellence';
+  siteSettings.aboutVal3Text     = d.aboutVal3Text||'Committed to maintaining the highest academic standards across all modules, semesters, and evaluation processes.';
+  siteSettings.mapEmbedSrc       = d.mapEmbedSrc||'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1659.613313909794!2d-7.376425176252986!3d33.70308424551225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x849ff06389fa1f5d!2sFacult%C3%A9+des+Lettres+et+des+Sciences+Humaines+-+Mohammedia!5e0!3m2!1sen!2suk!4v1497403782132';
+  siteSettings.mapAddress        = d.mapAddress||'Faculty of Letters and Humanities — Mohammedia, Morocco';
+  siteSettings.busOperators      = d.busOperators||[
+    { id:'casabus', name:'Casabus', logoUrl:'https://www.casabus.ma/media/c3nbibgi/logo-casabus.png', nameColor:'#e85b1a',
+      lines:[{label:'L800',color:'#1e40af',desc:'Casablanca → Mohammedia'},{label:'L900',color:'#7c3aed',desc:''},{label:'L904',color:'#0e8a70',desc:''},{label:'L905',color:'#c2410c',desc:''},{label:'L907',color:'#be185d',desc:''},{label:'L32D',color:'#0f6d56',desc:''}]},
+    { id:'foughal', name:'Foughal Bus', logoUrl:'https://foughalbus.ma/wp-content/uploads/2024/07/Groupe-236.svg', nameColor:'#1a5276',
+      lines:[{label:'L01',color:'#1a5276',desc:''},{label:'L02',color:'#117a65',desc:''},{label:'L03',color:'#922b21',desc:''},{label:'L08',color:'#6c3483',desc:''}]}
+  ];
   // Header branding
   siteSettings.logoIcon      = d.logoIcon||'fas fa-graduation-cap';
   siteSettings.logoIconSize  = d.logoIconSize||20;
@@ -1909,6 +2155,7 @@ function applySettingsData(d){
   applySondageVisibility();
   applyHeaderBranding();
   applyHeroContent();
+  applyAboutContent();
   applyTheme(siteSettings.activeTheme||'original');
   if(adminUnlocked){ renderAdminLessonSemTabs(); renderAdminExamSemTabs(); renderAdminSettings(); }
 }
@@ -1977,6 +2224,7 @@ async function init(){
     applySondageVisibility();
     applyHeaderBranding();
     applyHeroContent();
+    applyAboutContent();
     applyTheme(siteSettings.activeTheme||'original');
     showNewBadgeOnce();
     startNotifListener();
@@ -2025,17 +2273,24 @@ window.showPage=function(p){
 };
 // Apply hidden pages and ordering to nav
 function applyHiddenPages(){
-  const allPages=['home','modules','exams','timetable','makeup','announcements','sondage','space'];
+  const allPages=['home','modules','exams','timetable','makeup','announcements','sondage','space','about'];
   const order=siteSettings.pageOrder||allPages;
   const nav=document.querySelector('.header-nav');
   if(!nav) return;
-  order.forEach(p=>{
+  // Apply CSS order for smooth animated reordering
+  order.forEach((p,i)=>{
     const el=document.getElementById('nav-'+p);
-    if(el){ el.style.display=siteSettings.hiddenPages.includes(p)?'none':'flex'; nav.appendChild(el); }
+    if(el){
+      el.style.order=i;
+      el.style.display=siteSettings.hiddenPages.includes(p)?'none':'flex';
+    }
   });
-  allPages.filter(p=>!order.includes(p)).forEach(p=>{
+  allPages.filter(p=>!order.includes(p)).forEach((p,i)=>{
     const el=document.getElementById('nav-'+p);
-    if(el){ el.style.display=siteSettings.hiddenPages.includes(p)?'none':'flex'; }
+    if(el){
+      el.style.order=order.length+i;
+      el.style.display=siteSettings.hiddenPages.includes(p)?'none':'flex';
+    }
   });
 }
 // Apply hidden sems to tabs
@@ -2109,6 +2364,128 @@ function applyHeroContent(){
   const subEl = document.getElementById('heroSubtitle');
   if(subEl){ const raw = s.heroSubtitle||'Your official portal for the English Studies Department — GR1 & GR2. Access timetables, modules, past exams, announcements, and more.'; subEl.innerHTML = raw.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>'); }
 }
+
+function applyAboutContent(){
+  const s = siteSettings;
+  const setText=(id,val)=>{ const el=document.getElementById(id); if(el) el.textContent=val; };
+
+  // Hero
+  setText('aboutEyebrow',    s.aboutEyebrow||'English Studies Portal');
+  setText('aboutPageTitle',  s.aboutPageTitle||'About Us');
+  setText('aboutPageSubtitle', s.aboutPageSubtitle||'Discover the story behind the English Studies Department at FLSHM Mohammedia.');
+
+  // Our Story card
+  setText('aboutCardTitle', s.aboutCardTitle||'English Studies at FLSHM');
+  const bodyEl = document.getElementById('aboutCardBody');
+  if(bodyEl){
+    const raw = s.aboutCardBody||'Welcome to the English Studies Department.\n\nThis portal centralises all academic resources for our students.';
+    bodyEl.innerHTML = raw.split('\n').filter(l=>l.trim()).map(l=>'<p>'+l.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')+'</p>').join('');
+  }
+
+  // Card footer stats (editable numbers)
+  setText('abStatN1', s.aboutStat1Num||'2');    setText('abStatL1', s.aboutStat1Label||'Groups');
+  setText('abStatN2', s.aboutStat2Num||'6');    setText('abStatL2', s.aboutStat2Label||'Semesters');
+  setText('abStatN3', s.aboutStat3Num||'7+');   setText('abStatL3', s.aboutStat3Label||'Modules');
+
+  // Value cards
+  setText('aboutVal1Title', s.aboutVal1Title||'Our Mission');
+  setText('aboutVal1Text',  s.aboutVal1Text||'Empower English Studies students with the tools they need.');
+  setText('aboutVal2Title', s.aboutVal2Title||'Community');
+  setText('aboutVal2Text',  s.aboutVal2Text||'Fostering connection between students and faculty.');
+  setText('aboutVal3Title', s.aboutVal3Title||'Excellence');
+  setText('aboutVal3Text',  s.aboutVal3Text||'Committed to maintaining the highest academic standards.');
+
+  // Render dynamic location section
+  const locEl = document.getElementById('aboutLocationSection');
+  if(locEl){
+    const ops = s.busOperators||[];
+    const busBlocksHtml = ops.map(op=>`
+      <div class="about-bus-block" style="margin-bottom:14px;">
+        <div class="about-bus-header">
+          ${op.logoUrl ? `<img src="${op.logoUrl}" alt="${op.name}" class="about-bus-logo" onerror="this.style.display='none'">` : ''}
+          <span class="about-bus-name" style="color:${op.nameColor||'#e85b1a'};">${op.name}</span>
+        </div>
+        <div class="about-bus-lines">
+          ${(op.lines||[]).map(l=>`<span class="bus-line-dyn" style="background:${l.color};box-shadow:0 3px 10px ${l.color}55;" title="${l.desc||l.label}">${l.label}</span>`).join('')}
+        </div>
+      </div>`).join('');
+    locEl.innerHTML = `
+      <div class="about-section-head"><i class="fas fa-map-marker-alt"></i> <span id="aboutFindUsTitle">${s.aboutFindUsTitle||'Find Us'}</span></div>
+      <div class="about-location-grid">
+        <div class="about-map-wrap">
+          <iframe src="${s.mapEmbedSrc||''}" height="260" style="border:0;width:100%;border-radius:16px;" allowfullscreen loading="lazy"></iframe>
+          <div class="about-address"><i class="fas fa-location-dot"></i> ${s.mapAddress||'Faculty of Letters and Humanities — Mohammedia, Morocco'}</div>
+        </div>
+        <div class="about-buses-wrap">${busBlocksHtml}</div>
+      </div>`;
+  }
+
+  updateAboutLiveStats();
+}
+
+function updateAboutLiveStats(){
+  const el = document.getElementById('aboutLiveStats');
+  if(!el) return;
+  const fmt = n=>{ if(n>=1e6) return (n/1e6).toFixed(1).replace(/\.0$/,'')+'M'; if(n>=1000) return (n/1000).toFixed(1).replace(/\.0$/,'')+'k'; return String(n); };
+  let views=0, likes=0, saves=0, shares=0, comments=0;
+  (typeof announcements!=='undefined'?announcements:[]).forEach(a=>{ views+=a.views||0; likes+=a.likes||0; saves+=a.saves||0; shares+=a.shares||0; });
+  (typeof makeupSessions!=='undefined'?makeupSessions:[]).forEach(a=>{ views+=a.views||0; likes+=a.likes||0; });
+  (typeof commentsCache!=='undefined'?Object.values(commentsCache):[]).forEach(c=>{ comments+=c.length; });
+  const posts=(typeof announcements!=='undefined'?announcements:[]).length;
+  const items=[
+    {ico:'👁',num:fmt(views),lbl:'Total Views'},
+    {ico:'❤️',num:fmt(likes),lbl:'Total Likes'},
+    {ico:'💬',num:fmt(comments),lbl:'Comments'},
+    {ico:'🔖',num:fmt(saves),lbl:'Saves'},
+    {ico:'📢',num:fmt(posts),lbl:'Posts'},
+  ];
+  el.innerHTML=`<div class="about-stats-strip-inner">${items.map(i=>`
+    <div class="ab-stat-item">
+      <div class="ab-stat-ico">${i.ico}</div>
+      <div class="ab-stat-num">${i.num}</div>
+      <div class="ab-stat-lbl">${i.lbl}</div>
+    </div>`).join('')}</div>`;
+}
+
+window.saveAboutContent = async function(){
+  const g = (id,fb)=>{ const el=document.getElementById(id); return el?el.value:fb; };
+  siteSettings.aboutEyebrow      = g('abEyebrow',    siteSettings.aboutEyebrow);
+  siteSettings.aboutFindUsTitle  = g('abFindUsTitle',siteSettings.aboutFindUsTitle);
+  siteSettings.aboutStat1Num     = g('abS1Num',      siteSettings.aboutStat1Num);
+  siteSettings.aboutStat1Label   = g('abS1Lbl',      siteSettings.aboutStat1Label);
+  siteSettings.aboutStat2Num     = g('abS2Num',      siteSettings.aboutStat2Num);
+  siteSettings.aboutStat2Label   = g('abS2Lbl',      siteSettings.aboutStat2Label);
+  siteSettings.aboutStat3Num     = g('abS3Num',      siteSettings.aboutStat3Num);
+  siteSettings.aboutStat3Label   = g('abS3Lbl',      siteSettings.aboutStat3Label);
+  siteSettings.aboutPageTitle    = g('abPageTitle', siteSettings.aboutPageTitle);
+  siteSettings.aboutPageSubtitle = g('abPageSub',   siteSettings.aboutPageSubtitle);
+  siteSettings.aboutCardTitle    = g('abCardTitle',  siteSettings.aboutCardTitle);
+  siteSettings.aboutCardBody     = g('abCardBody',   siteSettings.aboutCardBody);
+  siteSettings.aboutVal1Title    = g('abVal1Title',  siteSettings.aboutVal1Title);
+  siteSettings.aboutVal1Text     = g('abVal1Text',   siteSettings.aboutVal1Text);
+  siteSettings.aboutVal2Title    = g('abVal2Title',  siteSettings.aboutVal2Title);
+  siteSettings.aboutVal2Text     = g('abVal2Text',   siteSettings.aboutVal2Text);
+  siteSettings.aboutVal3Title    = g('abVal3Title',  siteSettings.aboutVal3Title);
+  siteSettings.aboutVal3Text     = g('abVal3Text',   siteSettings.aboutVal3Text);
+  siteSettings.mapEmbedSrc       = g('abMapSrc',     siteSettings.mapEmbedSrc);
+  siteSettings.mapAddress        = g('abMapAddr',    siteSettings.mapAddress);
+  // Collect bus operators from DOM
+  const ops = siteSettings.busOperators||[];
+  ops.forEach((op,oi)=>{
+    op.name      = g(`opName${oi}`,  op.name);
+    op.nameColor = g(`opColor${oi}`, op.nameColor);
+    op.logoUrl   = g(`opLogo${oi}`,  op.logoUrl);
+    (op.lines||[]).forEach((ln,li)=>{
+      ln.label = g(`lnLabel${oi}_${li}`, ln.label);
+      ln.color = g(`lnColor${oi}_${li}`, ln.color);
+      ln.desc  = g(`lnDesc${oi}_${li}`,  ln.desc);
+    });
+  });
+  siteSettings.busOperators = ops;
+  applyAboutContent();
+  await saveSettings();
+  showToast('✅ About page saved!');
+};
 
 window.saveHeroContent = async function(){
   siteSettings.heroAcademicYear = document.getElementById('hcAcademicYear').value.trim()||'Academic Year 2025–2026';
@@ -3971,7 +4348,8 @@ function renderAdminSettings(){
     {id:'makeup',label:'🔄 Makeup Sessions'},
     {id:'announcements',label:'📢 Announcements'},
     {id:'sondage',label:'📋 Sondage'},
-    {id:'space',label:'👥 Student Space'}
+    {id:'space',label:'👥 Student Space'},
+    {id:'about',label:'ℹ️ About'}
   ];
   const order=siteSettings.pageOrder||allPages.map(p=>p.id);
   const orderedPages=order.map(id=>allPages.find(p=>p.id===id)).filter(Boolean);
@@ -4041,18 +4419,20 @@ function renderAdminSettings(){
       <!-- LEFT: Nav ordering + show/hide -->
       <div>
         <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">📄 Navigation — Ordre &amp; Visibilité</h4>
-        <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">▲/▼ pour réordonner. Checkbox = visible dans le header.</p>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px;">Utilisez ▲/▼ pour réordonner les pages dans le header. Le mouvement est animé en direct.</p>
         <div id="navOrderList">
           ${orderedPages.map((p,i)=>`
-            <div style="display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:#f8fafc;margin-bottom:6px;">
-              <div style="display:flex;flex-direction:column;gap:2px;">
-                <button class="order-btn" onclick="moveNavPage('${p.id}',-1)" ${i===0?'disabled':''}>▲</button>
-                <button class="order-btn" onclick="moveNavPage('${p.id}',+1)" ${i===orderedPages.length-1?'disabled':''}>▼</button>
+            <div id="nav-order-row-${p.id}" style="display:flex;align-items:center;gap:10px;padding:9px 12px;border:1.5px solid var(--border);border-radius:10px;background:white;margin-bottom:7px;box-shadow:0 2px 8px rgba(0,0,0,.04);transition:box-shadow .2s,transform .2s;">
+              <span style="min-width:22px;height:22px;border-radius:7px;background:var(--navy);color:white;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;">${i+1}</span>
+              <div style="display:flex;flex-direction:column;gap:3px;">
+                <button class="order-btn" onclick="moveNavPage('${p.id}',-1)" ${i===0?'disabled':''} title="Monter" style="font-size:14px;padding:1px 7px;">▲</button>
+                <button class="order-btn" onclick="moveNavPage('${p.id}',+1)" ${i===orderedPages.length-1?'disabled':''} title="Descendre" style="font-size:14px;padding:1px 7px;">▼</button>
               </div>
-              <label style="display:flex;align-items:center;gap:8px;flex:1;cursor:pointer;margin:0;">
-                <input type="checkbox" ${!siteSettings.hiddenPages.includes(p.id)?'checked':''} onchange="togglePageVisibility('${p.id}',this.checked)" style="width:auto;margin:0;accent-color:var(--navy);">
-                <span style="font-size:14px;font-weight:500;">${p.label}</span>
+              <label style="display:flex;align-items:center;gap:9px;flex:1;cursor:pointer;margin:0;">
+                <input type="checkbox" ${!siteSettings.hiddenPages.includes(p.id)?'checked':''} onchange="togglePageVisibility('${p.id}',this.checked)" style="width:auto;margin:0;accent-color:var(--navy);width:15px;height:15px;">
+                <span style="font-size:13.5px;font-weight:600;color:var(--navy);">${p.label}</span>
               </label>
+              <span style="font-size:10px;color:var(--muted);background:#f1f5f9;border-radius:6px;padding:2px 8px;font-weight:700;">${siteSettings.hiddenPages.includes(p.id)?'Caché':'Visible'}</span>
             </div>`).join('')}
         </div>
       </div>
@@ -4334,12 +4714,19 @@ window.toggleTTSemVisibility=async function(sem,show){
 };
 // Nav page ordering
 window.moveNavPage=async function(id,dir){
-  const order=siteSettings.pageOrder||['home','modules','exams','timetable','makeup','announcements','space'];
+  const order=siteSettings.pageOrder||['home','modules','exams','timetable','makeup','announcements','sondage','space','about'];
   const idx=order.indexOf(id); if(idx<0) return;
   const swap=idx+dir; if(swap<0||swap>=order.length) return;
   [order[idx],order[swap]]=[order[swap],order[idx]];
   siteSettings.pageOrder=order;
-  await saveSettings(); applyHiddenPages(); renderAdminSettings();
+  await saveSettings();
+  applyHiddenPages();
+  renderAdminSettings();
+  // Flash animation on the moved nav item
+  requestAnimationFrame(()=>{
+    const navEl=document.getElementById('nav-'+id);
+    if(navEl){ navEl.classList.remove('nav-moved'); void navEl.offsetWidth; navEl.classList.add('nav-moved'); setTimeout(()=>navEl.classList.remove('nav-moved'),600); }
+  });
 };
 // Module add / delete / reorder — works for ALL sems S1-S6
 window.addCustomMod=async function(){
@@ -4395,6 +4782,8 @@ window.switchAdminTab=function(tab,el){
   }
   if(tab==='comments'){ renderAdminComments(); renderAdminCmtNamesList(); renderPubIdentitySection(); }
   if(tab==='sondage-admin'){ renderAdminSondage(); }
+  if(tab==='about-admin'){ renderAdminAbout(); }
+  if(tab==='stats-admin'){ renderAdminStats(); }
 };
 
 function renderAdminAnn(){
@@ -5006,6 +5395,255 @@ function renderAdminSondage(){
   renderAdminSubList();
   setupSondageListeners();
 }
+
+// ══ ABOUT ADMIN ══
+window.renderAdminAbout = function(){
+  const el = document.getElementById('admin-about-content');
+  if(!el) return;
+  const s = siteSettings;
+  const ops = s.busOperators||[];
+
+  const busEditorHtml = ops.map((op,oi)=>`
+    <div style="background:white;border:1.5px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:14px;" id="opBlock${oi}">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;gap:10px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:10px;">
+          ${op.logoUrl?`<img src="${op.logoUrl}" style="height:26px;object-fit:contain;" onerror="this.style.display='none'">`:''}
+          <span style="font-size:13px;font-weight:800;color:var(--navy);">Operator ${oi+1}</span>
+        </div>
+        <button onclick="removeAboutOperator(${oi})" style="background:#fee2e2;color:#991b1b;border:none;border-radius:8px;padding:5px 12px;cursor:pointer;font-size:12px;font-weight:700;"><i class="fas fa-trash"></i> Remove</button>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;">
+        <div>
+          <label style="font-size:10px;color:var(--muted);font-weight:700;display:block;margin-bottom:3px;">Operator Name</label>
+          <input type="text" id="opName${oi}" value="${(op.name||'').replace(/"/g,'&quot;')}" placeholder="e.g. Casabus" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:12px;">
+        </div>
+        <div>
+          <label style="font-size:10px;color:var(--muted);font-weight:700;display:block;margin-bottom:3px;">Name Color</label>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input type="color" id="opColor${oi}" value="${op.nameColor||'#e85b1a'}" style="width:38px;height:34px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;padding:2px;">
+            <span style="font-size:11px;color:var(--muted);">Header text color</span>
+          </div>
+        </div>
+        <div style="grid-column:1/-1;">
+          <label style="font-size:10px;color:var(--muted);font-weight:700;display:block;margin-bottom:3px;">Logo URL</label>
+          <input type="text" id="opLogo${oi}" value="${(op.logoUrl||'').replace(/"/g,'&quot;')}" placeholder="https://..." style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:12px;">
+        </div>
+      </div>
+      <div style="border-top:1px solid var(--border);padding-top:12px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+          <span style="font-size:11px;font-weight:800;color:var(--navy);">Bus Lines</span>
+          <button onclick="addAboutLine(${oi})" style="background:var(--navy);color:white;border:none;border-radius:8px;padding:4px 12px;cursor:pointer;font-size:11px;font-weight:700;"><i class="fas fa-plus"></i> Add Line</button>
+        </div>
+        <div id="opLines${oi}" style="display:flex;flex-direction:column;gap:8px;">
+          ${(op.lines||[]).map((ln,li)=>`
+            <div style="display:grid;grid-template-columns:80px 40px 1fr auto;gap:8px;align-items:center;" id="lineRow${oi}_${li}">
+              <input type="text" id="lnLabel${oi}_${li}" value="${(ln.label||'').replace(/"/g,'&quot;')}" placeholder="L800" style="padding:7px 10px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:12px;font-weight:700;text-align:center;">
+              <input type="color" id="lnColor${oi}_${li}" value="${ln.color||'#1e40af'}" style="width:40px;height:34px;border:1.5px solid var(--border);border-radius:7px;cursor:pointer;padding:2px;">
+              <input type="text" id="lnDesc${oi}_${li}" value="${(ln.desc||'').replace(/"/g,'&quot;')}" placeholder="Description (optional)" style="padding:7px 10px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:12px;">
+              <button onclick="removeAboutLine(${oi},${li})" style="background:#fee2e2;color:#991b1b;border:none;border-radius:7px;padding:5px 10px;cursor:pointer;font-size:11px;"><i class="fas fa-times"></i></button>
+            </div>`).join('')}
+        </div>
+      </div>
+    </div>`).join('');
+
+  el.innerHTML = `
+    <h4 style="font-size:14px;color:var(--navy);margin-bottom:2px;font-weight:700;">ℹ️ About Page — Content Editor</h4>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:18px;">Edit all text, stats, map, and bus lines displayed on the About page. Changes are saved to Firebase.</p>
+
+    <!-- PAGE HEADER -->
+    <div style="background:#f8fafc;border:1.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:16px;">
+      <h5 style="font-size:12px;color:var(--navy);font-weight:800;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px;">🎯 Page Header</h5>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <label style="font-size:10px;color:var(--muted);font-weight:700;display:block;margin-bottom:3px;">Eyebrow Tag <span style="font-weight:400;color:var(--muted);">(badge above title)</span></label>
+          <input type="text" id="abEyebrow" value="${(s.aboutEyebrow||'English Studies Portal').replace(/"/g,'&quot;')}" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        </div>
+        <div>
+          <label style="font-size:10px;color:var(--muted);font-weight:700;display:block;margin-bottom:3px;">Page Title</label>
+          <input type="text" id="abPageTitle" value="${(s.aboutPageTitle||'About Us').replace(/"/g,'&quot;')}" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        </div>
+        <div style="grid-column:1/-1;">
+          <label style="font-size:10px;color:var(--muted);font-weight:700;display:block;margin-bottom:3px;">Subtitle</label>
+          <input type="text" id="abPageSub" value="${(s.aboutPageSubtitle||'').replace(/"/g,'&quot;')}" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- OUR STORY CARD -->
+    <div style="background:#fff8f5;border:1.5px solid #ffd8c2;border-radius:14px;padding:18px 20px;margin-bottom:16px;">
+      <h5 style="font-size:12px;color:var(--navy);font-weight:800;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px;">📖 "Our Story" Card</h5>
+      <div style="margin-bottom:10px;">
+        <label style="font-size:10px;color:var(--muted);font-weight:700;display:block;margin-bottom:3px;">Card Title</label>
+        <input type="text" id="abCardTitle" value="${(s.aboutCardTitle||'English Studies at FLSHM').replace(/"/g,'&quot;')}" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:10px;color:var(--muted);font-weight:700;display:block;margin-bottom:3px;">Content — <em style="font-weight:400;">blank line = new paragraph</em></label>
+        <textarea id="abCardBody" rows="7" style="width:100%;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;resize:vertical;">${(s.aboutCardBody||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
+      </div>
+      <label style="font-size:10px;color:var(--muted);font-weight:700;display:block;margin-bottom:8px;">Card Footer Stats <span style="font-weight:400;">(number + label)</span></label>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:10px;">
+          <label style="font-size:9px;color:var(--gold);font-weight:800;display:block;margin-bottom:6px;text-transform:uppercase;">Stat 1</label>
+          <input type="text" id="abS1Num" value="${(s.aboutStat1Num||'2').replace(/"/g,'&quot;')}" placeholder="2" style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:13px;font-weight:800;text-align:center;margin-bottom:5px;">
+          <input type="text" id="abS1Lbl" value="${(s.aboutStat1Label||'Groups').replace(/"/g,'&quot;')}" placeholder="Groups" style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:11px;text-align:center;">
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:10px;">
+          <label style="font-size:9px;color:var(--sky);font-weight:800;display:block;margin-bottom:6px;text-transform:uppercase;">Stat 2</label>
+          <input type="text" id="abS2Num" value="${(s.aboutStat2Num||'6').replace(/"/g,'&quot;')}" placeholder="6" style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:13px;font-weight:800;text-align:center;margin-bottom:5px;">
+          <input type="text" id="abS2Lbl" value="${(s.aboutStat2Label||'Semesters').replace(/"/g,'&quot;')}" placeholder="Semesters" style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:11px;text-align:center;">
+        </div>
+        <div style="background:white;border:1px solid var(--border);border-radius:10px;padding:10px;">
+          <label style="font-size:9px;color:#7c3aed;font-weight:800;display:block;margin-bottom:6px;text-transform:uppercase;">Stat 3</label>
+          <input type="text" id="abS3Num" value="${(s.aboutStat3Num||'7+').replace(/"/g,'&quot;')}" placeholder="7+" style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:13px;font-weight:800;text-align:center;margin-bottom:5px;">
+          <input type="text" id="abS3Lbl" value="${(s.aboutStat3Label||'Modules').replace(/"/g,'&quot;')}" placeholder="Modules" style="width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:11px;text-align:center;">
+        </div>
+      </div>
+    </div>
+
+    <!-- VALUE CARDS -->
+    <div style="background:#f0f9ff;border:1.5px solid #bae6fd;border-radius:14px;padding:18px 20px;margin-bottom:16px;">
+      <h5 style="font-size:12px;color:var(--navy);font-weight:800;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px;">🎯 3 Value Cards</h5>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;">
+        <div style="background:white;border-radius:10px;padding:12px;border:1px solid var(--border);">
+          <label style="font-size:10px;color:var(--gold);font-weight:800;display:block;margin-bottom:6px;">💡 Card 1</label>
+          <input type="text" id="abVal1Title" value="${(s.aboutVal1Title||'Our Mission').replace(/"/g,'&quot;')}" placeholder="Title" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:12px;font-weight:700;margin-bottom:6px;">
+          <textarea id="abVal1Text" rows="4" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:12px;resize:vertical;">${(s.aboutVal1Text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
+        </div>
+        <div style="background:white;border-radius:10px;padding:12px;border:1px solid var(--border);">
+          <label style="font-size:10px;color:var(--sky);font-weight:800;display:block;margin-bottom:6px;">👥 Card 2</label>
+          <input type="text" id="abVal2Title" value="${(s.aboutVal2Title||'Community').replace(/"/g,'&quot;')}" placeholder="Title" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:12px;font-weight:700;margin-bottom:6px;">
+          <textarea id="abVal2Text" rows="4" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:12px;resize:vertical;">${(s.aboutVal2Text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
+        </div>
+        <div style="background:white;border-radius:10px;padding:12px;border:1px solid var(--border);">
+          <label style="font-size:10px;color:#7c3aed;font-weight:800;display:block;margin-bottom:6px;">🏆 Card 3</label>
+          <input type="text" id="abVal3Title" value="${(s.aboutVal3Title||'Excellence').replace(/"/g,'&quot;')}" placeholder="Title" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:12px;font-weight:700;margin-bottom:6px;">
+          <textarea id="abVal3Text" rows="4" style="width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:7px;font-family:inherit;font-size:12px;resize:vertical;">${(s.aboutVal3Text||'').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAP & LOCATION -->
+    <div style="background:#f0fff4;border:1.5px solid #bbf7d0;border-radius:14px;padding:18px 20px;margin-bottom:16px;">
+      <h5 style="font-size:12px;color:var(--navy);font-weight:800;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px;">🗺️ Map & Location</h5>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div>
+          <label style="font-size:10px;color:var(--muted);font-weight:700;display:block;margin-bottom:3px;">Section Title</label>
+          <input type="text" id="abFindUsTitle" value="${(s.aboutFindUsTitle||'Find Us').replace(/"/g,'&quot;')}" placeholder="Find Us" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:13px;">
+        </div>
+        <div>
+          <label style="font-size:10px;color:var(--muted);font-weight:700;display:block;margin-bottom:3px;">Address Label</label>
+          <input type="text" id="abMapAddr" value="${(s.mapAddress||'Faculty of Letters and Humanities — Mohammedia, Morocco').replace(/"/g,'&quot;')}" style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:12px;">
+        </div>
+      </div>
+      <div>
+        <label style="font-size:10px;color:var(--muted);font-weight:700;display:block;margin-bottom:3px;">Google Maps Embed URL</label>
+        <input type="text" id="abMapSrc" value="${(s.mapEmbedSrc||'').replace(/"/g,'&quot;')}" placeholder="https://www.google.com/maps/embed?..." style="width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit;font-size:12px;">
+        <p style="font-size:11px;color:var(--muted);margin-top:4px;">Go to Google Maps → Share → Embed a map → copy the <code>src</code> URL only.</p>
+      </div>
+    </div>
+
+    <!-- BUS OPERATORS -->
+    <div style="background:#fdf4ff;border:1.5px solid #e9d5ff;border-radius:14px;padding:18px 20px;margin-bottom:16px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <h5 style="font-size:12px;color:var(--navy);font-weight:800;text-transform:uppercase;letter-spacing:.5px;">🚌 Bus Operators & Lines</h5>
+        <button onclick="addAboutOperator()" style="background:var(--navy);color:white;border:none;border-radius:8px;padding:6px 14px;cursor:pointer;font-size:12px;font-weight:700;"><i class="fas fa-plus"></i> Add Operator</button>
+      </div>
+      <div id="aboutBusEditor">${busEditorHtml}</div>
+    </div>
+
+    <button class="add-btn" style="margin:0;width:100%;" onclick="saveAboutContent()"><i class="fas fa-save"></i> Save All About Page Changes</button>
+  `;
+};
+
+window.addAboutOperator = function(){
+  const ops = siteSettings.busOperators||[];
+  ops.push({ id:'op'+Date.now(), name:'New Operator', logoUrl:'', nameColor:'#1e40af', lines:[] });
+  siteSettings.busOperators = ops;
+  renderAdminAbout();
+};
+window.removeAboutOperator = function(oi){
+  if(!confirm('Remove this operator?')) return;
+  const ops = siteSettings.busOperators||[];
+  ops.splice(oi,1);
+  siteSettings.busOperators = ops;
+  renderAdminAbout();
+};
+window.addAboutLine = function(oi){
+  const ops = siteSettings.busOperators||[];
+  if(!ops[oi]) return;
+  ops[oi].lines = ops[oi].lines||[];
+  ops[oi].lines.push({ label:'L?', color:'#1e40af', desc:'' });
+  siteSettings.busOperators = ops;
+  renderAdminAbout();
+};
+window.removeAboutLine = function(oi,li){
+  const ops = siteSettings.busOperators||[];
+  if(!ops[oi]) return;
+  ops[oi].lines.splice(li,1);
+  siteSettings.busOperators = ops;
+  renderAdminAbout();
+};
+
+// ══ STATS ADMIN ══
+window.renderAdminStats = function(){
+  const el = document.getElementById('adminStatsContent');
+  if(!el) return;
+
+  const fmt = n => {
+    if(n >= 1000000) return (n/1000000).toFixed(1).replace(/\.0$/,'')+'M';
+    if(n >= 1000) return (n/1000).toFixed(1).replace(/\.0$/,'')+'k';
+    return String(n);
+  };
+
+  // Aggregate from announcements
+  let totalViews=0, totalLikes=0, totalComments=0, totalSaves=0, totalShares=0;
+  announcements.forEach(a=>{
+    totalViews   += a.views||0;
+    totalLikes   += a.likes||0;
+    totalComments+= 0; // comments come from separate collection
+    totalSaves   += a.saves||0;
+    totalShares  += a.shares||0;
+  });
+  makeupSessions.forEach(a=>{ totalViews+=(a.views||0); totalLikes+=(a.likes||0); });
+
+  // Count object from comments cache
+  Object.values(commentsCache).forEach(cmts=>{ totalComments+=cmts.length; });
+
+  const statCard=(ico,label,val,color)=>`
+    <div style="background:white;border:1.5px solid var(--border);border-radius:16px;padding:20px 22px;box-shadow:var(--card-shadow);text-align:center;">
+      <div style="width:46px;height:46px;border-radius:14px;background:${color}18;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:18px;color:${color};">${ico}</div>
+      <div style="font-family:var(--theme-font-display);font-size:32px;font-weight:800;color:var(--navy);line-height:1;">${fmt(val)}</div>
+      <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1.2px;font-weight:700;margin-top:6px;">${label}</div>
+    </div>`;
+
+  const topPosts = [...announcements].sort((a,b)=>(b.views||0)-(a.views||0)).slice(0,5);
+  const topRows = topPosts.map(a=>`
+    <div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);">
+      <div style="flex:1;min-width:0;">
+        <div style="font-size:13px;font-weight:700;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${a.title||'—'}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px;">${a.date||''}</div>
+      </div>
+      <div style="display:flex;gap:14px;flex-shrink:0;font-size:12px;font-weight:700;">
+        <span style="color:var(--sky);">👁 ${fmt(a.views||0)}</span>
+        <span style="color:#e11d48;">❤️ ${fmt(a.likes||0)}</span>
+        <span style="color:var(--gold);">🔖 ${fmt(a.saves||0)}</span>
+      </div>
+    </div>`).join('');
+
+  el.innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:14px;margin-bottom:28px;">
+      ${statCard('<i class="fas fa-eye"></i>','Total Views',totalViews,'#00b4a0')}
+      ${statCard('<i class="fas fa-heart"></i>','Total Likes',totalLikes,'#e11d48')}
+      ${statCard('<i class="far fa-comment"></i>','Comments',totalComments,'#7c3aed')}
+      ${statCard('<i class="fas fa-bookmark"></i>','Saves',totalSaves,'#ff6b35')}
+      ${statCard('<i class="fas fa-share-alt"></i>','Shares',totalShares,'#1e40af')}
+      ${statCard('<i class="fas fa-bullhorn"></i>','Posts',announcements.length,'#0e8a70')}
+    </div>
+    <div style="background:white;border:1.5px solid var(--border);border-radius:16px;padding:20px 22px;box-shadow:var(--card-shadow);">
+      <h5 style="font-size:13px;font-weight:800;color:var(--navy);margin-bottom:14px;">🔥 Top 5 Posts — by Views</h5>
+      ${topRows||'<p style="color:var(--muted);font-size:13px;">No posts yet.</p>'}
+    </div>`;
+};
 
 
 
