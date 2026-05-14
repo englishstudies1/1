@@ -201,8 +201,197 @@
 .fg-l08{background:linear-gradient(135deg,#6c3483,#9b59b6);color:white;box-shadow:0 3px 10px rgba(108,52,131,.35);}
 [data-theme="midnight"] .about-bus-block{background:#1e1e32;border-color:var(--border);}
 
+/* ══ MAINTENANCE OVERLAY — site style ══ */
+#maintenanceOverlay{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--cream,#f8f6f2);
+  display:flex;flex-direction:column;
+  overflow-y:auto;
+}
+/* Header */
+.mnt-header{
+  background:linear-gradient(140deg,var(--navy) 0%,var(--royal,#1e2a7a) 55%,#2e3a82 100%);
+  padding:0 32px;flex-shrink:0;
+}
+.mnt-header-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  height:64px;max-width:900px;margin:0 auto;width:100%;
+}
+.mnt-status-badge{
+  display:flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);
+  border-radius:100px;padding:5px 14px;
+  font-size:11px;color:rgba(255,255,255,.85);font-weight:700;letter-spacing:.4px;
+}
+.mnt-blink-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--gold);display:inline-block;flex-shrink:0;
+  animation:mntBlink 1.4s ease-in-out infinite;
+}
+@keyframes mntBlink{0%,100%{opacity:1;}50%{opacity:.2;}}
+/* Body */
+.mnt-body{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:40px 20px 80px;
+}
+/* Card */
+.mnt-card{
+  background:white;border:1.5px solid var(--border,#e2e8f2);
+  border-radius:28px;max-width:480px;width:100%;
+  box-shadow:0 24px 72px rgba(18,22,58,.12),0 4px 24px rgba(18,22,58,.07);
+  overflow:hidden;animation:mntSlideUp .5s ease both;
+}
+@keyframes mntSlideUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+.mnt-card-top-bar{height:4px;background:linear-gradient(90deg,var(--gold),var(--sky),var(--gold));}
+.mnt-card-inner{padding:32px 36px;text-align:center;}
+/* Robot */
+.mnt-robot-wrap{margin-bottom:12px;animation:mntFloat 3.5s ease-in-out infinite;}
+.mnt-robot{width:148px;height:auto;filter:drop-shadow(0 12px 24px rgba(18,22,58,.12));}
+@keyframes mntFloat{0%,100%{transform:translateY(0) rotate(-.5deg);}50%{transform:translateY(-10px) rotate(.5deg);}}
+.mnt-antenna-ball{animation:mntPulse 1.5s ease-in-out infinite;}
+@keyframes mntPulse{0%,100%{opacity:1;}50%{opacity:.5;}}
+.mnt-light-r{animation:mntLightBlink 1s ease-in-out infinite;}
+.mnt-light-y{animation:mntLightBlink 1.4s .3s ease-in-out infinite;}
+.mnt-light-g{animation:mntLightBlink 1.8s .6s ease-in-out infinite;}
+@keyframes mntLightBlink{0%,100%{opacity:1;}50%{opacity:.15;}}
+.mnt-sweat{animation:mntSweat 2.5s ease-in-out infinite;}
+@keyframes mntSweat{0%,100%{transform:translateY(0);}60%{transform:translateY(4px);}}
+.mnt-errbar{animation:mntErrBar 2.2s ease-in-out infinite;}
+@keyframes mntErrBar{0%,100%{width:32px;}50%{width:55px;}}
+.mnt-bolt{animation:mntBoltSpin .8s ease-in-out infinite alternate;}
+@keyframes mntBoltSpin{from{opacity:.7;}to{opacity:1;}}
+/* Text */
+.mnt-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:linear-gradient(135deg,rgba(255,107,53,.12),rgba(0,180,160,.08));
+  border:1px solid rgba(255,107,53,.25);border-radius:100px;
+  padding:5px 14px;font-size:11px;font-weight:800;color:var(--gold);
+  letter-spacing:.5px;text-transform:uppercase;margin-bottom:16px;
+}
+.mnt-title{
+  font-family:var(--theme-font-display);font-size:clamp(24px,4vw,34px);
+  font-weight:800;color:var(--navy);line-height:1.2;margin:0 0 12px;
+}
+.mnt-title em{font-style:italic;color:var(--gold);font-weight:700;}
+.mnt-sub{color:var(--muted,#6b7a99);font-size:14.5px;line-height:1.75;margin:0 0 28px;font-weight:400;}
+/* Progress */
+.mnt-progress-wrap{margin-bottom:0;}
+.mnt-progress-track{height:5px;background:var(--border,#e2e8f2);border-radius:10px;overflow:hidden;margin-bottom:8px;}
+.mnt-progress-fill{height:100%;width:68%;border-radius:10px;background:linear-gradient(90deg,var(--gold),var(--sky),var(--gold));background-size:200% 100%;animation:mntProgressMove 2.8s linear infinite;}
+@keyframes mntProgressMove{0%{background-position:100%;}100%{background-position:-100%;}}
+.mnt-progress-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--muted,#6b7a99);font-weight:600;letter-spacing:.3px;}
+.mnt-progress-pct{color:var(--gold);font-weight:800;}
+/* Footer */
+.mnt-footer{
+  margin-top:24px;font-size:13px;color:var(--muted,#6b7a99);
+  display:flex;align-items:center;gap:6px;position:relative;
+}
+.mnt-brand{font-weight:800;color:var(--gold);font-family:var(--theme-font-display);}
+/* Hidden admin trigger */
+.mnt-admin-trigger{
+  background:none;border:none;cursor:pointer;
+  color:transparent;font-size:20px;width:28px;height:28px;
+  position:absolute;right:-10px;bottom:-8px;
+  opacity:0;transition:opacity .3s;
+}
+.mnt-footer:hover .mnt-admin-trigger{opacity:.18;}
+.mnt-footer:hover .mnt-admin-trigger:hover{opacity:.55;}
+/* Feedback FAB */
+.mnt-fab{
+  position:fixed;bottom:28px;right:28px;z-index:10002;
+  background:linear-gradient(135deg,var(--navy),var(--royal,#1e2a7a));
+  color:white;border:none;border-radius:100px;
+  padding:13px 22px;cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;gap:9px;font-size:14px;font-weight:700;
+  box-shadow:0 8px 32px rgba(18,22,58,.3),0 2px 8px rgba(18,22,58,.15);
+  transition:transform .25s,box-shadow .25s;
+  animation:mntSlideUp .6s .3s ease both;
+}
+.mnt-fab:hover{transform:translateY(-3px) scale(1.04);box-shadow:0 14px 40px rgba(18,22,58,.35);}
+.mnt-fab-icon{font-size:17px;animation:mntFabWiggle 3s ease-in-out infinite;}
+@keyframes mntFabWiggle{0%,90%,100%{transform:rotate(0);}93%{transform:rotate(-12deg);}96%{transform:rotate(12deg);}}
+/* Feedback panel */
+.mnt-feedback-backdrop{
+  display:none;position:fixed;inset:0;background:rgba(18,22,58,.35);z-index:10003;
+  backdrop-filter:blur(3px);animation:none;
+}
+.mnt-feedback-backdrop.open{display:block;animation:mntFadeIn .25s ease;}
+@keyframes mntFadeIn{from{opacity:0;}to{opacity:1;}}
+.mnt-feedback-panel{
+  position:fixed;bottom:0;left:50%;transform:translateX(-50%) translateY(110%);
+  width:min(480px,100vw);background:white;border-radius:24px 24px 0 0;
+  z-index:10004;padding:0 0 32px;
+  box-shadow:0 -12px 60px rgba(18,22,58,.18);
+  transition:transform .35s cubic-bezier(.22,1,.36,1);
+}
+.mnt-feedback-panel.open{transform:translateX(-50%) translateY(0);}
+.mnt-feedback-handle{width:40px;height:4px;background:var(--border,#e2e8f2);border-radius:10px;margin:14px auto 0;}
+.mnt-fp-header{display:flex;align-items:flex-start;justify-content:space-between;padding:16px 24px 0;}
+.mnt-fp-eyebrow{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);font-weight:800;margin-bottom:4px;}
+.mnt-fp-title{font-family:var(--theme-font-display);font-size:18px;font-weight:800;color:var(--navy);margin:0;}
+.mnt-fp-close{background:var(--border,#e2e8f2);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;color:var(--muted,#6b7a99);font-size:14px;flex-shrink:0;transition:background .2s;}
+.mnt-fp-close:hover{background:#dce3ef;}
+.mnt-fp-body{padding:18px 24px 0;}
+.mnt-fp-label{font-size:11px;font-weight:700;color:var(--muted,#6b7a99);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:6px;}
+.mnt-fp-input{width:100%;padding:10px 13px;border:1.5px solid var(--border,#e2e8f2);border-radius:10px;font-family:inherit;font-size:13px;outline:none;transition:border-color .2s;color:var(--navy);}
+.mnt-fp-input:focus{border-color:var(--gold);}
+.mnt-fp-textarea{width:100%;padding:10px 13px;border:1.5px solid var(--border,#e2e8f2);border-radius:10px;font-family:inherit;font-size:13px;outline:none;resize:none;height:100px;transition:border-color .2s;color:var(--navy);}
+.mnt-fp-textarea:focus{border-color:var(--gold);}
+.mnt-fp-btn{
+  width:100%;margin-top:14px;padding:13px;
+  background:linear-gradient(135deg,var(--navy),var(--royal,#1e2a7a));
+  color:white;border:none;border-radius:12px;font-family:inherit;
+  font-size:14px;font-weight:700;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+  box-shadow:0 4px 18px rgba(18,22,58,.25);
+}
+.mnt-fp-btn:hover{transform:translateY(-1px);box-shadow:0 7px 24px rgba(18,22,58,.3);}
+/* Maintenance admin tab */
+.maintenance-tab{color:#ef4444 !important;}
+[data-theme="midnight"] #maintenanceOverlay{background:var(--cream);}
+
+/* ── RESET ── */
+
 /* ── RESET ── */
 *{margin:0;padding:0;box-sizing:border-box;}
+
+/* ══ LOGO 2 — Formal Seal ══ */
+.ld2-wrap{animation:ldFadeIn .5s ease both;}
+.ld2-seal-wrap{position:relative;width:170px;height:170px;margin-bottom:8px;}
+.ld2-svg{width:170px;height:170px;overflow:visible;}
+/* Ring draw-in animations */
+.ld2-ring-1{stroke-dasharray:465;stroke-dashoffset:465;animation:ld2DrawRing 1.4s .1s ease forwards;}
+.ld2-ring-2{stroke-dasharray:415;stroke-dashoffset:415;animation:ld2DrawRing 1.2s .5s ease forwards;}
+.ld2-ring-3{stroke-dasharray:365;stroke-dashoffset:365;animation:ld2DrawRing 1s .8s ease forwards;}
+@keyframes ld2DrawRing{to{stroke-dashoffset:0;}}
+/* Shield pulse-in */
+.ld2-shield{opacity:0;animation:ld2FadeScale .6s 1.2s ease forwards;}
+@keyframes ld2FadeScale{from{opacity:0;transform:scale(.85);}to{opacity:1;transform:scale(1);}}
+/* Icon draw */
+.ld2-icon{opacity:0;animation:ldFadeIn .5s 1.7s ease forwards;}
+/* Dots & diamonds */
+.ld2-dot,.ld2-diamond{opacity:0;animation:ld2FadeScale .4s 1.5s ease forwards;}
+/* Curved text */
+.ld2-arc-text{font-size:7px;font-weight:800;fill:#c9a84c;letter-spacing:2.5px;opacity:0;animation:ldFadeIn .5s 1.9s ease forwards;text-transform:uppercase;}
+.ld2-arc-text-bot{font-size:6px;font-weight:700;fill:rgba(201,168,76,.7);letter-spacing:1.8px;opacity:0;animation:ldFadeIn .5s 2s ease forwards;text-transform:uppercase;}
+.ld2-rule,.ld2-es-text{opacity:0;animation:ldFadeIn .5s 2.1s ease forwards;}
+/* Star spin */
+.ld2-star{animation:ld2StarSpin 4s linear infinite;transform-box:fill-box;transform-origin:center;}
+@keyframes ld2StarSpin{0%,100%{transform:scale(1);}50%{transform:scale(1.2);}}
+/* Title */
+.ld2-title{animation:ldFadeIn .6s 2s ease both;}
+.ld2-main-title{
+  font-family:'Cormorant Garamond','Playfair Display',serif;
+  font-size:24px;font-weight:700;color:white;letter-spacing:1px;
+  text-align:center;line-height:1.1;margin-bottom:6px;
+}
+.ld2-main-title em{font-style:italic;color:#c9a84c;font-weight:400;}
+.ld2-sub-title{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(255,255,255,.45);text-align:center;font-weight:500;
+}
+/* Logo 2 progress fill — gold tone */
+.ld2-progress-fill{background:linear-gradient(90deg,#c9a84c,#f0d080,#c9a84c) !important;}
 body{font-family:var(--theme-font-body);background:var(--cream);color:var(--text);min-height:100vh;transition:background .4s,color .4s;}
 
 /* ══ HEADER ══ */
@@ -1106,6 +1295,86 @@ footer::after{
   .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
   .cards-grid{grid-template-columns:repeat(2,1fr);}
   .hero h1{letter-spacing:-1.2px;}
+
+  /* ── ABOUT PAGE MOBILE ── */
+  .about-hero{padding:44px 20px 40px;text-align:center;}
+  .about-hero-title{font-size:clamp(28px,9vw,44px);letter-spacing:-1px;}
+  .about-hero-sub{font-size:13.5px;max-width:100%;}
+  .about-eyebrow{font-size:10px;padding:4px 12px;}
+
+  /* Our Story card */
+  .about-card-wrap{padding:0 14px;margin-bottom:20px;}
+  .about-card-inner{padding:20px 18px;}
+  .about-card-header{gap:12px;}
+  .about-card-ico{width:46px;height:46px;font-size:18px;border-radius:14px;flex-shrink:0;}
+  .about-card-title{font-size:17px;}
+  .about-card-body{font-size:13.5px;}
+  .about-card-footer{gap:0;}
+  .about-stat{padding:0 14px;}
+  .about-stat-n{font-size:24px;}
+  .about-stat-l{font-size:10px;}
+  .about-stat-sep{height:36px;}
+
+  /* 3 value cards — single column on mobile */
+  .about-grid{
+    grid-template-columns:1fr;
+    gap:12px;
+    padding:0 14px;
+    margin-bottom:20px;
+  }
+  .about-grid-card{padding:18px 16px;}
+  .about-grid-ico{width:40px;height:40px;font-size:16px;margin-bottom:10px;}
+  .about-grid-card h3{font-size:14px;}
+
+  /* Live stats strip — scrollable row */
+  .about-stats-strip{padding:0 14px;margin-bottom:20px;}
+  .about-stats-strip-inner{
+    display:flex;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    border-radius:16px;
+    scrollbar-width:none;
+  }
+  .about-stats-strip-inner::-webkit-scrollbar{display:none;}
+  .ab-stat-item{
+    flex:0 0 auto;
+    min-width:90px;
+    padding:14px 10px;
+    scroll-snap-align:start;
+  }
+  .ab-stat-num{font-size:18px;}
+  .ab-stat-lbl{font-size:9px;}
+
+  /* Find Us section */
+  .about-section-wrap{padding:0 14px;margin-bottom:24px;}
+  .about-section-head{font-size:14px;margin-bottom:14px;}
+  .about-location-grid{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+  .about-map-wrap iframe{height:210px;border-radius:14px;}
+  .about-address{font-size:12px;}
+
+  /* Bus blocks */
+  .about-bus-block{padding:14px 14px;}
+  .about-bus-header{margin-bottom:10px;}
+  .about-bus-logo{height:22px;}
+  .about-bus-name{font-size:13px;}
+  .about-bus-lines{gap:7px;}
+  .bus-line-dyn{min-width:42px;height:28px;font-size:11px;padding:0 8px;border-radius:7px;}
+}
+
+@media(max-width:400px){
+  .about-card-footer{flex-wrap:wrap;gap:12px;justify-content:center;}
+  .about-stat-sep{display:none;}
+  .about-stat{padding:0 10px;}
+  .about-card-inner{padding:18px 14px;}
+  .about-hero-title{font-size:clamp(24px,10vw,36px);}
+  .about-grid{padding:0 10px;}
+  .about-card-wrap{padding:0 10px;}
+  .about-section-wrap{padding:0 10px;}
+  .ab-stat-item{min-width:80px;}
 }
 </style>
 
@@ -1126,7 +1395,7 @@ footer::after{
   <div class="ld-corner ld-corner-br">
     <svg viewBox="0 0 120 120"><path d="M10,110 L10,10 L110,10"/></svg>
   </div>
-  <div class="ld-logo-wrap">
+  <div class="ld-logo-wrap" id="ldLogoWrap1">
     <div class="ld-logo-svg">
       <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -1168,13 +1437,96 @@ footer::after{
     </div>
     <div class="ld-title-block">
       <div class="ld-site-name">English <span>Studies</span></div>
-      <div class="ld-site-sub">FLSHM &middot; GR1 &amp; GR2 Portal</div>
+      <div class="ld-site-sub">FLSHM &middot; Mohammedia</div>
     </div>
     <div class="ld-progress-wrap">
       <div class="ld-progress-track">
         <div class="ld-progress-fill"></div>
       </div>
       <div class="ld-status" id="ldStatus">Initializing...</div>
+    </div>
+  </div>
+
+  <!-- LOGO 2 — Formal university seal style -->
+  <div class="ld-logo-wrap ld2-wrap" id="ldLogoWrap2" style="display:none;">
+    <div class="ld2-seal-wrap">
+      <svg class="ld2-svg" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ld2Gold" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#c9a84c"/>
+            <stop offset="50%" stop-color="#f0d080"/>
+            <stop offset="100%" stop-color="#c9a84c"/>
+          </linearGradient>
+          <linearGradient id="ld2Navy" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#12163a"/>
+            <stop offset="100%" stop-color="#1e2a5e"/>
+          </linearGradient>
+        </defs>
+        <!-- Outer ring -->
+        <circle cx="80" cy="80" r="74" fill="none" stroke="url(#ld2Gold)" stroke-width="1.5" opacity=".6" class="ld2-ring-1"/>
+        <!-- Middle ring -->
+        <circle cx="80" cy="80" r="66" fill="none" stroke="rgba(201,168,76,.3)" stroke-width=".8" class="ld2-ring-2"/>
+        <!-- Inner ring -->
+        <circle cx="80" cy="80" r="58" fill="none" stroke="url(#ld2Gold)" stroke-width="1" opacity=".5" class="ld2-ring-3"/>
+        <!-- Top decorative dots on outer ring -->
+        <circle cx="80" cy="7" r="3" fill="#c9a84c" class="ld2-dot"/>
+        <circle cx="151" cy="80" r="2.5" fill="#c9a84c" opacity=".6" class="ld2-dot"/>
+        <circle cx="80" cy="153" r="2.5" fill="#c9a84c" opacity=".6" class="ld2-dot"/>
+        <circle cx="9" cy="80" r="2.5" fill="#c9a84c" opacity=".6" class="ld2-dot"/>
+        <!-- Diamond ornaments at cardinal points (inner) -->
+        <polygon points="80,19 83,23 80,27 77,23" fill="#c9a84c" opacity=".7" class="ld2-diamond"/>
+        <polygon points="133,80 137,83 133,86 129,83" fill="#c9a84c" opacity=".5" class="ld2-diamond"/>
+        <polygon points="80,133 83,137 80,141 77,137" fill="#c9a84c" opacity=".5" class="ld2-diamond"/>
+        <polygon points="27,80 23,83 27,86 31,83" fill="#c9a84c" opacity=".5" class="ld2-diamond"/>
+        <!-- Center shield -->
+        <path d="M80,36 L106,46 L106,76 Q106,100 80,112 Q54,100 54,76 L54,46 Z" fill="url(#ld2Navy)" stroke="url(#ld2Gold)" stroke-width="1.5" class="ld2-shield"/>
+        <!-- Shield inner border -->
+        <path d="M80,42 L100,50 L100,74 Q100,94 80,104 Q60,94 60,74 L60,50 Z" fill="none" stroke="rgba(201,168,76,.35)" stroke-width=".8"/>
+        <!-- Book icon inside shield -->
+        <g class="ld2-icon">
+          <!-- Book spine -->
+          <line x1="80" y1="56" x2="80" y2="88" stroke="#c9a84c" stroke-width="1.2" opacity=".8"/>
+          <!-- Left page -->
+          <path d="M80,58 Q68,60 66,72 Q68,84 80,86" fill="none" stroke="#f0d080" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Right page -->
+          <path d="M80,58 Q92,60 94,72 Q92,84 80,86" fill="none" stroke="#f0d080" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Lines on left page -->
+          <line x1="70" y1="65" x2="78" y2="64" stroke="#c9a84c" stroke-width=".8" opacity=".7" stroke-linecap="round"/>
+          <line x1="70" y1="69" x2="78" y2="68" stroke="#c9a84c" stroke-width=".8" opacity=".7" stroke-linecap="round"/>
+          <line x1="70" y1="73" x2="78" y2="72" stroke="#c9a84c" stroke-width=".8" opacity=".7" stroke-linecap="round"/>
+          <!-- Lines on right page -->
+          <line x1="82" y1="64" x2="90" y2="65" stroke="#c9a84c" stroke-width=".8" opacity=".7" stroke-linecap="round"/>
+          <line x1="82" y1="68" x2="90" y2="69" stroke="#c9a84c" stroke-width=".8" opacity=".7" stroke-linecap="round"/>
+          <line x1="82" y1="72" x2="90" y2="73" stroke="#c9a84c" stroke-width=".8" opacity=".7" stroke-linecap="round"/>
+          <!-- Star above book -->
+          <polygon points="80,50 81.5,54 85,54 82.5,56 83.5,60 80,58 76.5,60 77.5,56 75,54 78.5,54" fill="#c9a84c" opacity=".9" class="ld2-star"/>
+        </g>
+        <!-- Curved text top "FACULTÉ DES LETTRES" -->
+        <path id="ld2TopArc" d="M 30,80 A 50,50 0 0,1 130,80" fill="none"/>
+        <text class="ld2-arc-text">
+          <textPath href="#ld2TopArc" startOffset="50%" text-anchor="middle">FACULTÉ DES LETTRES</textPath>
+        </text>
+        <!-- Curved text bottom "FLSHM · MOHAMMEDIA" -->
+        <path id="ld2BotArc" d="M 25,88 A 56,56 0 0,0 135,88" fill="none"/>
+        <text class="ld2-arc-text-bot">
+          <textPath href="#ld2BotArc" startOffset="50%" text-anchor="middle">FLSHM · MOHAMMEDIA</textPath>
+        </text>
+        <!-- Horizontal rule lines -->
+        <line x1="35" y1="120" x2="62" y2="120" stroke="url(#ld2Gold)" stroke-width=".8" opacity=".7" class="ld2-rule"/>
+        <line x1="98" y1="120" x2="125" y2="120" stroke="url(#ld2Gold)" stroke-width=".8" opacity=".7" class="ld2-rule"/>
+        <!-- ES monogram bottom -->
+        <text x="80" y="125" text-anchor="middle" font-size="9" font-weight="700" letter-spacing="4" fill="#c9a84c" opacity=".8" class="ld2-es-text">• E S •</text>
+      </svg>
+    </div>
+    <div class="ld-title-block ld2-title">
+      <div class="ld2-main-title">English <em>Studies</em></div>
+      <div class="ld2-sub-title">Department of English — FLSHM</div>
+    </div>
+    <div class="ld-progress-wrap">
+      <div class="ld-progress-track">
+        <div class="ld-progress-fill ld2-progress-fill"></div>
+      </div>
+      <div class="ld-status" id="ldStatus2">Loading...</div>
     </div>
   </div>
 </div>
@@ -1491,6 +1843,7 @@ footer::after{
     <div class="admin-tab" onclick="switchAdminTab('notifs-admin',this);renderAdminNotifs();">🔔 Notifications</div>
     <div class="admin-tab" onclick="switchAdminTab('about-admin',this);renderAdminAbout();">ℹ️ About</div>
     <div class="admin-tab" onclick="switchAdminTab('stats-admin',this);renderAdminStats();">📊 Stats</div>
+    <div class="admin-tab maintenance-tab" onclick="switchAdminTab('maintenance-admin',this);renderAdminMaintenance();">🔧 Maintenance</div>
   </div>
   <div class="admin-section-content active" id="admin-announcements">
     <button class="add-btn" onclick="openModal('addAnnModal')"><i class="fas fa-plus"></i> New Announcement</button>
@@ -1609,9 +1962,13 @@ footer::after{
 
   <!-- STATS ADMIN -->
   <div class="admin-section-content" id="admin-stats-admin">
-    <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">📊 Vue d'ensemble — Statistiques</h4>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">Résumé des vues, likes et commentaires de toutes vos publications.</p>
-    <div id="adminStatsContent"><p style="color:var(--muted);font-size:13px;"><i class="fas fa-spinner fa-spin"></i> Chargement...</p></div>
+    <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">📊 Overview — Statistics</h4>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">Total views, likes and comments across all your publications.</p>
+    <div id="adminStatsContent"><p style="color:var(--muted);font-size:13px;"><i class="fas fa-spinner fa-spin"></i> Loading...</p></div>
+  </div>
+  <!-- MAINTENANCE ADMIN -->
+  <div class="admin-section-content" id="admin-maintenance-admin">
+    <div id="adminMaintenanceContent"></div>
   </div>
 </div>
 
@@ -1918,6 +2275,8 @@ let siteSettings = {
   pageOrder: ['home','modules','exams','timetable','makeup','announcements','sondage','space','about'],
   version: 'v2.0.1',
   madeBy: 'Mourad Projects',
+  maintenanceMode: false,
+  loadingLogoStyle: 'logo1',
   footerText: '© 2026 English Studies Portal · FLSHM Mohammedia',
   sondageVisible: true,
   presTitle: '',
@@ -2012,6 +2371,8 @@ onAuthStateChanged(auth, user => {
       document.getElementById('adminPanel').classList.add('open');
       renderAdminPanel();
       document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'});
+      applyMaintenanceMode();
+      setupMntFeedbackListener();
     } else {
       // Not an admin email — sign out immediately
       signOut(auth);
@@ -2079,6 +2440,10 @@ function applySettingsData(d){
   siteSettings.pageOrder     = d.pageOrder||['home','modules','exams','timetable','makeup','announcements','sondage','space','about'];
   siteSettings.version       = d.version||'v2.0.1';
   siteSettings.madeBy        = d.madeBy||'Mourad Projects';
+  siteSettings.maintenanceMode = d.maintenanceMode||false;
+  siteSettings.loadingLogoStyle = d.loadingLogoStyle||localStorage.getItem('ldLogoStyle')||'logo1';
+  localStorage.setItem('ldLogoStyle', siteSettings.loadingLogoStyle);
+  applyMaintenanceMode();
   siteSettings.footerText    = d.footerText||'© 2026 English Studies Portal · FLSHM Mohammedia';
   siteSettings.sondageVisible= d.sondageVisible!==false;
   siteSettings.presTitle     = d.presTitle||'';
@@ -4499,6 +4864,69 @@ function renderAdminSettings(){
       </div>
     </div>
 
+    <!-- LOADING LOGO STYLE -->
+    <div style="margin-bottom:24px;border-top:2px solid var(--border);padding-top:20px;">
+      <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">🎬 Loading Screen — Logo Style</h4>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:16px;">Choose which animated logo appears when the site loads. Takes effect on the next page refresh.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+
+        <!-- Logo 1 -->
+        <div style="border:2px solid ${siteSettings.loadingLogoStyle==='logo1'?'var(--gold)':'var(--border)'};border-radius:16px;overflow:hidden;cursor:pointer;transition:border-color .2s,box-shadow .2s;box-shadow:${siteSettings.loadingLogoStyle==='logo1'?'0 0 0 3px rgba(255,107,53,.15)':'none'};" onclick="switchLoadingLogo('logo1')">
+          <div style="background:linear-gradient(140deg,#12163a,#1e2a5e);padding:20px;display:flex;flex-direction:column;align-items:center;gap:10px;">
+            <svg viewBox="0 0 140 140" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="70" cy="70" r="62" fill="none" stroke="#ff6b35" stroke-width="1.2" stroke-dasharray="8 6" opacity=".5"/>
+              <circle cx="70" cy="70" r="50" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1" stroke-dasharray="4 8"/>
+              <circle cx="70" cy="70" r="38" fill="none" stroke="rgba(255,107,53,.25)" stroke-width="1.5"/>
+              <circle cx="70" cy="8" r="4" fill="#ff6b35" opacity=".8"/>
+              <circle cx="132" cy="70" r="3" fill="#00b4a0" opacity=".6"/>
+              <rect x="50" y="50" width="40" height="40" rx="20" fill="linear-gradient(135deg,#ff6b35,#00b4a0)" style="fill:url(#gOuter)" opacity=".15"/>
+              <text x="70" y="76" text-anchor="middle" font-size="16" font-weight="800" fill="white">ES</text>
+            </svg>
+            <div style="text-align:center;">
+              <div style="color:white;font-size:13px;font-weight:700;">English <span style="color:#ff6b35;">Studies</span></div>
+              <div style="color:rgba(255,255,255,.4);font-size:10px;letter-spacing:1.5px;margin-top:2px;">FLSHM · MOHAMMEDIA</div>
+            </div>
+          </div>
+          <div style="padding:10px 14px;background:white;display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--navy);">Logo 1 — Dynamic</div>
+              <div style="font-size:10px;color:var(--muted);">Spinning rings · Orange & Teal</div>
+            </div>
+            ${siteSettings.loadingLogoStyle==='logo1'?'<span style="background:var(--gold);color:white;border-radius:20px;padding:3px 10px;font-size:10px;font-weight:800;">Active</span>':'<span style="background:#f1f5f9;color:var(--muted);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:600;">Select</span>'}
+          </div>
+        </div>
+
+        <!-- Logo 2 -->
+        <div style="border:2px solid ${siteSettings.loadingLogoStyle==='logo2'?'var(--gold)':'var(--border)'};border-radius:16px;overflow:hidden;cursor:pointer;transition:border-color .2s,box-shadow .2s;box-shadow:${siteSettings.loadingLogoStyle==='logo2'?'0 0 0 3px rgba(255,107,53,.15)':'none'};" onclick="switchLoadingLogo('logo2')">
+          <div style="background:linear-gradient(140deg,#0a1428,#1a2a4a);padding:20px;display:flex;flex-direction:column;align-items:center;gap:10px;">
+            <svg viewBox="0 0 160 160" width="80" height="80" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="80" cy="80" r="74" fill="none" stroke="#c9a84c" stroke-width="1.5" opacity=".6"/>
+              <circle cx="80" cy="80" r="66" fill="none" stroke="rgba(201,168,76,.3)" stroke-width=".8"/>
+              <circle cx="80" cy="80" r="58" fill="none" stroke="#c9a84c" stroke-width="1" opacity=".4"/>
+              <path d="M80,36 L106,46 L106,76 Q106,100 80,112 Q54,100 54,76 L54,46 Z" fill="#12163a" stroke="#c9a84c" stroke-width="1.5" opacity=".9"/>
+              <line x1="80" y1="58" x2="80" y2="88" stroke="#c9a84c" stroke-width="1.2" opacity=".8"/>
+              <path d="M80,60 Q69,62 67,72 Q69,83 80,85" fill="none" stroke="#f0d080" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M80,60 Q91,62 93,72 Q91,83 80,85" fill="none" stroke="#f0d080" stroke-width="1.5" stroke-linecap="round"/>
+              <polygon points="80,52 81.5,56 85,56 82.5,58 83.5,62 80,60 76.5,62 77.5,58 75,56 78.5,56" fill="#c9a84c" opacity=".9"/>
+              <circle cx="80" cy="7" r="3" fill="#c9a84c"/>
+            </svg>
+            <div style="text-align:center;">
+              <div style="color:white;font-size:13px;font-weight:700;font-family:Georgia,serif;font-style:italic;">English <span style="color:#c9a84c;">Studies</span></div>
+              <div style="color:rgba(201,168,76,.6);font-size:10px;letter-spacing:2px;margin-top:2px;">DEPT. OF ENGLISH — FLSHM</div>
+            </div>
+          </div>
+          <div style="padding:10px 14px;background:white;display:flex;align-items:center;justify-content:space-between;">
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--navy);">Logo 2 — Formal Seal</div>
+              <div style="font-size:10px;color:var(--muted);">University crest · Navy & Gold</div>
+            </div>
+            ${siteSettings.loadingLogoStyle==='logo2'?'<span style="background:var(--gold);color:white;border-radius:20px;padding:3px 10px;font-size:10px;font-weight:800;">Active</span>':'<span style="background:#f1f5f9;color:var(--muted);border-radius:20px;padding:3px 10px;font-size:10px;font-weight:600;">Select</span>'}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- FOOTER / BRANDING — full width -->
     <div style="margin-top:28px;border-top:2px solid var(--border);padding-top:20px;">
       <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">🎨 Footer &amp; Branding</h4>
@@ -4784,6 +5212,7 @@ window.switchAdminTab=function(tab,el){
   if(tab==='sondage-admin'){ renderAdminSondage(); }
   if(tab==='about-admin'){ renderAdminAbout(); }
   if(tab==='stats-admin'){ renderAdminStats(); }
+  if(tab==='maintenance-admin'){ renderAdminMaintenance(); }
 };
 
 function renderAdminAnn(){
@@ -5173,7 +5602,164 @@ window.openModal=function(id){document.getElementById(id).classList.add('open');
 window.closeModal=function(id){document.getElementById(id).classList.remove('open');};
 document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open');}));
 
-// ══ SONDAGE SYSTEM ══
+// ══ LOADING LOGO SWITCHER ══
+(function applyLogoEarly(){
+  const style = localStorage.getItem('ldLogoStyle')||'logo1';
+  const l1 = document.getElementById('ldLogoWrap1');
+  const l2 = document.getElementById('ldLogoWrap2');
+  if(!l1||!l2) return;
+  if(style==='logo2'){ l1.style.display='none'; l2.style.display='flex'; }
+  else { l1.style.display='flex'; l2.style.display='none'; }
+})();
+
+window.switchLoadingLogo = async function(style){
+  siteSettings.loadingLogoStyle = style;
+  localStorage.setItem('ldLogoStyle', style);
+  await saveSettings();
+  showToast('✅ Logo updated — visible on next page load');
+  renderAdminSettings();
+};
+function applyMaintenanceMode(){
+  const on = siteSettings.maintenanceMode;
+  const overlay = document.getElementById('maintenanceOverlay');
+  if(!overlay) return;
+  if(on && !adminUnlocked){
+    overlay.style.display = 'flex';
+    overlay.style.flexDirection = 'column';
+    document.body.style.overflow = 'hidden';
+    // Mirror site logo/name
+    const nameEl = document.getElementById('headerSiteName');
+    const subEl  = document.getElementById('headerSiteSub');
+    const icoEl  = document.getElementById('logoIcon');
+    if(nameEl) { const m=document.getElementById('mntSiteName'); if(m) m.textContent=nameEl.textContent; }
+    if(subEl)  { const m=document.getElementById('mntSiteSub');  if(m) m.textContent=subEl.textContent; }
+    if(icoEl)  { const m=document.getElementById('mntLogoIcon'); if(m) m.className=icoEl.className; }
+  } else {
+    overlay.style.display = 'none';
+    document.body.style.overflow = '';
+    // Close feedback panel if open
+    closeMntFeedback();
+  }
+  const bypass = document.getElementById('mntAdminBypass');
+  if(bypass) bypass.style.display = (on && adminUnlocked) ? 'block' : 'none';
+}
+
+window.toggleMntFeedback = function(){
+  const panel = document.getElementById('mntFeedbackPanel');
+  const backdrop = document.getElementById('mntFeedbackBackdrop');
+  if(!panel) return;
+  const open = panel.classList.contains('open');
+  if(open){ closeMntFeedback(); } else {
+    panel.classList.add('open');
+    backdrop.classList.add('open');
+  }
+};
+function closeMntFeedback(){
+  const panel = document.getElementById('mntFeedbackPanel');
+  const backdrop = document.getElementById('mntFeedbackBackdrop');
+  if(panel) panel.classList.remove('open');
+  if(backdrop) backdrop.classList.remove('open');
+}
+
+window.openMntAdminLogin = function(){
+  // Show the login modal from behind maintenance overlay
+  const loginModal = document.getElementById('loginModal');
+  if(loginModal){
+    loginModal.style.zIndex = '10010'; // above maintenance overlay
+    loginModal.classList.add('open');
+  }
+};
+
+window.toggleMaintenanceMode = async function(val){
+  siteSettings.maintenanceMode = val;
+  await saveSettings();
+  applyMaintenanceMode();
+  if(typeof renderAdminMaintenance === 'function') renderAdminMaintenance();
+  showToast(val ? '🔧 Maintenance mode is now ON' : '✅ Site is back online!');
+};
+
+window.submitMntFeedback = async function(){
+  const text = (document.getElementById('mntFeedbackText')||{}).value||'';
+  const name = (document.getElementById('mntFeedbackName')||{}).value||'Anonymous';
+  const msgEl = document.getElementById('mntFeedbackMsg');
+  if(!text.trim()){ if(msgEl) msgEl.innerHTML='<span style="color:#f87171;">Please write something first!</span>'; return; }
+  try{
+    await addDoc(collection(db,'maintenanceFeedback'),{
+      text:text.trim(), name:name.trim()||'Anonymous',
+      ts:Date.now(), date:new Date().toLocaleDateString('en-GB')
+    });
+    if(msgEl) msgEl.innerHTML='<span style="color:#34d399;"><i class="fas fa-check-circle"></i> Message sent! We\'ll read it soon. 🙏</span>';
+    if(document.getElementById('mntFeedbackText')) document.getElementById('mntFeedbackText').value='';
+    if(document.getElementById('mntFeedbackName')) document.getElementById('mntFeedbackName').value='';
+  } catch(e){ if(msgEl) msgEl.innerHTML='<span style="color:#f87171;">Failed to send. Please try again.</span>'; }
+};
+
+// Feedback listener
+let mntFeedbackList = [];
+function setupMntFeedbackListener(){
+  onSnapshot(collection(db,'maintenanceFeedback'), snap=>{
+    mntFeedbackList = snap.docs.map(d=>({id:d.id,...d.data()})).sort((a,b)=>b.ts-a.ts);
+    if(document.getElementById('admin-maintenance-admin')?.classList.contains('active')) renderAdminMaintenance();
+  });
+}
+
+window.renderAdminMaintenance = function(){
+  const el = document.getElementById('adminMaintenanceContent');
+  if(!el) return;
+  const on = siteSettings.maintenanceMode;
+  const feedbackHtml = mntFeedbackList.length
+    ? mntFeedbackList.map(f=>`
+      <div style="background:white;border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;box-shadow:0 2px 8px rgba(0,0,0,.04);">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;">
+          <div style="flex:1;">
+            <div style="font-size:13px;color:var(--text);line-height:1.6;margin-bottom:6px;">${f.text.replace(/</g,'&lt;').replace(/>/g,'&gt;')}</div>
+            <div style="font-size:11px;color:var(--muted);">— ${f.name} &nbsp;·&nbsp; ${f.date}</div>
+          </div>
+          <button onclick="deleteMntFeedback('${f.id}')" style="background:#fee2e2;color:#991b1b;border:none;border-radius:8px;padding:4px 10px;cursor:pointer;font-size:11px;flex-shrink:0;"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>`).join('')
+    : '<p style="color:var(--muted);font-size:13px;text-align:center;padding:24px 0;">No feedback messages yet.</p>';
+
+  el.innerHTML = `
+    <!-- BIG TOGGLE -->
+    <div style="background:${on?'linear-gradient(135deg,#1e0a0a,#3b0000)':'linear-gradient(135deg,#0a1e0a,#003b00)'};border:2px solid ${on?'#ef4444':'#22c55e'};border-radius:20px;padding:28px 24px;text-align:center;margin-bottom:22px;position:relative;overflow:hidden;">
+      <div style="position:absolute;inset:0;background:${on?'radial-gradient(circle at 50% 0%,rgba(239,68,68,.15),transparent 70%)':'radial-gradient(circle at 50% 0%,rgba(34,197,94,.12),transparent 70%)'}"></div>
+      <div style="position:relative;z-index:1;">
+        <div style="font-size:42px;margin-bottom:8px;">${on?'🔧':'✅'}</div>
+        <div style="font-size:18px;font-weight:800;color:${on?'#ef4444':'#22c55e'};font-family:var(--theme-font-display);margin-bottom:4px;">${on?'Maintenance Mode — ACTIVE':'Site is LIVE'}</div>
+        <div style="font-size:12px;color:rgba(255,255,255,.5);margin-bottom:20px;">${on?'Visitors see the maintenance page right now.':'Everything is running normally.'}</div>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <button onclick="toggleMaintenanceMode(${!on})" style="background:${on?'#22c55e':'#ef4444'};color:white;border:none;border-radius:12px;padding:11px 28px;cursor:pointer;font-size:14px;font-weight:800;font-family:inherit;box-shadow:0 4px 18px ${on?'rgba(34,197,94,.4)':'rgba(239,68,68,.4)'};transition:transform .2s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+            ${on?'<i class="fas fa-circle-check"></i> Bring Site Back Online':'<i class="fas fa-wrench"></i> Enable Maintenance Mode'}
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- FEEDBACK MESSAGES -->
+    <div style="background:#f8fafc;border:1.5px solid var(--border);border-radius:14px;padding:18px 20px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+        <h5 style="font-size:13px;font-weight:800;color:var(--navy);display:flex;align-items:center;gap:8px;">
+          <i class="fas fa-comments" style="color:#6366f1;"></i> Visitor Feedback
+          <span style="background:#6366f1;color:white;border-radius:20px;padding:1px 9px;font-size:11px;">${mntFeedbackList.length}</span>
+        </h5>
+        ${mntFeedbackList.length?`<button onclick="clearAllMntFeedback()" style="background:#fee2e2;color:#991b1b;border:none;border-radius:8px;padding:5px 12px;cursor:pointer;font-size:11px;font-weight:700;"><i class="fas fa-trash"></i> Clear All</button>`:''}
+      </div>
+      <div id="mntFeedbackAdminList">${feedbackHtml}</div>
+    </div>`;
+};
+
+window.deleteMntFeedback = async function(id){
+  if(!confirm('Delete this message?')) return;
+  await deleteDoc(doc(db,'maintenanceFeedback',id));
+};
+window.clearAllMntFeedback = async function(){
+  if(!confirm('Delete all feedback messages?')) return;
+  const batch = mntFeedbackList.map(f=>deleteDoc(doc(db,'maintenanceFeedback',f.id)));
+  await Promise.all(batch);
+};
+
+// Hook into switchAdminTab
+
 
 let presStudents=[], subStudents=[];
 let presListener=null, subListener=null;
@@ -5648,5 +6234,145 @@ window.renderAdminStats = function(){
 
 
 </script>
+<!-- ══ MAINTENANCE OVERLAY ══ -->
+<div id="maintenanceOverlay" style="display:none;">
+
+  <!-- SITE HEADER (mirrored) -->
+  <div class="mnt-header">
+    <div class="mnt-header-inner">
+      <div class="logo" style="cursor:default;">
+        <div class="logo-icon"><i id="mntLogoIcon" class="fas fa-graduation-cap"></i></div>
+        <div class="logo-text">
+          <div class="site-name" id="mntSiteName">English Studies</div>
+          <div class="site-sub" id="mntSiteSub">FLSHM · Mohammedia</div>
+        </div>
+      </div>
+      <div class="mnt-status-badge"><span class="mnt-blink-dot"></span> Under Maintenance</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="mnt-body">
+
+    <!-- ROBOT + MESSAGE CARD -->
+    <div class="mnt-card">
+      <div class="mnt-card-top-bar"></div>
+      <div class="mnt-card-inner">
+
+        <!-- Robot -->
+        <div class="mnt-robot-wrap">
+          <svg class="mnt-robot" viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Antenna -->
+            <rect x="87" y="4" width="6" height="26" rx="3" fill="var(--gold)" class="mnt-antenna-shaft"/>
+            <circle cx="90" cy="4" r="7" fill="var(--gold)" class="mnt-antenna-ball"/>
+            <circle cx="90" cy="4" r="3.5" fill="white" opacity=".7"/>
+            <!-- Head -->
+            <rect x="38" y="30" width="104" height="64" rx="20" fill="white" stroke="var(--navy)" stroke-width="2"/>
+            <!-- Visor -->
+            <rect x="48" y="38" width="84" height="42" rx="13" fill="var(--cream, #f8f6f2)" stroke="var(--border,#e2e8f2)" stroke-width="1.5"/>
+            <!-- Left eye (OK) -->
+            <rect x="55" y="45" width="30" height="20" rx="6" fill="white" stroke="var(--navy)" stroke-width="1.5"/>
+            <circle cx="70" cy="55" r="7" fill="var(--sky)"/>
+            <circle cx="70" cy="55" r="3.5" fill="var(--navy)"/>
+            <circle cx="72" cy="52" r="1.5" fill="white"/>
+            <!-- Right eye (X broken) -->
+            <rect x="95" y="45" width="30" height="20" rx="6" fill="white" stroke="var(--navy)" stroke-width="1.5"/>
+            <line x1="100" y1="49" x2="120" y2="61" stroke="var(--gold)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="120" y1="49" x2="100" y2="61" stroke="var(--gold)" stroke-width="3" stroke-linecap="round"/>
+            <!-- Sad mouth -->
+            <path d="M60 78 Q90 70 120 78" stroke="var(--navy)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- Sweat drop -->
+            <ellipse cx="130" cy="44" rx="4" ry="5.5" fill="var(--sky)" opacity=".7" class="mnt-sweat"/>
+            <path d="M130 38 L127 42 A4 4 0 0 0 133 42 Z" fill="var(--sky)" opacity=".7" class="mnt-sweat"/>
+            <!-- Neck -->
+            <rect x="81" y="94" width="18" height="10" rx="4" fill="white" stroke="var(--navy)" stroke-width="1.5"/>
+            <!-- Body -->
+            <rect x="28" y="104" width="124" height="68" rx="18" fill="white" stroke="var(--navy)" stroke-width="2"/>
+            <!-- Chest panel -->
+            <rect x="44" y="114" width="92" height="46" rx="12" fill="var(--cream,#f8f6f2)" stroke="var(--border,#e2e8f2)" stroke-width="1.5"/>
+            <!-- Status lights -->
+            <circle cx="66" cy="130" r="5.5" fill="#ef4444" class="mnt-light-r"/>
+            <circle cx="90" cy="130" r="5.5" fill="var(--gold)" class="mnt-light-y"/>
+            <circle cx="114" cy="130" r="5.5" fill="var(--sky)" class="mnt-light-g"/>
+            <!-- Error bar -->
+            <rect x="56" y="142" width="68" height="9" rx="4.5" fill="var(--navy)" opacity=".08"/>
+            <rect x="56" y="142" width="32" height="9" rx="4.5" fill="var(--gold)" opacity=".6" class="mnt-errbar"/>
+            <!-- Bolt sticker -->
+            <text x="120" y="120" font-size="12" fill="var(--gold)" class="mnt-bolt">⚡</text>
+            <!-- Left arm (drooping) -->
+            <rect x="4" y="108" width="22" height="46" rx="11" fill="white" stroke="var(--navy)" stroke-width="1.8" transform="rotate(18,15,131)"/>
+            <rect x="-2" y="148" width="20" height="12" rx="6" fill="var(--navy)" opacity=".12" transform="rotate(18,8,154)"/>
+            <!-- Right arm (up confused) -->
+            <rect x="154" y="100" width="22" height="46" rx="11" fill="white" stroke="var(--navy)" stroke-width="1.8" transform="rotate(-32,165,123)"/>
+            <circle cx="172" cy="84" r="8" fill="white" stroke="var(--navy)" stroke-width="1.8"/>
+            <text x="168" y="88" font-size="9" fill="var(--gold)">?</text>
+            <!-- Legs -->
+            <rect x="58" y="172" width="26" height="22" rx="9" fill="white" stroke="var(--navy)" stroke-width="1.8"/>
+            <rect x="96" y="172" width="26" height="22" rx="9" fill="white" stroke="var(--navy)" stroke-width="1.8"/>
+            <!-- Feet -->
+            <rect x="52" y="188" width="34" height="10" rx="5" fill="var(--navy)" opacity=".15"/>
+            <rect x="94" y="188" width="34" height="10" rx="5" fill="var(--navy)" opacity=".15"/>
+            <!-- Crack on body -->
+            <path d="M88 109 L84 120 L91 124 L87 135" stroke="var(--gold)" stroke-width="1.5" fill="none" stroke-linecap="round" opacity=".55"/>
+          </svg>
+        </div>
+
+        <!-- Text -->
+        <div class="mnt-eyebrow"><span class="mnt-blink-dot"></span> Maintenance Mode</div>
+        <h1 class="mnt-title">We're sorry,<br>we'll be <em>back soon.</em></h1>
+        <p class="mnt-sub">Our site is currently undergoing maintenance. We're working hard to make things even better for you.</p>
+
+        <!-- Progress -->
+        <div class="mnt-progress-wrap">
+          <div class="mnt-progress-track"><div class="mnt-progress-fill"></div></div>
+          <div class="mnt-progress-labels">
+            <span>Working on it...</span>
+            <span class="mnt-progress-pct">68%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="mnt-footer">
+      Made with ❤️ by <span class="mnt-brand">Mourad Projects</span>
+      <!-- Hidden admin trigger — very subtle -->
+      <button class="mnt-admin-trigger" onclick="openMntAdminLogin()" title="Admin access">·</button>
+    </div>
+  </div>
+
+  <!-- FEEDBACK FAB -->
+  <button class="mnt-fab" id="mntFab" onclick="toggleMntFeedback()">
+    <span class="mnt-fab-icon"><i class="fas fa-comment-dots"></i></span>
+    <span class="mnt-fab-label">Feedback</span>
+  </button>
+
+  <!-- FEEDBACK PANEL (slide-up) -->
+  <div class="mnt-feedback-panel" id="mntFeedbackPanel">
+    <div class="mnt-feedback-handle"></div>
+    <div class="mnt-fp-header">
+      <div>
+        <div class="mnt-fp-eyebrow">Leave a message</div>
+        <h3 class="mnt-fp-title">We'd love to hear from you</h3>
+      </div>
+      <button class="mnt-fp-close" onclick="toggleMntFeedback()"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="mnt-fp-body">
+      <label class="mnt-fp-label">Your name <span style="font-weight:400;opacity:.6;">(optional)</span></label>
+      <input type="text" id="mntFeedbackName" placeholder="e.g. Youssef" class="mnt-fp-input">
+      <label class="mnt-fp-label" style="margin-top:12px;">Message</label>
+      <textarea id="mntFeedbackText" placeholder="Your thoughts, questions or feedback..." class="mnt-fp-textarea" maxlength="500"></textarea>
+      <div id="mntFeedbackMsg" style="font-size:12px;min-height:18px;margin-top:6px;"></div>
+      <button class="mnt-fp-btn" onclick="submitMntFeedback()"><i class="fas fa-paper-plane"></i> Send Message</button>
+    </div>
+  </div>
+  <div class="mnt-feedback-backdrop" id="mntFeedbackBackdrop" onclick="toggleMntFeedback()"></div>
+
+  <!-- Admin bypass button (shown only when admin is logged in during maintenance) -->
+  <button id="mntAdminBypass" onclick="toggleMaintenanceMode(false)" style="display:none;position:fixed;top:80px;right:20px;background:var(--gold);color:white;border:none;border-radius:12px;padding:9px 18px;cursor:pointer;font-size:13px;font-weight:700;box-shadow:0 4px 20px rgba(255,107,53,.45);z-index:10001;font-family:inherit;">
+    <i class="fas fa-circle-check"></i> Exit Maintenance
+  </button>
+</div>
+
 </body>
 </html>
