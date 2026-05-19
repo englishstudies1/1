@@ -750,9 +750,9 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 .post-time{font-size:11px;color:var(--muted);font-weight:600;margin-left:auto;flex-shrink:0;}
 .post-tag{font-size:10px;padding:3px 10px;border-radius:var(--r-pill);font-weight:700;letter-spacing:.3px;}
 .post-thread-line{
-  position:absolute;left:38px;top:72px;bottom:auto;height:calc(100% - 130px);
+  position:absolute;left:38px;top:72px;bottom:auto;height:0;
   width:2px;background:var(--border);border-radius:2px;
-  pointer-events:none;max-height:80px;
+  pointer-events:none;
 }
 .post-content{margin-left:54px;margin-bottom:14px;}
 .post-title{font-weight:800;font-size:15px;color:var(--navy);margin-bottom:6px;line-height:1.4;}
@@ -892,6 +892,7 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 .lnk{background:linear-gradient(135deg,#f1f5f9,#cbd5e1);color:#475569;}
 .alsa{background:white;color:#ff8c00;border:1.5px solid #ffd8a8;}
 .foughal{background:white;color:#1a5276;border:1.5px solid #90caf9;}
+.oncf{background:white;color:#c8102e;border:1.5px solid #fca5a5;}
 .info-alert{
   background:linear-gradient(135deg,#fff8f5,#fff0e8);
   border:1px solid #ffd8c2;border-radius:var(--r);padding:14px 18px;
@@ -2325,7 +2326,9 @@ let siteSettings = {
     { id:'casabus', name:'Casabus', logoUrl:'https://www.casabus.ma/media/c3nbibgi/logo-casabus.png', nameColor:'#e85b1a',
       lines:[{label:'L800',color:'#1e40af',desc:'Casablanca → Mohammedia'},{label:'L900',color:'#7c3aed',desc:''},{label:'L904',color:'#0e8a70',desc:''},{label:'L905',color:'#c2410c',desc:''},{label:'L907',color:'#be185d',desc:''},{label:'L32D',color:'#0f6d56',desc:''}]},
     { id:'foughal', name:'Foughal Bus', logoUrl:'https://foughalbus.ma/wp-content/uploads/2024/07/Groupe-236.svg', nameColor:'#1a5276',
-      lines:[{label:'L01',color:'#1a5276',desc:''},{label:'L02',color:'#117a65',desc:''},{label:'L03',color:'#922b21',desc:''},{label:'L08',color:'#6c3483',desc:''}]}
+      lines:[{label:'L01',color:'#1a5276',desc:''},{label:'L02',color:'#117a65',desc:''},{label:'L03',color:'#922b21',desc:''},{label:'L08',color:'#6c3483',desc:''}]},
+    { id:'oncf', name:'ONCF', logoUrl:'https://play-lh.googleusercontent.com/eNp0dZDQcNrXQRkqqIF47jlY2x1XOd004CoWJTDfd0VTneU1Gu_RN3ceils94EuSkdA', nameColor:'#c8102e',
+      lines:[{label:'Casa Port',color:'#c8102e',desc:'Casa Port → Mohammedia'},{label:'Casa Voy.',color:'#9b0000',desc:'Casa Voyageurs → Mohammedia'}]}
   ],
 };
 
@@ -2476,7 +2479,9 @@ function applySettingsData(d){
     { id:'casabus', name:'Casabus', logoUrl:'https://www.casabus.ma/media/c3nbibgi/logo-casabus.png', nameColor:'#e85b1a',
       lines:[{label:'L800',color:'#1e40af',desc:'Casablanca → Mohammedia'},{label:'L900',color:'#7c3aed',desc:''},{label:'L904',color:'#0e8a70',desc:''},{label:'L905',color:'#c2410c',desc:''},{label:'L907',color:'#be185d',desc:''},{label:'L32D',color:'#0f6d56',desc:''}]},
     { id:'foughal', name:'Foughal Bus', logoUrl:'https://foughalbus.ma/wp-content/uploads/2024/07/Groupe-236.svg', nameColor:'#1a5276',
-      lines:[{label:'L01',color:'#1a5276',desc:''},{label:'L02',color:'#117a65',desc:''},{label:'L03',color:'#922b21',desc:''},{label:'L08',color:'#6c3483',desc:''}]}
+      lines:[{label:'L01',color:'#1a5276',desc:''},{label:'L02',color:'#117a65',desc:''},{label:'L03',color:'#922b21',desc:''},{label:'L08',color:'#6c3483',desc:''}]},
+    { id:'oncf', name:'ONCF', logoUrl:'https://play-lh.googleusercontent.com/eNp0dZDQcNrXQRkqqIF47jlY2x1XOd004CoWJTDfd0VTneU1Gu_RN3ceils94EuSkdA', nameColor:'#c8102e',
+      lines:[{label:'Casa Port',color:'#c8102e',desc:'Casa Port → Mohammedia'},{label:'Casa Voy.',color:'#9b0000',desc:'Casa Voyageurs → Mohammedia'}]}
   ];
   // Header branding
   siteSettings.logoIcon      = d.logoIcon||'fas fa-graduation-cap';
@@ -2764,16 +2769,33 @@ function applyAboutContent(){
   const locEl = document.getElementById('aboutLocationSection');
   if(locEl){
     const ops = s.busOperators||[];
-    const busBlocksHtml = ops.map(op=>`
+    const FALLBACK_LOGOS = {
+      oncf:    'https://play-lh.googleusercontent.com/eNp0dZDQcNrXQRkqqIF47jlY2x1XOd004CoWJTDfd0VTneU1Gu_RN3ceils94EuSkdA',
+      casabus: 'https://www.casabus.ma/media/c3nbibgi/logo-casabus.png',
+      foughal: 'https://foughalbus.ma/wp-content/uploads/2024/07/Groupe-236.svg'
+    };
+    function getOpLogo(op){
+      if(op.logoUrl) return op.logoUrl;
+      if(op.id && FALLBACK_LOGOS[op.id]) return FALLBACK_LOGOS[op.id];
+      const n=(op.name||'').toLowerCase();
+      if(n.includes('oncf')) return FALLBACK_LOGOS.oncf;
+      if(n.includes('casabus')||n.includes('alsa')) return FALLBACK_LOGOS.casabus;
+      if(n.includes('foughal')) return FALLBACK_LOGOS.foughal;
+      return '';
+    }
+    const busBlocksHtml = ops.map(op=>{
+      const logoUrl = getOpLogo(op);
+      return `
       <div class="about-bus-block" style="margin-bottom:14px;">
         <div class="about-bus-header">
-          ${op.logoUrl ? `<img src="${op.logoUrl}" alt="${op.name}" class="about-bus-logo" onerror="this.style.display='none'">` : ''}
+          ${logoUrl ? `<img src="${logoUrl}" alt="${op.name}" class="about-bus-logo" onerror="this.style.display='none'">` : ''}
           <span class="about-bus-name" style="color:${op.nameColor||'#e85b1a'};">${op.name}</span>
         </div>
         <div class="about-bus-lines">
           ${(op.lines||[]).map(l=>`<span class="bus-line-dyn" style="background:${l.color};box-shadow:0 3px 10px ${l.color}55;" title="${l.desc||l.label}">${l.label}</span>`).join('')}
         </div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
     locEl.innerHTML = `
       <div class="about-section-head"><i class="fas fa-map-marker-alt"></i> <span id="aboutFindUsTitle">${s.aboutFindUsTitle||'Find Us'}</span></div>
       <div class="about-location-grid">
@@ -3972,7 +3994,7 @@ function annHTML(a){
       <button class="post-action-btn" onclick="toggleComments('${a.id}',this)" title="Comment">
         <i class="far fa-comment"></i>
       </button>
-      <button class="post-action-btn" title="Share" onclick="sharePost('${a.id}','${escapeHtml((a.title||'').replace(/'/g,'').replace(/"/g,''))}','${escapeHtml((a.text||'').slice(0,120).replace(/'/g,'').replace(/"/g,''))}')">
+      <button class="post-action-btn" title="Share" data-id="${a.id}" data-title="${(a.title||'').replace(/"/g,'&quot;')}" data-text="${(a.text||'').slice(0,120).replace(/"/g,'&quot;')}" onclick="sharePost(this.dataset.id, this.dataset.title, this.dataset.text)">
         <i class="fas fa-share-nodes"></i>
       </button>
       <button class="post-action-btn ${isSaved(a.id)?'saved-active':''}" id="saveBtn-${a.id}" onclick="toggleSave('${a.id}',this)" title="Save">
@@ -4045,18 +4067,34 @@ function escapeHtml(str){
 
 function filteredAnn(){return announcements.filter(a=>a.group==='Both'||a.group===currentGroup);}
 
+function adjustThreadLines(){
+  requestAnimationFrame(()=>{
+    document.querySelectorAll('.post-card').forEach(card=>{
+      const line=card.querySelector('.post-thread-line');
+      const content=card.querySelector('.post-content');
+      if(!line||!content) return;
+      const cardTop=card.getBoundingClientRect().top;
+      const contentBottom=content.getBoundingClientRect().bottom;
+      const lineTop=72;
+      const height=Math.max(0, contentBottom - cardTop - lineTop);
+      line.style.height=height+'px';
+      line.style.maxHeight='none';
+    });
+  });
+}
 function renderAnnPreview(){
   const el=document.getElementById('annPreview');
   const arr=filteredAnn().slice(0,3);
-  // Only re-render if content changed (avoid collapsing open comments)
   const newHtml=arr.length?arr.map(annHTML).join(''):'<p style="color:var(--muted);font-size:14px;">No announcements yet.</p>';
   if(el._lastHtml!==newHtml){ el.innerHTML=newHtml; el._lastHtml=newHtml; }
+  adjustThreadLines();
 }
 function renderAllAnn(){
   const el=document.getElementById('annFull');
   const arr=filteredAnn();
   const newHtml=arr.length?arr.map(annHTML).join(''):'<p style="color:var(--muted);font-size:14px;">No announcements yet.</p>';
   if(el._lastHtml!==newHtml){ el.innerHTML=newHtml; el._lastHtml=newHtml; }
+  adjustThreadLines();
 }
 function updateTicker(){
   const first=filteredAnn()[0];
@@ -4237,6 +4275,7 @@ const SPACE_ICONS = [
   {ico:'fas fa-bus',             cls:'bus',    label:'Bus (general)'},
   {ico:'bus-logo-casabus',       cls:'alsa',   label:'ALSA — Casabus (Casablanca)', imgUrl:'https://www.casabus.ma/media/c3nbibgi/logo-casabus.png'},
   {ico:'bus-logo-foughal',       cls:'foughal',label:'Foughal Bus', imgUrl:'https://foughalbus.ma/wp-content/uploads/2024/07/Groupe-236.svg'},
+  {ico:'bus-logo-oncf',         cls:'oncf',   label:'ONCF (Train)', imgUrl:'https://play-lh.googleusercontent.com/eNp0dZDQcNrXQRkqqIF47jlY2x1XOd004CoWJTDfd0VTneU1Gu_RN3ceils94EuSkdA'},
   {ico:'fas fa-shuttle-van',     cls:'foughal',label:'Van / Transport'},
   // ── Documents ──
   {ico:'fas fa-file-word',       cls:'gd',     label:'Word Document'},
@@ -4550,7 +4589,7 @@ window.previewSpaceIcon = function(ico, previewId){
     pin:'#e60023',rd:'#ff4500',tv:'#9146ff',gh:'#24292e',sl:'#4a154b',
     gc:'#ea4335',gd:'#34a853',ent:'#ff6b35',bk:'#d97706',study:'#4338ca',
     sci:'#059669',lib:'#7c3aed',gl:'#0369a1',aud:'#db2777',cert:'#d97706',
-    lnk:'#64748b',bus:'#d97706',alsa:'#ff8c00',foughal:'#1a5276'
+    lnk:'#64748b',bus:'#d97706',alsa:'#ff8c00',foughal:'#1a5276',oncf:'#c8102e'
   };
   const bg = colorMap[cls]||'var(--sky)';
   el.style.background = bg;
