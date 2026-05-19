@@ -703,6 +703,18 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 .tag-info{background:#fff0e8;color:#c2410c;}
 .tag-general{background:#f1f5f9;color:#475569;}
 .ann-text{font-size:13.5px;color:var(--text);line-height:1.7;white-space:pre-wrap;word-break:break-word;font-weight:400;}
+.img-upload-area{border:2px dashed var(--border);border-radius:12px;padding:14px;text-align:center;cursor:pointer;transition:.2s;margin-top:8px;position:relative;}
+.img-upload-area:hover{border-color:var(--royal);background:var(--royal)11;}
+.img-upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.img-upload-area .img-preview{width:100%;max-height:160px;object-fit:cover;border-radius:8px;display:none;}
+.img-upload-area .img-placeholder{font-size:13px;color:var(--muted);}
+.img-upload-area.has-img .img-placeholder{display:none;}
+.img-upload-area.has-img .img-preview{display:block;}
+.img-remove-btn{position:absolute;top:6px;right:6px;background:#ef4444;color:white;border:none;border-radius:50%;width:22px;height:22px;font-size:12px;cursor:pointer;display:none;z-index:2;}
+.img-upload-area.has-img .img-remove-btn{display:flex;align-items:center;justify-content:center;}
+.post-img{width:100%;border-radius:10px;margin-top:10px;max-height:320px;object-fit:cover;cursor:pointer;}
+.upload-progress{height:4px;background:var(--border);border-radius:4px;margin-top:6px;overflow:hidden;display:none;}
+.upload-progress-bar{height:100%;background:var(--royal);width:0%;transition:width .3s;border-radius:4px;}
 .ann-group{font-size:11px;color:var(--muted);margin-top:5px;font-weight:600;}
 
 /* ══ THREADS-STYLE POST CARD ══ */
@@ -2006,7 +2018,15 @@ footer::after{
       <input type="date" id="annDateInput" style="flex:1;">
       <input type="time" id="annTimeInput" style="flex:1;">
     </div>
+    <label style="font-size:12px;color:var(--muted);margin:8px 0 4px;display:block;">📷 Photo (optional)</label>
+    <div class="img-upload-area" id="addImgArea" onclick="document.getElementById('addImgFile').click()">
+      <input type="file" id="addImgFile" accept="image/*" style="display:none" onchange="previewImg('addImgArea','addImgFile','addImgPreview')">
+      <button class="img-remove-btn" onclick="event.stopPropagation();removeImg('addImgArea','addImgFile','addImgPreview')">✕</button>
+      <img class="img-preview" id="addImgPreview" src="" alt="">
+      <span class="img-placeholder"><i class="fas fa-image" style="font-size:22px;color:var(--muted);display:block;margin-bottom:6px;"></i>Click to add a photo</span>
+    </div>
     <div class="modal-actions" style="margin-top:4px;"><button class="modal-btn modal-btn-cancel" onclick="closeModal('addAnnModal')">Cancel</button><button class="modal-btn modal-btn-save" onclick="saveAnn()">Add</button></div>
+    <div class="upload-progress" id="addUploadProgress"><div class="upload-progress-bar" id="addUploadBar"></div></div>
   </div>
 </div>
 
@@ -2028,7 +2048,16 @@ footer::after{
       <input type="number" id="editAnnViews" placeholder="Views" min="0" style="flex:1;">
       <input type="number" id="editAnnLikes" placeholder="Likes" min="0" style="flex:1;">
     </div>
+    <label style="font-size:12px;color:var(--muted);margin:8px 0 4px;display:block;">📷 Photo (optional)</label>
+    <div class="img-upload-area" id="editImgArea" onclick="document.getElementById('editImgFile').click()">
+      <input type="file" id="editImgFile" accept="image/*" style="display:none" onchange="previewImg('editImgArea','editImgFile','editImgPreview')">
+      <input type="hidden" id="editAnnImgUrl">
+      <button class="img-remove-btn" onclick="event.stopPropagation();removeImg('editImgArea','editImgFile','editImgPreview')">✕</button>
+      <img class="img-preview" id="editImgPreview" src="" alt="">
+      <span class="img-placeholder"><i class="fas fa-image" style="font-size:22px;color:var(--muted);display:block;margin-bottom:6px;"></i>Click to change photo</span>
+    </div>
     <div class="modal-actions" style="margin-top:4px;"><button class="modal-btn modal-btn-cancel" onclick="closeModal('editAnnModal')">Cancel</button><button class="modal-btn modal-btn-save" onclick="updateAnn()">Save Changes</button></div>
+    <div class="upload-progress" id="editUploadProgress"><div class="upload-progress-bar" id="editUploadBar"></div></div>
   </div>
 </div>
 
@@ -2221,6 +2250,7 @@ footer::after{
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, updateDoc, writeBatch, increment, setDoc, getDoc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDH1738INWjoXnzXLOPytluX1ED8saNcyI",
@@ -2234,6 +2264,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const storage = getStorage(app);
 
 // ══ ADMIN EMAILS (for role detection) ══
 const ADMIN_EMAILS = {
@@ -3984,6 +4015,7 @@ function annHTML(a){
     <div class="post-content">
       <div class="post-title">${escapeHtml(a.title||'')}</div>
       <div class="post-text">${escapeHtml(a.text||'')}</div>
+      ${a.imgUrl ? `<img class="post-img" src="${a.imgUrl}" alt="" onclick="this.requestFullscreen&&this.requestFullscreen()" onerror="this.style.display='none'">` : ''}
     </div>
 
     <!-- Action buttons -->
@@ -5455,6 +5487,13 @@ window.openEditAnn=function(id){
   document.getElementById('editAnnTime').value=a.time||'';
   document.getElementById('editAnnViews').value=a.views||0;
   document.getElementById('editAnnLikes').value=a.likes||0;
+  // Load existing image
+  const imgUrl=a.imgUrl||'';
+  document.getElementById('editAnnImgUrl').value=imgUrl;
+  const area=document.getElementById('editImgArea');
+  const preview=document.getElementById('editImgPreview');
+  if(imgUrl){ preview.src=imgUrl; area.classList.add('has-img'); }
+  else { preview.src=''; area.classList.remove('has-img'); }
   openModal('editAnnModal');
 };
 window.updateAnn=async function(){
@@ -5464,8 +5503,16 @@ window.updateAnn=async function(){
   if(!title||!text){alert('Please fill all fields.');return;}
   const views_a=parseInt(document.getElementById('editAnnViews').value)||0;
   const likes_a=parseInt(document.getElementById('editAnnLikes').value)||0;
-  await updateDoc(doc(db,'announcements',id),{title,text,group:document.getElementById('editAnnGroup').value,type:document.getElementById('editAnnType').value,date:document.getElementById('editAnnDate').value,time:document.getElementById('editAnnTime').value,views:views_a,likes:likes_a});
+  const file=document.getElementById('editImgFile').files[0];
+  const existingUrl=document.getElementById('editAnnImgUrl').value;
+  let imgUrl=existingUrl==='__removed__'?'':existingUrl;
+  if(file){
+    try{ imgUrl=await uploadAnnImg(file,id,'editUploadBar','editUploadProgress'); }
+    catch(e){ console.warn('img upload err',e); }
+  }
+  await updateDoc(doc(db,'announcements',id),{title,text,group:document.getElementById('editAnnGroup').value,type:document.getElementById('editAnnType').value,date:document.getElementById('editAnnDate').value,time:document.getElementById('editAnnTime').value,views:views_a,likes:likes_a,imgUrl});
   closeModal('editAnnModal');
+  removeImg('editImgArea','editImgFile','editImgPreview');
 };
 
 window.openEditTT=function(id){
@@ -5552,31 +5599,70 @@ window.updateExam=async function(){
 };
 
 // ══ CRUD ══
+window.previewImg=function(areaId,fileId,previewId){
+  const file=document.getElementById(fileId).files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    const img=document.getElementById(previewId);
+    img.src=e.target.result;
+    document.getElementById(areaId).classList.add('has-img');
+  };
+  reader.readAsDataURL(file);
+};
+window.removeImg=function(areaId,fileId,previewId){
+  document.getElementById(fileId).value='';
+  document.getElementById(previewId).src='';
+  document.getElementById(areaId).classList.remove('has-img');
+  if(areaId==='editImgArea') document.getElementById('editAnnImgUrl').value='__removed__';
+};
+async function uploadAnnImg(file, annId, progressBarId, progressContainerId){
+  return new Promise((resolve,reject)=>{
+    const r=storageRef(storage,`announcements/${annId}_${Date.now()}`);
+    const task=uploadBytesResumable(r,file);
+    const bar=document.getElementById(progressBarId);
+    const wrap=document.getElementById(progressContainerId);
+    if(wrap) wrap.style.display='block';
+    task.on('state_changed',
+      snap=>{ const pct=Math.round(snap.bytesTransferred/snap.totalBytes*100); if(bar) bar.style.width=pct+'%'; },
+      err=>{ if(wrap) wrap.style.display='none'; reject(err); },
+      async ()=>{ const url=await getDownloadURL(task.snapshot.ref); if(wrap) wrap.style.display='none'; resolve(url); }
+    );
+  });
+}
 window.saveAnn=async function(){
   const title=document.getElementById('annTitleInput').value.trim();
   const text=document.getElementById('annTextInput').value.trim();
   if(!title||!text){alert('Please fill all fields.');return;}
   const group=document.getElementById('annGroupInput').value;
-  await addDoc(collection(db,'announcements'),{
-    title,text,group,
-    type:document.getElementById('annTypeInput').value,
-    date:document.getElementById('annDateInput').value,
-    time:document.getElementById('annTimeInput').value,
-    order: announcements.length ? Math.min(...announcements.map(a=>a.order??0)) - 1 : 0,
-    views:0,likes:0
-  });
-  // ── Broadcast notification to all users ──
+  const file=document.getElementById('addImgFile').files[0];
+  const saveBtn=document.querySelector('#addAnnModal .modal-btn-save');
+  if(saveBtn){ saveBtn.disabled=true; saveBtn.textContent='Saving...'; }
   try{
-    await addDoc(collection(db,'broadcastNotifs'),{
-      bcType:'announcement',
-      title,
-      preview: text.slice(0,60),
-      group,
-      ts: Date.now()
+    const docRef=await addDoc(collection(db,'announcements'),{
+      title,text,group,
+      type:document.getElementById('annTypeInput').value,
+      date:document.getElementById('annDateInput').value,
+      time:document.getElementById('annTimeInput').value,
+      order: announcements.length ? Math.min(...announcements.map(a=>a.order??0)) - 1 : 0,
+      views:0,likes:0,imgUrl:''
     });
-  }catch(e){ console.warn('broadcast err',e); }
-  closeModal('addAnnModal');
-  ['annTitleInput','annTextInput','annDateInput','annTimeInput'].forEach(id=>document.getElementById(id).value='');
+    if(file){
+      if(saveBtn) saveBtn.textContent='Uploading photo...';
+      const imgUrl=await uploadAnnImg(file,docRef.id,'addUploadBar','addUploadProgress');
+      await updateDoc(docRef,{imgUrl});
+    }
+    try{
+      await addDoc(collection(db,'broadcastNotifs'),{bcType:'announcement',title,preview:text.slice(0,60),group,ts:Date.now()});
+    }catch(e){ console.warn('broadcast err',e); }
+    closeModal('addAnnModal');
+    ['annTitleInput','annTextInput','annDateInput','annTimeInput'].forEach(id=>document.getElementById(id).value='');
+    removeImg('addImgArea','addImgFile','addImgPreview');
+  }catch(e){
+    console.error('saveAnn error:',e);
+    alert('❌ Error: ' + (e.message||e.code||'Unknown error') + '\n\nIf this is a storage error, check Firebase Storage Rules.');
+  }finally{
+    if(saveBtn){ saveBtn.disabled=false; saveBtn.textContent='Add'; }
+  }
 };
 window.deleteAnn=async function(id){if(!confirm('Delete?'))return;await deleteDoc(doc(db,'announcements',id));};
 window.saveLesson=async function(){
