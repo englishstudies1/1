@@ -702,7 +702,7 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 .tag-urgent{background:#fee2e2;color:#991b1b;}
 .tag-info{background:#fff0e8;color:#c2410c;}
 .tag-general{background:#f1f5f9;color:#475569;}
-.post-text{font-size:13.5px;color:var(--text);line-height:1.7;word-break:break-word;font-weight:400;white-space:pre-wrap;}
+.post-text{font-size:13.5px;color:var(--text);line-height:1.7;word-break:break-word;font-weight:400;}
 .rte-wrap{border:1.5px solid var(--border);border-radius:10px;overflow:hidden;margin:6px 0;}
 .rte-toolbar{display:flex;gap:2px;padding:6px 8px;background:var(--card);border-bottom:1px solid var(--border);}
 .rte-btn{background:none;border:none;width:28px;height:28px;border-radius:6px;cursor:pointer;font-size:13px;color:var(--text);display:flex;align-items:center;justify-content:center;transition:.15s;}
@@ -4073,7 +4073,7 @@ function annHTML(a){
     <!-- Content -->
     <div class="post-content">
       <div class="post-title">${escapeHtml(a.title||'')}</div>
-      <div class="post-text">${a.text||''}</div>
+      <div class="post-text">${/<[a-z][\s\S]*>/i.test(a.text||'') ? (a.text||'') : (a.text||'').replace(/\n/g,'<br>')}</div>
       ${a.imgUrl ? `<img class="post-img" src="${a.imgUrl}" alt="" onclick="this.requestFullscreen&&this.requestFullscreen()" onerror="this.style.display='none'">` : ''}
     </div>
 
@@ -4189,7 +4189,8 @@ function renderAllAnn(){
 }
 function updateTicker(){
   const first=filteredAnn()[0];
-  document.getElementById('tickerText').innerHTML=first?`📢 ${first.title}: ${first.text.replace(/\n/g,' ')}`:'📢 Welcome to the English Studies Portal — FLSHM Mohammedia';
+  const plainText=(first?.text||'').replace(/<[^>]*>/g,' ').replace(/\n/g,' ').replace(/  +/g,' ').trim();
+  document.getElementById('tickerText').innerHTML=first?`📢 ${first.title}: ${plainText}`:'📢 Welcome to the English Studies Portal — FLSHM Mohammedia';
 }
 
 // ══ MODULES ══
