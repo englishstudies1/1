@@ -2250,7 +2250,6 @@ footer::after{
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, updateDoc, writeBatch, increment, setDoc, getDoc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { getStorage, ref as storageRef, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDH1738INWjoXnzXLOPytluX1ED8saNcyI",
@@ -2264,7 +2263,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
-const storage = getStorage(app);
+const CLOUDINARY_CLOUD = 'dl8ibag5f';
+const CLOUDINARY_PRESET = 'English Studies';
 
 // ══ ADMIN EMAILS (for role detection) ══
 const ADMIN_EMAILS = {
@@ -5616,17 +5616,30 @@ window.removeImg=function(areaId,fileId,previewId){
   if(areaId==='editImgArea') document.getElementById('editAnnImgUrl').value='__removed__';
 };
 async function uploadAnnImg(file, annId, progressBarId, progressContainerId){
-  return new Promise((resolve,reject)=>{
-    const r=storageRef(storage,`announcements/${annId}_${Date.now()}`);
-    const task=uploadBytesResumable(r,file);
-    const bar=document.getElementById(progressBarId);
-    const wrap=document.getElementById(progressContainerId);
-    if(wrap) wrap.style.display='block';
-    task.on('state_changed',
-      snap=>{ const pct=Math.round(snap.bytesTransferred/snap.totalBytes*100); if(bar) bar.style.width=pct+'%'; },
-      err=>{ if(wrap) wrap.style.display='none'; reject(err); },
-      async ()=>{ const url=await getDownloadURL(task.snapshot.ref); if(wrap) wrap.style.display='none'; resolve(url); }
-    );
+  const bar=document.getElementById(progressBarId);
+  const wrap=document.getElementById(progressContainerId);
+  if(wrap) wrap.style.display='block';
+  const formData=new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', CLOUDINARY_PRESET);
+  formData.append('public_id', `announcements/${annId}_${Date.now()}`);
+  return new Promise((resolve, reject)=>{
+    const xhr=new XMLHttpRequest();
+    xhr.open('POST',`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`);
+    xhr.upload.onprogress=e=>{
+      if(e.lengthComputable && bar) bar.style.width=Math.round(e.loaded/e.total*100)+'%';
+    };
+    xhr.onload=()=>{
+      if(wrap) wrap.style.display='none';
+      if(xhr.status===200){
+        const res=JSON.parse(xhr.responseText);
+        resolve(res.secure_url);
+      } else {
+        reject(new Error('Cloudinary error: '+xhr.responseText));
+      }
+    };
+    xhr.onerror=()=>{ if(wrap) wrap.style.display='none'; reject(new Error('Network error')); };
+    xhr.send(formData);
   });
 }
 window.saveAnn=async function(){
