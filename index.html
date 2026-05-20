@@ -2575,11 +2575,7 @@ function applyTheme(theme){
 // ══ SEED ══
 async function seedIfEmpty(){
   const s=await getDocs(collection(db,'announcements'));
-  if(s.empty){
-    await addDoc(collection(db,'announcements'),{title:'Welcome to Semester 1!',text:'Please ensure your registration is complete.',group:'Both',type:'info',date:'2026-01-02',time:'08:00',order:0,views:0,likes:0});
-    await addDoc(collection(db,'announcements'),{title:'Library Hours Extended',text:'Library open until 8PM during exam period.',group:'Both',type:'general',date:'2026-01-08',time:'',order:1,views:0,likes:0});
-    await addDoc(collection(db,'announcements'),{title:'Urgent: Classroom Change',text:'Grammar on Thursday moved to Amphi B.',group:'GR1',type:'urgent',date:'2026-01-10',time:'',order:2,views:0,likes:0});
-  }
+  // No auto-seed for announcements — admin adds them manually
   const mk=await getDocs(collection(db,'makeup'));
   if(mk.empty){
     await addDoc(collection(db,'makeup'),{date:'2026-01-02',desc:'Reading Comprehension — Amphi 1',group:'Both',order:0,views:0,likes:0});
