@@ -31,6 +31,10 @@
   --r:20px;--r-sm:12px;--r-pill:100px;
   --theme-font-body:'Outfit',sans-serif;
   --theme-font-display:'Bricolage Grotesque',sans-serif;
+  --mkBg:#ffffff;--mkBorder:#00b4a0;--mkText:#1a1d2e;--mkDate:#ff6b35;
+  --ttHeaderBg:#12163a;--ttHeaderText:#ffffff;
+  --ttRowBg:#ffffff;--ttRowAltBg:#faf9f7;--ttRowText:#1a1d2e;
+  --ttChipBg:#fff0e8;--ttChipText:#ff6b35;
 }
 
 /* ── Emerald theme ── */
@@ -453,10 +457,10 @@ header::after{
 }
 .notif-badge.show{display:flex;}
 .notif-dropdown{
-  position:absolute;top:calc(100% + 14px);right:0;width:340px;
+  position:fixed;top:80px;right:16px;width:340px;
   background:white;border-radius:20px;
   box-shadow:0 20px 60px rgba(18,22,58,.2),0 4px 16px rgba(18,22,58,.1);
-  border:1px solid var(--border);z-index:9999;overflow:hidden;
+  border:1px solid var(--border);z-index:99999;overflow:hidden;
   display:none;flex-direction:column;max-height:420px;
 }
 .notif-dropdown.open{display:flex;animation:fadeUp .2s ease;}
@@ -856,31 +860,31 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 /* ══ TIMETABLE ══ */
 .ttable{width:100%;border-collapse:separate;border-spacing:0;margin-top:4px;border-radius:20px;overflow:hidden;box-shadow:var(--card-shadow);}
 .ttable th{
-  background:linear-gradient(135deg,var(--navy),var(--royal));
-  color:white;padding:14px 18px;text-align:left;font-size:12.5px;
+  background:var(--ttHeaderBg);
+  color:var(--ttHeaderText);padding:14px 18px;text-align:left;font-size:12.5px;
   font-weight:700;font-family:var(--theme-font-display);letter-spacing:.2px;
 }
 .ttable th:first-child{border-radius:20px 0 0 0;}
 .ttable th:last-child{border-radius:0 20px 0 0;}
 .ttable td:nth-child(3),.ttable th:nth-child(3){color:var(--gold);font-size:12px;}
-.ttable td{padding:13px 18px;font-size:13px;border-bottom:1px solid var(--border);background:white;font-weight:500;}
+.ttable td{padding:13px 18px;font-size:13px;border-bottom:1px solid var(--border);background:var(--ttRowBg);color:var(--ttRowText);font-weight:500;}
 .ttable tr:last-child td{border-bottom:none;}
-.ttable tr:nth-child(even) td{background:#faf9f7;}
+.ttable tr:nth-child(even) td{background:var(--ttRowAltBg);}
 .ttable tr:hover td{background:#fff8f5;}
 .time-chip{
-  background:linear-gradient(135deg,#fff0e8,#ffe3d4);
-  color:var(--gold);padding:4px 12px;border-radius:var(--r-pill);
+  background:var(--ttChipBg);
+  color:var(--ttChipText);padding:4px 12px;border-radius:var(--r-pill);
   font-size:11.5px;font-weight:800;white-space:nowrap;
   font-family:var(--theme-font-display);
 }
 .makeup-item{
-  background:white;border:1.5px solid var(--border);
-  border-left:5px solid var(--sky);
+  background:var(--mkBg);border:1.5px solid var(--border);
+  border-left:5px solid var(--mkBorder);
   border-radius:var(--r);padding:18px 20px;margin-bottom:12px;
   box-shadow:var(--card-shadow);
 }
-.makeup-date{font-size:11.5px;font-weight:800;color:var(--gold);margin-bottom:5px;font-family:var(--theme-font-display);}
-.makeup-desc{font-size:13.5px;color:var(--text);font-weight:500;}
+.makeup-date{font-size:11.5px;font-weight:800;color:var(--mkDate);margin-bottom:5px;font-family:var(--theme-font-display);}
+.makeup-desc{font-size:13.5px;color:var(--mkText);font-weight:500;}
 .space-link{
   display:flex;align-items:center;gap:16px;padding:18px 20px;
   background:white;border:1.5px solid var(--border);border-radius:var(--r);
@@ -1074,12 +1078,13 @@ footer::after{
   border-radius:var(--r-pill);text-transform:uppercase;letter-spacing:.5px;margin-left:8px;
 }
 #notifPermBanner{
-  position:fixed;bottom:24px;left:50%;transform:translateX(-50%);
-  background:white;border-radius:20px;padding:16px 20px;
-  box-shadow:0 8px 40px rgba(18,22,58,.18);border:1.5px solid var(--border);
-  display:flex;align-items:center;gap:16px;z-index:9998;
-  max-width:480px;width:calc(100% - 40px);animation:fadeUp .35s ease;
+  position:fixed;top:0;left:0;right:0;width:100%;transform:none;
+  background:white;border-radius:0;padding:14px 20px;
+  box-shadow:0 4px 20px rgba(18,22,58,.18);border-bottom:2px solid var(--gold);
+  display:flex;align-items:center;gap:16px;z-index:9999;
+  animation:slideDown .35s ease;
 }
+@keyframes slideDown{from{transform:translateY(-100%);}to{transform:translateY(0);}}
 .icon-pick-btn{
   width:40px;height:40px;border:1.5px solid var(--border);border-radius:12px;
   background:#faf9f7;cursor:pointer;display:inline-flex;align-items:center;
@@ -1578,15 +1583,6 @@ footer::after{
           <i class="fas fa-bell"></i>
           <span class="notif-badge" id="notifBadge"></span>
         </button>
-        <div class="notif-dropdown" id="notifDropdown">
-          <div class="notif-dropdown-head">
-            <h4><i class="fas fa-bell" style="color:var(--gold);margin-right:6px;"></i>Notifications</h4>
-            <button class="notif-mark-all" onclick="markAllNotifsRead()">Mark all as read</button>
-          </div>
-          <div class="notif-list" id="notifList">
-            <div class="notif-empty">No notifications yet</div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -2592,6 +2588,28 @@ function applySettingsData(d){
   siteSettings.pubIcon       = d.pubIcon||'fas fa-university';
   siteSettings.tickerSpeed   = d.tickerSpeed||22;
   applyTickerSpeed();
+  siteSettings.mkBg         = d.mkBg||'#ffffff';
+  siteSettings.mkBorder     = d.mkBorder||'#00b4a0';
+  siteSettings.mkText       = d.mkText||'#1a1d2e';
+  siteSettings.mkDate       = d.mkDate||'#ff6b35';
+  siteSettings.ttHeaderBg   = d.ttHeaderBg||'#12163a';
+  siteSettings.ttHeaderText = d.ttHeaderText||'#ffffff';
+  siteSettings.ttRowBg      = d.ttRowBg||'#ffffff';
+  siteSettings.ttRowAltBg   = d.ttRowAltBg||'#faf9f7';
+  siteSettings.ttRowText    = d.ttRowText||'#1a1d2e';
+  siteSettings.ttChipBg     = d.ttChipBg||'#fff0e8';
+  siteSettings.ttChipText   = d.ttChipText||'#ff6b35';
+  document.documentElement.style.setProperty('--mkBg',   siteSettings.mkBg);
+  document.documentElement.style.setProperty('--mkBorder',siteSettings.mkBorder);
+  document.documentElement.style.setProperty('--mkText',  siteSettings.mkText);
+  document.documentElement.style.setProperty('--mkDate',  siteSettings.mkDate);
+  document.documentElement.style.setProperty('--ttHeaderBg',   siteSettings.ttHeaderBg);
+  document.documentElement.style.setProperty('--ttHeaderText', siteSettings.ttHeaderText);
+  document.documentElement.style.setProperty('--ttRowBg',      siteSettings.ttRowBg);
+  document.documentElement.style.setProperty('--ttRowAltBg',   siteSettings.ttRowAltBg);
+  document.documentElement.style.setProperty('--ttRowText',    siteSettings.ttRowText);
+  document.documentElement.style.setProperty('--ttChipBg',     siteSettings.ttChipBg);
+  document.documentElement.style.setProperty('--ttChipText',   siteSettings.ttChipText);
   siteSettings.hideGR1       = d.hideGR1||false;
   siteSettings.hideGR2       = d.hideGR2||false;
   siteSettings.activeTheme   = d.activeTheme||'vivid';
@@ -2637,14 +2655,8 @@ function applyTheme(theme){
 
 // ══ SEED ══
 async function seedIfEmpty(){
-  const s=await getDocs(collection(db,'announcements'));
-  // No auto-seed for announcements — admin adds them manually
   const mk=await getDocs(collection(db,'makeup'));
-  if(mk.empty){
-    await addDoc(collection(db,'makeup'),{date:'2026-01-02',desc:'Reading Comprehension — Amphi 1',group:'Both',order:0,views:0,likes:0});
-    await addDoc(collection(db,'makeup'),{date:'2026-01-05',desc:'Grammar — Room 12',group:'GR1',order:1,views:0,likes:0});
-    await addDoc(collection(db,'makeup'),{date:'2026-01-08',desc:'Spoken English — Language Lab',group:'GR2',order:2,views:0,likes:0});
-  }
+  // No auto-seed for makeup — admin adds them manually
   const tt=await getDocs(collection(db,'timetable'));
   if(tt.empty){
     const rows=[
@@ -2988,6 +3000,38 @@ window.saveTickerSpeed = async function(){
   applyTickerSpeed();
   await saveSettings();
   showToast('✅ Ticker speed saved!');
+};
+
+window.saveMkColors = async function(){
+  siteSettings.mkBg     = document.getElementById('mkBgPicker').value;
+  siteSettings.mkBorder = document.getElementById('mkBorderPicker').value;
+  siteSettings.mkText   = document.getElementById('mkTextPicker').value;
+  siteSettings.mkDate   = document.getElementById('mkDatePicker').value;
+  document.documentElement.style.setProperty('--mkBg',    siteSettings.mkBg);
+  document.documentElement.style.setProperty('--mkBorder',siteSettings.mkBorder);
+  document.documentElement.style.setProperty('--mkText',  siteSettings.mkText);
+  document.documentElement.style.setProperty('--mkDate',  siteSettings.mkDate);
+  await saveSettings();
+  showToast('✅ Makeup colors saved!');
+};
+
+window.saveTtHeaderColor = async function(){
+  siteSettings.ttHeaderBg   = document.getElementById('ttHeaderBgPicker').value;
+  siteSettings.ttHeaderText = document.getElementById('ttHeaderTextPicker').value;
+  siteSettings.ttRowBg      = document.getElementById('ttRowBgPicker').value;
+  siteSettings.ttRowAltBg   = document.getElementById('ttRowAltBgPicker').value;
+  siteSettings.ttRowText    = document.getElementById('ttRowTextPicker').value;
+  siteSettings.ttChipBg     = document.getElementById('ttChipBgPicker').value;
+  siteSettings.ttChipText   = document.getElementById('ttChipTextPicker').value;
+  document.documentElement.style.setProperty('--ttHeaderBg',   siteSettings.ttHeaderBg);
+  document.documentElement.style.setProperty('--ttHeaderText', siteSettings.ttHeaderText);
+  document.documentElement.style.setProperty('--ttRowBg',      siteSettings.ttRowBg);
+  document.documentElement.style.setProperty('--ttRowAltBg',   siteSettings.ttRowAltBg);
+  document.documentElement.style.setProperty('--ttRowText',    siteSettings.ttRowText);
+  document.documentElement.style.setProperty('--ttChipBg',     siteSettings.ttChipBg);
+  document.documentElement.style.setProperty('--ttChipText',   siteSettings.ttChipText);
+  await saveSettings();
+  showToast('✅ Timetable colors saved!');
 };
 
 window.saveHeaderBranding = async function(){
@@ -3957,7 +4001,7 @@ function renderNotifList(notifs){
         <div class="notif-avatar" style="${avatarBg}"><i class="${icon}" style="font-size:13px;"></i></div>
         <div class="notif-body">
           <div class="notif-text">${isAnn?'📢 New Announcement':'🔄 New Makeup Session'}${groupBadge}<br><strong>${escapeUsername(n.title||'')}</strong></div>
-          ${n.preview?`<div class="notif-preview">${escapeUsername(n.preview)}</div>`:''}
+          ${n.preview?`<div class="notif-preview">${escapeUsername((n.preview||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim())}</div>`:''}
           <div class="notif-time">${relTime(n.ts||Date.now())}</div>
         </div>
         <div class="notif-unread-dot"></div>
@@ -4012,9 +4056,15 @@ window.markAllNotifsRead = async function(){
 
 window.toggleNotifDropdown = function(){
   const dd = document.getElementById('notifDropdown');
+  const btn = document.querySelector('.notif-bell-btn');
   if(!dd) return;
   dd.classList.toggle('open');
   if(dd.classList.contains('open')){
+    if(btn){
+      const r = btn.getBoundingClientRect();
+      dd.style.top = (r.bottom + 10) + 'px';
+      dd.style.right = (window.innerWidth - r.right) + 'px';
+    }
     setTimeout(()=>{
       function outsideClick(e){
         const wrap = document.getElementById('notifBellWrap');
@@ -4802,7 +4852,7 @@ window.renderAdminNotifs = async function(){
             <span style="font-size:11px;color:var(--muted);">${date}</span>
           </div>
           <div style="font-size:14px;font-weight:600;color:var(--navy);margin-bottom:2px;">${n.title||'—'}</div>
-          ${n.preview?`<div style="font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${n.preview}</div>`:''}
+          ${n.preview?`<div style="font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${(n.preview||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim()}</div>`:''}
         </div>
         <button onclick="deleteAdminNotif('${n.id}')" style="flex-shrink:0;padding:6px 12px;background:#fee2e2;color:#991b1b;border:none;border-radius:8px;cursor:pointer;font-weight:600;font-size:12px;white-space:nowrap;"><i class="fas fa-trash"></i> Supprimer</button>
       </div>`;
@@ -5178,6 +5228,57 @@ function renderAdminSettings(){
         </div>
         <button class="add-btn" style="margin:0;white-space:nowrap;" onclick="saveTickerSpeed()"><i class="fas fa-save"></i> Save Speed</button>
       </div>
+    </div>
+
+    <!-- MAKEUP COLORS -->
+    <div style="margin-top:28px;border-top:2px solid var(--border);padding-top:20px;">
+      <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">🎨 Makeup Sessions Colors</h4>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Customize the colors of makeup session cards.</p>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
+        <label style="font-size:12px;font-weight:600;color:var(--navy);">Card Background
+          <input type="color" id="mkBgPicker" value="${siteSettings.mkBg||'#ffffff'}" style="display:block;width:100%;height:36px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;margin-top:4px;" oninput="document.documentElement.style.setProperty('--mkBg',this.value)">
+        </label>
+        <label style="font-size:12px;font-weight:600;color:var(--navy);">Left Border
+          <input type="color" id="mkBorderPicker" value="${siteSettings.mkBorder||'#00b4a0'}" style="display:block;width:100%;height:36px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;margin-top:4px;" oninput="document.documentElement.style.setProperty('--mkBorder',this.value)">
+        </label>
+        <label style="font-size:12px;font-weight:600;color:var(--navy);">Text Color
+          <input type="color" id="mkTextPicker" value="${siteSettings.mkText||'#1a1d2e'}" style="display:block;width:100%;height:36px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;margin-top:4px;" oninput="document.documentElement.style.setProperty('--mkText',this.value)">
+        </label>
+        <label style="font-size:12px;font-weight:600;color:var(--navy);">Date Color
+          <input type="color" id="mkDatePicker" value="${siteSettings.mkDate||'#ff6b35'}" style="display:block;width:100%;height:36px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;margin-top:4px;" oninput="document.documentElement.style.setProperty('--mkDate',this.value)">
+        </label>
+      </div>
+      <button class="add-btn" style="margin:12px 0 0;width:100%;" onclick="saveMkColors()"><i class="fas fa-save"></i> Save Makeup Colors</button>
+    </div>
+
+    <!-- TIMETABLE HEADER COLOR -->
+    <div style="margin-top:28px;border-top:2px solid var(--border);padding-top:20px;">
+      <h4 style="font-size:14px;color:var(--navy);margin-bottom:4px;font-weight:700;">📅 Timetable Colors</h4>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Customize the Day/Module/Time bar and table rows.</p>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">
+        <label style="font-size:12px;font-weight:600;color:var(--navy);">Header Background
+          <input type="color" id="ttHeaderBgPicker" value="${siteSettings.ttHeaderBg||'#12163a'}" style="display:block;width:100%;height:36px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;margin-top:4px;" oninput="document.documentElement.style.setProperty('--ttHeaderBg',this.value)">
+        </label>
+        <label style="font-size:12px;font-weight:600;color:var(--navy);">Header Text
+          <input type="color" id="ttHeaderTextPicker" value="${siteSettings.ttHeaderText||'#ffffff'}" style="display:block;width:100%;height:36px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;margin-top:4px;" oninput="document.documentElement.style.setProperty('--ttHeaderText',this.value)">
+        </label>
+        <label style="font-size:12px;font-weight:600;color:var(--navy);">Row Background
+          <input type="color" id="ttRowBgPicker" value="${siteSettings.ttRowBg||'#ffffff'}" style="display:block;width:100%;height:36px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;margin-top:4px;" oninput="document.documentElement.style.setProperty('--ttRowBg',this.value)">
+        </label>
+        <label style="font-size:12px;font-weight:600;color:var(--navy);">Alternate Row
+          <input type="color" id="ttRowAltBgPicker" value="${siteSettings.ttRowAltBg||'#faf9f7'}" style="display:block;width:100%;height:36px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;margin-top:4px;" oninput="document.documentElement.style.setProperty('--ttRowAltBg',this.value)">
+        </label>
+        <label style="font-size:12px;font-weight:600;color:var(--navy);">Row Text
+          <input type="color" id="ttRowTextPicker" value="${siteSettings.ttRowText||'#1a1d2e'}" style="display:block;width:100%;height:36px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;margin-top:4px;" oninput="document.documentElement.style.setProperty('--ttRowText',this.value)">
+        </label>
+        <label style="font-size:12px;font-weight:600;color:var(--navy);">Time Chip Background
+          <input type="color" id="ttChipBgPicker" value="${siteSettings.ttChipBg||'#fff0e8'}" style="display:block;width:100%;height:36px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;margin-top:4px;" oninput="document.documentElement.style.setProperty('--ttChipBg',this.value)">
+        </label>
+        <label style="font-size:12px;font-weight:600;color:var(--navy);">Time Chip Text
+          <input type="color" id="ttChipTextPicker" value="${siteSettings.ttChipText||'#ff6b35'}" style="display:block;width:100%;height:36px;border:1.5px solid var(--border);border-radius:8px;cursor:pointer;margin-top:4px;" oninput="document.documentElement.style.setProperty('--ttChipText',this.value)">
+        </label>
+      </div>
+      <button class="add-btn" style="margin:12px 0 0;width:100%;" onclick="saveTtHeaderColor()"><i class="fas fa-save"></i> Save Timetable Colors</button>
     </div>
 
     <!-- THEME SWITCHER — full width -->
@@ -6613,6 +6714,17 @@ window.renderAdminStats = function(){
   <button id="mntAdminBypass" onclick="toggleMaintenanceMode(false)" style="display:none;position:fixed;top:80px;right:20px;background:var(--gold);color:white;border:none;border-radius:12px;padding:9px 18px;cursor:pointer;font-size:13px;font-weight:700;box-shadow:0 4px 20px rgba(255,107,53,.45);z-index:10001;font-family:inherit;">
     <i class="fas fa-circle-check"></i> Exit Maintenance
   </button>
+</div>
+
+<!-- Notification dropdown — outside header to avoid stacking context issues -->
+<div class="notif-dropdown" id="notifDropdown">
+  <div class="notif-dropdown-head">
+    <h4><i class="fas fa-bell" style="color:var(--gold);margin-right:6px;"></i>Notifications</h4>
+    <button class="notif-mark-all" onclick="markAllNotifsRead()">Mark all as read</button>
+  </div>
+  <div class="notif-list" id="notifList">
+    <div class="notif-empty">No notifications yet</div>
+  </div>
 </div>
 
 </body>
