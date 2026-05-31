@@ -1594,6 +1594,7 @@ footer::after{
     <div class="nav-item" onclick="showPage('makeup')" id="nav-makeup"><i class="fas fa-clock-rotate-left"></i> Makeup Sessions</div>
     <div class="nav-item" onclick="showPage('announcements')" id="nav-announcements"><i class="fas fa-bullhorn"></i> Announcements</div>
     <div class="nav-item" onclick="showPage('sondage')" id="nav-sondage"><i class="fas fa-poll"></i> Sondage</div>
+    <div class="nav-item" onclick="showPage('practice')" id="nav-practice"><i class="fas fa-brain"></i> Practice Exams</div>
     <div class="nav-item" onclick="showPage('space')" id="nav-space"><i class="fas fa-users"></i> Student Space</div>
     <div class="nav-item" onclick="showPage('about')" id="nav-about"><i class="fas fa-info-circle"></i> About</div>
   </nav>
@@ -1812,6 +1813,78 @@ footer::after{
   </main>
 </div>
 
+<!-- PRACTICE EXAMS -->
+<div id="page-practice" class="page">
+  <main>
+    <div class="sec-header">
+      <h2><i class="fas fa-brain"></i> <span id="practicePageTitle">Practice Exams</span></h2>
+      <p id="practicePageSubtitle">Test your knowledge with interactive quizzes covering all chapters</p>
+      <div class="section-divider"></div>
+    </div>
+
+    <!-- Quiz selector cards -->
+    <div id="practiceQuizSelector" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-bottom:32px;">
+      <div onclick="startPracticeQuiz('british-civ')" style="background:white;border:1.5px solid var(--border);border-radius:20px;padding:24px 22px;cursor:pointer;box-shadow:var(--card-shadow);transition:transform .25s,box-shadow .25s,border-color .25s;" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='var(--card-hover)';this.style.borderColor='var(--gold)';" onmouseout="this.style.transform='';this.style.boxShadow='var(--card-shadow)';this.style.borderColor='var(--border)';">
+        <div style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#fff0e8,#ffd8c2);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;box-shadow:0 4px 14px rgba(255,107,53,.18);">&#x1F1EC;&#x1F1E7;</div>
+        <div style="font-family:var(--theme-font-display);font-size:17px;font-weight:800;color:var(--navy);margin-bottom:6px;letter-spacing:-.3px;">British Civilization</div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:14px;">100 questions covering all chapters from Pre-Celtic era to Mass Media</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;gap:8px;">
+            <span style="background:#fff0e8;color:var(--gold);font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;">100 Qs</span>
+            <span style="background:#e0f2fe;color:#0369a1;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;">MCQ</span>
+          </div>
+          <span style="font-size:12px;color:var(--gold);font-weight:700;">Start &#x2192;</span>
+        </div>
+      </div>
+      <div style="background:#f8fafc;border:1.5px dashed var(--border);border-radius:20px;padding:24px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:160px;gap:10px;">
+        <div style="font-size:32px;opacity:.35;">&#x2795;</div>
+        <div style="font-size:13px;color:var(--muted);font-weight:600;">More quizzes coming soon</div>
+        <div style="font-size:11px;color:var(--muted);">Admin can add new exams from the panel</div>
+      </div>
+    </div>
+
+    <!-- Quiz arena -->
+    <div id="practiceQuizArena" style="display:none;">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px;">
+        <button onclick="exitPracticeQuiz()" style="display:flex;align-items:center;gap:7px;padding:9px 16px;background:white;color:var(--navy);border:1.5px solid var(--border);border-radius:10px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;box-shadow:var(--card-shadow);transition:.2s;">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <div>
+          <div id="quizArenaTitle" style="font-family:var(--theme-font-display);font-size:18px;font-weight:800;color:var(--navy);"></div>
+          <div id="quizArenaSubtitle" style="font-size:12px;color:var(--muted);"></div>
+        </div>
+      </div>
+      <div id="practiceQuizScreen">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;padding:14px 18px;background:white;border:1.5px solid var(--border);border-radius:16px;box-shadow:var(--card-shadow);">
+          <span id="pqNumber" style="font-size:12.5px;font-weight:800;color:var(--navy);white-space:nowrap;">Q 1/100</span>
+          <div style="flex:1;height:10px;background:var(--border);border-radius:100px;overflow:hidden;">
+            <div id="pqProgressFill" style="height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--sky));border-radius:100px;transition:width .5s;"></div>
+          </div>
+          <span id="pqScore" style="font-size:12.5px;font-weight:800;color:var(--sky);white-space:nowrap;">Score: 0</span>
+        </div>
+        <div style="background:white;border:1.5px solid var(--border);border-radius:20px;padding:28px 26px;margin-bottom:18px;box-shadow:var(--card-shadow);">
+          <div id="pqQuestionText" style="font-family:var(--theme-font-display);font-size:18px;font-weight:700;color:var(--navy);line-height:1.45;margin-bottom:22px;"></div>
+          <div id="pqOptionsContainer" style="display:grid;gap:12px;"></div>
+        </div>
+        <div style="display:flex;justify-content:center;">
+          <button id="pqNextBtn" onclick="pqNextQuestion()" disabled style="padding:14px 52px;background:var(--navy);color:white;border:none;border-radius:100px;cursor:pointer;font-family:var(--theme-font-display);font-size:15px;font-weight:700;box-shadow:0 6px 20px rgba(18,22,58,.22);transition:.3s;opacity:.4;">Next &#x2192;</button>
+        </div>
+      </div>
+      <div id="practiceResultsScreen" style="display:none;text-align:center;padding:32px 24px;background:white;border:1.5px solid var(--border);border-radius:24px;box-shadow:var(--card-shadow);">
+        <div style="font-size:56px;margin-bottom:12px;">&#x1F393;</div>
+        <div style="font-family:var(--theme-font-display);font-size:26px;font-weight:800;color:var(--navy);margin-bottom:8px;">Final Score</div>
+        <div id="pqFinalScore" style="width:140px;height:140px;border-radius:50%;border:10px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:var(--theme-font-display);font-size:38px;font-weight:900;color:var(--navy);margin:16px auto 20px;background:#fff8f4;"></div>
+        <p id="pqFeedback" style="font-size:14.5px;color:var(--text);line-height:1.7;max-width:440px;margin:0 auto 24px;font-weight:500;"></p>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+          <button onclick="pqRestart()" style="padding:12px 30px;background:var(--navy);color:white;border:none;border-radius:100px;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px;box-shadow:0 4px 16px rgba(18,22,58,.22);transition:.2s;"><i class="fas fa-rotate-right"></i> Restart</button>
+          <button onclick="exitPracticeQuiz()" style="padding:12px 30px;background:white;color:var(--navy);border:1.5px solid var(--border);border-radius:100px;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px;transition:.2s;"><i class="fas fa-arrow-left"></i> All Exams</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-main">
@@ -1868,6 +1941,7 @@ footer::after{
     <div class="admin-tab" onclick="switchAdminTab('about-admin',this);renderAdminAbout();">ℹ️ About</div>
     <div class="admin-tab" onclick="switchAdminTab('stats-admin',this);renderAdminStats();">📊 Stats</div>
     <div class="admin-tab maintenance-tab" onclick="switchAdminTab('maintenance-admin',this);renderAdminMaintenance();">🔧 Maintenance</div>
+    <div class="admin-tab" onclick="switchAdminTab('practice-admin',this);renderAdminPractice();">🧪 Practice Exams</div>
   </div>
   <div class="admin-section-content active" id="admin-announcements">
     <button class="add-btn" onclick="openModal('addAnnModal')"><i class="fas fa-plus"></i> New Announcement</button>
@@ -2530,7 +2604,7 @@ function applySettingsData(d){
   siteSettings.hiddenTTSems  = d.hiddenTTSems||[];
   siteSettings.ttColumns     = d.ttColumns||{room:true,prof:true};
   siteSettings.customMods    = d.customMods||{};
-  siteSettings.pageOrder     = d.pageOrder||['home','modules','exams','timetable','makeup','announcements','sondage','space','about'];
+  siteSettings.pageOrder     = d.pageOrder||['home','modules','exams','timetable','makeup','announcements','sondage','practice','space','about'];
   siteSettings.version       = d.version||'v2.0.1';
   siteSettings.madeBy        = d.madeBy||'Mourad Projects';
   siteSettings.maintenanceMode = d.maintenanceMode||false;
@@ -2539,6 +2613,8 @@ function applySettingsData(d){
   applyMaintenanceMode();
   siteSettings.footerText    = d.footerText||'© 2026 English Studies Portal · FLSHM Mohammedia';
   siteSettings.sondageVisible= d.sondageVisible!==false;
+  siteSettings.practicePageTitle    = d.practicePageTitle||'Practice Exams';
+  siteSettings.practicePageSubtitle = d.practicePageSubtitle||'Test your knowledge with interactive quizzes covering all chapters';
   siteSettings.presTitle     = d.presTitle||'';
   siteSettings.presDriveLink = d.presDriveLink||'';
   siteSettings.subDriveLink  = d.subDriveLink||'';
@@ -2638,6 +2714,11 @@ function applySettingsData(d){
   applyHeaderBranding();
   applyHeroContent();
   applyAboutContent();
+  // Apply practice page title/subtitle
+  const _ptEl = document.getElementById('practicePageTitle');
+  const _psEl = document.getElementById('practicePageSubtitle');
+  if(_ptEl) _ptEl.textContent = siteSettings.practicePageTitle||'Practice Exams';
+  if(_psEl) _psEl.textContent = siteSettings.practicePageSubtitle||'Test your knowledge with interactive quizzes covering all chapters';
   applyTheme(siteSettings.activeTheme||'original');
   if(adminUnlocked){ renderAdminLessonSemTabs(); renderAdminExamSemTabs(); renderAdminSettings(); }
 }
@@ -2741,11 +2822,12 @@ window.showPage=function(p){
   else if(p==='announcements') renderAllAnn();
   else if(p==='space') renderSpace();
   else if(p==='sondage'){ renderPresentationList(); renderSubmissionList(); }
+  else if(p==='practice'){ /* practice quiz state managed internally */ }
   else if(p==='home'){ renderAnnPreview(); updateTicker(); }
 };
 // Apply hidden pages and ordering to nav
 function applyHiddenPages(){
-  const allPages=['home','modules','exams','timetable','makeup','announcements','sondage','space','about'];
+  const allPages=['home','modules','exams','timetable','makeup','announcements','sondage','practice','space','about'];
   const order=siteSettings.pageOrder||allPages;
   const nav=document.querySelector('.header-nav');
   if(!nav) return;
@@ -4894,6 +4976,7 @@ function renderAdminSettings(){
     {id:'makeup',label:'🔄 Makeup Sessions'},
     {id:'announcements',label:'📢 Announcements'},
     {id:'sondage',label:'📋 Sondage'},
+    {id:'practice',label:'🧪 Practice Exams'},
     {id:'space',label:'👥 Student Space'},
     {id:'about',label:'ℹ️ About'}
   ];
@@ -5374,7 +5457,7 @@ window.toggleTTSemVisibility=async function(sem,show){
 };
 // Nav page ordering
 window.moveNavPage=async function(id,dir){
-  const order=siteSettings.pageOrder||['home','modules','exams','timetable','makeup','announcements','sondage','space','about'];
+  const order=siteSettings.pageOrder||['home','modules','exams','timetable','makeup','announcements','sondage','practice','space','about'];
   const idx=order.indexOf(id); if(idx<0) return;
   const swap=idx+dir; if(swap<0||swap>=order.length) return;
   [order[idx],order[swap]]=[order[swap],order[idx]];
@@ -5445,6 +5528,7 @@ window.switchAdminTab=function(tab,el){
   if(tab==='about-admin'){ renderAdminAbout(); }
   if(tab==='stats-admin'){ renderAdminStats(); }
   if(tab==='maintenance-admin'){ renderAdminMaintenance(); }
+  if(tab==='practice-admin'){ renderAdminPractice(); }
 };
 
 function renderAdminAnn(){
@@ -6575,6 +6659,324 @@ window.renderAdminStats = function(){
 
 
 
+// ══ PRACTICE EXAMS ══
+const PQ_BANKS = {
+  'british-civ': {
+    title: 'British Civilization',
+    subtitle: '100 Questions · MCQ',
+    questions: [
+      // CH 1: PRE-CELTIC
+      {q:"The Palaeolithic Age lasted from 2.5 million BC to which date?",a:["10,000 BC","8,000 BC","4,000 BC","2,000 BC"],c:1},
+      {q:"What was the economy of the Mesolithics based on?",a:["Agriculture","Fishing, hunting, and collecting fruits","Mining and trade","Industrial production"],c:1},
+      {q:"Between 6000-5000 BC, what caused migration to Britain to become more difficult?",a:["Heavy snow","The cutting of the land bridge","War with France","The arrival of the Romans"],c:1},
+      {q:"Which period is the 3rd period of prehistory (4000 to 2000 BC)?",a:["Mesolithic","Neolithic","Bronze Age","Iron Age"],c:1},
+      {q:"The Neolithic religion consisted of the belief in a celestial God, witchcraft, and:",a:["The Moon","The Afterlife","The Sun only","The Stars"],c:1},
+      {q:"Who were the 'vigorous people' that brought copper and bronze to Britain?",a:["The Gaels","The Beaker folk","The Picts","The Romans"],c:1},
+      {q:"The Bronze Age (2000/1700 to 700 BC) was characterized by the predominance of:",a:["The lunar cult","The solar cult","The ocean cult","No religion"],c:1},
+      {q:"Which group is credited with developing the Bronze civilization in Britain?",a:["The Saxons","The Picts","The Vikings","The Romans"],c:1},
+      {q:"The availability of which material facilitated land clearance and population growth?",a:["Stone","Bronze","Iron","Gold"],c:2},
+      {q:"Who coined the terms 'Palaeolithic' and 'Neolithic' in 1865?",a:["Charles Darwin","John Lubbock","Alfred the Great","Julius Caesar"],c:1},
+      // CH 2: FOUNDING OF BRITAIN
+      {q:"The Gaels, men of Celtic race, migrated to Britain in which century BC?",a:["10th","8th","5th","1st"],c:1},
+      {q:"Between 500 & 300 BC, who drove the Gaels westward?",a:["The Romans","The Britons","The Saxons","The Vikings"],c:1},
+      {q:"What language did the Celts use?",a:["Latin","Gaelic","English","French"],c:1},
+      {q:"Who occupied a dominant position in Celtic society as priests?",a:["The Druids","The Barons","The Knights","The Jutes"],c:0},
+      {q:"Julius Caesar made two quick raids in 55 and 54 BC against which people?",a:["The Picts","The Cantii (a Briton people)","The Saxons","The Scots"],c:1},
+      {q:"The Roman pacification led to 'Romanization', which was strongest among:",a:["The peasants","The towns and upper classes","The farmers","The soldiers only"],c:1},
+      {q:"In what year did the Anglo-Saxon mercenaries revolt against their British employers?",a:["410","430","442","1066"],c:2},
+      {q:"The Anglo-Saxons came from which three groups?",a:["Romans, Gauls, Franks","Jutes, Saxons, and Angles","Vikings, Normans, Scots","Picts, Gaels, Britons"],c:1},
+      {q:"The 'Heptarchy' included kingdoms like Wessex, Essex, Sussex, and:",a:["London","Mercia","Paris","Wales"],c:1},
+      {q:"The Anglo-Saxon system of financial compensation for murder was called:",a:["Wergild","Danegeld","Taxes","Tithes"],c:0},
+      {q:"Who established the ecclesiastical capital at Canterbury in 597?",a:["The Venerable Bede","St. Augustine","King Alfred","Egbert"],c:1},
+      {q:"What was the purpose of the Synod of Whitby in 663?",a:["To start a war","To resolve differences between Celtic and Roman Christianity","To elect a King","To sign a peace treaty"],c:1},
+      {q:"The first Viking landing occurred in which year?",a:["1066","787","410","802"],c:1},
+      {q:"Alfred the Great defeated the Danes at which battle in 878?",a:["Hastings","Edington","Stanford Bridge","Bannockburn"],c:1},
+      {q:"The 'Danegeld' was a tax imposed by which King?",a:["Alfred","Ethelred 'the Unready'","Canute","Edward the Confessor"],c:1},
+      {q:"In Oct 1066, Harold was defeated by William of Normandy at which battle?",a:["Stanford Bridge","Hastings","Lewis","Evesham"],c:1},
+      // CH 4: PLANTAGENETS
+      {q:"The 'Plantagenets' were named after an emblem representing which plant?",a:["Rose","Planta genesta","Oak","Thistle"],c:1},
+      {q:"The Magna Carta was signed in which year?",a:["1215","1066","1348","1381"],c:0},
+      {q:"What did the Magna Carta primarily limit?",a:["Church power","Royal power","Parliamentary power","Baronial power"],c:1},
+      {q:"The Black Death arrived in Britain from Europe in which year?",a:["1215","1295","1348","1381"],c:2},
+      {q:"The Peasants' Revolt of 1381 was led by:",a:["Wat Tyler","Jack Cade","Robin Hood","John Ball"],c:0},
+      {q:"The Hundred Years War was primarily fought between England and:",a:["Scotland","France","Spain","Germany"],c:1},
+      {q:"Which battle in 1415 was a great English victory during the Hundred Years War?",a:["Agincourt","Crecy","Poitiers","Bannockburn"],c:0},
+      {q:"The Wars of the Roses were fought between the Houses of:",a:["Tudor and Stuart","Lancaster and York","Plantagenet and Tudor","Windsor and Hanover"],c:1},
+      {q:"Which family ended the Wars of the Roses by taking the throne in 1485?",a:["The Yorks","The Lancasters","The Tudors","The Stuarts"],c:2},
+      // CH 5: THE TUDORS
+      {q:"Henry VIII is famous for breaking with Rome and establishing the:",a:["Catholic Church","Church of England (Anglican Church)","Presbyterian Church","Methodist Church"],c:1},
+      {q:"Which monarch reestablished Catholicism as the state religion (Bloody Mary)?",a:["Henry VIII","Elizabeth I","Mary I","Edward VI"],c:2},
+      {q:"The defeat of the Spanish Armada occurred during the reign of:",a:["Henry VIII","Mary I","Elizabeth I","James I"],c:2},
+      {q:"The Spanish Armada was defeated in which year?",a:["1558","1588","1603","1534"],c:1},
+      {q:"The Act of Supremacy (1534) declared who to be the Supreme Head of the Church of England?",a:["The Pope","The Archbishop of Canterbury","Henry VIII","Parliament"],c:2},
+      // CH 6: THE STUARTS
+      {q:"The 'Gunpowder Plot' of 1605 was an attempt to assassinate:",a:["Oliver Cromwell","King James I","King Charles I","William of Orange"],c:1},
+      {q:"The English Civil War was fought between the Royalists (Cavaliers) and the:",a:["Whigs","Roundheads (Parliamentarians)","Tories","Jacobites"],c:1},
+      {q:"King Charles I was executed in which year?",a:["1645","1648","1649","1660"],c:2},
+      {q:"Who became Lord Protector of England after the Civil War?",a:["Thomas Cromwell","Richard Cromwell","Oliver Cromwell","William of Orange"],c:2},
+      {q:"The 'Glorious Revolution' of 1688 brought which monarchs to the throne?",a:["James II & Mary","William III & Mary II","George I & Anne","Charles II & Catherine"],c:1},
+      {q:"The Bill of Rights (1689) was a crucial step in establishing:",a:["Absolute monarchy","Constitutional monarchy","A Republic","A Theocracy"],c:1},
+      // CH 7: THE HANOVERIANS
+      {q:"The Act of Union of 1707 united England and:",a:["Ireland","Wales","Scotland","Canada"],c:2},
+      {q:"Britain's first Prime Minister (by convention) was:",a:["William Pitt","Robert Walpole","Gladstone","Disraeli"],c:1},
+      {q:"The Industrial Revolution began in Britain approximately in which century?",a:["17th","18th","19th","16th"],c:1},
+      {q:"Which journalist was imprisoned for libelling the government of George III?",a:["William Pitt","John Wilkes","Robert Walpole","John Milton"],c:1},
+      {q:"Which battle in 1777 turned the American Civil War into an international one?",a:["Yorktown","Saratoga","Hastings","Bosworth"],c:1},
+      {q:"General Cornwallis surrendered at Yorktown in:",a:["1776","1781","1783","1785"],c:1},
+      {q:"The 'India Act' (1784) was supported by which Prime Minister?",a:["Walpole","William Pitt the Second","Lord North","Lord Bute"],c:1},
+      // CH 8: GOVERNMENT
+      {q:"The leader of the party that wins the most seats becomes:",a:["The Speaker","The Prime Minister","The Lord Chancellor","The Monarch"],c:1},
+      {q:"A 'Constitutional Monarchy' means the powers of the monarch are limited by:",a:["The Army","Law and convention","The Pope","The BBC"],c:1},
+      {q:"The British Constitution is described as:",a:["Rigid","Unwritten and flexible","Written and static","Non-existent"],c:1},
+      {q:"Parliament consists of the Sovereign, the House of Lords (HL), and:",a:["The Cabinet","The House of Commons (HC)","The Civil Service","The BBC"],c:1},
+      {q:"Who presides over the House of Lords?",a:["The Speaker","The Lord Chancellor","The Prime Minister","The Queen"],c:1},
+      {q:"The House of Commons comprises how many members?",a:["186","650","430","1000"],c:1},
+      {q:"A Bill is presented 1st to the House of Commons, then to the:",a:["Monarch","House of Lords","Prime Minister","Press"],c:1},
+      {q:"The administration of government is run by:",a:["Politicians only","The Civil Service","The Army","The Police"],c:1},
+      {q:"How many districts is Greater London divided into (Local Gvt)?",a:["10","32","53","569"],c:1},
+      {q:"The two original parties, Tory and Whig, originated in the reign of:",a:["Henry VIII","Charles II","George III","Victoria"],c:1},
+      {q:"By 1900, the growing needs of workers gave rise to which party?",a:["Conservative","Labour Party","Liberal","Green Party"],c:1},
+      {q:"The Social & Liberal Democratic Party was formed in which year?",a:["1900","1988","1944","1991"],c:1},
+      // CH 9: EDUCATION
+      {q:"Which Act introduced a national education system under the Ministry of Education?",a:["Act of 1066","Education Act of 1944","Act of Union","Bill of Rights"],c:1},
+      {q:"Local bodies that provide secondary education are known as:",a:["BBC","LEAs (Local Education Authorities)","ITC","HC"],c:1},
+      {q:"Education in Britain is free and compulsory until age:",a:["11","16","18","21"],c:2},
+      {q:"After 16, students can take G.C.S.E. exams; what does it stand for?",a:["General College of Science","General Certificate of Secondary Education","Great Course of Social English","None"],c:1},
+      {q:"British universities are described as:",a:["Controlled by the Church","Completely autonomous","Part of the BBC","Under the House of Lords"],c:1},
+      {q:"By the end of 1994, how many universities were there in the UK?",a:["10","90","150","500"],c:1},
+      // CH 10: MASS MEDIA
+      {q:"The BBC is financed by which method (until at least 2001)?",a:["Advertising","Licence fees","Government grants only","Selling newspapers"],c:1},
+      {q:"The World Service broadcasts in how many languages?",a:["5","40","100","200"],c:1},
+      {q:"In 1991, the IBA was replaced by the Radio Authority and the:",a:["BBC","Independent TV Commission (ITC)","Ministry of Media","House of Commons"],c:1},
+      {q:"Which group owns 'The Sun' and 'The Times'?",a:["Mirror Group","News International (Rupert Murdoch)","United Newspapers","The State"],c:1},
+      {q:"Which newspaper is the oldest Sunday newspaper (founded 1791)?",a:["The Times","Observer","The Daily Telegraph","The Guardian"],c:1},
+      {q:"The 'Tabloid' newspapers are printed on which size of paper?",a:["Large","Small","Square","Round"],c:1},
+      {q:"Which weekly review is mentioned among 'The New Scientist' and 'The Economist'?",a:["The Sun","Spectator","The Mirror","The Independent"],c:1},
+      {q:"London is described as the capital of which international press group?",a:["French","Arab press","American","German"],c:1},
+      {q:"The British Broadcasting Corporation (BBC) was founded in which year?",a:["1922","1932","1991","1944"],c:0},
+      {q:"Which prestigious newspaper was founded in 1785?",a:["The Guardian","The Times","The Daily Telegraph","The Financial Times"],c:1},
+      // More questions to reach 100
+      {q:"What was the Domesday Book?",a:["A legal code","A census survey of England commissioned by William I","A religious text","A map of Britain"],c:1},
+      {q:"The term 'Heptarchy' refers to the seven Anglo-Saxon kingdoms; which of these was NOT one?",a:["Mercia","Northumbria","Normandy","East Anglia"],c:2},
+      {q:"Which Roman Emperor built a wall across northern Britain?",a:["Augustus","Hadrian","Nero","Caesar"],c:1},
+      {q:"What was the name of William the Conqueror's compilation of English landholding?",a:["Magna Carta","Domesday Book","Bill of Rights","Act of Union"],c:1},
+      {q:"The Reformation in England was started primarily because of:",a:["A theological dispute","Henry VIII's desire to annul his marriage","A popular uprising","Parliament's decision"],c:1},
+      {q:"John Wycliffe is associated with which movement in medieval England?",a:["The Reformation","The Lollards (proto-Protestant movement)","The Gunpowder Plot","The Peasants' Revolt"],c:1},
+      {q:"The Battle of Bannockburn (1314) was a victory for:",a:["England over France","Scotland over England","England over Scotland","Wales over England"],c:1},
+      {q:"Which event marked the end of the medieval period in English history?",a:["The Black Death","The Battle of Bosworth Field (1485)","The signing of Magna Carta","The Norman Conquest"],c:1},
+      {q:"Who was the first monarch of the Tudor dynasty?",a:["Henry VII","Henry VIII","Edward IV","Richard III"],c:0},
+      {q:"The term 'the model Parliament' refers to the Parliament of:",a:["1215","1265","1295","1381"],c:2},
+      {q:"'Globe Theatre' in London was built in which year?",a:["1576","1599","1616","1642"],c:1},
+      {q:"Who wrote 'A Midsummer Night's Dream'?",a:["Christopher Marlowe","Ben Jonson","William Shakespeare","John Milton"],c:2},
+      {q:"The 'Toleration Act' of 1689 granted religious freedom to:",a:["Catholics","Non-conformists (Protestant Dissenters)","Jews","Muslims"],c:1},
+      {q:"What does 'Habeas Corpus' protect?",a:["Freedom of speech","Protection against unlawful imprisonment","The right to vote","The right to property"],c:1},
+      {q:"The Reform Act of 1832 primarily addressed:",a:["Workers' rights","Electoral reform and the removal of rotten boroughs","Women's suffrage","Religious tolerance"],c:1},
+      {q:"Queen Victoria reigned from 1837 to:",a:["1880","1890","1901","1910"],c:2},
+      {q:"The Chartist movement of the 1840s demanded:",a:["Free trade","Universal male suffrage and electoral reform","The abolition of slavery","Irish independence"],c:1},
+      {q:"In which year was the Great Exhibition held in the Crystal Palace?",a:["1837","1851","1867","1901"],c:1},
+      {q:"Who was the British Prime Minister during most of World War II?",a:["Neville Chamberlain","Clement Attlee","Winston Churchill","Anthony Eden"],c:2},
+      {q:"The National Health Service (NHS) was established in which year?",a:["1944","1945","1948","1950"],c:2}
+    ]
+  }
+};
+
+let pqCurrentQuiz = null;
+let pqIndex = 0;
+let pqScore = 0;
+let pqAnswered = false;
+
+window.startPracticeQuiz = function(quizId){
+  pqCurrentQuiz = PQ_BANKS[quizId];
+  if(!pqCurrentQuiz) return;
+  pqIndex = 0; pqScore = 0; pqAnswered = false;
+  document.getElementById('quizArenaTitle').textContent = pqCurrentQuiz.title;
+  document.getElementById('quizArenaSubtitle').textContent = pqCurrentQuiz.questions.length + ' Questions';
+  document.getElementById('practiceQuizSelector').style.display = 'none';
+  document.getElementById('practiceQuizArena').style.display = 'block';
+  document.getElementById('practiceQuizScreen').style.display = 'block';
+  document.getElementById('practiceResultsScreen').style.display = 'none';
+  pqLoadQuestion();
+};
+
+window.exitPracticeQuiz = function(){
+  document.getElementById('practiceQuizSelector').style.display = 'grid';
+  document.getElementById('practiceQuizArena').style.display = 'none';
+  pqCurrentQuiz = null;
+};
+
+function pqLoadQuestion(){
+  pqAnswered = false;
+  const btn = document.getElementById('pqNextBtn');
+  btn.disabled = true; btn.style.opacity = '.4';
+  const data = pqCurrentQuiz.questions[pqIndex];
+  const total = pqCurrentQuiz.questions.length;
+  document.getElementById('pqNumber').textContent = 'Q ' + (pqIndex+1) + '/' + total;
+  document.getElementById('pqProgressFill').style.width = (((pqIndex+1)/total)*100) + '%';
+  document.getElementById('pqScore').textContent = 'Score: ' + pqScore;
+  document.getElementById('pqQuestionText').textContent = data.q;
+  const container = document.getElementById('pqOptionsContainer');
+  container.innerHTML = '';
+  data.a.forEach((opt, idx)=>{
+    const div = document.createElement('div');
+    div.style.cssText = 'padding:16px 18px;border:2px solid var(--border);border-radius:14px;cursor:pointer;background:white;transition:.25s all;display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:500;color:var(--text);box-shadow:0 2px 8px rgba(18,22,58,.04);';
+    div.innerHTML = '<span>' + opt + '</span>';
+    div.onmouseover = ()=>{ if(!div.classList.contains('locked')) div.style.borderColor='var(--gold)'; };
+    div.onmouseout  = ()=>{ if(!div.classList.contains('locked') && !div.classList.contains('pq-correct') && !div.classList.contains('pq-wrong')) div.style.borderColor='var(--border)'; };
+    div.onclick = ()=>pqSelect(idx, div);
+    container.appendChild(div);
+  });
+}
+
+function pqSelect(idx, el){
+  if(pqAnswered) return;
+  pqAnswered = true;
+  const correct = pqCurrentQuiz.questions[pqIndex].c;
+  const options = document.querySelectorAll('#pqOptionsContainer div');
+  options.forEach(o=>{ o.classList.add('locked'); o.style.cursor='default'; o.onmouseover=null; o.onmouseout=null; });
+  if(idx === correct){
+    el.style.cssText += 'background:#e8f5e9;border-color:#27ae60;color:#2e7d32;font-weight:700;';
+    el.innerHTML += '<span style="color:#27ae60;font-size:16px;">&#x2713;</span>';
+    pqScore++;
+  } else {
+    el.style.cssText += 'background:#ffebee;border-color:#e74c3c;color:#c62828;';
+    el.innerHTML += '<span style="color:#e74c3c;font-size:16px;">&#x2715;</span>';
+    const corEl = options[correct];
+    corEl.style.cssText += 'background:#e8f5e9;border-color:#27ae60;color:#2e7d32;font-weight:700;';
+    corEl.innerHTML += '<span style="color:#27ae60;font-size:16px;">&#x2713;</span>';
+  }
+  document.getElementById('pqScore').textContent = 'Score: ' + pqScore;
+  const btn = document.getElementById('pqNextBtn');
+  btn.disabled = false; btn.style.opacity = '1';
+}
+
+window.pqNextQuestion = function(){
+  pqIndex++;
+  if(pqIndex < pqCurrentQuiz.questions.length){
+    pqLoadQuestion();
+  } else {
+    pqShowResults();
+  }
+};
+
+function pqShowResults(){
+  document.getElementById('practiceQuizScreen').style.display = 'none';
+  document.getElementById('practiceResultsScreen').style.display = 'block';
+  const total = pqCurrentQuiz.questions.length;
+  const pct = Math.round((pqScore/total)*100);
+  document.getElementById('pqFinalScore').textContent = pct + '%';
+  let msg = '';
+  if(pct >= 90) msg = 'Incredible! You are a master of this subject. You are definitely ready for the exam.';
+  else if(pct >= 70) msg = "Excellent! Strong performance. Review the few you missed — keep it up!";
+  else if(pct >= 50) msg = 'Good effort! Go back and review the specific chapters where you struggled.';
+  else msg = "Keep studying! Read through your notes carefully and try again — you will improve!";
+  document.getElementById('pqFeedback').textContent = msg;
+}
+
+window.pqRestart = function(){
+  if(!pqCurrentQuiz) return;
+  pqIndex = 0; pqScore = 0; pqAnswered = false;
+  document.getElementById('practiceQuizScreen').style.display = 'block';
+  document.getElementById('practiceResultsScreen').style.display = 'none';
+  pqLoadQuestion();
+};
+
+// ══ ADMIN: PRACTICE EXAMS ══
+window.renderAdminPractice = function(){
+  const el = document.getElementById('adminPracticeContent');
+  if(!el) return;
+  const hidden = siteSettings.hiddenPages.includes('practice');
+  const order = siteSettings.pageOrder || ['home','modules','exams','timetable','makeup','announcements','sondage','practice','space','about'];
+  const idx = order.indexOf('practice');
+  const isFirst = idx <= 0;
+  const isLast = idx >= order.length - 1;
+  const title = siteSettings.practicePageTitle || 'Practice Exams';
+  const subtitle = siteSettings.practicePageSubtitle || 'Test your knowledge with interactive quizzes covering all chapters';
+
+  el.innerHTML = `
+    <div style="display:grid;gap:20px;">
+
+      <!-- VISIBILITY + POSITION -->
+      <div style="background:white;border:1.5px solid var(--border);border-radius:16px;padding:22px 24px;box-shadow:var(--card-shadow);">
+        <h4 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:4px;">👁 Visibility &amp; Position</h4>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:18px;">Show or hide the Practice Exams page in the header navigation, and reorder its position.</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border:1.5px solid ${hidden?'#fca5a5':'#86efac'};border-radius:12px;background:${hidden?'#fff1f2':'#f0fdf4'};margin-bottom:16px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:36px;height:36px;border-radius:10px;background:${hidden?'#fee2e2':'#dcfce7'};display:flex;align-items:center;justify-content:center;font-size:16px;">${hidden?'🙈':'👁'}</div>
+            <div>
+              <div style="font-size:13px;font-weight:800;color:var(--navy);">Status: <span style="color:${hidden?'#ef4444':'#22c55e'};">${hidden?'Hidden':'Visible'}</span></div>
+              <div style="font-size:11px;color:var(--muted);">Position in nav: #${idx+1}</div>
+            </div>
+          </div>
+          <button onclick="togglePracticeVisibility()" style="padding:9px 18px;background:${hidden?'var(--navy)':'#fee2e2'};color:${hidden?'white':'#991b1b'};border:none;border-radius:10px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;transition:.2s;">
+            ${hidden?'<i class="fas fa-eye"></i> Show':'<i class="fas fa-eye-slash"></i> Hide'}
+          </button>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:12.5px;font-weight:600;color:var(--navy);margin-right:4px;">Move position:</span>
+          <button onclick="moveNavPage('practice',-1)" ${isFirst?'disabled':''} style="padding:8px 16px;background:${isFirst?'#f1f5f9':'var(--navy)'};color:${isFirst?'var(--muted)':'white'};border:none;border-radius:8px;cursor:${isFirst?'not-allowed':'pointer'};font-family:inherit;font-weight:700;font-size:13px;transition:.2s;">&#x25B2; Move Left</button>
+          <button onclick="moveNavPage('practice',+1)" ${isLast?'disabled':''} style="padding:8px 16px;background:${isLast?'#f1f5f9':'var(--navy)'};color:${isLast?'var(--muted)':'white'};border:none;border-radius:8px;cursor:${isLast?'not-allowed':'pointer'};font-family:inherit;font-weight:700;font-size:13px;transition:.2s;">Move Right &#x25BC;</button>
+        </div>
+      </div>
+
+      <!-- MODIFY PAGE TEXT -->
+      <div style="background:white;border:1.5px solid var(--border);border-radius:16px;padding:22px 24px;box-shadow:var(--card-shadow);">
+        <h4 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:4px;">✏️ Modify Page Content</h4>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:18px;">Update the title and subtitle shown at the top of the Practice Exams page.</p>
+        <div style="display:grid;gap:12px;">
+          <div>
+            <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">Page Title</label>
+            <input type="text" id="practiceAdminTitle" value="${title.replace(/"/g,'&quot;')}" placeholder="Practice Exams" style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;font-weight:600;">
+          </div>
+          <div>
+            <label style="font-size:11px;color:var(--muted);font-weight:700;display:block;margin-bottom:4px;">Subtitle</label>
+            <input type="text" id="practiceAdminSubtitle" value="${subtitle.replace(/"/g,'&quot;')}" placeholder="Subtitle..." style="width:100%;padding:10px 13px;border:1.5px solid var(--border);border-radius:10px;font-family:inherit;font-size:14px;">
+          </div>
+          <button onclick="savePracticeSettings()" style="padding:10px 22px;background:var(--navy);color:white;border:none;border-radius:10px;cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;width:fit-content;transition:.2s;"><i class="fas fa-save"></i> Save Changes</button>
+        </div>
+      </div>
+
+      <!-- AVAILABLE QUIZZES -->
+      <div style="background:#f8fafc;border:1.5px solid var(--border);border-radius:16px;padding:22px 24px;">
+        <h4 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:4px;">🧪 Available Quizzes</h4>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Currently embedded quizzes visible on the Practice Exams page.</p>
+        <div style="background:white;border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
+          <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#fff0e8,#ffd8c2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">&#x1F1EC;&#x1F1E7;</div>
+          <div style="flex:1;">
+            <div style="font-size:13.5px;font-weight:800;color:var(--navy);">British Civilization</div>
+            <div style="font-size:11px;color:var(--muted);">100 MCQ questions · All chapters</div>
+          </div>
+          <span style="background:#dcfce7;color:#166534;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;">Active</span>
+        </div>
+      </div>
+
+    </div>`;
+};
+
+window.togglePracticeVisibility = async function(){
+  const hidden = siteSettings.hiddenPages.includes('practice');
+  if(hidden) siteSettings.hiddenPages = siteSettings.hiddenPages.filter(p=>p!=='practice');
+  else if(!siteSettings.hiddenPages.includes('practice')) siteSettings.hiddenPages.push('practice');
+  await saveSettings();
+  applyHiddenPages();
+  renderAdminPractice();
+  showToast(hidden ? '✅ Practice Exams now visible!' : '✅ Practice Exams hidden');
+};
+
+window.savePracticeSettings = async function(){
+  const title = (document.getElementById('practiceAdminTitle')||{}).value || 'Practice Exams';
+  const subtitle = (document.getElementById('practiceAdminSubtitle')||{}).value || '';
+  siteSettings.practicePageTitle = title.trim();
+  siteSettings.practicePageSubtitle = subtitle.trim();
+  await saveSettings();
+  const titleEl = document.getElementById('practicePageTitle');
+  const subEl = document.getElementById('practicePageSubtitle');
+  if(titleEl) titleEl.textContent = title;
+  if(subEl) subEl.textContent = subtitle;
+  showToast('✅ Practice Exams settings saved!');
+  renderAdminPractice();
+};
+
+
 </script>
 <!-- ══ MAINTENANCE OVERLAY ══ -->
 <div id="maintenanceOverlay" style="display:none;">
@@ -6714,6 +7116,11 @@ window.renderAdminStats = function(){
   <button id="mntAdminBypass" onclick="toggleMaintenanceMode(false)" style="display:none;position:fixed;top:80px;right:20px;background:var(--gold);color:white;border:none;border-radius:12px;padding:9px 18px;cursor:pointer;font-size:13px;font-weight:700;box-shadow:0 4px 20px rgba(255,107,53,.45);z-index:10001;font-family:inherit;">
     <i class="fas fa-circle-check"></i> Exit Maintenance
   </button>
+</div>
+
+<!-- ADMIN: PRACTICE EXAMS -->
+<div class="admin-section-content" id="admin-practice-admin">
+  <div id="adminPracticeContent"></div>
 </div>
 
 <!-- Notification dropdown — outside header to avoid stacking context issues -->
