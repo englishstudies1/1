@@ -1836,6 +1836,35 @@ footer::after{
           <span style="font-size:12px;color:var(--gold);font-weight:700;">Start &#x2192;</span>
         </div>
       </div>
+      <!-- Grammar 2 Card -->
+      <div onclick="startPracticeQuiz('grammar-2')" style="background:white;border:1.5px solid var(--border);border-radius:20px;padding:24px 22px;cursor:pointer;box-shadow:var(--card-shadow);transition:transform .25s,box-shadow .25s,border-color .25s;" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='var(--card-hover)';this.style.borderColor='var(--sky)';" onmouseout="this.style.transform='';this.style.boxShadow='var(--card-shadow)';this.style.borderColor='var(--border)';">
+        <div style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#e0f2fe,#bae6fd);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;box-shadow:0 4px 14px rgba(14,165,233,.18);">&#x1F4DD;</div>
+        <div style="font-family:var(--theme-font-display);font-size:17px;font-weight:800;color:var(--navy);margin-bottom:6px;letter-spacing:-.3px;">Grammar 2</div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:14px;">60 questions — Passive Voice, Reported Speech, Relatives, Modals &amp; more</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;gap:8px;">
+            <span style="background:#e0f2fe;color:#0369a1;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;">60 Qs</span>
+            <span style="background:#f0fdf4;color:#166534;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;">Fill-in</span>
+          </div>
+          <span style="font-size:12px;color:var(--sky);font-weight:700;">Start &#x2192;</span>
+        </div>
+      </div>
+
+      <!-- Digital Culture Card -->
+      <div onclick="startPracticeQuiz('digital-culture')" style="background:white;border:1.5px solid var(--border);border-radius:20px;padding:24px 22px;cursor:pointer;box-shadow:var(--card-shadow);transition:transform .25s,box-shadow .25s,border-color .25s;" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='var(--card-hover)';this.style.borderColor='#8b5cf6';" onmouseout="this.style.transform='';this.style.boxShadow='var(--card-shadow)';this.style.borderColor='var(--border)';">
+        <div style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#f3e8ff,#ddd6fe);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;box-shadow:0 4px 14px rgba(139,92,246,.18);">&#x1F5A5;&#xFE0F;</div>
+        <div style="font-family:var(--theme-font-display);font-size:17px;font-weight:800;color:var(--navy);margin-bottom:6px;letter-spacing:-.3px;">Culture Numérique</div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:14px;">60 questions en Français — Internet, Réseaux sociaux, Cybersécurité, IA &amp; plus</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;gap:8px;">
+            <span style="background:#f3e8ff;color:#6b21a8;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;">60 Qs</span>
+            <span style="background:#fef9c3;color:#854d0e;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;">Français</span>
+          </div>
+          <span style="font-size:12px;color:#8b5cf6;font-weight:700;">Start &#x2192;</span>
+        </div>
+      </div>
+
+      <!-- Placeholder -->
       <div style="background:#f8fafc;border:1.5px dashed var(--border);border-radius:20px;padding:24px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:160px;gap:10px;">
         <div style="font-size:32px;opacity:.35;">&#x2795;</div>
         <div style="font-size:13px;color:var(--muted);font-weight:600;">More quizzes coming soon</div>
@@ -6777,7 +6806,151 @@ const PQ_BANKS = {
       {q:"Who was the British Prime Minister during most of World War II?",a:["Neville Chamberlain","Clement Attlee","Winston Churchill","Anthony Eden"],c:2},
       {q:"The National Health Service (NHS) was established in which year?",a:["1944","1945","1948","1950"],c:2}
     ]
+  },
+
+  'grammar-2': {
+    title: 'Grammar 2',
+    subtitle: '60 Questions · Complete the sentence',
+    questions: [
+      // PASSIVE VOICE
+      {q:"The novel ___ by Charles Dickens in the 19th century.",a:["wrote","was written","has written","is writing"],c:1},
+      {q:"The new hospital ___ next year.",a:["will build","builds","will be built","is building"],c:2},
+      {q:"The cake ___ by my mother every Sunday.",a:["makes","made","is made","was making"],c:2},
+      {q:"The report ___ before the meeting starts.",a:["must submit","must be submitted","submits","submitted"],c:1},
+      {q:"The windows ___ during the storm last night.",a:["broke","were broken","are broken","break"],c:1},
+      {q:"The letter ___ yesterday at noon.",a:["is sent","sends","was sent","sent"],c:2},
+      {q:"A new shopping centre ___ in our city.",a:["is being built","is building","builds","built"],c:0},
+      {q:"The children ___ to school by their parents every day.",a:["drive","are driven","drove","have driven"],c:1},
+      {q:"The prize ___ to the winner at the ceremony.",a:["was given","gave","gives","is giving"],c:0},
+      {q:"Mistakes ___ and corrected before submission.",a:["should find","should be found","found","are finding"],c:1},
+      // REPORTED SPEECH
+      {q:'She said: "I am very tired." → She said that she ___ very tired.',a:["is","was","were","will be"],c:1},
+      {q:'He said: "I will call you tomorrow." → He said he ___ call me the next day.',a:["will","would","should","could"],c:1},
+      {q:'She asked: "Are you ready?" → She asked if I ___ ready.',a:["am","are","was","were"],c:2},
+      {q:'They said: "We have finished the project." → They said they ___ the project.',a:["have finished","finished","had finished","will finish"],c:2},
+      {q:'He said: "Don\'t open that door!" → He told me ___ open that door.',a:["not to","don't","to not","no to"],c:0},
+      {q:'She said: "I can swim well." → She said she ___ swim well.',a:["can","could","may","might"],c:1},
+      {q:'He said: "I must leave now." → He said he ___ leave.',a:["must","had to","might","would"],c:1},
+      {q:'She asked: "Where do you live?" → She asked me where I ___.',a:["live","lived","am living","will live"],c:1},
+      // RELATIVE CLAUSES
+      {q:"The man ___ lives next door is a doctor.",a:["which","who","whose","whom"],c:1},
+      {q:"The book ___ I borrowed last week was fascinating.",a:["who","whose","which","where"],c:2},
+      {q:"That is the city ___ she was born.",a:["which","that","where","who"],c:2},
+      {q:"The woman ___ car was stolen reported it to the police.",a:["who","which","whose","that"],c:2},
+      {q:"That is the reason ___ she left the company.",a:["where","which","why","that"],c:2},
+      {q:"He is the candidate ___ everyone admires.",a:["which","who","whom","whose"],c:2},
+      {q:"The restaurant ___ we had dinner was very expensive.",a:["which","where","who","that"],c:1},
+      // MODAL VERBS
+      {q:"You ___ smoke inside the building. It is strictly forbidden.",a:["don't have to","shouldn't","mustn't","might not"],c:2},
+      {q:"She ___ be at home. Her lights are on.",a:["should","can","must","might"],c:2},
+      {q:"I ___ ride a bike when I was six years old.",a:["can","must","could","should"],c:2},
+      {q:"You ___ wear a tie; it is not required for this event.",a:["mustn't","don't have to","can't","shouldn't"],c:1},
+      {q:"He ___ be the new manager. I have never seen him before.",a:["must","can","will","might"],c:3},
+      {q:"You look exhausted. You ___ take some rest.",a:["must","should","might","could"],c:1},
+      {q:"We ___ finish the assignment by Friday. (It is obligatory)",a:["should","might","must","could"],c:2},
+      // GERUNDS vs INFINITIVES
+      {q:"I enjoy ___ to classical music in the evenings.",a:["to listen","listen","listening","listened"],c:2},
+      {q:"She decided ___ a new apartment near the university.",a:["finding","find","to find","found"],c:2},
+      {q:"He admitted ___ the classroom window by accident.",a:["to break","break","broke","breaking"],c:3},
+      {q:"They want ___ abroad for their honeymoon next year.",a:["traveling","travel","to travel","traveled"],c:2},
+      {q:"I am looking forward to ___ you at the conference.",a:["see","seen","to see","seeing"],c:3},
+      {q:"She refused ___ the unfair contract.",a:["signing","sign","to sign","signed"],c:2},
+      {q:"He is very good at ___ complex problems quickly.",a:["solve","solving","to solve","solved"],c:1},
+      {q:"Would you mind ___ the door, please?",a:["close","to close","closed","closing"],c:3},
+      // ARTICLES
+      {q:"___ Sahara Desert is the largest hot desert in the world.",a:["A","An","The","−"],c:2},
+      {q:"She is ___ honest and hardworking employee.",a:["a","an","the","−"],c:1},
+      {q:"He plays ___ violin in the city orchestra.",a:["a","an","the","−"],c:2},
+      {q:"___ cats are independent animals that do not need much care.",a:["A","An","The","−"],c:3},
+      {q:"He is ___ best student in the whole department.",a:["a","an","the","−"],c:2},
+      {q:"I had ___ interesting conversation with my professor.",a:["a","an","the","−"],c:1},
+      // TENSES
+      {q:"By the time she arrived, he had ___ left the office.",a:["yet","already","just","still"],c:1},
+      {q:"She ___ her homework when her mother called her.",a:["did","has done","was doing","had done"],c:2},
+      {q:"I ___ English for five years and I am still learning.",a:["study","studied","am studying","have been studying"],c:3},
+      {q:"He ___ to Paris three times in his life.",a:["went","has gone","has been","had been"],c:2},
+      {q:"Despite ___ hard all semester, he failed the final exam.",a:["study","studied","studying","to study"],c:2},
+      {q:"I suggest ___ the early morning train to avoid traffic.",a:["take","to take","taking","took"],c:2},
+      {q:"She is used to ___ in noisy and busy environments.",a:["live","lived","living","lives"],c:2}
+    ]
+  },
+
+  'digital-culture': {
+    title: 'Culture Numérique',
+    subtitle: '60 Questions · QCM en Français',
+    questions: [
+      // INTERNET & WEB
+      {q:"Que signifie l'acronyme WWW ?",a:["World Wireless Web","World Wide Web","Wide World Web","Web Worldwide"],c:1},
+      {q:"Qui est considéré comme l'inventeur du World Wide Web ?",a:["Bill Gates","Steve Jobs","Tim Berners-Lee","Mark Zuckerberg"],c:2},
+      {q:"En quelle année le Web a-t-il été inventé ?",a:["1969","1983","1989","2000"],c:2},
+      {q:"Que signifie l'acronyme HTTP ?",a:["High Technology Transfer Protocol","HyperText Terminal Process","HyperText Transfer Protocol","Home Transfer Technology Protocol"],c:2},
+      {q:"Qu'est-ce qu'une adresse IP ?",a:["Un type de virus informatique","Un identifiant unique pour chaque appareil sur un réseau","Un navigateur web","Un protocole de messagerie"],c:1},
+      {q:"Que signifie URL ?",a:["Unified Reference Location","Universal Resource Label","Uniform Resource Locator","Unique Relay Link"],c:2},
+      {q:"Quel protocole sécurise les échanges sur le Web ?",a:["FTP","HTTP","SMTP","HTTPS"],c:3},
+      {q:"Qu'est-ce qu'un cookie sur internet ?",a:["Un logiciel de sécurité","Un type de virus","Un fichier stocké par le navigateur contenant des informations","Un moteur de recherche"],c:2},
+      {q:"Quel est le rôle d'un navigateur web ?",a:["Stocker des fichiers","Accéder aux sites web et afficher leur contenu","Protéger contre les virus","Envoyer des emails"],c:1},
+      {q:"Qu'est-ce que le Cloud Computing ?",a:["Un réseau social","Stockage et traitement des données sur des serveurs distants","Un type de virus","Un navigateur web"],c:1},
+      // RÉSEAUX SOCIAUX
+      {q:"En quelle année Facebook a-t-il été fondé ?",a:["2001","2004","2006","2008"],c:1},
+      {q:"Qui a fondé Facebook ?",a:["Steve Jobs","Elon Musk","Jack Dorsey","Mark Zuckerberg"],c:3},
+      {q:"Quel réseau social est principalement basé sur le partage de photos et vidéos courtes ?",a:["LinkedIn","Twitter","Reddit","Instagram"],c:3},
+      {q:"Quel est le réseau social professionnel le plus utilisé au monde ?",a:["Facebook","Twitter","LinkedIn","Pinterest"],c:2},
+      {q:"Qu'est-ce qu'un hashtag (#) sur les réseaux sociaux ?",a:["Un lien hypertexte","Un nom d'utilisateur","Un mot-clé permettant de regrouper des contenus","Un type de publicité"],c:2},
+      {q:"Quel réseau social est connu pour ses messages courts (280 caractères) ?",a:["Facebook","Snapchat","Instagram","Twitter / X"],c:3},
+      {q:"Qu'est-ce que la 'bulle de filtre' sur les réseaux sociaux ?",a:["Un outil de confidentialité","Un filtre photo","Le fait de n'être exposé qu'à des contenus similaires à ses opinions","Un type de publicité ciblée"],c:2},
+      {q:"Quel réseau social est principalement connu pour les vidéos courtes et virales ?",a:["YouTube","Pinterest","Twitch","TikTok"],c:3},
+      {q:"Qu'est-ce qu'un influenceur numérique ?",a:["Un pirate informatique","Un développeur web","Une personne qui a une forte influence sur sa communauté en ligne","Un type de logiciel"],c:2},
+      {q:"Que signifie le terme 'fake news' ?",a:["Des nouvelles rapides","De fausses informations présentées comme vraies","Des nouvelles gratuites","Des nouvelles en anglais"],c:1},
+      // CYBERSÉCURITÉ
+      {q:"Qu'est-ce qu'un virus informatique ?",a:["Un navigateur web","Un programme malveillant qui se réplique et se propage","Un réseau social","Un logiciel de traitement de texte"],c:1},
+      {q:"Que signifie le terme 'phishing' (hameçonnage) ?",a:["Un jeu en ligne","Un réseau social","Une tentative de vol d'informations personnelles par usurpation","Un type de navigateur"],c:2},
+      {q:"Qu'est-ce qu'un pare-feu (firewall) ?",a:["Un logiciel de traitement de texte","Un réseau social","Un type de virus","Un système de protection contre les accès non autorisés"],c:3},
+      {q:"Que signifie 'ransomware' ?",a:["Un jeu vidéo","Un navigateur web","Un logiciel de rançon qui chiffre les fichiers et exige un paiement","Un réseau social"],c:2},
+      {q:"Qu'est-ce que l'authentification à deux facteurs (2FA) ?",a:["Un double mot de passe","Un système de vérification en deux étapes pour sécuriser un compte","Un type de virus","Un réseau privé"],c:1},
+      {q:"Quel est le rôle d'un VPN ?",a:["Accélérer la connexion internet","Masquer l'adresse IP et chiffrer la connexion","Stocker des fichiers en ligne","Créer des virus"],c:1},
+      {q:"Qu'est-ce qu'un mot de passe sécurisé ?",a:["Court et facile à retenir","Le nom de son animal de compagnie","Une suite de chiffres simples","Long, combinant lettres, chiffres et caractères spéciaux"],c:3},
+      {q:"Qu'est-ce que le cyberharcèlement ?",a:["Un type de virus","Une technique de programmation","Des actions malveillantes répétées via les outils numériques","Un réseau social"],c:2},
+      {q:"Que signifie RGPD ?",a:["Réseau Global de Protection Digitale","Règlement Général sur la Protection des Données","Registre Général des Personnes et Données","Règles Générales de Partage des Données"],c:1},
+      {q:"Qu'est-ce qu'un logiciel espion (spyware) ?",a:["Un navigateur web","Un moteur de recherche","Un réseau social","Un logiciel qui surveille l'activité d'un utilisateur à son insu"],c:3},
+      // E-COMMERCE
+      {q:"Qu'est-ce que le commerce électronique (e-commerce) ?",a:["Un réseau social","Un système d'exploitation","L'achat et la vente de biens ou services via internet","Un type de virus"],c:2},
+      {q:"Quel est le plus grand site de e-commerce au monde ?",a:["eBay","Alibaba","Cdiscount","Amazon"],c:3},
+      {q:"Que signifie B2B en e-commerce ?",a:["Buy to Buy","Browser to Browser","Business to Business","Brand to Brand"],c:2},
+      {q:"Que signifie C2C en e-commerce ?",a:["Company to Company","Click to Convert","Consumer to Consumer","Content to Customer"],c:2},
+      {q:"Qu'est-ce qu'un portefeuille électronique (e-wallet) ?",a:["Un réseau social","Un type de virus","Un navigateur web","Un moyen de paiement numérique stockant des informations bancaires"],c:3},
+      {q:"Qu'est-ce que le dropshipping ?",a:["Pirater des données de carte bancaire","Livrer des colis très rapidement","Vendre des produits sans les stocker soi-même","Programmer des sites e-commerce"],c:2},
+      {q:"Qu'est-ce qu'une marketplace ?",a:["Un logiciel de sécurité","Une plateforme regroupant plusieurs vendeurs indépendants","Un réseau social professionnel","Un navigateur web"],c:1},
+      // INTELLIGENCE ARTIFICIELLE
+      {q:"Que signifie IA ?",a:["Interface Avancée","Internet Augmenté","Informatique Analytique","Intelligence Artificielle"],c:3},
+      {q:"Qu'est-ce que le machine learning ?",a:["Un réseau social","Un type de virus","L'apprentissage automatique des machines à partir des données","Un navigateur web"],c:2},
+      {q:"Lequel est un exemple d'assistant virtuel basé sur l'IA ?",a:["Google Maps","Microsoft Word","Adobe Photoshop","Siri d'Apple"],c:3},
+      {q:"Qu'est-ce qu'un chatbot ?",a:["Un réseau social","Un virus informatique","Un programme informatique simulant une conversation humaine","Un type de navigateur"],c:2},
+      {q:"Qu'est-ce que le deep learning (apprentissage profond) ?",a:["Un réseau social","Un jeu vidéo","Un protocole internet","Un sous-ensemble du ML basé sur des réseaux de neurones artificiels"],c:3},
+      {q:"Quel risque majeur est associé à l'IA ?",a:["L'amélioration de la productivité","La réduction des coûts","La bonne qualité des données","Les biais algorithmiques pouvant mener à des discriminations"],c:3},
+      {q:"Dans quel domaine l'IA est-elle largement utilisée pour les diagnostics ?",a:["L'architecture","La musique","La médecine","La mode"],c:2},
+      // DONNÉES & SOCIÉTÉ NUMÉRIQUE
+      {q:"Que signifie 'Big Data' ?",a:["Un navigateur web","Un réseau social","De très grandes quantités de données numériques","Un type de virus"],c:2},
+      {q:"Qu'est-ce qu'un data center ?",a:["Un réseau social","Une école d'informatique","Un jeu vidéo","Un centre de stockage et de traitement massif de données"],c:3},
+      {q:"Lequel est un exemple de service de stockage cloud ?",a:["Internet Explorer","Adobe Photoshop","Microsoft Office 2003","Google Drive"],c:3},
+      {q:"Qu'est-ce que la fracture numérique ?",a:["Un bug informatique","Un virus puissant","Un type de réseau","L'inégalité d'accès aux technologies numériques entre populations"],c:3},
+      {q:"Que signifie GAFAM ?",a:["Un virus informatique","Un protocole internet","Un réseau social","Google, Apple, Facebook, Amazon, Microsoft"],c:3},
+      {q:"Qu'est-ce que la neutralité du Net ?",a:["L'égalité de traitement de toutes les données sur internet","Un type de virus","Un réseau social","Un protocole de sécurité"],c:0},
+      {q:"Qu'est-ce que le droit à l'oubli numérique ?",a:["Le droit de publier anonymement","Le droit de pirater des données","Le droit de faire supprimer ses données personnelles d'internet","Le droit à la connexion gratuite"],c:2},
+      {q:"Quand ARPANET, l'ancêtre d'internet, a-t-il été créé ?",a:["1959","1979","1989","1969"],c:3},
+      {q:"Qu'est-ce que l'open source ?",a:["Un réseau social","Un service payant","Un type de virus","Un logiciel dont le code source est librement accessible et modifiable"],c:3},
+      {q:"Que signifie 'société de l'information' ?",a:["Une entreprise de médias traditionnels","Un réseau social","Une société où la production et l'échange d'informations numériques sont centraux","Un système politique"],c:2},
+      // OUTILS & APPLICATIONS
+      {q:"Lequel de ces logiciels est un système d'exploitation ?",a:["Microsoft Word","Google Chrome","Windows 10","Adobe Photoshop"],c:2},
+      {q:"Qu'est-ce qu'un moteur de recherche ?",a:["Un réseau social","Un logiciel permettant de rechercher des informations sur le Web","Un type de virus","Un navigateur web"],c:1},
+      {q:"Quel est le moteur de recherche le plus utilisé au monde ?",a:["Bing","Yahoo","DuckDuckGo","Google"],c:3},
+      {q:"Qu'est-ce qu'une application mobile (app) ?",a:["Un virus pour smartphone","Un navigateur web mobile","Un programme conçu pour fonctionner sur appareils mobiles","Un réseau social mobile"],c:2},
+      {q:"Que signifie 'streaming' ?",a:["Télécharger des fichiers illégalement","La diffusion de contenu multimédia en temps réel via internet","Pirater des données","Créer des virus"],c:1},
+      {q:"Qu'est-ce que Wikipedia ?",a:["Un réseau social","Un navigateur web","Un moteur de recherche","Une encyclopédie collaborative en ligne et gratuite"],c:3},
+      {q:"Qu'est-ce que la e-démocratie ?",a:["Un réseau social politique","Un type de virus","Un protocole internet","La participation citoyenne aux processus démocratiques via les outils numériques"],c:3},
+      {q:"Qu'est-ce qu'un QR code ?",a:["Un type de virus","Un réseau social","Un code-barres 2D lisible par une caméra, renvoyant vers des informations","Un protocole internet"],c:2}
+    ]
   }
+
 };
 
 let pqCurrentQuiz = null;
@@ -6939,13 +7112,31 @@ window.renderAdminPractice = function(){
       <div style="background:#f8fafc;border:1.5px solid var(--border);border-radius:16px;padding:22px 24px;">
         <h4 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:4px;">🧪 Available Quizzes</h4>
         <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Currently embedded quizzes visible on the Practice Exams page.</p>
-        <div style="background:white;border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
-          <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#fff0e8,#ffd8c2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">&#x1F1EC;&#x1F1E7;</div>
-          <div style="flex:1;">
-            <div style="font-size:13.5px;font-weight:800;color:var(--navy);">British Civilization</div>
-            <div style="font-size:11px;color:var(--muted);">100 MCQ questions · All chapters</div>
+        <div style="display:grid;gap:10px;">
+          <div style="background:white;border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
+            <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#fff0e8,#ffd8c2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">&#x1F1EC;&#x1F1E7;</div>
+            <div style="flex:1;">
+              <div style="font-size:13.5px;font-weight:800;color:var(--navy);">British Civilization</div>
+              <div style="font-size:11px;color:var(--muted);">100 MCQ questions · All chapters</div>
+            </div>
+            <span style="background:#dcfce7;color:#166534;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;">Active</span>
           </div>
-          <span style="background:#dcfce7;color:#166534;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;">Active</span>
+          <div style="background:white;border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
+            <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#e0f2fe,#bae6fd);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">&#x1F4DD;</div>
+            <div style="flex:1;">
+              <div style="font-size:13.5px;font-weight:800;color:var(--navy);">Grammar 2</div>
+              <div style="font-size:11px;color:var(--muted);">60 fill-in-the-blank questions · Passive, Reported Speech, Modals…</div>
+            </div>
+            <span style="background:#dcfce7;color:#166534;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;">Active</span>
+          </div>
+          <div style="background:white;border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
+            <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#f3e8ff,#ddd6fe);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">&#x1F5A5;&#xFE0F;</div>
+            <div style="flex:1;">
+              <div style="font-size:13.5px;font-weight:800;color:var(--navy);">Culture Numérique</div>
+              <div style="font-size:11px;color:var(--muted);">60 QCM en Français · Internet, IA, Cybersécurité…</div>
+            </div>
+            <span style="background:#dcfce7;color:#166534;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;">Active</span>
+          </div>
         </div>
       </div>
 
