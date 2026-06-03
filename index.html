@@ -1853,8 +1853,8 @@ footer::after{
       <!-- Digital Culture Card -->
       <div onclick="startPracticeQuiz('digital-culture')" style="background:white;border:1.5px solid var(--border);border-radius:20px;padding:24px 22px;cursor:pointer;box-shadow:var(--card-shadow);transition:transform .25s,box-shadow .25s,border-color .25s;" onmouseover="this.style.transform='translateY(-5px)';this.style.boxShadow='var(--card-hover)';this.style.borderColor='#8b5cf6';" onmouseout="this.style.transform='';this.style.boxShadow='var(--card-shadow)';this.style.borderColor='var(--border)';">
         <div style="width:52px;height:52px;border-radius:16px;background:linear-gradient(135deg,#f3e8ff,#ddd6fe);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;box-shadow:0 4px 14px rgba(139,92,246,.18);">&#x1F5A5;&#xFE0F;</div>
-        <div style="font-family:var(--theme-font-display);font-size:17px;font-weight:800;color:var(--navy);margin-bottom:6px;letter-spacing:-.3px;">Culture Numérique</div>
-        <div style="font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:14px;">60 questions en Français — Internet, Réseaux sociaux, Cybersécurité, IA &amp; plus</div>
+        <div style="font-family:var(--theme-font-display);font-size:17px;font-weight:800;color:var(--navy);margin-bottom:6px;letter-spacing:-.3px;">Digital Culture</div>
+        <div style="font-size:12.5px;color:var(--muted);line-height:1.6;margin-bottom:14px;">60 questions — Internet, Social Networks, Cybersecurity, AI &amp; more</div>
         <div style="display:flex;align-items:center;justify-content:space-between;">
           <div style="display:flex;gap:8px;">
             <span style="background:#f3e8ff;color:#6b21a8;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;">60 Qs</span>
@@ -6876,8 +6876,8 @@ const PQ_BANKS = {
   },
 
   'digital-culture': {
-    title: 'Culture Numérique',
-    subtitle: '60 Questions · QCM en Français',
+    title: 'Digital Culture',
+    subtitle: '60 Questions · MCQ',
     questions: [
       // INTERNET & WEB
       {q:"Que signifie l'acronyme WWW ?",a:["World Wireless Web","World Wide Web","Wide World Web","Web Worldwide"],c:1},
@@ -6954,16 +6954,27 @@ const PQ_BANKS = {
 };
 
 let pqCurrentQuiz = null;
+let pqQuestions = [];   // shuffled copy used during a session
 let pqIndex = 0;
 let pqScore = 0;
 let pqAnswered = false;
 
+function pqShuffle(arr){
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
 window.startPracticeQuiz = function(quizId){
   pqCurrentQuiz = PQ_BANKS[quizId];
   if(!pqCurrentQuiz) return;
+  pqQuestions = pqShuffle(pqCurrentQuiz.questions);
   pqIndex = 0; pqScore = 0; pqAnswered = false;
   document.getElementById('quizArenaTitle').textContent = pqCurrentQuiz.title;
-  document.getElementById('quizArenaSubtitle').textContent = pqCurrentQuiz.questions.length + ' Questions';
+  document.getElementById('quizArenaSubtitle').textContent = pqQuestions.length + ' Questions';
   document.getElementById('practiceQuizSelector').style.display = 'none';
   document.getElementById('practiceQuizArena').style.display = 'block';
   document.getElementById('practiceQuizScreen').style.display = 'block';
@@ -6975,14 +6986,15 @@ window.exitPracticeQuiz = function(){
   document.getElementById('practiceQuizSelector').style.display = 'grid';
   document.getElementById('practiceQuizArena').style.display = 'none';
   pqCurrentQuiz = null;
+  pqQuestions = [];
 };
 
 function pqLoadQuestion(){
   pqAnswered = false;
   const btn = document.getElementById('pqNextBtn');
   btn.disabled = true; btn.style.opacity = '.4';
-  const data = pqCurrentQuiz.questions[pqIndex];
-  const total = pqCurrentQuiz.questions.length;
+  const data = pqQuestions[pqIndex];
+  const total = pqQuestions.length;
   document.getElementById('pqNumber').textContent = 'Q ' + (pqIndex+1) + '/' + total;
   document.getElementById('pqProgressFill').style.width = (((pqIndex+1)/total)*100) + '%';
   document.getElementById('pqScore').textContent = 'Score: ' + pqScore;
@@ -7003,7 +7015,7 @@ function pqLoadQuestion(){
 function pqSelect(idx, el){
   if(pqAnswered) return;
   pqAnswered = true;
-  const correct = pqCurrentQuiz.questions[pqIndex].c;
+  const correct = pqQuestions[pqIndex].c;
   const options = document.querySelectorAll('#pqOptionsContainer div');
   options.forEach(o=>{ o.classList.add('locked'); o.style.cursor='default'; o.onmouseover=null; o.onmouseout=null; });
   if(idx === correct){
@@ -7024,7 +7036,7 @@ function pqSelect(idx, el){
 
 window.pqNextQuestion = function(){
   pqIndex++;
-  if(pqIndex < pqCurrentQuiz.questions.length){
+  if(pqIndex < pqQuestions.length){
     pqLoadQuestion();
   } else {
     pqShowResults();
@@ -7034,7 +7046,7 @@ window.pqNextQuestion = function(){
 function pqShowResults(){
   document.getElementById('practiceQuizScreen').style.display = 'none';
   document.getElementById('practiceResultsScreen').style.display = 'block';
-  const total = pqCurrentQuiz.questions.length;
+  const total = pqQuestions.length;
   const pct = Math.round((pqScore/total)*100);
   document.getElementById('pqFinalScore').textContent = pct + '%';
   let msg = '';
@@ -7047,6 +7059,7 @@ function pqShowResults(){
 
 window.pqRestart = function(){
   if(!pqCurrentQuiz) return;
+  pqQuestions = pqShuffle(pqCurrentQuiz.questions);
   pqIndex = 0; pqScore = 0; pqAnswered = false;
   document.getElementById('practiceQuizScreen').style.display = 'block';
   document.getElementById('practiceResultsScreen').style.display = 'none';
@@ -7132,8 +7145,8 @@ window.renderAdminPractice = function(){
           <div style="background:white;border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:14px;">
             <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#f3e8ff,#ddd6fe);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;">&#x1F5A5;&#xFE0F;</div>
             <div style="flex:1;">
-              <div style="font-size:13.5px;font-weight:800;color:var(--navy);">Culture Numérique</div>
-              <div style="font-size:11px;color:var(--muted);">60 QCM en Français · Internet, IA, Cybersécurité…</div>
+              <div style="font-size:13.5px;font-weight:800;color:var(--navy);">Digital Culture</div>
+              <div style="font-size:11px;color:var(--muted);">60 MCQ · Internet, AI, Cybersecurity…</div>
             </div>
             <span style="background:#dcfce7;color:#166534;font-size:11px;font-weight:700;padding:3px 10px;border-radius:100px;">Active</span>
           </div>
