@@ -205,6 +205,120 @@
 .fg-l08{background:linear-gradient(135deg,#6c3483,#9b59b6);color:white;box-shadow:0 3px 10px rgba(108,52,131,.35);}
 [data-theme="midnight"] .about-bus-block{background:#1e1e32;border-color:var(--border);}
 
+/* ══ STUDENT AUTH GATE ══ */
+#studentGate{
+  position:fixed;inset:0;z-index:10500;
+  background:var(--bg,#f8f6f2);
+  display:none;flex-direction:column;align-items:center;justify-content:center;
+  min-height:100vh;overflow-y:auto;padding:24px 16px;
+  font-family:var(--theme-font-body,'Outfit',sans-serif);
+}
+.gate-view{display:none;flex-direction:column;align-items:center;width:100%;max-width:440px;}
+/* LANDING card */
+.gate-card{
+  background:var(--card-bg,white);border:1.5px solid var(--border,#e5e7eb);
+  border-radius:20px;padding:36px 32px 32px;width:100%;
+  box-shadow:0 6px 28px rgba(0,0,0,.07),0 1px 4px rgba(0,0,0,.04);text-align:center;
+}
+.gate-site-logo{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px;}
+.gate-logo-ico{
+  width:42px;height:42px;border-radius:13px;
+  background:linear-gradient(135deg,var(--navy),var(--royal));
+  display:flex;align-items:center;justify-content:center;font-size:18px;color:white;flex-shrink:0;
+}
+.gate-logo-name{font-weight:800;font-size:17px;color:var(--navy);text-align:left;line-height:1.2;}
+.gate-logo-sub{font-size:11px;color:var(--muted);font-weight:500;text-align:left;}
+.gate-divider-line{height:1px;background:var(--border,#e5e7eb);margin:22px 0;}
+.gate-title{font-family:var(--theme-font-display,'Bricolage Grotesque',sans-serif);font-size:20px;font-weight:800;color:var(--navy);margin-bottom:5px;}
+.gate-sub{font-size:13px;color:var(--muted);margin-bottom:24px;line-height:1.6;}
+.gate-btns{display:flex;gap:10px;width:100%;}
+.gate-btn-primary{
+  flex:1;padding:12px 0;background:linear-gradient(135deg,var(--navy),var(--royal));
+  color:white;border:none;border-radius:11px;font-family:inherit;font-size:13.5px;font-weight:700;
+  cursor:pointer;transition:.2s;
+}
+.gate-btn-primary:hover{opacity:.88;transform:translateY(-1px);}
+.gate-btn-secondary{
+  flex:1;padding:12px 0;background:transparent;color:var(--navy);
+  border:1.5px solid var(--border,#ddd);border-radius:11px;font-family:inherit;
+  font-size:13.5px;font-weight:700;cursor:pointer;transition:.2s;
+}
+.gate-btn-secondary:hover{border-color:var(--navy);background:var(--bg,#f8f6f2);}
+/* FORM card (login / register) */
+.gate-form-card{
+  background:var(--card-bg,white);border:1.5px solid var(--border,#e5e7eb);
+  border-radius:20px;padding:28px 28px 24px;width:100%;
+  box-shadow:0 6px 28px rgba(0,0,0,.07),0 1px 4px rgba(0,0,0,.04);
+}
+.gate-back-btn{
+  display:inline-flex;align-items:center;gap:6px;background:transparent;
+  border:1.5px solid var(--border,#e5e7eb);color:var(--muted);border-radius:9px;
+  padding:6px 14px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;
+  margin-bottom:16px;transition:.2s;align-self:flex-start;
+}
+.gate-back-btn:hover{border-color:var(--navy);color:var(--navy);}
+.gate-form-title{font-family:var(--theme-font-display,'Bricolage Grotesque',sans-serif);font-size:19px;font-weight:800;color:var(--navy);margin-bottom:3px;}
+.gate-form-sub{font-size:12px;color:var(--muted);margin-bottom:18px;line-height:1.5;}
+.gate-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.gate-field{margin-bottom:10px;}
+.gate-label{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:4px;}
+.gate-input{
+  width:100%;padding:10px 12px;border:1.5px solid var(--border,#e5e7eb);border-radius:10px;
+  font-family:inherit;font-size:13.5px;color:var(--text);outline:none;transition:.2s;
+  box-sizing:border-box;background:var(--card-bg,white);
+}
+.gate-input:focus{border-color:var(--royal);box-shadow:0 0 0 3px rgba(30,42,110,.07);}
+.gate-phone-wrap{display:flex;gap:8px;}
+.gate-country-sel,.gate-group-sel{
+  padding:10px 9px;border:1.5px solid var(--border,#e5e7eb);border-radius:10px;
+  font-family:inherit;font-size:13px;color:var(--text);background:var(--card-bg,white);
+  outline:none;transition:.2s;cursor:pointer;
+}
+.gate-country-sel:focus,.gate-group-sel:focus{border-color:var(--royal);}
+.gate-group-sel{width:100%;padding:10px 12px;box-sizing:border-box;}
+.gate-error{
+  background:#fff0f0;border:1.5px solid #fca5a5;border-radius:8px;
+  padding:8px 12px;font-size:12px;color:#b91c1c;margin-bottom:10px;display:none;font-weight:600;
+}
+.gate-submit{
+  width:100%;padding:12px 0;margin-top:4px;
+  background:linear-gradient(135deg,var(--navy),var(--royal));
+  color:white;border:none;border-radius:11px;font-family:inherit;
+  font-size:13.5px;font-weight:700;cursor:pointer;transition:.2s;
+}
+.gate-submit:hover{opacity:.88;transform:translateY(-1px);}
+.gate-submit:disabled{opacity:.55;cursor:not-allowed;transform:none;}
+.gate-switch-link{text-align:center;font-size:12px;color:var(--muted);margin-top:14px;}
+.gate-switch-link a{color:var(--royal);font-weight:700;cursor:pointer;text-decoration:none;}
+.gate-switch-link a:hover{text-decoration:underline;}
+/* PENDING / REJECTED cards */
+.gate-status-card{
+  background:var(--card-bg,white);border:1.5px solid var(--border,#e5e7eb);
+  border-radius:20px;padding:36px 28px;width:100%;text-align:center;
+  box-shadow:0 6px 28px rgba(0,0,0,.07);
+}
+.gate-status-icon{font-size:44px;margin-bottom:10px;display:block;}
+.gate-status-title{font-family:var(--theme-font-display,'Bricolage Grotesque',sans-serif);font-size:19px;font-weight:800;color:var(--navy);margin-bottom:7px;}
+.gate-status-text{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:22px;}
+/* Footer secret admin trigger */
+.gate-footer-area{margin-top:22px;font-size:11.5px;color:var(--muted);text-align:center;opacity:.6;}
+.gate-footer-area span{cursor:default;user-select:none;}
+/* Student bar in header */
+#studentHeaderBar{
+  display:none;align-items:center;gap:10px;
+  background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.18);
+  border-radius:100px;padding:5px 14px 5px 10px;
+}
+.stud-bar-name{font-size:12px;font-weight:700;color:white;}
+.stud-bar-group{font-size:10px;font-weight:800;padding:2px 9px;border-radius:100px;background:rgba(255,255,255,.18);color:white;}
+.stud-logout-btn{
+  background:rgba(255,90,90,.2);border:1.5px solid rgba(255,90,90,.3);
+  color:#ffcaca;border-radius:100px;padding:4px 12px;font-family:inherit;
+  font-size:11px;font-weight:800;cursor:pointer;transition:.2s;white-space:nowrap;
+}
+.stud-logout-btn:hover{background:rgba(255,90,90,.35);}
+
+
 /* ══ MAINTENANCE OVERLAY — site style ══ */
 #maintenanceOverlay{
   position:fixed;inset:0;z-index:9999;
@@ -1577,6 +1691,12 @@ footer::after{
       </div>
       <!-- Hidden admin trigger (1px invisible) -->
       <button class="admin-trigger" id="adminTrigger" onclick="openLoginModal()"></button>
+      <!-- Student bar (shown when student is logged in) -->
+      <div id="studentHeaderBar">
+        <span class="stud-bar-name" id="studBarName">Student</span>
+        <span class="stud-bar-group" id="studBarGroup">GR1</span>
+        <button class="stud-logout-btn" onclick="doStudentGateLogout()"><i class="fas fa-sign-out-alt" style="margin-right:4px;"></i>Logout</button>
+      </div>
       <!-- Notification Bell -->
       <div class="notif-bell-wrap" id="notifBellWrap">
         <button class="notif-bell-btn" onclick="toggleNotifDropdown()" title="Notifications">
@@ -1971,6 +2091,7 @@ footer::after{
     <div class="admin-tab" onclick="switchAdminTab('stats-admin',this);renderAdminStats();">📊 Stats</div>
     <div class="admin-tab maintenance-tab" onclick="switchAdminTab('maintenance-admin',this);renderAdminMaintenance();">🔧 Maintenance</div>
     <div class="admin-tab" onclick="switchAdminTab('practice-admin',this);renderAdminPractice();">🧪 Practice Exams</div>
+    <div class="admin-tab" onclick="switchAdminTab('students-admin',this);renderAdminStudents();">👤 Students</div>
   </div>
   <div class="admin-section-content active" id="admin-announcements">
     <button class="add-btn" onclick="openModal('addAnnModal')"><i class="fas fa-plus"></i> New Announcement</button>
@@ -2411,7 +2532,7 @@ footer::after{
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, onSnapshot, updateDoc, writeBatch, increment, setDoc, getDoc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDH1738INWjoXnzXLOPytluX1ED8saNcyI",
@@ -2456,6 +2577,7 @@ const LINKS = {
 
 // ══ STATE ══
 let currentGroup='GR1', adminUnlocked=false, currentAdmin=null;
+let studentLoggedIn=false, currentStudent=null;
 let curModSem='S1', curExamSem='S1', curTTSem='S1';
 let lesAdminSem='S1', exAdminSem='S1';
 let announcements=[], makeupSessions=[], timetable=[], lessons=[], exams=[], spaceLinks=[];
@@ -2470,6 +2592,7 @@ let siteSettings = {
   version: 'v2.0.1',
   madeBy: 'Mourad Projects',
   maintenanceMode: false,
+  requireLogin: true,
   loadingLogoStyle: 'logo1',
   footerText: '© 2026 English Studies Portal · FLSHM Mohammedia',
   sondageVisible: true,
@@ -2529,9 +2652,133 @@ let siteSettings = {
 const visitorId = sessionStorage.getItem('vid') || Math.random().toString(36).slice(2);
 sessionStorage.setItem('vid', visitorId);
 
-// ══ LOGIN — Firebase Auth ══
+window.openAdminFromGate = function(){
+  const m = document.getElementById('loginModal');
+  if(m){ m.style.zIndex='10600'; }
+  document.getElementById('loginEmail').value='';
+  document.getElementById('loginPassword').value='';
+  document.getElementById('loginError').style.display='none';
+  openModal('loginModal');
+  setTimeout(()=>document.getElementById('loginEmail').focus(),100);
+};
+
+// ══ GATE FUNCTIONS ══
+window.showGateViewFn = function(view){
+  // Use inline styles to avoid CSS specificity issues
+  document.querySelectorAll('.gate-view').forEach(v=>{ v.style.display='none'; });
+  const key = view.charAt(0).toUpperCase()+view.slice(1);
+  const el = document.getElementById('gateView'+key);
+  if(el){ el.style.display='flex'; }
+  // Reset errors on view switch
+  const le = document.getElementById('gateLoginError');
+  const re = document.getElementById('gateRegError');
+  if(le){ le.style.display='none'; le.textContent=''; }
+  if(re){ re.style.display='none'; re.textContent=''; }
+};
+
+function showGate(view){ 
+  document.getElementById('studentGate').style.display='flex'; 
+  window.showGateViewFn(view||'landing');
+}
+function hideGate(){ 
+  document.getElementById('studentGate').style.display='none'; 
+}
+
+function updateStudentBar(data){
+  const bar = document.getElementById('studentHeaderBar');
+  if(!bar) return;
+  if(data){
+    bar.style.display='flex';
+    const nEl=document.getElementById('studBarName');
+    const gEl=document.getElementById('studBarGroup');
+    if(nEl) nEl.textContent=(data.firstName||'')+(data.lastName?' '+data.lastName:'');
+    if(gEl) gEl.textContent=data.group||'';
+  } else {
+    bar.style.display='none';
+  }
+}
+
+// ══ STUDENT LOGOUT (gate) ══
+window.doStudentGateLogout = async function(){
+  studentLoggedIn=false; currentStudent=null;
+  updateStudentBar(null);
+  await signOut(auth);
+  showGate('landing');
+};
+
+// ══ STUDENT LOGIN ══
+window.doStudentLogin = async function(){
+  const email = (document.getElementById('gateLoginEmail')||{}).value?.trim()||'';
+  const pass  = (document.getElementById('gateLoginPassword')||{}).value||'';
+  const errEl = document.getElementById('gateLoginError');
+  const btn   = document.getElementById('gateLoginBtn');
+  if(errEl){ errEl.style.display='none'; errEl.textContent=''; }
+  if(!email||!pass){ if(errEl){errEl.textContent='Please fill in all fields.';errEl.style.display='block';} return; }
+  if(btn){ btn.disabled=true; btn.textContent='Logging in...'; }
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+    // onAuthStateChanged will handle the rest
+  } catch(e){
+    let msg = 'Incorrect email or password.';
+    if(e.code==='auth/user-not-found'||e.code==='auth/wrong-password'||e.code==='auth/invalid-credential') msg='Incorrect email or password.';
+    else if(e.code==='auth/too-many-requests') msg='Too many attempts. Please wait a moment.';
+    else if(e.code==='auth/invalid-email') msg='Invalid email address.';
+    if(errEl){ errEl.textContent='❌ '+msg; errEl.style.display='block'; }
+  } finally {
+    if(btn){ btn.disabled=false; btn.innerHTML='<i class="fas fa-sign-in-alt" style="margin-right:8px;"></i>LOGIN'; }
+  }
+};
+
+// ══ STUDENT REGISTER ══
+window.doStudentRegister = async function(){
+  const firstName  = (document.getElementById('regFirstName')||{}).value?.trim()||'';
+  const lastName   = (document.getElementById('regLastName')||{}).value?.trim()||'';
+  const massar     = (document.getElementById('regMassar')||{}).value?.trim()||'';
+  const apogee     = (document.getElementById('regApogee')||{}).value?.trim()||'';
+  const phoneCountry = (document.getElementById('regPhoneCountry')||{}).value||'+212';
+  const phone      = (document.getElementById('regPhone')||{}).value?.trim()||'';
+  const email      = (document.getElementById('regEmail')||{}).value?.trim()||'';
+  const password   = (document.getElementById('regPassword')||{}).value||'';
+  const group      = (document.getElementById('regGroup')||{}).value||'';
+  const errEl      = document.getElementById('gateRegError');
+  const btn        = document.getElementById('gateRegBtn');
+
+  if(errEl){ errEl.style.display='none'; errEl.textContent=''; }
+  // Validation
+  if(!firstName||!lastName||!massar||!apogee||!phone||!email||!password||!group){
+    if(errEl){ errEl.textContent='❌ Please fill in all fields.'; errEl.style.display='block'; } return;
+  }
+  if(password.length < 6){
+    if(errEl){ errEl.textContent='❌ Password must be at least 6 characters.'; errEl.style.display='block'; } return;
+  }
+  if(btn){ btn.disabled=true; btn.textContent='Registering...'; }
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, password);
+    const uid = cred.user.uid;
+    await setDoc(doc(db,'students',uid),{
+      uid, firstName, lastName, massar, apogee,
+      phone: phoneCountry+phone, email, group,
+      status:'pending', createdAt: Date.now()
+    });
+    // Show pending screen
+    showGateViewFn('pending');
+  } catch(e){
+    let msg = 'Registration failed. Please try again.';
+    if(e.code==='auth/email-already-in-use') msg='This email is already registered. Please log in.';
+    else if(e.code==='auth/invalid-email') msg='Invalid email address.';
+    else if(e.code==='auth/weak-password') msg='Password is too weak (at least 6 characters).';
+    if(errEl){ errEl.textContent='❌ '+msg; errEl.style.display='block'; }
+  } finally {
+    if(btn){ btn.disabled=false; btn.innerHTML='<i class="fas fa-user-plus" style="margin-right:8px;"></i>REGISTER &amp; ENTER'; }
+  }
+};
+
+// ══ LOGIN — Firebase Auth (Admin) ══
 window.openLoginModal = function(){
   if(adminUnlocked){ document.getElementById('adminPanel').scrollIntoView({behavior:'smooth'}); return; }
+  // Always ensure modal appears above gate overlay
+  const m = document.getElementById('loginModal');
+  if(m) m.style.zIndex='10600';
   document.getElementById('loginEmail').value='';
   document.getElementById('loginPassword').value='';
   document.getElementById('loginError').style.display='none';
@@ -2553,14 +2800,17 @@ window.doLogin = async function(){
 };
 document.getElementById('loginPassword').addEventListener('keydown',e=>{if(e.key==='Enter')window.doLogin();});
 
-onAuthStateChanged(auth, user => {
+onAuthStateChanged(auth, async user => {
   if(user){
     const emailKey = user.email.toLowerCase();
     const acc = ADMIN_EMAILS[emailKey];
     if(acc){
+      // ── Admin login ──
       adminUnlocked=true;
       currentAdmin={email:user.email, name:acc.name, role:acc.role};
       closeModal('loginModal');
+      hideGate();
+      updateStudentBar(null);
       const grColor=acc.role==='GR1'?'#1e40af':'#166534';
       const grBg=acc.role==='GR1'?'#dbeafe':'#dcfce7';
       document.getElementById('adminWho').innerHTML=`${acc.name} <span style="background:${grBg};color:${grColor};padding:2px 10px;border-radius:100px;font-size:11px;font-weight:800;">${acc.role}</span>`;
@@ -2570,14 +2820,44 @@ onAuthStateChanged(auth, user => {
       applyMaintenanceMode();
       setupMntFeedbackListener();
     } else {
-      // Not an admin email — sign out immediately
-      signOut(auth);
-      const errEl=document.getElementById('loginError');
-      if(errEl){ errEl.textContent='❌ Accès refusé. Compte non autorisé.'; errEl.style.display='block'; }
+      // ── Student login ──
+      try {
+        const studentSnap = await getDoc(doc(db,'students',user.uid));
+        if(studentSnap.exists()){
+          const data = studentSnap.data();
+          if(data.status === 'approved'){
+            studentLoggedIn=true; currentStudent=data;
+            hideGate();
+            updateStudentBar(data);
+            // Auto-switch to their group
+            if(data.group && (data.group==='GR1'||data.group==='GR2')){
+              window.switchGroup(data.group);
+            }
+          } else if(data.status === 'rejected'){
+            showGate('rejected');
+          } else {
+            // pending
+            showGate('pending');
+          }
+        } else {
+          // No student doc found — show login error (shouldn't normally happen)
+          await signOut(auth);
+          const le=document.getElementById('gateLoginError');
+          if(le){ le.textContent='❌ Account not found. Please register first.'; le.style.display='block'; }
+          showGate('login');
+        }
+      } catch(e){
+        console.warn('student auth check err',e);
+        showGate('landing');
+      }
     }
   } else {
+    // ── Logged out ──
     adminUnlocked=false; currentAdmin=null;
+    studentLoggedIn=false; currentStudent=null;
     document.getElementById('adminPanel').classList.remove('open');
+    updateStudentBar(null);
+    // Gate is shown by init() after loading completes if not authenticated
   }
 });
 
@@ -2637,6 +2917,7 @@ function applySettingsData(d){
   siteSettings.version       = d.version||'v2.0.1';
   siteSettings.madeBy        = d.madeBy||'Mourad Projects';
   siteSettings.maintenanceMode = d.maintenanceMode||false;
+  siteSettings.requireLogin = d.requireLogin !== false; // default true
   siteSettings.loadingLogoStyle = d.loadingLogoStyle||localStorage.getItem('ldLogoStyle')||'logo1';
   localStorage.setItem('ldLogoStyle', siteSettings.loadingLogoStyle);
   applyMaintenanceMode();
@@ -2817,7 +3098,16 @@ async function init(){
     const ov = document.getElementById('loadingOverlay');
     const st = document.getElementById('ldStatus');
     if(st) st.textContent = 'Ready!';
-    setTimeout(()=>{ov.classList.add('hidden');setTimeout(()=>{ov.style.display='none';},700);},400);
+    setTimeout(()=>{
+      ov.classList.add('hidden');
+      setTimeout(()=>{
+        ov.style.display='none';
+        // Show gate if not authenticated and login is required
+        if(!adminUnlocked && !studentLoggedIn && siteSettings.requireLogin !== false){
+          showGate('landing');
+        }
+      },700);
+    },400);
   }
 }
 init();
@@ -2912,6 +3202,13 @@ function applyHeaderBranding(){
   if(nameEl) nameEl.textContent = s.siteName||'English Studies';
   const subEl = document.getElementById('headerSiteSub');
   if(subEl) subEl.textContent = s.siteSub||'FLSHM · Mohammedia';
+  // Sync gate landing logo too
+  const gIco = document.getElementById('gateLandingIcon');
+  const gName = document.getElementById('gateLandingName');
+  const gSub  = document.getElementById('gateLandingSub');
+  if(gIco)  gIco.className = s.logoIcon||'fas fa-graduation-cap';
+  if(gName) gName.textContent = s.siteName||'English Studies';
+  if(gSub)  gSub.textContent  = s.siteSub||'FLSHM · Mohammedia';
   // GR labels
   const b1 = document.getElementById('grBtn1');
   const b2 = document.getElementById('grBtn2');
@@ -7066,6 +7363,142 @@ window.pqRestart = function(){
   pqLoadQuestion();
 };
 
+// ══ ADMIN: STUDENTS ══
+window.renderAdminStudents = async function(){
+  const el = document.getElementById('adminStudentsContent');
+  if(!el) return;
+  el.innerHTML='<p style="color:var(--muted);font-size:13px;padding:8px 0;">Loading students...</p>';
+  try {
+    const snap = await getDocs(collection(db,'students'));
+    const all = snap.docs.map(d=>({...d.data(), docId:d.id}));
+    const pending  = all.filter(s=>s.status==='pending');
+    const approved = all.filter(s=>s.status==='approved');
+    const rejected = all.filter(s=>s.status==='rejected');
+
+    const renderStudentCard = (s, actions='')=>`
+      <div style="background:white;border:1.5px solid var(--border);border-radius:14px;padding:16px 18px;display:flex;align-items:flex-start;gap:14px;flex-wrap:wrap;">
+        <div style="width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--navy),var(--royal));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:16px;flex-shrink:0;">
+          ${(s.firstName||'?').charAt(0).toUpperCase()}
+        </div>
+        <div style="flex:1;min-width:180px;">
+          <div style="font-size:14px;font-weight:800;color:var(--navy);">${escapeHtml(s.firstName||'')} ${escapeHtml(s.lastName||'')}</div>
+          <div style="display:flex;flex-wrap:wrap;gap:5px;margin:5px 0 6px;">
+            <span style="background:#f1f5f9;color:var(--navy);font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;">${escapeHtml(s.group||'')}</span>
+            <span style="background:#fff0e8;color:var(--gold);font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;">Massar: ${escapeHtml(s.massar||'—')}</span>
+            <span style="background:#e0f2fe;color:#0369a1;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;">Apogée: ${escapeHtml(s.apogee||'—')}</span>
+          </div>
+          <div style="font-size:12px;color:var(--muted);">📧 ${escapeHtml(s.email||'')} &nbsp;·&nbsp; 📞 ${escapeHtml(s.phone||'—')}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px;">Registered: ${s.createdAt ? new Date(s.createdAt).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}) : '—'}</div>
+        </div>
+        ${actions}
+      </div>`;
+
+    const pendingHTML = pending.length ? pending.map(s=>renderStudentCard(s,`
+      <div style="display:flex;flex-direction:column;gap:7px;flex-shrink:0;">
+        <button onclick="approveStudent('${s.uid}')" style="padding:8px 16px;background:#22c55e;color:white;border:none;border-radius:10px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:800;transition:.2s;white-space:nowrap;">✅ Approve</button>
+        <button onclick="rejectStudent('${s.uid}')" style="padding:8px 16px;background:#ef4444;color:white;border:none;border-radius:10px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:800;transition:.2s;white-space:nowrap;">❌ Reject</button>
+      </div>`)).join('') : '<p style="font-size:13px;color:var(--muted);font-style:italic;padding:6px 0;">No pending registrations.</p>';
+
+    const approvedHTML = approved.length ? approved.map(s=>renderStudentCard(s,`
+      <div style="flex-shrink:0;">
+        <span style="background:#dcfce7;color:#166534;font-size:11px;font-weight:800;padding:4px 12px;border-radius:100px;display:block;margin-bottom:6px;text-align:center;">✅ Approved</span>
+        <button onclick="rejectStudent('${s.uid}')" style="padding:6px 12px;background:#fee2e2;color:#991b1b;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:700;width:100%;">Revoke</button>
+      </div>`)).join('') : '<p style="font-size:13px;color:var(--muted);font-style:italic;padding:6px 0;">No approved students yet.</p>';
+
+    const rejectedHTML = rejected.length ? rejected.map(s=>renderStudentCard(s,`
+      <div style="flex-shrink:0;">
+        <span style="background:#fee2e2;color:#991b1b;font-size:11px;font-weight:800;padding:4px 12px;border-radius:100px;display:block;margin-bottom:6px;text-align:center;">❌ Rejected</span>
+        <button onclick="approveStudent('${s.uid}')" style="padding:6px 12px;background:#dcfce7;color:#166534;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:700;width:100%;">Approve</button>
+      </div>`)).join('') : '';
+
+    el.innerHTML = `
+      <h4 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:4px;">👤 Student Registrations</h4>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:20px;">Review and approve or reject student registration requests. Only approved students can access the portal.</p>
+
+      <!-- LOGIN GATE TOGGLE -->
+      <div style="background:white;border:1.5px solid ${siteSettings.requireLogin!==false?'#86efac':'#fde68a'};border-radius:16px;padding:18px 22px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div style="width:40px;height:40px;border-radius:12px;background:${siteSettings.requireLogin!==false?'#dcfce7':'#fef9c3'};display:flex;align-items:center;justify-content:center;font-size:20px;">${siteSettings.requireLogin!==false?'🔒':'🔓'}</div>
+          <div>
+            <div style="font-size:13.5px;font-weight:800;color:var(--navy);">Student Login Gate — <span style="color:${siteSettings.requireLogin!==false?'#22c55e':'#f59e0b'};">${siteSettings.requireLogin!==false?'Active':'Disabled'}</span></div>
+            <div style="font-size:12px;color:var(--muted);">${siteSettings.requireLogin!==false?'Visitors must log in to access the portal.':'Portal is open to everyone — no login required.'}</div>
+          </div>
+        </div>
+        <button onclick="toggleRequireLogin()" style="padding:10px 20px;background:${siteSettings.requireLogin!==false?'#fee2e2':'var(--navy)'};color:${siteSettings.requireLogin!==false?'#991b1b':'white'};border:none;border-radius:12px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:800;transition:.2s;white-space:nowrap;">
+          ${siteSettings.requireLogin!==false?'🔓 Disable Gate':'🔒 Enable Gate'}
+        </button>
+      </div>
+
+      <!-- PENDING -->
+      <div style="background:white;border:1.5px solid #fde68a;border-radius:16px;padding:20px 22px;margin-bottom:20px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#fef3c7;display:flex;align-items:center;justify-content:center;font-size:18px;">⏳</div>
+          <div>
+            <div style="font-size:14px;font-weight:800;color:var(--navy);">Pending Review</div>
+            <div style="font-size:12px;color:var(--muted);">${pending.length} request${pending.length!==1?'s':''} waiting for approval</div>
+          </div>
+          <button onclick="renderAdminStudents()" style="margin-left:auto;padding:7px 14px;background:#f1f5f9;color:var(--navy);border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:12px;font-weight:700;"><i class="fas fa-sync"></i> Refresh</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">${pendingHTML}</div>
+      </div>
+
+      <!-- APPROVED -->
+      <div style="background:white;border:1.5px solid #86efac;border-radius:16px;padding:20px 22px;margin-bottom:20px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#dcfce7;display:flex;align-items:center;justify-content:center;font-size:18px;">✅</div>
+          <div>
+            <div style="font-size:14px;font-weight:800;color:var(--navy);">Approved Students</div>
+            <div style="font-size:12px;color:var(--muted);">${approved.length} student${approved.length!==1?'s':''} with access</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">${approvedHTML}</div>
+      </div>
+
+      ${rejected.length ? `
+      <!-- REJECTED -->
+      <div style="background:white;border:1.5px solid #fca5a5;border-radius:16px;padding:20px 22px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div style="width:36px;height:36px;border-radius:10px;background:#fee2e2;display:flex;align-items:center;justify-content:center;font-size:18px;">❌</div>
+          <div>
+            <div style="font-size:14px;font-weight:800;color:var(--navy);">Rejected</div>
+            <div style="font-size:12px;color:var(--muted);">${rejected.length} rejected registration${rejected.length!==1?'s':''}</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">${rejectedHTML}</div>
+      </div>` : ''}
+    `;
+  } catch(e){
+    el.innerHTML='<p style="color:#ef4444;font-size:13px;">Error loading students.</p>';
+    console.warn('renderAdminStudents err',e);
+  }
+};
+
+window.toggleRequireLogin = async function(){
+  siteSettings.requireLogin = siteSettings.requireLogin === false ? true : false;
+  await saveSettings();
+  showToast(siteSettings.requireLogin ? '🔒 Login gate enabled.' : '🔓 Login gate disabled — portal is now open.');
+  renderAdminStudents();
+};
+
+window.approveStudent = async function(uid){
+  if(!uid) return;
+  try {
+    await updateDoc(doc(db,'students',uid),{status:'approved'});
+    showToast('✅ Student approved!');
+    renderAdminStudents();
+  } catch(e){ alert('Error approving student.'); }
+};
+
+window.rejectStudent = async function(uid){
+  if(!uid) return;
+  if(!confirm('Reject this student? They will not be able to access the portal.')) return;
+  try {
+    await updateDoc(doc(db,'students',uid),{status:'rejected'});
+    showToast('✅ Student rejected.');
+    renderAdminStudents();
+  } catch(e){ alert('Error rejecting student.'); }
+};
+
 // ══ ADMIN: PRACTICE EXAMS ══
 window.renderAdminPractice = function(){
   const el = document.getElementById('adminPracticeContent');
@@ -7182,7 +7615,160 @@ window.savePracticeSettings = async function(){
 
 
 </script>
+<!-- ══ STUDENT AUTH GATE ══ -->
+<div id="studentGate">
+
+  <!-- LANDING VIEW -->
+  <div id="gateViewLanding" class="gate-view">
+    <div class="gate-card">
+      <div class="gate-site-logo">
+        <div class="gate-logo-ico"><i id="gateLandingIcon" class="fas fa-graduation-cap"></i></div>
+        <div>
+          <div class="gate-logo-name" id="gateLandingName">English Studies</div>
+          <div class="gate-logo-sub" id="gateLandingSub">FLSHM · Mohammedia</div>
+        </div>
+      </div>
+      <div class="gate-divider-line"></div>
+      <h1 class="gate-title">Welcome, Student!</h1>
+      <p class="gate-sub">Please log in or create an account to access the portal.</p>
+      <div class="gate-btns">
+        <button class="gate-btn-primary" onclick="showGateViewFn('login')"><i class="fas fa-sign-in-alt" style="margin-right:6px;"></i>Login</button>
+        <button class="gate-btn-secondary" onclick="showGateViewFn('register')"><i class="fas fa-user-plus" style="margin-right:6px;"></i>Sign Up</button>
+      </div>
+    </div>
+    <div class="gate-footer-area">
+      <span id="gateAdminTrigger" onclick="openAdminFromGate()">Mourad Project's @ 2026</span>
+    </div>
+  </div>
+
+  <!-- LOGIN VIEW -->
+  <div id="gateViewLogin" class="gate-view">
+    <button class="gate-back-btn" onclick="showGateViewFn('landing')"><i class="fas fa-arrow-left"></i> Back</button>
+    <div class="gate-form-card">
+      <div class="gate-site-logo" style="justify-content:flex-start;margin-bottom:12px;">
+        <div class="gate-logo-ico" style="width:34px;height:34px;font-size:14px;border-radius:10px;"><i class="fas fa-graduation-cap"></i></div>
+        <div>
+          <div class="gate-logo-name" style="font-size:14px;">English Studies Portal</div>
+          <div class="gate-logo-sub">Student Login</div>
+        </div>
+      </div>
+      <div class="gate-divider-line" style="margin:12px 0 16px;"></div>
+      <div class="gate-error" id="gateLoginError"></div>
+      <div class="gate-field">
+        <label class="gate-label">Email Address</label>
+        <input type="email" class="gate-input" id="gateLoginEmail" placeholder="your@email.com" autocomplete="email">
+      </div>
+      <div class="gate-field">
+        <label class="gate-label">Password</label>
+        <input type="password" class="gate-input" id="gateLoginPassword" placeholder="••••••••" autocomplete="current-password"
+          onkeydown="if(event.key==='Enter') doStudentLogin()">
+      </div>
+      <button class="gate-submit" id="gateLoginBtn" onclick="doStudentLogin()">
+        <i class="fas fa-sign-in-alt" style="margin-right:7px;"></i>Login
+      </button>
+      <div class="gate-switch-link">
+        Don't have an account? <a onclick="showGateViewFn('register')">Create one</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- REGISTER VIEW -->
+  <div id="gateViewRegister" class="gate-view">
+    <button class="gate-back-btn" onclick="showGateViewFn('landing')"><i class="fas fa-arrow-left"></i> Back</button>
+    <div class="gate-form-card">
+      <div class="gate-site-logo" style="justify-content:flex-start;margin-bottom:12px;">
+        <div class="gate-logo-ico" style="width:34px;height:34px;font-size:14px;border-radius:10px;"><i class="fas fa-graduation-cap"></i></div>
+        <div>
+          <div class="gate-logo-name" style="font-size:14px;">English Studies Portal</div>
+          <div class="gate-logo-sub">Create New Account</div>
+        </div>
+      </div>
+      <div class="gate-divider-line" style="margin:12px 0 16px;"></div>
+      <div class="gate-error" id="gateRegError"></div>
+      <div class="gate-row">
+        <div class="gate-field" style="margin-bottom:0;">
+          <label class="gate-label">First Name</label>
+          <input type="text" class="gate-input" id="regFirstName" placeholder="First Name" autocomplete="given-name">
+        </div>
+        <div class="gate-field" style="margin-bottom:0;">
+          <label class="gate-label">Last Name</label>
+          <input type="text" class="gate-input" id="regLastName" placeholder="Last Name" autocomplete="family-name">
+        </div>
+      </div>
+      <div class="gate-field">
+        <label class="gate-label">Massar Code</label>
+        <input type="text" class="gate-input" id="regMassar" placeholder="e.g. R123456" maxlength="15">
+      </div>
+      <div class="gate-field">
+        <label class="gate-label">Apogée Number</label>
+        <input type="text" class="gate-input" id="regApogee" placeholder="Your apogée number" maxlength="15">
+      </div>
+      <div class="gate-field">
+        <label class="gate-label">Phone Number</label>
+        <div class="gate-phone-wrap">
+          <select class="gate-country-sel" id="regPhoneCountry">
+            <option value="+212">🇲🇦 +212</option>
+            <option value="+962">🇯🇴 +962</option>
+            <option value="+970">🇵🇸 +970</option>
+            <option value="+974">🇶🇦 +974</option>
+            <option value="+971">🇦🇪 +971</option>
+          </select>
+          <input type="tel" class="gate-input" id="regPhone" placeholder="06 00 00 00 00" style="flex:1;">
+        </div>
+      </div>
+      <div class="gate-field">
+        <label class="gate-label">Email Address</label>
+        <input type="email" class="gate-input" id="regEmail" placeholder="your@email.com" autocomplete="email">
+      </div>
+      <div class="gate-field">
+        <label class="gate-label">Password</label>
+        <input type="password" class="gate-input" id="regPassword" placeholder="At least 6 characters" autocomplete="new-password">
+      </div>
+      <div class="gate-field">
+        <label class="gate-label">Group</label>
+        <select class="gate-group-sel" id="regGroup">
+          <option value="">— Select Your Group —</option>
+          <option value="GR1">GR1</option>
+          <option value="GR2">GR2</option>
+        </select>
+      </div>
+      <button class="gate-submit" id="gateRegBtn" onclick="doStudentRegister()">
+        <i class="fas fa-user-plus" style="margin-right:7px;"></i>Register &amp; Enter
+      </button>
+      <div class="gate-switch-link">
+        Already have an account? <a onclick="showGateViewFn('login')">Log in</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PENDING VIEW -->
+  <div id="gateViewPending" class="gate-view">
+    <div class="gate-status-card">
+      <span class="gate-status-icon">⏳</span>
+      <h2 class="gate-status-title">Registration Submitted</h2>
+      <p class="gate-status-text">Your account is <strong>pending admin review</strong>.<br>You will be granted access once approved. Check back later or contact the department.</p>
+      <button class="gate-submit" style="max-width:220px;margin:0 auto;" onclick="doStudentGateLogout()">
+        <i class="fas fa-sign-out-alt" style="margin-right:7px;"></i>Log Out
+      </button>
+    </div>
+  </div>
+
+  <!-- REJECTED VIEW -->
+  <div id="gateViewRejected" class="gate-view">
+    <div class="gate-status-card">
+      <span class="gate-status-icon">❌</span>
+      <h2 class="gate-status-title">Access Denied</h2>
+      <p class="gate-status-text">Your registration was <strong>not approved</strong>.<br>Please contact the English Studies Department.</p>
+      <button class="gate-submit" style="max-width:200px;margin:0 auto;" onclick="doStudentGateLogout()">
+        <i class="fas fa-arrow-left" style="margin-right:7px;"></i>Go Back
+      </button>
+    </div>
+  </div>
+
+</div>
+
 <!-- ══ MAINTENANCE OVERLAY ══ -->
+
 <div id="maintenanceOverlay" style="display:none;">
 
   <!-- SITE HEADER (mirrored) -->
@@ -7325,6 +7911,11 @@ window.savePracticeSettings = async function(){
 <!-- ADMIN: PRACTICE EXAMS -->
 <div class="admin-section-content" id="admin-practice-admin">
   <div id="adminPracticeContent"></div>
+</div>
+
+<!-- ADMIN: STUDENTS -->
+<div class="admin-section-content" id="admin-students-admin">
+  <div id="adminStudentsContent"></div>
 </div>
 
 <!-- Notification dropdown — outside header to avoid stacking context issues -->
