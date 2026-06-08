@@ -304,19 +304,7 @@
 .gate-footer-area{margin-top:22px;font-size:11.5px;color:var(--muted);text-align:center;opacity:.6;}
 .gate-footer-area span{cursor:default;user-select:none;}
 /* Student bar in header */
-#studentHeaderBar{
-  display:none;align-items:center;gap:10px;
-  background:rgba(255,255,255,.12);border:1.5px solid rgba(255,255,255,.18);
-  border-radius:100px;padding:5px 14px 5px 10px;
-}
-.stud-bar-name{font-size:12px;font-weight:700;color:white;}
-.stud-bar-group{font-size:10px;font-weight:800;padding:2px 9px;border-radius:100px;background:rgba(255,255,255,.18);color:white;}
-.stud-logout-btn{
-  background:rgba(255,90,90,.2);border:1.5px solid rgba(255,90,90,.3);
-  color:#ffcaca;border-radius:100px;padding:4px 12px;font-family:inherit;
-  font-size:11px;font-weight:800;cursor:pointer;transition:.2s;white-space:nowrap;
-}
-.stud-logout-btn:hover{background:rgba(255,90,90,.35);}
+/* Student bar now in footer — see #studentFooterBar */
 
 
 /* ══ MAINTENANCE OVERLAY — site style ══ */
@@ -1691,12 +1679,6 @@ footer::after{
       </div>
       <!-- Hidden admin trigger (1px invisible) -->
       <button class="admin-trigger" id="adminTrigger" onclick="openLoginModal()"></button>
-      <!-- Student bar (shown when student is logged in) -->
-      <div id="studentHeaderBar">
-        <span class="stud-bar-name" id="studBarName">Student</span>
-        <span class="stud-bar-group" id="studBarGroup">GR1</span>
-        <button class="stud-logout-btn" onclick="doStudentGateLogout()"><i class="fas fa-sign-out-alt" style="margin-right:4px;"></i>Logout</button>
-      </div>
       <!-- Notification Bell -->
       <div class="notif-bell-wrap" id="notifBellWrap">
         <button class="notif-bell-btn" onclick="toggleNotifDropdown()" title="Notifications">
@@ -2058,11 +2040,26 @@ footer::after{
     </div>
   </div>
   <hr class="footer-divider">
+  <!-- Student bar — shows in footer when logged in as student -->
+  <div id="studentFooterBar" style="display:none;background:rgba(255,255,255,.06);border-top:1px solid rgba(255,255,255,.1);padding:10px 24px;">
+    <div style="max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:8px;flex:1;">
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--royal),var(--sky));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;" id="studFooterAvatar">?</div>
+        <div>
+          <div style="font-size:13px;font-weight:800;color:white;" id="studFooterName">Student</div>
+          <div style="font-size:10.5px;color:rgba(255,255,255,.55);">Logged in · <span id="studFooterGroup" style="font-weight:700;color:rgba(255,255,255,.75);"></span></div>
+        </div>
+      </div>
+      <button onclick="doStudentGateLogout()" style="display:flex;align-items:center;gap:6px;padding:7px 16px;background:rgba(255,90,90,.18);border:1.5px solid rgba(255,90,90,.3);color:#ffbdbd;border-radius:100px;font-family:inherit;font-size:12px;font-weight:700;cursor:pointer;transition:.2s;white-space:nowrap;">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </div>
+  </div>
   <div class="footer-bottom">
     <span id="footerCopy">© 2026 English Studies Portal · FLSHM Mohammedia &nbsp;<span class="version-badge" id="footerVersion">v2.0.1</span></span>
     <div style="display:flex;align-items:center;gap:12px;">
       <span id="footerMadeBy" style="display:none;"></span>
-      <button class="footer-admin-btn" onclick="openLoginModal()" title=""><i class="fas fa-circle-user"></i></button>
+      <button class="footer-admin-btn" id="footerAdminBtn" onclick="openLoginModal()" title=""><i class="fas fa-circle-user"></i></button>
     </div>
   </div>
 </footer>
@@ -2092,6 +2089,7 @@ footer::after{
     <div class="admin-tab maintenance-tab" onclick="switchAdminTab('maintenance-admin',this);renderAdminMaintenance();">🔧 Maintenance</div>
     <div class="admin-tab" onclick="switchAdminTab('practice-admin',this);renderAdminPractice();">🧪 Practice Exams</div>
     <div class="admin-tab" onclick="switchAdminTab('students-admin',this);renderAdminStudents();">👤 Students</div>
+    <div class="admin-tab" onclick="switchAdminTab('admins-admin',this);renderAdminAdmins();">🛡 Admins</div>
   </div>
   <div class="admin-section-content active" id="admin-announcements">
     <button class="add-btn" onclick="openModal('addAnnModal')"><i class="fas fa-plus"></i> New Announcement</button>
@@ -2271,6 +2269,17 @@ footer::after{
     </div>
     <select id="annGroupInput"><option value="Both">Both GR1 &amp; GR2</option><option value="GR1">GR1 Only</option><option value="GR2">GR2 Only</option></select>
     <select id="annTypeInput"><option value="general">General</option><option value="info">Info</option><option value="urgent">Urgent</option></select>
+    <!-- Target specific students -->
+    <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);cursor:pointer;margin:6px 0 4px;font-weight:600;">
+      <input type="checkbox" id="annTargetToggle" onchange="toggleAnnTargetPicker('add')" style="width:15px;height:15px;accent-color:var(--royal);cursor:pointer;">
+      👁 Visible to specific students only
+    </label>
+    <div id="annTargetPicker" style="display:none;background:var(--bg,#f8f6f2);border:1.5px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:2px;">
+      <p style="font-size:11.5px;color:var(--muted);margin:0 0 10px;">Select which students can see this announcement. Leave all unchecked = visible to everyone.</p>
+      <div id="annTargetList" style="max-height:160px;overflow-y:auto;display:flex;flex-direction:column;gap:4px;">
+        <span style="font-size:12px;color:var(--muted);">Loading students...</span>
+      </div>
+    </div>
     <!-- Manual date + time -->
     <label style="font-size:12px;color:var(--muted);margin-bottom:4px;display:block;">Date &amp; Time (manual)</label>
     <div style="display:flex;gap:8px;">
@@ -2551,9 +2560,19 @@ const CLOUDINARY_PRESET = 'English Studies';
 
 // ══ ADMIN EMAILS (for role detection) ══
 const ADMIN_EMAILS = {
-  'mouradaittaleb02@gmail.com': { name: 'Mourad', role: 'GR1' },
-  'hajaryahya40@gmail.com':     { name: 'Hajar',  role: 'GR2' },
+  'mouradaittaleb02@gmail.com': { name: 'Mourad', role: 'GR1', isSuperAdmin: true },
+  'hajaryahya40@gmail.com':     { name: 'Hajar',  role: 'GR2', isSuperAdmin: true },
 };
+
+// Dynamic admins loaded from Firestore (added via admin panel)
+let firestoreAdmins = {}; // email -> {name, role}
+async function loadFirestoreAdmins(){
+  try {
+    const snap = await getDocs(collection(db,'admins'));
+    snap.docs.forEach(d => { firestoreAdmins[d.id] = d.data(); });
+  } catch(e){ console.warn('loadFirestoreAdmins err',e); }
+}
+function getAllAdmins(){ return {...ADMIN_EMAILS, ...firestoreAdmins}; }
 
 // ══ CONSTANTS ══
 const DEFAULT_MODS = {
@@ -2685,16 +2704,24 @@ function hideGate(){
 }
 
 function updateStudentBar(data){
-  const bar = document.getElementById('studentHeaderBar');
-  if(!bar) return;
+  const bar    = document.getElementById('studentFooterBar');
+  const adminBtn = document.getElementById('footerAdminBtn');
   if(data){
-    bar.style.display='flex';
-    const nEl=document.getElementById('studBarName');
-    const gEl=document.getElementById('studBarGroup');
-    if(nEl) nEl.textContent=(data.firstName||'')+(data.lastName?' '+data.lastName:'');
-    if(gEl) gEl.textContent=data.group||'';
+    // Show student footer bar
+    if(bar) bar.style.display='block';
+    const name = ((data.firstName||'')+' '+(data.lastName||'')).trim();
+    const initials = name.slice(0,2).toUpperCase()||'ST';
+    const nEl=document.getElementById('studFooterName');
+    const gEl=document.getElementById('studFooterGroup');
+    const aEl=document.getElementById('studFooterAvatar');
+    if(nEl) nEl.textContent = name;
+    if(gEl) gEl.textContent = data.group||'';
+    if(aEl) aEl.textContent = initials;
+    // Hide admin trigger from students
+    if(adminBtn) adminBtn.style.display='none';
   } else {
-    bar.style.display='none';
+    if(bar) bar.style.display='none';
+    if(adminBtn) adminBtn.style.display='';
   }
 }
 
@@ -2803,7 +2830,9 @@ document.getElementById('loginPassword').addEventListener('keydown',e=>{if(e.key
 onAuthStateChanged(auth, async user => {
   if(user){
     const emailKey = user.email.toLowerCase();
-    const acc = ADMIN_EMAILS[emailKey];
+    // Check hardcoded + Firestore admins
+    const allAdmins = getAllAdmins();
+    const acc = allAdmins[emailKey];
     if(acc){
       // ── Admin login ──
       adminUnlocked=true;
@@ -3069,6 +3098,7 @@ async function seedIfEmpty(){
 
 async function init(){
   try{
+    await loadFirestoreAdmins();
     await syncLikesFromFirebase();
     // ── Load settings FIRST so hidden sems/pages apply before first render ──
     try{
@@ -3514,14 +3544,21 @@ function saveViewedSet(){ localStorage.setItem('flshm_viewed', JSON.stringify(vi
 
 async function recordView(col, id){
   const key = col+'_'+id;
-  if(viewedSet[key]) return; // already viewed by this user
+  if(viewedSet[key]) return;
   viewedSet[key] = true;
   saveViewedSet();
   try {
-    // Store in Firebase: userViews/{userId}/views/{col_id} = true
     await setDoc(doc(db,'userViews',USER_ID+'_'+col+'_'+id),{uid:USER_ID,col,itemId:id,ts:Date.now()});
-    // Increment counter on the item
     await updateDoc(doc(db,col,id),{views: increment(1)});
+    // Track named student engagement
+    if(studentLoggedIn && currentStudent && col==='announcements'){
+      const engId = currentStudent.uid+'_view_'+id;
+      await setDoc(doc(db,'annEngagement',engId),{
+        annId:id, studentUid:currentStudent.uid,
+        studentName:((currentStudent.firstName||'')+' '+(currentStudent.lastName||'')).trim(),
+        studentGroup:currentStudent.group||'', action:'view', ts:Date.now()
+      },{merge:true});
+    }
   } catch(e){ console.warn('view err',e); }
 }
 
@@ -3563,6 +3600,15 @@ window.toggleSave = async function(id, btnEl){
       const cur = snap.exists() ? (snap.data().saves||0) : 0;
       await updateDoc(ref,{saves: cur+1});
       if(sc) sc.textContent = cur+1;
+      // Track named student engagement
+      if(studentLoggedIn && currentStudent){
+        const engId = currentStudent.uid+'_save_'+id;
+        await setDoc(doc(db,'annEngagement',engId),{
+          annId:id, studentUid:currentStudent.uid,
+          studentName:((currentStudent.firstName||'')+' '+(currentStudent.lastName||'')).trim(),
+          studentGroup:currentStudent.group||'', action:'save', ts:Date.now()
+        },{merge:true});
+      }
     }catch(e){ if(sc) sc.textContent=(parseInt(sc.textContent)||0)+1; }
     showToast('📌 Post saved!');
   }
@@ -3574,12 +3620,21 @@ window.toggleSave = async function(id, btnEl){
 window.sharePost = async function(id, title, text){
   try{
     await navigator.share({title, text, url: window.location.href});
-    // Increment share count
     try{ await updateDoc(doc(db,'announcements',id),{shares:increment(1)}); }catch(e){}
     const sc=document.getElementById('shareCount-'+id);
     if(sc) sc.textContent=(parseInt(sc.textContent)||0)+1;
+    // Track named student engagement
+    if(studentLoggedIn && currentStudent){
+      try {
+        const engId = currentStudent.uid+'_share_'+id;
+        await setDoc(doc(db,'annEngagement',engId),{
+          annId:id, studentUid:currentStudent.uid,
+          studentName:((currentStudent.firstName||'')+' '+(currentStudent.lastName||'')).trim(),
+          studentGroup:currentStudent.group||'', action:'share', ts:Date.now()
+        },{merge:true});
+      }catch(e){}
+    }
   } catch(e){
-    // Fallback: copy link
     try{ await navigator.clipboard.writeText(window.location.href); showToast('🔗 Link copied!'); }catch(ee){}
   }
 };
@@ -3671,7 +3726,18 @@ window.toggleLike = async function(col, id, btnEl){
     try { await setDoc(doc(db,'userLikes',likeDocId),{uid:USER_ID,col,itemId:id,ts:Date.now()}); } catch(e){}
     if(likeCountEl) likeCountEl.textContent = (parseInt(likeCountEl.textContent)||0)+1;
     else { const s=btnEl.querySelector('span'); if(s) s.textContent=(parseInt(s.textContent)||0)+1; }
-  }
+    // Track named student engagement (announcements only)
+    if(col==='announcements' && studentLoggedIn && currentStudent){
+      try {
+        const engId = currentStudent.uid+'_like_'+id;
+        await setDoc(doc(db,'annEngagement',engId),{
+          annId:id, studentUid:currentStudent.uid,
+          studentName:((currentStudent.firstName||'')+' '+(currentStudent.lastName||'')).trim(),
+          studentGroup:currentStudent.group||'', action:'like', ts:Date.now()
+        },{merge:true});
+      }catch(e){}
+    }
+  }  // end else
 };
 
 function isLiked(col,id){
@@ -3700,6 +3766,9 @@ async function syncLikesFromFirebase(){
 function getCommentName(){
   if(adminUnlocked && currentAdmin){
     return (siteSettings.adminCommentNames && siteSettings.adminCommentNames[currentAdmin.email]) || currentAdmin.name;
+  }
+  if(studentLoggedIn && currentStudent){
+    return ((currentStudent.firstName||'') + (currentStudent.lastName ? ' '+currentStudent.lastName : '')).trim();
   }
   return localStorage.getItem('flshm_comment_name') || '';
 }
@@ -3809,11 +3878,14 @@ async function renderCommentsList(annId, comments){
     const isAdmin = c.isAdmin;
     const avatarBg = isAdmin ? 'background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);' : '';
     const adminBadge = isAdmin ? `<span style="background:var(--gold);color:white;font-size:8.5px;font-weight:800;padding:1px 7px;border-radius:100px;letter-spacing:.3px;margin-left:5px;">ADMIN</span>` : '';
+    const grClr = c.studentGroup==='GR1'?'#1e40af':'#166534';
+    const grBg  = c.studentGroup==='GR1'?'#dbeafe':'#dcfce7';
+    const studentBadge = (!isAdmin && c.isStudent && c.studentGroup) ? `<span style="background:${grBg};color:${grClr};font-size:8.5px;font-weight:800;padding:1px 7px;border-radius:100px;margin-left:5px;">${c.studentGroup}</span>` : '';
     html += `<div class="fb-comment" id="cmt-${c.id}">
       <div class="fb-comment-avatar" style="${avatarBg}">${(c.username||'?').slice(0,2).toUpperCase()}</div>
       <div class="fb-comment-main">
         <div class="fb-comment-bubble">
-          <span class="fb-comment-name">${escapeUsername(c.username)}${adminBadge}</span>
+          <span class="fb-comment-name">${escapeUsername(c.username)}${adminBadge}${studentBadge}</span>
           <div class="fb-comment-text">${formatCommentText(c.text||'')}</div>
         </div>
         <div class="fb-comment-actions">
@@ -3868,11 +3940,14 @@ function renderReplies(annId, parentId, replies){
     const isAdmin = r.isAdmin;
     const avatarBg = isAdmin ? 'background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);' : '';
     const adminBadge = isAdmin ? `<span style="background:var(--gold);color:white;font-size:8.5px;font-weight:800;padding:1px 7px;border-radius:100px;letter-spacing:.3px;margin-left:5px;">ADMIN</span>` : '';
+    const rGrClr = r.studentGroup==='GR1'?'#1e40af':'#166534';
+    const rGrBg  = r.studentGroup==='GR1'?'#dbeafe':'#dcfce7';
+    const studentBadge = (!isAdmin && r.isStudent && r.studentGroup) ? `<span style="background:${rGrBg};color:${rGrClr};font-size:8.5px;font-weight:800;padding:1px 7px;border-radius:100px;margin-left:5px;">${r.studentGroup}</span>` : '';
     return `<div class="fb-comment fb-reply" id="cmt-${r.id}">
       <div class="fb-comment-avatar" style="width:26px;height:26px;font-size:10px;${avatarBg}">${(r.username||'?').slice(0,2).toUpperCase()}</div>
       <div class="fb-comment-main">
         <div class="fb-comment-bubble">
-          <span class="fb-comment-name">${escapeUsername(r.username)}${adminBadge}</span>
+          <span class="fb-comment-name">${escapeUsername(r.username)}${adminBadge}${studentBadge}</span>
           <div class="fb-comment-text">${formatCommentText(r.text||'')}</div>
         </div>
         <div class="fb-comment-actions">
@@ -3915,6 +3990,8 @@ window.submitComment = async function(annId, parentId){
   let username;
   if(adminUnlocked && currentAdmin){
     username = getCommentName();
+  } else if(studentLoggedIn && currentStudent){
+    username = getCommentName(); // auto from account
   } else {
     // Read from the name input for this announcement (or fallback to localStorage)
     const nameInp = document.getElementById('cmtName-'+annId);
@@ -3940,6 +4017,8 @@ window.submitComment = async function(annId, parentId){
       annId, parentId: parentId||null,
       username, text, ts: Date.now(), likes: 0,
       isAdmin: adminUnlocked ? true : false,
+      isStudent: (!adminUnlocked && studentLoggedIn && currentStudent) ? true : false,
+      studentGroup: (!adminUnlocked && studentLoggedIn && currentStudent) ? (currentStudent.group||'') : '',
       userId: USER_ID
     });
     ta.value='';
@@ -4559,6 +4638,7 @@ function annHTML(a){
         &nbsp;·&nbsp; <span id="shareCount-${a.id}">${a.shares||0}</span> shares
         &nbsp;·&nbsp; <span id="viewCount-${a.id}">${a.views||0}</span> views
         &nbsp;·&nbsp; <span id="saveCount-${a.id}">${a.saves||0}</span> saved
+        ${adminUnlocked && a.targetStudents && a.targetStudents.length > 0 ? `&nbsp;·&nbsp; <span style="color:var(--royal);font-weight:800;">👁 ${a.targetStudents.length} student${a.targetStudents.length!==1?'s':''} only</span>` : ''}
       </span>
     </div>
 
@@ -4575,6 +4655,20 @@ function annHTML(a){
               <textarea class="comment-textarea" id="cmtInput-${a.id}" placeholder="Write a comment..." rows="1"
                 onkeydown="cmtKeydown(event,'${a.id}',null)"></textarea>
               <div class="username-tag">Commenting as <strong>${adminName}</strong> <span class="admin-badge" style="vertical-align:middle;">ADMIN</span></div>
+            </div>
+            <button class="comment-send-btn" onclick="submitComment('${a.id}',null)"><i class="fas fa-paper-plane"></i></button>
+          </div>`;
+        } else if(studentLoggedIn && currentStudent){
+          const sName = getCommentName();
+          const initials = sName.slice(0,2).toUpperCase();
+          const grClr = currentStudent.group==='GR1' ? '#1e40af' : '#166534';
+          const grBg  = currentStudent.group==='GR1' ? '#dbeafe' : '#dcfce7';
+          return `<div class="comment-input-row">
+            <div class="comment-input-avatar" style="background:linear-gradient(135deg,var(--royal),var(--sky));">${initials}</div>
+            <div class="comment-input-wrap">
+              <textarea class="comment-textarea" id="cmtInput-${a.id}" placeholder="Write a comment..." rows="1"
+                onkeydown="cmtKeydown(event,'${a.id}',null)"></textarea>
+              <div class="username-tag">Commenting as <strong>${sName}</strong> <span style="background:${grBg};color:${grClr};font-size:8.5px;font-weight:800;padding:1px 7px;border-radius:100px;margin-left:4px;vertical-align:middle;">${currentStudent.group||'STUDENT'}</span></div>
             </div>
             <button class="comment-send-btn" onclick="submitComment('${a.id}',null)"><i class="fas fa-paper-plane"></i></button>
           </div>`;
@@ -4614,7 +4708,21 @@ function escapeHtml(str){
   return s;
 }
 
-function filteredAnn(){return announcements.filter(a=>a.group==='Both'||a.group===currentGroup);}
+function filteredAnn(){
+  return announcements.filter(a=>{
+    // Group filter
+    const groupOk = a.group==='Both' || a.group===currentGroup;
+    if(!groupOk) return false;
+    // Admin always sees everything
+    if(adminUnlocked) return true;
+    // Targeted announcements: only show to listed students
+    if(a.targetStudents && a.targetStudents.length > 0){
+      if(!studentLoggedIn || !currentStudent) return false;
+      return a.targetStudents.includes(currentStudent.uid);
+    }
+    return true;
+  });
+}
 
 function adjustThreadLines(){
   requestAnimationFrame(()=>{
@@ -5882,9 +5990,10 @@ function renderAdminAnn(){
           <span class="post-admin-symbol" title="Admin post"><i class="fas fa-shield-alt" style="font-size:8px;"></i></span>
           <strong>${a.title}</strong>
         </div>
-        <span>${dt} · <span style="background:${grColor};color:${grText};padding:1px 7px;border-radius:100px;font-weight:700;font-size:11px;">${a.group}</span> · ${a.type} · 👁 ${a.views||0} · ❤️ ${a.likes||0}</span>
+        <span>${dt} · <span style="background:${grColor};color:${grText};padding:1px 7px;border-radius:100px;font-weight:700;font-size:11px;">${a.group}</span> · ${a.type} · 👁 ${a.views||0} · ❤️ ${a.likes||0}${a.targetStudents&&a.targetStudents.length?` · <span style="color:var(--royal);font-weight:800;">🎯 ${a.targetStudents.length} targeted</span>`:''}</span>
       </div>
       <div class="admin-item-actions" style="position:relative;z-index:10;">
+        <button class="edit-btn" title="Engagement" onclick="event.stopPropagation();showAnnEngagement('${a.id}','${(a.title||'').replace(/'/g,"\\'")}')"><i class="fas fa-chart-bar"></i></button>
         <button class="edit-btn" onclick="event.stopPropagation();openEditAnn('${a.id}')"><i class="fas fa-pen"></i></button>
         <button class="del-btn" onclick="event.stopPropagation();deleteAnn('${a.id}')"><i class="fas fa-trash"></i></button>
       </div>
@@ -6255,11 +6364,54 @@ async function uploadAnnImg(file, annId, progressBarId, progressContainerId){
     xhr.send(formData);
   });
 }
+// ── Target students picker for announcements ──
+let _approvedStudentsCache = null;
+async function loadApprovedStudentsForPicker(){
+  if(_approvedStudentsCache) return _approvedStudentsCache;
+  const snap = await getDocs(query(collection(db,'students'), where('status','==','approved')));
+  _approvedStudentsCache = snap.docs.map(d=>d.data());
+  return _approvedStudentsCache;
+}
+
+window.toggleAnnTargetPicker = async function(prefix){
+  const toggle = document.getElementById('annTargetToggle');
+  const picker = document.getElementById('annTargetPicker');
+  const listEl = document.getElementById('annTargetList');
+  if(!toggle||!picker) return;
+  picker.style.display = toggle.checked ? 'block' : 'none';
+  if(toggle.checked && listEl && listEl.querySelector('span')){
+    try {
+      const students = await loadApprovedStudentsForPicker();
+      if(!students.length){
+        listEl.innerHTML = '<p style="font-size:12px;color:var(--muted);margin:0;">No approved students yet.</p>';
+        return;
+      }
+      listEl.innerHTML = students.map(s=>{
+        const grClr = s.group==='GR1'?'#1e40af':'#166534';
+        const grBg  = s.group==='GR1'?'#dbeafe':'#dcfce7';
+        return `<label style="display:flex;align-items:center;gap:9px;padding:6px 8px;border-radius:8px;cursor:pointer;font-size:13px;background:white;border:1px solid var(--border);">
+          <input type="checkbox" class="ann-target-cb" value="${s.uid}" style="accent-color:var(--royal);cursor:pointer;">
+          <span style="flex:1;font-weight:600;color:var(--navy);">${escapeHtml(s.firstName)} ${escapeHtml(s.lastName)}</span>
+          <span style="background:${grBg};color:${grClr};font-size:10px;font-weight:800;padding:1px 8px;border-radius:100px;">${s.group}</span>
+        </label>`;
+      }).join('');
+    } catch(e){
+      listEl.innerHTML = '<p style="color:#ef4444;font-size:12px;margin:0;">Error loading students.</p>';
+    }
+  }
+};
+
 window.saveAnn=async function(){
   const title=document.getElementById('annTitleInput').value.trim();
   const text=document.getElementById('addEditor').innerHTML.trim();
   if(!title||!text||text==='<br>'){alert('Please fill all fields.');return;}
   const group=document.getElementById('annGroupInput').value;
+  // Collect targeted students
+  const targetToggle = document.getElementById('annTargetToggle');
+  const targetStudents = [];
+  if(targetToggle && targetToggle.checked){
+    document.querySelectorAll('#annTargetList .ann-target-cb:checked').forEach(cb=>targetStudents.push(cb.value));
+  }
   const file=document.getElementById('addImgFile').files[0];
   const saveBtn=document.querySelector('#addAnnModal .modal-btn-save');
   if(saveBtn){ saveBtn.disabled=true; saveBtn.textContent='Saving...'; }
@@ -6270,7 +6422,8 @@ window.saveAnn=async function(){
       date:document.getElementById('annDateInput').value,
       time:document.getElementById('annTimeInput').value,
       order: announcements.length ? Math.min(...announcements.map(a=>a.order??0)) - 1 : 0,
-      views:0,likes:0,imgUrl:''
+      views:0,likes:0,imgUrl:'',
+      targetStudents: targetStudents.length ? targetStudents : []
     });
     if(file){
       if(saveBtn) saveBtn.textContent='Uploading photo...';
@@ -6283,6 +6436,8 @@ window.saveAnn=async function(){
     closeModal('addAnnModal');
     ['annTitleInput','annDateInput','annTimeInput'].forEach(id=>document.getElementById(id).value='');
     document.getElementById('addEditor').innerHTML='';
+    document.getElementById('annTargetToggle').checked=false;
+    document.getElementById('annTargetPicker').style.display='none';
     removeImg('addImgArea','addImgFile','addImgPreview');
   }catch(e){
     console.error('saveAnn error:',e);
@@ -7363,6 +7518,162 @@ window.pqRestart = function(){
   pqLoadQuestion();
 };
 
+// ══ ADMIN: ADMINS MANAGEMENT ══
+window.renderAdminAdmins = async function(){
+  const el = document.getElementById('adminAdminsContent');
+  if(!el) return;
+  // Only super-admins (hardcoded) can manage admins
+  const isSuperAdmin = currentAdmin && ADMIN_EMAILS[currentAdmin.email.toLowerCase()];
+
+  // Reload Firestore admins
+  await loadFirestoreAdmins();
+
+  const superList = Object.entries(ADMIN_EMAILS).map(([email, acc])=>`
+    <div style="background:white;border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div style="width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;color:var(--navy);font-weight:800;font-size:15px;flex-shrink:0;">${(acc.name||'?').charAt(0)}</div>
+      <div style="flex:1;">
+        <div style="font-size:13.5px;font-weight:800;color:var(--navy);">${escapeHtml(acc.name)} <span style="background:#fef9c3;color:#92400e;font-size:9px;font-weight:800;padding:1px 7px;border-radius:100px;margin-left:4px;">SUPER ADMIN</span></div>
+        <div style="font-size:12px;color:var(--muted);">${escapeHtml(email)} · ${escapeHtml(acc.role||'All')}</div>
+      </div>
+      <span style="font-size:11px;color:var(--muted);font-style:italic;">Hardcoded — cannot remove</span>
+    </div>`).join('');
+
+  const fsAdminEntries = Object.entries(firestoreAdmins);
+  const fsAdminList = fsAdminEntries.length ? fsAdminEntries.map(([email, acc])=>`
+    <div style="background:white;border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div style="width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--navy),var(--royal));display:flex;align-items:center;justify-content:center;color:white;font-weight:800;font-size:15px;flex-shrink:0;">${(acc.name||'?').charAt(0)}</div>
+      <div style="flex:1;">
+        <div style="font-size:13.5px;font-weight:800;color:var(--navy);">${escapeHtml(acc.name)}</div>
+        <div style="font-size:12px;color:var(--muted);">${escapeHtml(email)} · ${escapeHtml(acc.role||'All')}</div>
+        ${acc.addedAt ? `<div style="font-size:11px;color:var(--muted);">Added: ${new Date(acc.addedAt).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})}</div>` : ''}
+      </div>
+      ${isSuperAdmin ? `<button onclick="removeFirestoreAdmin('${email.replace(/'/g,"\\'")}')" style="padding:6px 14px;background:#fee2e2;color:#991b1b;border:none;border-radius:8px;cursor:pointer;font-family:inherit;font-size:11px;font-weight:700;white-space:nowrap;">Remove</button>` : ''}
+    </div>`).join('') : '<p style="font-size:13px;color:var(--muted);font-style:italic;">No additional admins yet.</p>';
+
+  el.innerHTML = `
+    <h4 style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:4px;">🛡 Admin Management</h4>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:18px;">Only super-admins can add or remove admins. Students can <strong>never</strong> access this panel.</p>
+
+    <!-- Add admin -->
+    ${isSuperAdmin ? `
+    <div style="background:white;border:1.5px solid #86efac;border-radius:16px;padding:18px 20px;margin-bottom:20px;">
+      <div style="font-size:13.5px;font-weight:800;color:var(--navy);margin-bottom:12px;">➕ Add New Admin</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+        <div>
+          <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px;">Email</label>
+          <input type="email" id="newAdminEmail" placeholder="admin@gmail.com" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;font-family:inherit;font-size:13px;outline:none;box-sizing:border-box;">
+        </div>
+        <div>
+          <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px;">Display Name</label>
+          <input type="text" id="newAdminName" placeholder="e.g. Fatima" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;font-family:inherit;font-size:13px;outline:none;box-sizing:border-box;">
+        </div>
+      </div>
+      <div style="margin-bottom:12px;">
+        <label style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;display:block;margin-bottom:4px;">Role / Access</label>
+        <select id="newAdminRole" style="width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:9px;font-family:inherit;font-size:13px;outline:none;background:white;">
+          <option value="GR1">GR1 Admin</option>
+          <option value="GR2">GR2 Admin</option>
+          <option value="Both">Both Groups</option>
+        </select>
+      </div>
+      <p style="font-size:11.5px;color:var(--muted);margin-bottom:10px;">⚠️ The person must register on the site first, then you approve them here as an admin.</p>
+      <button onclick="addFirestoreAdmin()" style="padding:10px 22px;background:linear-gradient(135deg,var(--navy),var(--royal));color:white;border:none;border-radius:10px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;">Add Admin</button>
+    </div>` : '<div style="background:#fff7ed;border:1.5px solid #fed7aa;border-radius:12px;padding:14px 16px;font-size:13px;color:#92400e;margin-bottom:20px;">⚠️ Only super-admins can add or remove admins.</div>'}
+
+    <!-- Super admins list -->
+    <div style="margin-bottom:16px;">
+      <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Super Admins (hardcoded)</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">${superList}</div>
+    </div>
+
+    <!-- Firestore admins list -->
+    <div>
+      <div style="font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;">Added Admins (${fsAdminEntries.length})</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">${fsAdminList}</div>
+    </div>
+  `;
+};
+
+window.addFirestoreAdmin = async function(){
+  const email = (document.getElementById('newAdminEmail').value||'').trim().toLowerCase();
+  const name  = (document.getElementById('newAdminName').value||'').trim();
+  const role  = (document.getElementById('newAdminRole').value||'Both');
+  if(!email||!name){ showToast('❌ Fill in email and name.'); return; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ showToast('❌ Invalid email.'); return; }
+  if(ADMIN_EMAILS[email]){ showToast('❌ Already a super-admin.'); return; }
+  try {
+    const docId = email.replace(/\./g,'_');
+    await setDoc(doc(db,'admins',docId),{
+      email, name, role, addedAt: Date.now(), addedBy: currentAdmin?.email||''
+    });
+    firestoreAdmins[email] = {name, role};
+    showToast('✅ Admin added!');
+    renderAdminAdmins();
+  } catch(e){ showToast('❌ Error: '+e.message); }
+};
+
+window.removeFirestoreAdmin = async function(email){
+  if(!confirm(`Remove ${email} as admin?`)) return;
+  try {
+    const docId = email.replace(/\./g,'_');
+    await deleteDoc(doc(db,'admins',docId));
+    delete firestoreAdmins[email];
+    showToast('✅ Admin removed.');
+    renderAdminAdmins();
+  } catch(e){ showToast('❌ Error: '+e.message); }
+};
+
+// ══ ADMIN: ANNOUNCEMENT ENGAGEMENT (who viewed/liked/saved/shared) ══
+window.showAnnEngagement = async function(annId, annTitle){
+  const el = document.getElementById('engModal-content');
+  const titleEl = document.getElementById('engModal-title');
+  if(!el) return;
+  if(titleEl) titleEl.textContent = annTitle || 'Announcement';
+  el.innerHTML = '<p style="color:var(--muted);font-size:13px;">Loading...</p>';
+  document.getElementById('engModal').style.display='flex';
+
+  try {
+    const snap = await getDocs(query(collection(db,'annEngagement'), where('annId','==',annId)));
+    const entries = snap.docs.map(d=>d.data());
+
+    const byAction = {view:[], like:[], save:[], share:[]};
+    entries.forEach(e=>{ if(byAction[e.action]) byAction[e.action].push(e); });
+
+    const renderList = (arr, label, icon) => {
+      if(!arr.length) return '';
+      const rows = arr.map(e=>{
+        const grClr = e.studentGroup==='GR1'?'#1e40af':'#166534';
+        const grBg  = e.studentGroup==='GR1'?'#dbeafe':'#dcfce7';
+        const dt = e.ts ? new Date(e.ts).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})+' · '+new Date(e.ts).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}) : '—';
+        return `<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
+          <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--royal),var(--sky));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:white;flex-shrink:0;">${(e.studentName||'?').charAt(0).toUpperCase()}</div>
+          <div style="flex:1;">
+            <div style="font-size:13px;font-weight:700;color:var(--navy);">${escapeHtml(e.studentName||'—')}</div>
+            <div style="font-size:11px;color:var(--muted);">${dt}</div>
+          </div>
+          <span style="background:${grBg};color:${grClr};font-size:10px;font-weight:800;padding:2px 9px;border-radius:100px;">${e.studentGroup||'—'}</span>
+        </div>`;
+      }).join('');
+      return `<div style="margin-bottom:18px;">
+        <div style="font-size:12px;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px;">${icon} ${label} (${arr.length})</div>
+        ${rows}
+      </div>`;
+    };
+
+    const html = renderList(byAction.view,'Viewed','👁')
+      + renderList(byAction.like,'Liked','❤️')
+      + renderList(byAction.save,'Saved','🔖')
+      + renderList(byAction.share,'Shared','📤');
+
+    el.innerHTML = html || '<p style="font-size:13px;color:var(--muted);font-style:italic;">No student engagement tracked yet.</p>';
+  } catch(e){
+    el.innerHTML = '<p style="color:#ef4444;font-size:13px;">Error loading engagement data.</p>';
+  }
+};
+window.closeEngModal = function(){
+  document.getElementById('engModal').style.display='none';
+};
+
 // ══ ADMIN: STUDENTS ══
 window.renderAdminStudents = async function(){
   const el = document.getElementById('adminStudentsContent');
@@ -7388,7 +7699,7 @@ window.renderAdminStudents = async function(){
             <span style="background:#e0f2fe;color:#0369a1;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;">Apogée: ${escapeHtml(s.apogee||'—')}</span>
           </div>
           <div style="font-size:12px;color:var(--muted);">📧 ${escapeHtml(s.email||'')} &nbsp;·&nbsp; 📞 ${escapeHtml(s.phone||'—')}</div>
-          <div style="font-size:11px;color:var(--muted);margin-top:3px;">Registered: ${s.createdAt ? new Date(s.createdAt).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}) : '—'}</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px;">Registered: ${s.createdAt ? new Date(s.createdAt).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})+' at '+new Date(s.createdAt).toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}) : '—'}</div>
         </div>
         ${actions}
       </div>`;
@@ -7615,6 +7926,20 @@ window.savePracticeSettings = async function(){
 
 
 </script>
+<!-- ENGAGEMENT MODAL -->
+<div id="engModal" style="display:none;position:fixed;inset:0;z-index:10400;background:rgba(0,0,0,.45);align-items:center;justify-content:center;padding:16px;">
+  <div style="background:var(--card-bg,white);border-radius:20px;width:100%;max-width:500px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.22);">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1.5px solid var(--border);">
+      <div>
+        <div style="font-size:15px;font-weight:800;color:var(--navy);">📊 Student Engagement</div>
+        <div id="engModal-title" style="font-size:12px;color:var(--muted);margin-top:2px;"></div>
+      </div>
+      <button onclick="closeEngModal()" style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);padding:4px;">✕</button>
+    </div>
+    <div id="engModal-content" style="overflow-y:auto;padding:18px 20px;flex:1;"></div>
+  </div>
+</div>
+
 <!-- ══ STUDENT AUTH GATE ══ -->
 <div id="studentGate">
 
@@ -7916,6 +8241,11 @@ window.savePracticeSettings = async function(){
 <!-- ADMIN: STUDENTS -->
 <div class="admin-section-content" id="admin-students-admin">
   <div id="adminStudentsContent"></div>
+</div>
+
+<!-- ADMIN: ADMINS MANAGEMENT -->
+<div class="admin-section-content" id="admin-admins-admin">
+  <div id="adminAdminsContent"></div>
 </div>
 
 <!-- Notification dropdown — outside header to avoid stacking context issues -->
