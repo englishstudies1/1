@@ -307,6 +307,18 @@
 /* Student bar now in footer — see #studentFooterBar */
 
 
+/* ══ STUDENT MODE — admin panel hidden ══ */
+#adminPanel,
+#loginModal,
+#addAnnModal,
+#editAnnModal,
+#engModal,
+.admin-trigger,
+#adminTrigger,
+#footerAdminBtn,
+.footer-admin-btn{
+  display:none!important;
+}
 /* ══ MAINTENANCE OVERLAY — site style ══ */
 #maintenanceOverlay{
   position:fixed;inset:0;z-index:9999;
@@ -2741,17 +2753,23 @@ window.doStudentLogin = async function(){
   const btn   = document.getElementById('gateLoginBtn');
   if(errEl){ errEl.style.display='none'; errEl.textContent=''; }
   if(!email||!pass){ if(errEl){errEl.textContent='Please fill in all fields.';errEl.style.display='block';} return; }
-  if(btn){ btn.disabled=true; btn.textContent='Logging in...'; }
+  if(btn){ btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i>Logging in...'; }
+  // Show site loading overlay
+  const ov=document.getElementById('loadingOverlay');
+  const st=document.getElementById('ldStatus');
+  if(ov){ ov.style.cssText='position:fixed;inset:0;z-index:99999;display:flex;opacity:1;visibility:visible;pointer-events:all;'; }
+  if(st) st.textContent='Logging in...';
   try {
     await signInWithEmailAndPassword(auth, email, pass);
-    // onAuthStateChanged will handle the rest
+    // onAuthStateChanged handles the rest — keeps overlay showing until portal ready
   } catch(e){
+    // Hide overlay on error
+    if(ov){ ov.style.opacity='0'; setTimeout(()=>{ ov.style.display='none'; },400); }
     let msg = 'Incorrect email or password.';
     if(e.code==='auth/user-not-found'||e.code==='auth/wrong-password'||e.code==='auth/invalid-credential') msg='Incorrect email or password.';
     else if(e.code==='auth/too-many-requests') msg='Too many attempts. Please wait a moment.';
     else if(e.code==='auth/invalid-email') msg='Invalid email address.';
     if(errEl){ errEl.textContent='❌ '+msg; errEl.style.display='block'; }
-  } finally {
     if(btn){ btn.disabled=false; btn.innerHTML='<i class="fas fa-sign-in-alt" style="margin-right:8px;"></i>LOGIN'; }
   }
 };
@@ -2778,7 +2796,12 @@ window.doStudentRegister = async function(){
   if(password.length < 6){
     if(errEl){ errEl.textContent='❌ Password must be at least 6 characters.'; errEl.style.display='block'; } return;
   }
-  if(btn){ btn.disabled=true; btn.textContent='Registering...'; }
+  if(btn){ btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin" style="margin-right:8px;"></i>Creating account...'; }
+  // Show site loading overlay
+  const ov2=document.getElementById('loadingOverlay');
+  const st2=document.getElementById('ldStatus');
+  if(ov2){ ov2.style.cssText='position:fixed;inset:0;z-index:99999;display:flex;opacity:1;visibility:visible;pointer-events:all;'; }
+  if(st2) st2.textContent='Creating your account...';
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, password);
     const uid = cred.user.uid;
@@ -2790,6 +2813,9 @@ window.doStudentRegister = async function(){
     // Show pending screen
     showGateViewFn('pending');
   } catch(e){
+    // Hide overlay on error
+    const ov3=document.getElementById('loadingOverlay');
+    if(ov3){ ov3.style.opacity='0'; setTimeout(()=>{ ov3.style.display='none'; },400); }
     let msg = 'Registration failed. Please try again.';
     if(e.code==='auth/email-already-in-use') msg='This email is already registered. Please log in.';
     else if(e.code==='auth/invalid-email') msg='Invalid email address.';
@@ -2856,12 +2882,18 @@ onAuthStateChanged(auth, async user => {
           const data = studentSnap.data();
           if(data.status === 'approved'){
             studentLoggedIn=true; currentStudent=data;
+            // Show welcome message in loading overlay
+            const ov=document.getElementById('loadingOverlay');
+            const st=document.getElementById('ldStatus');
+            if(ov){ ov.style.cssText='position:fixed;inset:0;z-index:99999;display:flex;opacity:1;visibility:visible;pointer-events:all;'; }
+            if(st) st.textContent='Welcome, '+(data.firstName||'Student')+'! 🎓';
             hideGate();
             updateStudentBar(data);
-            // Auto-switch to their group
-            if(data.group && (data.group==='GR1'||data.group==='GR2')){
-              window.switchGroup(data.group);
-            }
+            if(data.group&&(data.group==='GR1'||data.group==='GR2')) window.switchGroup(data.group);
+            // Fade out loading overlay after brief welcome
+            setTimeout(()=>{
+              if(ov){ ov.style.transition='opacity .6s ease'; ov.style.opacity='0'; setTimeout(()=>{ ov.style.display='none'; },650); }
+            },1400);
           } else if(data.status === 'rejected'){
             showGate('rejected');
           } else {
