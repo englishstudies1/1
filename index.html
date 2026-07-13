@@ -4622,7 +4622,7 @@ function annHTML(a){
   const likedCls = liked?'liked':'';
   // Post publisher identity (separate from header branding)
   const logoIco = siteSettings.pubIcon||'fas fa-university';
-  const pubName = siteSettings.pubName||'English Studies';
+  const pubName = a.postedBy || siteSettings.pubName||'English Studies';
   // Tag color
   const tagClass = `tag-${a.type}`;
   // Group badge
@@ -4887,7 +4887,7 @@ function renderTTSemTabs(){
   const visible=sems.filter(s=>!(siteSettings.hiddenTTSems||[]).includes(s));
   const cont=document.getElementById('ttSemTabs');
   if(!cont) return;
-  cont.innerHTML=visible.map((s,i)=>`<div class="sem-tab${i===0?' active':''}" onclick="showTTSem('${s}',this)">Semester ${s.slice(1)}</div>`).join('');
+  cont.innerHTML=visible.map((s,i)=>`<div class="sem-tab${i===0?' active':''}" onclick="showTTSem('${s}',this)">${s}</div>`).join('');
   if(visible.length>0&&!visible.includes(curTTSem)){curTTSem=visible[0]; renderTimetable(curTTSem);}
 }
 
