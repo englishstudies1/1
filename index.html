@@ -4648,6 +4648,7 @@ function annHTML(a){
           <span class="post-admin-name">${escapeHtml(pubName)}</span>
           <span class="ann-tag ${tagClass}" style="margin-left:4px;">${a.type[0].toUpperCase()+a.type.slice(1)}</span>
           <span style="background:${grBg};color:${grColor};font-size:10px;padding:2px 8px;border-radius:100px;font-weight:700;">${a.group}</span>
+          <span style="background:#eef2ff;color:#3730a3;font-size:10px;padding:2px 8px;border-radius:100px;font-weight:700;">${a.sem||'S1'}</span>
         </div>
         <div class="post-pub-name">${dt||'&nbsp;'}</div>
       </div>
@@ -4896,8 +4897,14 @@ function makeupHTML(s){
   recordView('makeup',s.id);
   const liked=isLiked('makeup',s.id);
   const likedCls=liked?'liked':'';
+  const grColor=s.group==='GR1'?'#1e40af':s.group==='GR2'?'#166534':'#475569';
+  const grBg=s.group==='GR1'?'#dbeafe':s.group==='GR2'?'#dcfce7':'#f1f5f9';
   return `<div class="makeup-item">
-    <div class="makeup-date"><i class="fas fa-calendar-day"></i> ${s.date}</div>
+    <div class="makeup-date" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+      <span><i class="fas fa-calendar-day"></i> ${s.date}</span>
+      <span style="background:${grBg};color:${grColor};padding:2px 8px;border-radius:100px;font-weight:700;font-size:10px;">${s.group}</span>
+      <span style="background:#eef2ff;color:#3730a3;padding:2px 8px;border-radius:100px;font-weight:700;font-size:10px;">${s.sem||'S1'}</span>
+    </div>
     <div class="makeup-row">
       <span class="mk-cell"><i class="fas fa-book-open"></i> <strong>${escapeHtml(s.module||s.desc||'')}</strong></span>
       <span class="mk-cell"><i class="fas fa-clock"></i> ${escapeHtml(s.mtime||'—')}</span>
@@ -4905,7 +4912,6 @@ function makeupHTML(s){
     </div>
     ${s.desc&&s.module?`<div class="makeup-note">${escapeHtml(s.desc)}</div>`:''}
     <div class="ann-footer">
-      <span class="ann-group">For: ${s.group}</span>
       <span class="stat-pill"><i class="fas fa-eye"></i> ${s.views||0}</span>
       <button class="like-btn ${likedCls}" onclick="toggleLike('makeup','${s.id}',this)">
         <i class="fas fa-heart"></i> <span>${s.likes||0}</span>
