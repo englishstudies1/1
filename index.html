@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=1280">
   <title>English Studies | FLSHM Mohammedia</title>
 
   <!-- ═══ Open Graph / WhatsApp Preview ═══ -->
@@ -1123,6 +1123,8 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 .tt-view-opt i.fa-check{visibility:hidden;margin-left:auto;font-size:10px;}
 .tt-view-opt.active i.fa-check{visibility:visible;}
 
+.tt-scale-outer{width:100%;overflow:hidden;position:relative;}
+.tt-scale-inner{display:inline-block;}
 .tt-table2{width:100%;border-collapse:separate;border-spacing:0;margin-top:4px;}
 .tt-table2 thead th{
   background:linear-gradient(120deg,var(--royal),#7c5cd8);
@@ -1190,32 +1192,26 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
   font-family:var(--theme-font-display);
 }
 .makeup-item{
-  background:var(--mkBg);border:1.5px solid var(--border);
+  background:white;border:1.5px solid var(--border);
   border-left:5px solid var(--mkBorder);
-  border-radius:18px;padding:20px 22px;margin-bottom:16px;
+  border-radius:18px;padding:18px 20px;margin-bottom:14px;
   box-shadow:var(--card-shadow);
-  display:flex;gap:18px;align-items:flex-start;
+  display:flex;gap:16px;align-items:center;
   transition:box-shadow .25s,transform .25s;
 }
 .makeup-item:hover{box-shadow:var(--card-hover);transform:translateY(-2px);}
-.makeup-datebox{
-  flex-shrink:0;width:74px;text-align:center;
-  background:var(--cream);border:1.5px solid var(--border);border-radius:14px;
-  padding:10px 2px;
+.mk-row-ico{
+  width:52px;height:52px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:19px;
 }
-.makeup-datebox .mk-month{font-size:11px;font-weight:800;color:var(--mkDate);letter-spacing:.05em;}
-.makeup-datebox .mk-day{font-size:25px;font-weight:800;color:var(--navy);line-height:1.15;font-family:var(--theme-font-display);}
-.makeup-datebox .mk-year{font-size:10.5px;color:var(--muted);font-weight:600;}
+.makeup-datebox{display:none;}
 .makeup-body{flex:1;min-width:0;}
-.makeup-tags{display:flex;gap:6px;margin-bottom:9px;flex-wrap:wrap;}
-.mk-tag{font-size:10px;padding:3px 10px;border-radius:100px;font-weight:800;}
-.makeup-title-row{display:flex;align-items:center;gap:10px;margin-bottom:2px;}
-.makeup-title-ico{
-  width:32px;height:32px;border-radius:10px;flex-shrink:0;
-  background:linear-gradient(135deg,var(--gold),var(--gold-light));
-  display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;
-}
-.makeup-title{font-weight:800;font-size:16px;color:var(--navy);}
+.makeup-tags{display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap;align-items:center;}
+.mk-tag{font-size:10.5px;padding:3px 10px;border-radius:100px;font-weight:800;}
+.mk-tag.mk-date-tag{background:transparent;color:var(--mkDate);padding-left:0;display:inline-flex;align-items:center;gap:5px;}
+.makeup-title-row{display:flex;align-items:center;gap:10px;margin-bottom:3px;}
+.makeup-title-ico{display:none;}
+.makeup-title{font-weight:800;font-size:15.5px;color:var(--navy);}
 .makeup-date{font-size:11.5px;font-weight:800;color:var(--mkDate);margin-bottom:5px;font-family:var(--theme-font-display);}
 .makeup-desc{font-size:13.5px;color:var(--mkText);font-weight:500;}
 .space-link{
@@ -1425,14 +1421,71 @@ footer::after{
 }
 .icon-pick-btn:hover{background:#fff0e8;border-color:var(--gold);}
 .icon-pick-selected{background:var(--navy)!important;color:white!important;border-color:var(--navy)!important;}
-.makeup-row{display:flex;flex-wrap:wrap;gap:10px;margin:8px 0;}
+.makeup-row{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;}
 .mk-cell{
-  display:flex;align-items:center;gap:6px;font-size:13px;
-  background:linear-gradient(135deg,#fff0e8,#ffe3d4);
-  padding:5px 14px;border-radius:var(--r-pill);color:var(--gold);font-weight:700;
+  display:inline-flex;align-items:center;gap:6px;padding:5px 12px;
+  border-radius:100px;font-size:11.5px;font-weight:800;white-space:nowrap;
+  font-family:var(--theme-font-display);
 }
-.mk-cell i{color:var(--gold);font-size:12px;}
-.makeup-note{font-size:13px;color:var(--muted);margin-top:4px;font-style:italic;font-weight:500;}
+.mk-cell i{font-size:11px;}
+.makeup-note{font-size:13px;color:var(--muted);margin-top:2px;font-style:italic;font-weight:500;}
+.mk-footer-row{display:flex;align-items:center;gap:16px;margin-top:8px;}
+.mk-chevron{margin-left:auto;color:var(--border);font-size:14px;flex-shrink:0;padding-left:8px;}
+
+/* ══ MAKEUP 2.0 (hero, card, tabs, dropdowns) ══ */
+.mk-hero2{max-width:1180px;margin:0 auto;padding:40px 24px 40px;}
+.mk-hero2-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;}
+.mk-eyebrow2{display:inline-flex;align-items:center;gap:8px;background:#fff1e8;color:#ff6b35;border-radius:100px;padding:6px 16px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;}
+.mk-eyebrow2 .pulse-dot3{width:6px;height:6px;border-radius:50%;background:#ff6b35;box-shadow:0 0 0 3px rgba(255,107,53,.2);}
+.mk-hero2-title{font-family:var(--theme-font-display);font-size:clamp(34px,4.4vw,52px);font-weight:800;color:var(--navy);letter-spacing:-1.5px;line-height:1.08;margin-bottom:18px;}
+.mk-hero2-accent{background:linear-gradient(120deg,var(--gold),#ff3d7f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.mk-hero2-sub{color:var(--muted);font-size:15px;line-height:1.8;max-width:440px;margin-bottom:30px;font-weight:400;}
+.mk-hero2-visual{position:relative;display:flex;justify-content:center;}
+.mk-hero2-img-wrap{position:relative;width:100%;max-width:460px;}
+[data-theme="midnight"] .mk-hero2-title{color:var(--text);}
+
+.mk-card2{max-width:1180px;margin:0 auto 40px;padding:0 24px;}
+.mk-card2-inner{background:white;border:1.5px solid var(--border);border-radius:28px;box-shadow:0 24px 72px rgba(18,22,58,.10),0 4px 24px rgba(18,22,58,.05);padding:28px 28px 20px;}
+.mk-card2-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;flex-wrap:wrap;}
+.mk-tabs{display:flex;gap:6px;background:var(--cream);border-radius:100px;padding:4px;}
+.mk-tab{padding:9px 22px;border-radius:100px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;transition:.2s;font-family:var(--theme-font-display);white-space:nowrap;}
+.mk-tab.active{background:linear-gradient(120deg,var(--gold),#ff8c5a);color:white;box-shadow:0 6px 16px rgba(255,107,53,.28);}
+.mk-tab:hover:not(.active){color:var(--navy);}
+.mk-dd-row{display:flex;gap:10px;flex-wrap:wrap;}
+.mk-view-dd{position:relative;}
+.mk-view-btn{display:inline-flex;align-items:center;gap:9px;background:white;border:1.5px solid var(--border);border-radius:100px;padding:9px 18px;font-size:13px;font-weight:700;color:var(--navy);cursor:pointer;font-family:var(--theme-font-display);transition:.2s;}
+.mk-view-btn:hover{border-color:var(--gold);}
+.mk-view-btn i.fa-chevron-down{font-size:9px;color:var(--muted);}
+.mk-view-menu{position:absolute;top:calc(100% + 8px);left:0;background:white;border:1.5px solid var(--border);border-radius:16px;box-shadow:0 16px 40px rgba(18,22,58,.16);padding:6px;min-width:170px;z-index:50;display:none;flex-direction:column;gap:2px;max-height:260px;overflow-y:auto;}
+.mk-view-menu.open{display:flex;animation:fadeUp .15s ease;}
+.mk-view-opt{padding:9px 12px;border-radius:10px;font-size:12.5px;font-weight:600;color:var(--text);cursor:pointer;display:flex;align-items:center;gap:8px;}
+.mk-view-opt:hover{background:var(--cream);}
+.mk-view-opt.active{color:var(--gold);font-weight:800;}
+.mk-view-opt i.fa-check{margin-left:auto;font-size:10px;visibility:hidden;}
+.mk-view-opt.active i.fa-check{visibility:visible;}
+.mk-info-alert{
+  display:flex;align-items:center;gap:10px;background:#fff1e8;color:#c2410c;
+  border-radius:16px;padding:14px 20px;font-size:13.5px;font-weight:600;margin-bottom:20px;
+}
+.mk-info-alert i{color:#ff6b35;font-size:15px;}
+.mk-show-more-wrap{display:flex;justify-content:center;padding:14px 0 4px;}
+.mk-show-more-btn{display:inline-flex;align-items:center;gap:8px;background:var(--cream);border:1.5px solid var(--border);border-radius:100px;padding:10px 22px;font-size:13px;font-weight:700;color:var(--navy);cursor:pointer;transition:.2s;font-family:var(--theme-font-display);}
+.mk-show-more-btn:hover{border-color:var(--gold);color:var(--gold);}
+.mk-show-more-btn i{transition:transform .25s;font-size:10px;}
+.mk-show-more-btn.expanded i{transform:rotate(180deg);}
+@media (max-width:860px){
+  .mk-hero2-grid{grid-template-columns:1fr;gap:32px;text-align:center;}
+  .mk-hero2-sub{margin-left:auto;margin-right:auto;}
+  .tt-hero2-btns{justify-content:center;}
+  .mk-hero2-visual{order:-1;}
+  .mk-hero2-img-wrap{max-width:320px;}
+  .mk-card2-top{justify-content:center;}
+  .makeup-item{flex-wrap:wrap;}
+}
+@media (max-width:480px){
+  .mk-card2-inner{padding:20px 14px 14px;}
+  .makeup-item{padding:14px;gap:12px;}
+}
 .makeup-cta{
   display:flex;align-items:center;gap:22px;flex-wrap:wrap;
   background:linear-gradient(135deg,#eef2ff,#e0e7ff);
@@ -1676,8 +1729,14 @@ footer::after{
     padding:10px 14px;gap:8px;flex-wrap:wrap;height:auto;
     border-radius:16px;
   }
-  .logo-block{order:1;}
-  .header-actions{order:2;margin-left:auto;}
+  .logo-block{order:1;gap:8px;}
+  .logo-icon{width:32px;height:32px;font-size:13px;border-radius:10px;}
+  .logo-text .site-name{font-size:14px;}
+  .logo-text .site-sub{font-size:9px;padding:2px 8px;}
+  .header-actions{order:2;margin-left:auto;gap:6px;}
+  .group-switcher{padding:2px;}
+  .gr-btn{padding:4px 9px;font-size:9.5px;}
+  .hdr-icon-btn,.notif-bell-btn,.hdr-avatar{width:30px;height:30px;font-size:12px;}
   .header-nav{
     order:3;flex-basis:100%;width:100%;
     justify-content:flex-start;
@@ -1686,7 +1745,7 @@ footer::after{
     -webkit-overflow-scrolling:touch;
     scroll-snap-type:x proximity;
   }
-  .nav-item{scroll-snap-align:start;font-size:12.5px;padding:7px 12px;}
+  .nav-item{scroll-snap-align:start;font-size:12.5px;padding:7px 10px;}
   .hero{flex-direction:column;padding:44px 20px 40px;gap:32px;}
   .hero-card{min-width:unset;width:100%;}
   main{padding:24px 16px;}
@@ -1700,6 +1759,12 @@ footer::after{
   .makeup-datebox .mk-day{font-size:20px;}
   .makeup-cta{padding:20px;flex-direction:column;text-align:center;}
   .makeup-cta-btn{width:100%;justify-content:center;}
+
+  /* ── Announcement / post card stats row ── */
+  .post-footer{margin-left:0;max-width:100%;width:100%;padding:10px 14px;gap:8px 12px;border-radius:16px;}
+  .post-actions{margin-left:0;}
+  .post-stat{font-size:11px;}
+  .post-stat-divider{display:none;}
 
   /* ── ABOUT PAGE MOBILE ── */
   .about-hero{padding:44px 20px 40px;text-align:center;}
@@ -1780,6 +1845,48 @@ footer::after{
   .about-card-wrap{padding:0 10px;}
   .about-section-wrap{padding:0 10px;}
   .ab-stat-item{min-width:80px;}
+}
+
+/* ── TIMETABLE 2.0 — mobile: keep as a real table, just scrollable + tighter ── */
+@media(max-width:680px){
+  .tt-table2{min-width:640px;}
+  .tt-table2 thead th{padding:10px 12px;font-size:11px;white-space:nowrap;}
+  .tt-table2 tbody td{padding:10px 12px;font-size:12.5px;}
+  .tt-day-cell,.tt-mod-cell{font-size:12.5px;}
+  .tt-mod-ico{width:24px;height:24px;font-size:11px;}
+  .tt-time-pill,.tt-room-pill{font-size:10.5px;padding:3px 9px;}
+  .tt-card2-inner{padding:18px 0 6px;}
+  .tt-card2-top{gap:10px;padding:0 16px;}
+  .tt-tabs{width:100%;justify-content:center;}
+  .tt-view-dd{width:100%;}
+  .tt-view-btn{width:100%;justify-content:center;}
+  .tt-view-menu{left:16px;right:16px;width:auto;}
+  .tt-card2-inner .info-alert{margin-left:16px;margin-right:16px;}
+  #ttView{padding:0 16px;}
+  #ttView > div{border-radius:16px;box-shadow:0 4px 16px rgba(18,22,58,.06);}
+  .tt-table2{border-radius:14px;overflow:hidden;}
+}
+
+/* ── MAKEUP 2.0 — mobile item layout (same row layout as desktop, just scaled) ── */
+@media(max-width:680px){
+  .makeup-item{align-items:flex-start;gap:12px;padding:14px;}
+  .mk-row-ico{width:38px;height:38px;font-size:14px;flex-shrink:0;}
+  .mk-chevron{font-size:12px;align-self:center;}
+  .makeup-title{font-size:13.5px;line-height:1.3;}
+  .makeup-tags{gap:5px;margin-bottom:6px;}
+  .mk-tag{font-size:9px;padding:3px 8px;}
+  .mk-tag.mk-date-tag{font-size:10px;}
+  .makeup-note{font-size:12px;}
+  .makeup-row{gap:6px;margin:6px 0;}
+  .mk-cell{font-size:10px;padding:4px 9px;}
+  .mk-footer-row{gap:12px;margin-top:6px;}
+  .mk-card2-inner{padding:20px 16px 14px;}
+  .mk-card2-top{gap:10px;}
+  .mk-tabs{width:100%;justify-content:center;}
+  .mk-dd-row{width:100%;flex-direction:column;gap:8px;}
+  .mk-view-dd{width:100%;}
+  .mk-view-btn{width:100%;justify-content:center;}
+  .mk-view-menu{left:0;right:0;width:100%;}
 }
 
 /* ============================================
@@ -2547,9 +2654,101 @@ footer::after{
 
 <!-- MAKEUP -->
 <div id="page-makeup" class="page">
-  <main>
-    <div class="sec-header" style="margin-top:8px;"><h2><i class="fas fa-clock-rotate-left"></i> Makeup Sessions</h2><p>Rescheduled and extra lessons</p><div class="section-divider"></div></div>
-    <div id="makeupList"></div>
+  <section class="mk-hero2">
+    <div class="mk-hero2-grid">
+      <div class="mk-hero2-text">
+        <div class="mk-eyebrow2"><span class="pulse-dot3"></span> Makeup Sessions</div>
+        <h1 class="mk-hero2-title">Never Miss<br>a <span class="mk-hero2-accent">Chance</span></h1>
+        <p class="mk-hero2-sub">All your rescheduled sessions in one place. Stay updated and prepared.</p>
+        <div class="tt-hero2-btns">
+          <button class="tt-btn-primary" onclick="document.getElementById('mkCardAnchor').scrollIntoView({behavior:'smooth',block:'start'})">View all sessions <i class="fas fa-arrow-right"></i></button>
+          <button class="tt-btn-secondary" onclick="downloadMkPdf()"><i class="fas fa-download"></i> Download PDF</button>
+        </div>
+      </div>
+      <div class="mk-hero2-visual">
+        <div class="mk-hero2-img-wrap">
+          <svg viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+            <defs>
+              <linearGradient id="mkCalTop" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#ff8c5a"/><stop offset="1" stop-color="#ff6b35"/>
+              </linearGradient>
+              <linearGradient id="mkClockRing" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#9d7bff"/><stop offset="1" stop-color="#7c4dff"/>
+              </linearGradient>
+            </defs>
+            <circle cx="350" cy="190" r="150" fill="#ffeee6" opacity=".55"/>
+            <g opacity=".55">
+              <circle cx="60" cy="70" r="2.5" fill="#c7cbe0"/><circle cx="78" cy="70" r="2.5" fill="#c7cbe0"/><circle cx="96" cy="70" r="2.5" fill="#c7cbe0"/>
+              <circle cx="60" cy="86" r="2.5" fill="#c7cbe0"/><circle cx="78" cy="86" r="2.5" fill="#c7cbe0"/><circle cx="96" cy="86" r="2.5" fill="#c7cbe0"/>
+            </g>
+            <rect x="30" y="290" width="16" height="16" fill="#ffd9c2" transform="rotate(45 38 298)"/>
+            <polygon points="245,120 245,330 300,300 300,150" fill="#ffe0d0"/>
+            <g>
+              <rect x="55" y="270" width="34" height="30" rx="6" fill="#ffffff" stroke="#e4e6f2" stroke-width="2"/>
+              <path d="M72 272 C60 260 58 245 72 235 C86 245 84 260 72 272 Z" fill="#2fbf9f"/>
+              <path d="M72 272 C64 262 64 250 72 242" fill="none" stroke="#1f9a80" stroke-width="2"/>
+            </g>
+            <g>
+              <rect x="360" y="255" width="90" height="16" rx="4" fill="#2f6fed"/>
+              <rect x="365" y="239" width="80" height="16" rx="4" fill="#7c4dff" opacity=".85"/>
+              <rect x="360" y="223" width="90" height="16" rx="4" fill="#ff6b35"/>
+            </g>
+            <g>
+              <circle cx="380" cy="300" r="46" fill="url(#mkClockRing)"/>
+              <circle cx="380" cy="300" r="34" fill="#ffffff"/>
+              <line x1="380" y1="300" x2="380" y2="278" stroke="#7c4dff" stroke-width="4" stroke-linecap="round"/>
+              <line x1="380" y1="300" x2="396" y2="308" stroke="#ff6b35" stroke-width="4" stroke-linecap="round"/>
+              <circle cx="380" cy="300" r="4" fill="#12163a"/>
+            </g>
+            <g>
+              <rect x="120" y="110" width="200" height="180" rx="14" fill="#ffffff" stroke="#e4e6f2" stroke-width="2"/>
+              <path d="M120 124 Q120 110 134 110 L306 110 Q320 110 320 124 L320 148 L120 148 Z" fill="url(#mkCalTop)"/>
+              <circle cx="150" cy="110" r="7" fill="#ffffff" stroke="#e39a6b" stroke-width="3"/>
+              <circle cx="195" cy="110" r="7" fill="#ffffff" stroke="#e39a6b" stroke-width="3"/>
+              <circle cx="245" cy="110" r="7" fill="#ffffff" stroke="#e39a6b" stroke-width="3"/>
+              <circle cx="290" cy="110" r="7" fill="#ffffff" stroke="#e39a6b" stroke-width="3"/>
+              <rect x="133" y="158" width="46" height="14" rx="4" fill="#ffe0e6"/>
+              <rect x="243" y="158" width="46" height="14" rx="4" fill="#ff8fa3"/>
+              <g fill="#f1f2fa">
+                <rect x="133" y="182" width="34" height="24" rx="5"/><rect x="175" y="182" width="34" height="24" rx="5"/><rect x="217" y="182" width="34" height="24" rx="5"/><rect x="259" y="182" width="34" height="24" rx="5"/>
+                <rect x="133" y="214" width="34" height="24" rx="5"/><rect x="175" y="214" width="34" height="24" rx="5"/><rect x="217" y="214" width="34" height="24" rx="5"/><rect x="259" y="214" width="34" height="24" rx="5"/>
+                <rect x="133" y="246" width="34" height="24" rx="5"/><rect x="175" y="246" width="34" height="24" rx="5"/><rect x="217" y="246" width="34" height="24" rx="5"/><rect x="259" y="246" width="34" height="24" rx="5"/>
+              </g>
+              <rect x="175" y="182" width="34" height="24" rx="5" fill="#ff8fa3"/>
+              <rect x="259" y="182" width="34" height="24" rx="5" fill="#9d7bff"/>
+              <rect x="133" y="214" width="34" height="24" rx="5" fill="#7ea8ff"/>
+              <rect x="217" y="246" width="34" height="24" rx="5" fill="#9d7bff" opacity=".6"/>
+              <rect x="259" y="246" width="34" height="24" rx="5" fill="#ff6b35"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+  <main id="mkCardAnchor">
+    <div class="mk-card2">
+      <div class="mk-card2-inner" id="mk-print-area">
+        <div class="mk-card2-top">
+          <div class="mk-tabs" id="mkSemTabs"></div>
+          <div class="mk-dd-row">
+            <div class="mk-view-dd">
+              <button class="mk-view-btn" onclick="toggleMkMenu('module')"><i class="fas fa-th-large"></i> <span id="mkModuleLabel">All Modules</span> <i class="fas fa-chevron-down"></i></button>
+              <div class="mk-view-menu" id="mkModuleMenu"></div>
+            </div>
+            <div class="mk-view-dd">
+              <button class="mk-view-btn" onclick="toggleMkMenu('time')"><i class="fas fa-calendar-check"></i> <span id="mkTimeLabel">Upcoming</span> <i class="fas fa-chevron-down"></i></button>
+              <div class="mk-view-menu" id="mkTimeMenu">
+                <div class="mk-view-opt active" onclick="setMkTimeFilter('upcoming')">Upcoming <i class="fas fa-check"></i></div>
+                <div class="mk-view-opt" onclick="setMkTimeFilter('past')">Past <i class="fas fa-check"></i></div>
+                <div class="mk-view-opt" onclick="setMkTimeFilter('all')">All <i class="fas fa-check"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mk-info-alert"><i class="fas fa-info-circle"></i> Makeup exams are only for justified and authorized students.</div>
+        <div id="makeupList"></div>
+      </div>
+    </div>
     <div class="makeup-cta">
       <div class="makeup-cta-icon"><i class="fas fa-calendar-alt"></i></div>
       <div class="makeup-cta-text">
@@ -5654,6 +5853,28 @@ window.toggleTTShowMore=function(){
 };
 window.downloadTTPdf=function(){ showToast('🖨️ Opening print dialog — choose "Save as PDF"'); setTimeout(()=>window.print(),300); };
 
+function fitTimetableScale(){
+  const inner = document.getElementById('ttScaleInner');
+  const outer = inner ? inner.parentElement : null;
+  if(!inner||!outer) return;
+  inner.style.transform='none';
+  inner.style.width='max-content';
+  const naturalWidth = inner.scrollWidth;
+  const naturalHeight = inner.scrollHeight;
+  const containerWidth = outer.clientWidth;
+  if(naturalWidth > containerWidth && containerWidth > 0){
+    const scale = containerWidth / naturalWidth;
+    inner.style.transformOrigin = 'top left';
+    inner.style.transform = `scale(${scale})`;
+    outer.style.height = (naturalHeight * scale) + 'px';
+  } else {
+    inner.style.transform='none';
+    inner.style.width='100%';
+    outer.style.height='auto';
+  }
+}
+window.addEventListener('resize', ()=>{ clearTimeout(window._ttFitTO); window._ttFitTO=setTimeout(fitTimetableScale,150); });
+
 function renderTimetable(sem){
   curTTSem=sem;
   const el=document.getElementById('ttView');
@@ -5687,7 +5908,7 @@ function renderTimetable(sem){
     const grouped={};
     visRows.forEach(r=>{ (grouped[r.day]=grouped[r.day]||[]).push(r); });
     bodyHtml = dayOrder.filter(d=>grouped[d]).map(d=>
-      `<tr><td colspan="${2+ (showRoom?1:0)+(showProf?1:0)+2}" style="padding:0;border:none;background:transparent;"><div class="tt-week-group-title"><i class="fas fa-calendar-day" style="color:var(--royal)"></i>${d}</div></td></tr>`
+      `<tr class="tt-group-row"><td colspan="${2+ (showRoom?1:0)+(showProf?1:0)+2}" style="padding:0;border:none;background:transparent;"><div class="tt-week-group-title"><i class="fas fa-calendar-day" style="color:var(--royal)"></i>${d}</div></td></tr>`
       + grouped[d].map(rowHtml).join('')
     ).join('');
   } else {
@@ -5696,7 +5917,8 @@ function renderTimetable(sem){
 
   const showMoreHtml = rows.length>LIMIT ? `<div class="tt-show-more-wrap"><button class="tt-show-more-btn${ttShowAll?' expanded':''}" onclick="toggleTTShowMore()">${ttShowAll?'Show less':'Show more'} <i class="fas fa-chevron-down"></i></button></div>` : '';
 
-  el.innerHTML=`<div style="overflow-x:auto;"><table class="tt-table2">${theadHtml}<tbody>${bodyHtml}</tbody></table></div>${showMoreHtml}`;
+  el.innerHTML=`<div class="tt-scale-outer"><div class="tt-scale-inner" id="ttScaleInner"><table class="tt-table2">${theadHtml}<tbody>${bodyHtml}</tbody></table></div></div>${showMoreHtml}`;
+  requestAnimationFrame(fitTimetableScale);
 }
 window.showTTSem=function(sem,el){ttShowAll=false;document.querySelectorAll('#ttSemTabs .tt-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderTimetable(sem);};
 
@@ -5717,46 +5939,118 @@ function formatMkDate(dateStr){
   const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
   return {month:months[d.getMonth()], day:d.getDate(), year:d.getFullYear()};
 }
+function mkDurationFromRange(rangeStr){
+  if(!rangeStr) return '';
+  const m = rangeStr.match(/(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})/);
+  if(!m) return '';
+  const start = parseInt(m[1])*60+parseInt(m[2]);
+  let end = parseInt(m[3])*60+parseInt(m[4]);
+  if(end<start) end += 24*60;
+  const mins = end-start;
+  const h=Math.floor(mins/60), mm=mins%60;
+  return `${h}h ${mm.toString().padStart(2,'0')}m`;
+}
+let mkShowAll=false, curMkSem='S1', curMkModule='all', curMkTime='upcoming';
 function makeupHTML(s){
   recordView('makeup',s.id);
   const liked=isLiked('makeup',s.id);
   const likedCls=liked?'liked':'';
   const grColor=s.group==='GR1'?'#1e40af':s.group==='GR2'?'#166534':'#475569';
   const grBg=s.group==='GR1'?'#dbeafe':s.group==='GR2'?'#dcfce7':'#f1f5f9';
-  const dp=formatMkDate(s.date);
-  return `<div class="makeup-item">
-    <div class="makeup-datebox">
-      <div class="mk-month">${dp.month}</div>
-      <div class="mk-day">${dp.day}</div>
-      <div class="mk-year">${dp.year}</div>
-    </div>
+  const st=ttStyleFor(s.module||s.desc||'');
+  const dur=mkDurationFromRange(s.mtime);
+  return `<div class="makeup-item" style="border-left-color:${st.text}">
+    <div class="mk-row-ico" style="background:${st.icoBg};color:${st.icoColor}"><i class="fas ${st.icon}"></i></div>
     <div class="makeup-body">
       <div class="makeup-tags">
+        <span class="mk-tag mk-date-tag"><i class="fas fa-calendar-day"></i> ${escapeHtml(s.date||'—')}</span>
         <span class="mk-tag" style="background:${grBg};color:${grColor};">${s.group}</span>
         <span class="mk-tag" style="background:#eef2ff;color:#3730a3;">${s.sem||'S1'}</span>
       </div>
       <div class="makeup-title-row">
-        <span class="makeup-title-ico"><i class="fas fa-book-open"></i></span>
         <span class="makeup-title">${escapeHtml(s.module||s.desc||'Makeup Session')}</span>
       </div>
-      ${s.desc&&s.module?`<div class="makeup-note">${escapeHtml(s.desc)}</div>`:''}
+      ${s.desc&&s.module?`<div class="makeup-note">"${escapeHtml(s.desc)}"</div>`:''}
       <div class="makeup-row">
-        <span class="mk-cell"><i class="fas fa-clock"></i> ${escapeHtml(s.mtime||'—')}</span>
-        <span class="mk-cell"><i class="fas fa-door-open"></i> ${escapeHtml(s.amphi||'—')}</span>
+        <span class="mk-cell" style="background:${st.icoBg};color:${st.text}"><i class="fas fa-clock"></i> ${escapeHtml(s.mtime||'—')}</span>
+        <span class="mk-cell" style="background:${st.icoBg};color:${st.text}"><i class="fas fa-location-dot"></i> ${escapeHtml(s.amphi||'—')}</span>
+        ${dur?`<span class="mk-cell" style="background:${st.icoBg};color:${st.text}">${dur}</span>`:''}
       </div>
-      <div class="ann-footer">
-        <span class="stat-pill"><i class="fas fa-eye"></i> ${s.views||0} Views</span>
+      <div class="mk-footer-row">
+        <span class="stat-pill"><i class="fas fa-eye"></i> ${s.views||0}</span>
         <button class="like-btn ${likedCls}" onclick="toggleLike('makeup','${s.id}',this)">
-          <i class="fas fa-heart"></i> <span>${s.likes||0}</span> Likes
+          <i class="fas fa-heart"></i> <span>${s.likes||0}</span>
         </button>
       </div>
     </div>
+    <i class="fas fa-chevron-right mk-chevron"></i>
   </div>`;
+}
+window.toggleMkShowMore=function(){
+  mkShowAll=!mkShowAll;
+  renderMakeup();
+  if(!mkShowAll) document.getElementById('mkCardAnchor')?.scrollIntoView({behavior:'smooth',block:'start'});
+};
+window.downloadMkPdf=function(){ showToast('🖨️ Opening print dialog — choose "Save as PDF"'); setTimeout(()=>window.print(),300); };
+window.toggleMkMenu=function(which){
+  const id = which==='module'?'mkModuleMenu':'mkTimeMenu';
+  document.querySelectorAll('.mk-view-menu').forEach(m=>{ if(m.id!==id) m.classList.remove('open'); });
+  document.getElementById(id)?.classList.toggle('open');
+};
+document.addEventListener('click',(e)=>{
+  if(!e.target.closest('.mk-view-dd')) document.querySelectorAll('.mk-view-menu').forEach(m=>m.classList.remove('open'));
+});
+window.setMkModuleFilter=function(mod){
+  curMkModule=mod;
+  document.getElementById('mkModuleLabel').textContent = mod==='all'?'All Modules':mod;
+  document.getElementById('mkModuleMenu').classList.remove('open');
+  mkShowAll=false; renderMakeup();
+};
+window.setMkTimeFilter=function(t){
+  curMkTime=t;
+  document.getElementById('mkTimeLabel').textContent = t==='upcoming'?'Upcoming':t==='past'?'Past':'All';
+  document.querySelectorAll('#mkTimeMenu .mk-view-opt').forEach(o=>o.classList.remove('active'));
+  const idx = t==='upcoming'?0:t==='past'?1:2;
+  document.querySelectorAll('#mkTimeMenu .mk-view-opt')[idx]?.classList.add('active');
+  document.getElementById('mkTimeMenu').classList.remove('open');
+  mkShowAll=false; renderMakeup();
+};
+window.showMkSem=function(sem,el){
+  curMkSem=sem; mkShowAll=false;
+  document.querySelectorAll('#mkSemTabs .mk-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderMakeup();
+};
+function renderMkSemTabs(){
+  const cont=document.getElementById('mkSemTabs');
+  if(!cont) return;
+  const sems=[...new Set(makeupSessions.map(s=>s.sem||'S1'))].sort();
+  const visible = sems.length?sems:['S1'];
+  if(!visible.includes(curMkSem)) curMkSem=visible[0];
+  cont.innerHTML=visible.map(s=>`<div class="mk-tab${s===curMkSem?' active':''}" onclick="showMkSem('${s}',this)">${s}</div>`).join('');
+}
+function renderMkModuleMenu(base){
+  const mods=[...new Set(base.map(s=>s.module).filter(Boolean))];
+  const menu=document.getElementById('mkModuleMenu');
+  if(!menu) return;
+  menu.innerHTML = `<div class="mk-view-opt${curMkModule==='all'?' active':''}" onclick="setMkModuleFilter('all')">All Modules <i class="fas fa-check"></i></div>`
+    + mods.map(m=>`<div class="mk-view-opt${curMkModule===m?' active':''}" onclick="setMkModuleFilter('${m.replace(/'/g,"\\'")}')">${escapeHtml(m)} <i class="fas fa-check"></i></div>`).join('');
 }
 function renderMakeup(){
   const el=document.getElementById('makeupList');
-  const arr=makeupSessions.filter(x=>x.group==='Both'||x.group===currentGroup);
-  el.innerHTML=arr.length?arr.map(makeupHTML).join(''):'<div class="info-alert"><i class="fas fa-info-circle"></i> No makeup sessions scheduled.</div>';
+  renderMkSemTabs();
+  let arr=makeupSessions.filter(x=>(x.group==='Both'||x.group===currentGroup)&&(x.sem||'S1')===curMkSem);
+  renderMkModuleMenu(arr);
+  if(curMkModule!=='all') arr=arr.filter(x=>x.module===curMkModule);
+  const today=new Date().toISOString().slice(0,10);
+  if(curMkTime==='upcoming') arr=arr.filter(x=>!x.date||x.date>=today);
+  else if(curMkTime==='past') arr=arr.filter(x=>x.date&&x.date<today);
+  arr=[...arr].sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+  if(!arr.length){ el.innerHTML='<div class="info-alert"><i class="fas fa-info-circle"></i> No makeup sessions scheduled.</div>'; return; }
+  const LIMIT=5;
+  const visRows = mkShowAll ? arr : arr.slice(0,LIMIT);
+  const showMoreHtml = arr.length>LIMIT ? `<div class="mk-show-more-wrap"><button class="mk-show-more-btn${mkShowAll?' expanded':''}" onclick="toggleMkShowMore()">${mkShowAll?'Show less':'Show more'} <i class="fas fa-chevron-down"></i></button></div>` : '';
+  el.innerHTML=visRows.map(makeupHTML).join('')+showMoreHtml;
 }
 
 // ══ SPACE ══
