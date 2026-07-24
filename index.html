@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1280">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>English Studies | FLSHM Mohammedia</title>
 
   <!-- ═══ Open Graph / WhatsApp Preview ═══ -->
@@ -185,6 +185,7 @@
   .about-hero2-sub{margin-left:auto;margin-right:auto;}
   .about-hero2-visual{order:-1;}
   .about-hero2-photo-wrap{max-width:340px;}
+  .about-hero2-title{font-size:clamp(28px,8vw,42px);}
 }
 @media (max-width:480px){
   .about-hero2{padding:40px 18px 30px;}
@@ -1165,6 +1166,7 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
   .tt-hero2-img-wrap{max-width:320px;}
   .tt-card2-top{justify-content:center;}
   .tt-table2{font-size:12px;}
+  .tt-hero2-title{font-size:clamp(28px,8vw,42px);}
 }
 @media (max-width:480px){
   .tt-card2-inner{padding:20px 14px 6px;}
@@ -1481,6 +1483,7 @@ footer::after{
   .mk-hero2-img-wrap{max-width:320px;}
   .mk-card2-top{justify-content:center;}
   .makeup-item{flex-wrap:wrap;}
+  .mk-hero2-title{font-size:clamp(28px,8vw,42px);}
 }
 @media (max-width:480px){
   .mk-card2-inner{padding:20px 14px 14px;}
@@ -1748,12 +1751,14 @@ footer::after{
   .nav-item{scroll-snap-align:start;font-size:12.5px;padding:7px 10px;}
   .hero{flex-direction:column;padding:44px 20px 40px;gap:32px;}
   .hero-card{min-width:unset;width:100%;}
+  .hero h1{font-size:clamp(30px,8.5vw,44px);letter-spacing:-1.2px;}
+  .hero-stats{gap:10px;justify-content:center;}
+  .stat-item{min-width:100px;padding:12px 14px;flex:1 1 auto;}
   main{padding:24px 16px;}
   .es-showcase{ padding:60px 16px 0; }
   .footer-main{grid-template-columns:1fr;gap:24px;padding:32px 20px;}
   .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
   .cards-grid{grid-template-columns:repeat(2,1fr);}
-  .hero h1{letter-spacing:-1.2px;}
   .makeup-item{padding:16px;gap:12px;}
   .makeup-datebox{width:60px;padding:8px 2px;}
   .makeup-datebox .mk-day{font-size:20px;}
@@ -1835,6 +1840,12 @@ footer::after{
   .bus-line-dyn{min-width:42px;height:28px;font-size:11px;padding:0 8px;border-radius:7px;}
 }
 
+@media(max-width:400px){
+  .logo-text .site-sub{display:none;}
+  .logo-text .site-name{font-size:13px;}
+  .header-top{padding:8px 10px;}
+  .gr-btn{padding:4px 7px;font-size:9px;}
+}
 @media(max-width:400px){
   .about-card-footer{flex-wrap:wrap;gap:12px;justify-content:center;}
   .about-stat-sep{display:none;}
