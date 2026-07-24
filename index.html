@@ -1752,8 +1752,9 @@ footer::after{
   .hero{flex-direction:column;padding:44px 20px 40px;gap:32px;}
   .hero-card{min-width:unset;width:100%;}
   .hero h1{font-size:clamp(30px,8.5vw,44px);letter-spacing:-1.2px;}
-  .hero-stats{gap:10px;justify-content:center;}
-  .stat-item{min-width:100px;padding:12px 14px;flex:1 1 auto;}
+  .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .stat-item{width:100%;}
+  .stat-item{padding:12px 14px;}
   main{padding:24px 16px;}
   .es-showcase{ padding:60px 16px 0; }
   .footer-main{grid-template-columns:1fr;gap:24px;padding:32px 20px;}
@@ -1868,9 +1869,10 @@ footer::after{
   .tt-time-pill,.tt-room-pill{font-size:10.5px;padding:3px 9px;}
   .tt-card2-inner{padding:18px 0 6px;}
   .tt-card2-top{gap:10px;padding:0 16px;}
-  .tt-tabs{width:100%;justify-content:center;}
-  .tt-view-dd{width:100%;}
-  .tt-view-btn{width:100%;justify-content:center;}
+  .tt-tabs{width:fit-content;margin:0 auto;}
+  .tt-card2{padding:0 10px;}
+  .tt-view-dd{width:fit-content;margin:0 auto;}
+  .tt-view-btn{width:auto;justify-content:center;}
   .tt-view-menu{left:16px;right:16px;width:auto;}
   .tt-card2-inner .info-alert{margin-left:16px;margin-right:16px;}
   #ttView{padding:0 16px;}
@@ -1893,7 +1895,8 @@ footer::after{
   .mk-footer-row{gap:12px;margin-top:6px;}
   .mk-card2-inner{padding:20px 16px 14px;}
   .mk-card2-top{gap:10px;}
-  .mk-tabs{width:100%;justify-content:center;}
+  .mk-tabs{width:fit-content;margin:0 auto;}
+  .mk-card2{padding:0 10px;}
   .mk-dd-row{width:100%;flex-direction:column;gap:8px;}
   .mk-view-dd{width:100%;}
   .mk-view-btn{width:100%;justify-content:center;}
