@@ -936,6 +936,19 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 .upd-stat-num{font-family:var(--theme-font-display);font-size:13px;font-weight:800;color:var(--text);line-height:1.15;}
 .upd-stat-label{font-size:9px;color:var(--muted);font-weight:600;white-space:nowrap;}
 
+/* Study-module-matched variant: icon+number inline on top, label centered below */
+.upd-stats.mdc-style{gap:8px;flex-wrap:nowrap;}
+.upd-stats.mdc-style .upd-stat-card{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10px 6px;}
+.upd-stats.mdc-style .upd-stat-top{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:3px;}
+.upd-stats.mdc-style .upd-stat-num{font-size:15px;}
+.upd-stats.mdc-style .upd-stat-label{font-size:9px;text-transform:uppercase;letter-spacing:.3px;font-weight:700;white-space:normal;}
+@media (max-width:680px){
+  .upd-stats.mdc-style .upd-stat-card{padding:8px 4px;}
+  .upd-stats.mdc-style .upd-stat-ico{width:22px;height:22px;font-size:10px;}
+  .upd-stats.mdc-style .upd-stat-num{font-size:13px;}
+  .upd-stats.mdc-style .upd-stat-label{font-size:8px;}
+}
+
 .upd-body{display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start;}
 .upd-main{min-width:0;}
 .upd-toolbar{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
@@ -1612,23 +1625,25 @@ footer::after{
   #modStats.mod-hero-stats .upd-stat-card{flex:1 1 auto;justify-content:center;}
 }
 
-.mdc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
-.mdc-item{background:var(--cream);border:1.5px solid var(--border);border-radius:16px;padding:16px;transition:.2s;cursor:pointer;display:flex;flex-direction:column;}
+.mdc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;align-items:start;}
+.mdc-item{background:var(--cream);border:1.5px solid var(--border);border-radius:14px;padding:13px;transition:.2s;cursor:pointer;display:flex;flex-direction:column;}
 .mdc-item:hover{border-color:var(--royal);background:#fff;box-shadow:var(--card-shadow);}
-.mdc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:11px;}
-.mdc-ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
-.mdc-bookmark{width:26px;height:26px;border-radius:8px;border:none;background:transparent;color:var(--muted);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;}
+.mdc-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:11px;}
+.mdc-title-row{display:flex;align-items:center;gap:10px;min-width:0;}
+.mdc-ico{width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.mdc-bookmark{width:24px;height:24px;border-radius:7px;border:none;background:transparent;color:var(--muted);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;flex-shrink:0;}
 .mdc-bookmark:hover{background:#fff;color:var(--gold);}
 .mdc-bookmark.saved{color:var(--gold);}
-.mdc-name{font-family:var(--theme-font-display);font-weight:700;font-size:14px;color:var(--navy);line-height:1.3;margin-bottom:12px;min-height:36px;}
+.mdc-name{font-family:var(--theme-font-display);font-weight:700;font-size:14px;color:var(--navy);line-height:1.25;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 [data-theme="midnight"] .mdc-name{color:var(--text);}
-.mdc-stats{display:flex;gap:6px;margin-bottom:12px;}
-.mdc-stat{flex:1;background:#fff;border:1px solid var(--border);border-radius:9px;padding:6px 3px;text-align:center;}
+.mdc-stats{display:flex;gap:5px;margin-bottom:10px;}
+.mdc-stat{flex:1;background:#fff;border:1px solid var(--border);border-radius:8px;padding:6px 4px;text-align:center;}
 [data-theme="midnight"] .mdc-stat{background:#1e1e32;}
-.mdc-stat i{font-size:10px;display:block;margin-bottom:3px;}
-.mdc-stat .mdc-num{font-size:12px;font-weight:800;color:var(--text);font-family:var(--theme-font-display);display:block;}
-.mdc-stat .mdc-label{font-size:8px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.3px;}
-.mdc-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:11px;border-top:1px solid var(--border);margin-top:auto;font-size:11px;}
+.mdc-stat-top{display:flex;align-items:center;justify-content:center;gap:5px;margin-bottom:2px;}
+.mdc-stat-top i{font-size:11px;}
+.mdc-stat .mdc-num{font-size:12.5px;font-weight:800;color:var(--text);font-family:var(--theme-font-display);}
+.mdc-stat .mdc-label{font-size:7.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.3px;display:block;}
+.mdc-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:9px;border-top:1px solid var(--border);margin-top:auto;font-size:10.5px;}
 .mdc-count{color:var(--muted);font-weight:600;display:flex;align-items:center;gap:5px;}
 .mdc-open{color:var(--royal);font-weight:800;display:flex;align-items:center;gap:5px;white-space:nowrap;}
 .mdc-open i{font-size:9px;transition:transform .2s;}
@@ -3041,71 +3056,69 @@ footer::after{
 <!-- ANNOUNCEMENTS -->
 <div id="page-announcements" class="page">
   <main>
-    <div class="upd-hero">
-      <div class="upd-hero-bg">
-        <span class="about-orb about-orb-1" style="width:260px;height:260px;top:-60px;right:120px;"></span>
-        <span class="about-orb about-orb-2" style="width:220px;height:220px;bottom:-80px;right:20px;background:radial-gradient(circle,rgba(124,77,255,.18) 0%,transparent 70%);"></span>
-        <span class="upd-hero-dot upd-hero-dot-1"></span>
-        <span class="upd-hero-dot upd-hero-dot-2"></span>
-        <span class="upd-hero-dot upd-hero-dot-3"></span>
-        <span class="upd-hero-dot upd-hero-dot-4"></span>
-      </div>
-      <div class="upd-hero-left">
-        <div class="sec-header" style="margin-top:8px;position:relative;z-index:2;"><h2><i class="fas fa-bullhorn"></i> All Updates</h2><p>Official updates from the English Studies Department</p><div class="section-divider"></div></div>
+    <section class="tt-hero2">
+      <div class="tt-hero2-grid">
+        <div class="tt-hero2-text">
+          <div class="tt-eyebrow2"><span class="pulse-dot2"></span> Updates</div>
+          <h1 class="tt-hero2-title">Stay in the<br><span class="tt-hero2-accent">Loop</span></h1>
+          <p class="tt-hero2-sub">Official updates from the English Studies Department. Check announcements, plan ahead, and never miss what matters.</p>
 
-        <!-- Stat cards -->
-        <div class="upd-stats">
-          <div class="upd-stat-card">
-            <div class="upd-stat-ico" style="background:#ede9fe;color:#7c3aed;"><i class="fas fa-layer-group"></i></div>
-            <div><div class="upd-stat-num" id="updStatTotal">0</div><div class="upd-stat-label">Total Updates</div></div>
+          <!-- Stat cards -->
+          <div class="upd-stats mdc-style">
+            <div class="upd-stat-card">
+              <div class="upd-stat-top"><div class="upd-stat-ico" style="background:#ede9fe;color:#7c3aed;"><i class="fas fa-layer-group"></i></div><div class="upd-stat-num" id="updStatTotal">0</div></div>
+              <div class="upd-stat-label">Total Updates</div>
+            </div>
+            <div class="upd-stat-card">
+              <div class="upd-stat-top"><div class="upd-stat-ico" style="background:#fff0e8;color:#ff6b35;"><i class="fas fa-circle-exclamation"></i></div><div class="upd-stat-num" id="updStatImportant">0</div></div>
+              <div class="upd-stat-label">Important</div>
+            </div>
+            <div class="upd-stat-card">
+              <div class="upd-stat-top"><div class="upd-stat-ico" style="background:#e6f9f6;color:#00b4a0;"><i class="fas fa-clock"></i></div><div class="upd-stat-num" id="updStatLast">—</div></div>
+              <div class="upd-stat-label">Last update</div>
+            </div>
           </div>
-          <div class="upd-stat-card">
-            <div class="upd-stat-ico" style="background:#fff0e8;color:#ff6b35;"><i class="fas fa-circle-exclamation"></i></div>
-            <div><div class="upd-stat-num" id="updStatImportant">0</div><div class="upd-stat-label">Important</div></div>
-          </div>
-          <div class="upd-stat-card">
-            <div class="upd-stat-ico" style="background:#e6f9f6;color:#00b4a0;"><i class="fas fa-clock"></i></div>
-            <div><div class="upd-stat-num" id="updStatLast">—</div><div class="upd-stat-label">Last update</div></div>
+        </div>
+        <div class="tt-hero2-visual">
+          <div class="tt-hero2-img-wrap">
+            <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+              <!-- papers stack -->
+              <rect x="118" y="46" width="146" height="150" rx="18" fill="#f4eef9" transform="rotate(6 191 121)"/>
+              <rect x="100" y="40" width="146" height="150" rx="18" fill="#ffffff" stroke="#eee7f7" stroke-width="1.5"/>
+              <rect x="122" y="72" width="98" height="9" rx="4.5" fill="#f1d9d0"/>
+              <rect x="122" y="90" width="82" height="9" rx="4.5" fill="#f1d9d0"/>
+              <rect x="122" y="108" width="90" height="9" rx="4.5" fill="#f1d9d0"/>
+              <!-- bookmark ribbon -->
+              <path d="M198 40 h24 v46 l-12 -10 -12 10 z" fill="#ff6b7a"/>
+              <!-- chat bubble -->
+              <g transform="translate(58,58)">
+                <rect x="0" y="0" width="46" height="34" rx="12" fill="#8f6bff"/>
+                <path d="M10 34 l0 14 14 -14 z" fill="#8f6bff"/>
+                <rect x="9" y="10" width="20" height="4" rx="2" fill="#ffffff" opacity=".85"/>
+                <rect x="9" y="18" width="14" height="4" rx="2" fill="#ffffff" opacity=".6"/>
+              </g>
+              <!-- bell -->
+              <g transform="translate(150,86)">
+                <defs>
+                  <linearGradient id="updBellGrad" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#ffb648"/>
+                    <stop offset="100%" stop-color="#ff6b35"/>
+                  </linearGradient>
+                </defs>
+                <path d="M28 0c-15 0-24 11-24 27 0 20-8 24-8 30h64c0-6-8-10-8-30 0-16-9-27-24-27z" fill="url(#updBellGrad)"/>
+                <circle cx="28" cy="66" r="9" fill="url(#updBellGrad)"/>
+                <circle cx="28" cy="-5" r="5" fill="url(#updBellGrad)"/>
+              </g>
+              <!-- floating dots -->
+              <circle cx="70" cy="20" r="4" fill="#ffb648" opacity=".8"/>
+              <circle cx="270" cy="60" r="5" fill="#8f6bff" opacity=".7"/>
+              <circle cx="252" cy="150" r="7" fill="#8f6bff" opacity=".55"/>
+              <circle cx="90" cy="180" r="4" fill="#ff6b7a" opacity=".7"/>
+            </svg>
           </div>
         </div>
       </div>
-      <div class="upd-hero-illustration">
-        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
-          <!-- papers stack -->
-          <rect x="118" y="46" width="146" height="150" rx="18" fill="#f4eef9" transform="rotate(6 191 121)"/>
-          <rect x="100" y="40" width="146" height="150" rx="18" fill="#ffffff" stroke="#eee7f7" stroke-width="1.5"/>
-          <rect x="122" y="72" width="98" height="9" rx="4.5" fill="#f1d9d0"/>
-          <rect x="122" y="90" width="82" height="9" rx="4.5" fill="#f1d9d0"/>
-          <rect x="122" y="108" width="90" height="9" rx="4.5" fill="#f1d9d0"/>
-          <!-- bookmark ribbon -->
-          <path d="M198 40 h24 v46 l-12 -10 -12 10 z" fill="#ff6b7a"/>
-          <!-- chat bubble -->
-          <g transform="translate(58,58)">
-            <rect x="0" y="0" width="46" height="34" rx="12" fill="#8f6bff"/>
-            <path d="M10 34 l0 14 14 -14 z" fill="#8f6bff"/>
-            <rect x="9" y="10" width="20" height="4" rx="2" fill="#ffffff" opacity=".85"/>
-            <rect x="9" y="18" width="14" height="4" rx="2" fill="#ffffff" opacity=".6"/>
-          </g>
-          <!-- bell -->
-          <g transform="translate(150,86)">
-            <defs>
-              <linearGradient id="updBellGrad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0%" stop-color="#ffb648"/>
-                <stop offset="100%" stop-color="#ff6b35"/>
-              </linearGradient>
-            </defs>
-            <path d="M28 0c-15 0-24 11-24 27 0 20-8 24-8 30h64c0-6-8-10-8-30 0-16-9-27-24-27z" fill="url(#updBellGrad)"/>
-            <circle cx="28" cy="66" r="9" fill="url(#updBellGrad)"/>
-            <circle cx="28" cy="-5" r="5" fill="url(#updBellGrad)"/>
-          </g>
-          <!-- floating dots -->
-          <circle cx="70" cy="20" r="4" fill="#ffb648" opacity=".8"/>
-          <circle cx="270" cy="60" r="5" fill="#8f6bff" opacity=".7"/>
-          <circle cx="252" cy="150" r="7" fill="#8f6bff" opacity=".55"/>
-          <circle cx="90" cy="180" r="4" fill="#ff6b7a" opacity=".7"/>
-        </svg>
-      </div>
-    </div>
+    </section>
 
     <div class="upd-body">
       <div class="upd-main">
@@ -6001,8 +6014,6 @@ function annHTML(a){
       <span class="post-stat-divider"></span>
       <span class="post-stat"><i class="fas fa-share-nodes" style="color:#6366f1;"></i><span id="shareCount-${a.id}">${a.shares||0}</span>&nbsp;shares</span>
       <span class="post-stat-divider"></span>
-      <span class="post-stat"><i class="fas fa-eye" style="color:#8b5cf6;"></i><span id="viewCount-${a.id}">${a.views||0}</span>&nbsp;views</span>
-      <span class="post-stat-divider"></span>
       <span class="post-stat"><i class="fas fa-bookmark" style="color:#16a34a;"></i><span id="saveCount-${a.id}">${a.saves||0}</span>&nbsp;saved</span>
       ${adminUnlocked && a.targetStudents && a.targetStudents.length > 0 ? `<span class="post-stat-divider"></span><span class="post-stat" style="color:var(--royal);font-weight:800;">👁 ${a.targetStudents.length} student${a.targetStudents.length!==1?'s':''} only</span>` : ''}
     </div>
@@ -6302,14 +6313,16 @@ function renderModules(sem){
       }).join(''):'<div class="no-files"><i class="fas fa-info-circle" style="margin-right:6px;"></i>No files uploaded yet.</div>';
       return `<div class="mdc-item" id="modItem-${i}" onclick="toggleMod('modItem-${i}')">
         <div class="mdc-top">
-          <div class="mdc-ico" style="background:${meta.bg};color:${meta.color};"><i class="fas ${meta.icon}"></i></div>
+          <div class="mdc-title-row">
+            <div class="mdc-ico" style="background:${meta.bg};color:${meta.color};"><i class="fas ${meta.icon}"></i></div>
+            <div class="mdc-name">${m}</div>
+          </div>
           <button class="mdc-bookmark${isSaved?' saved':''}" onclick="toggleSaveModule(event,'${modKey}',this)"><i class="${isSaved?'fas':'far'} fa-bookmark"></i></button>
         </div>
-        <div class="mdc-name">${m}</div>
         <div class="mdc-stats">
-          <div class="mdc-stat"><i class="fas fa-book-open" style="color:#7c3aed;"></i><span class="mdc-num">${lessonsCount}</span><span class="mdc-label">Lessons</span></div>
-          <div class="mdc-stat"><i class="fas fa-file-pdf" style="color:#ef4444;"></i><span class="mdc-num">${pdfCount}</span><span class="mdc-label">PDFs</span></div>
-          <div class="mdc-stat"><i class="fas fa-circle-play" style="color:#2563eb;"></i><span class="mdc-num">${videoCount}</span><span class="mdc-label">Videos</span></div>
+          <div class="mdc-stat"><div class="mdc-stat-top"><i class="fas fa-book-open" style="color:#7c3aed;"></i><span class="mdc-num">${lessonsCount}</span></div><span class="mdc-label">Lessons</span></div>
+          <div class="mdc-stat"><div class="mdc-stat-top"><i class="fas fa-file-pdf" style="color:#ef4444;"></i><span class="mdc-num">${pdfCount}</span></div><span class="mdc-label">PDFs</span></div>
+          <div class="mdc-stat"><div class="mdc-stat-top"><i class="fas fa-circle-play" style="color:#2563eb;"></i><span class="mdc-num">${videoCount}</span></div><span class="mdc-label">Videos</span></div>
         </div>
         <div class="mdc-footer">
           <span class="mdc-count"><i class="fas fa-folder-open"></i> ${files.length} file${files.length!==1?'s':''}</span>
