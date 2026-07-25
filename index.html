@@ -1749,13 +1749,13 @@ footer::after{
     scroll-snap-type:x proximity;
   }
   .nav-item{scroll-snap-align:start;font-size:13.5px;padding:8px 12px;}
-  .hero{flex-direction:column;padding:44px 20px 40px;gap:32px;}
+  .hero{flex-direction:column;padding:36px 14px 32px;gap:28px;}
   .hero-card{min-width:unset;width:100%;}
   .hero h1{font-size:clamp(30px,8.5vw,44px);letter-spacing:-1.2px;}
   .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
   .stat-item{width:100%;}
   .stat-item{padding:12px 14px;}
-  main{padding:24px 16px;}
+  main{padding:20px 10px;}
   .es-showcase{ padding:60px 16px 0; }
   .footer-main{grid-template-columns:1fr;gap:24px;padding:32px 20px;}
   .footer-bottom{flex-direction:column;gap:6px;text-align:center;}
@@ -1859,25 +1859,48 @@ footer::after{
   .ab-stat-item{min-width:80px;}
 }
 
-/* ── TIMETABLE 2.0 — mobile: keep as a real table, just scrollable + tighter ── */
+/* ── TIMETABLE 2.0 — mobile: bigger, edge-to-edge, rebalanced columns, no horizontal scroll ── */
+@media(max-width:768px){
+  header{padding:12px 10px 0;}
+  .header-top{padding:12px 14px;}
+}
 @media(max-width:680px){
-  .tt-table2{min-width:640px;}
-  .tt-table2 thead th{padding:10px 12px;font-size:11px;white-space:nowrap;}
-  .tt-table2 tbody td{padding:10px 12px;font-size:12.5px;}
-  .tt-day-cell,.tt-mod-cell{font-size:12.5px;}
-  .tt-mod-ico{width:24px;height:24px;font-size:11px;}
-  .tt-time-pill,.tt-room-pill{font-size:10.5px;padding:3px 9px;}
-  .tt-card2-inner{padding:18px 0 6px;}
-  .tt-card2-top{gap:10px;padding:0 16px;}
+  .tt-hero2{padding:28px 10px 24px;}
+  .tt-hero2-sub{max-width:100%;}
+  .tt-card2{padding:0 8px;}
+  .tt-card2-inner{padding:16px 10px 8px;border-radius:20px;}
+  .tt-card2-top{gap:10px;padding:0 4px;}
   .tt-tabs{width:fit-content;margin:0 auto;}
-  .tt-card2{padding:0 10px;}
   .tt-view-dd{width:fit-content;margin:0 auto;}
   .tt-view-btn{width:auto;justify-content:center;}
-  .tt-view-menu{left:16px;right:16px;width:auto;}
-  .tt-card2-inner .info-alert{margin-left:16px;margin-right:16px;}
-  #ttView{padding:0 16px;}
-  #ttView > div{border-radius:16px;box-shadow:0 4px 16px rgba(18,22,58,.06);}
-  .tt-table2{border-radius:14px;overflow:hidden;}
+  .tt-view-menu{left:4px;right:4px;width:auto;}
+  .tt-card2-inner .info-alert{margin-left:4px;margin-right:4px;font-size:12.5px;padding:12px 14px;}
+  #ttView{padding:0 2px;}
+  #ttView > div{border-radius:14px;box-shadow:0 4px 16px rgba(18,22,58,.06);}
+
+  /* Table: fixed layout so % widths are respected, fills the card, no scroll */
+  .tt-scale-outer{overflow:visible;}
+  .tt-scale-inner{display:block;width:100%!important;transform:none!important;}
+  .tt-table2{table-layout:fixed;width:100%;border-radius:14px;overflow:hidden;}
+  .tt-table2 thead th{padding:11px 4px;font-size:10px;white-space:normal;line-height:1.15;}
+  .tt-table2 thead th i{display:none;}
+  .tt-table2 tbody td{padding:13px 4px;font-size:11.5px;vertical-align:middle;}
+  /* column widths: Day, Module, Time, Room, Teacher, chevron */
+  .tt-table2 th:nth-child(1),.tt-table2 td:nth-child(1){width:13%;}
+  .tt-table2 th:nth-child(2),.tt-table2 td:nth-child(2){width:34%;}
+  .tt-table2 th:nth-child(3),.tt-table2 td:nth-child(3){width:19%;}
+  .tt-table2 th:nth-child(4),.tt-table2 td:nth-child(4){width:19%;}
+  .tt-table2 th:nth-child(5),.tt-table2 td:nth-child(5){width:12%;}
+  .tt-table2 th:nth-child(6),.tt-table2 td:nth-child(6){width:3%;padding-left:0;padding-right:2px;}
+  .tt-day-cell{font-size:11px;flex-direction:column;align-items:flex-start;gap:2px;}
+  .tt-day-cell i{display:none;}
+  .tt-mod-cell{font-size:11.5px;line-height:1.25;gap:6px;}
+  .tt-mod-ico{width:20px;height:20px;font-size:9px;flex-shrink:0;}
+  .tt-time-pill,.tt-room-pill{font-size:9px;padding:3px 6px;white-space:normal;line-height:1.2;gap:3px;}
+  .tt-time-pill i,.tt-room-pill i{display:none;}
+  .tt-teacher-cell{font-size:10px;line-height:1.2;word-break:break-word;}
+  .tt-chevron{font-size:10px;}
+  .tt-show-more-btn{font-size:12.5px;padding:9px 20px;}
 }
 
 /* ── MAKEUP 2.0 — mobile item layout (same row layout as desktop, just scaled) ── */
@@ -5871,6 +5894,12 @@ function fitTimetableScale(){
   const inner = document.getElementById('ttScaleInner');
   const outer = inner ? inner.parentElement : null;
   if(!inner||!outer) return;
+  if(window.innerWidth <= 680){
+    inner.style.transform='none';
+    inner.style.width='100%';
+    outer.style.height='auto';
+    return;
+  }
   inner.style.transform='none';
   inner.style.width='max-content';
   const naturalWidth = inner.scrollWidth;
