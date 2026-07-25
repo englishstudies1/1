@@ -75,6 +75,11 @@
 [data-theme="midnight"] .notif-item.unread{background:#1a1a30;}
 [data-theme="midnight"] .notif-dropdown-head h4,[data-theme="midnight"] .notif-text{color:var(--text);}
 [data-theme="midnight"] .ann-item::before{background:#c0392b;}
+[data-theme="midnight"] .upd-stat-card,[data-theme="midnight"] .upd-search,[data-theme="midnight"] .upd-pill,[data-theme="midnight"] .upd-sidebar-card{background:#1e1e32;border-color:var(--border);color:var(--text);}
+[data-theme="midnight"] .upd-hero{background:linear-gradient(135deg,#1a1a2e 0%,#161624 100%);}
+[data-theme="midnight"] .upd-date-dot{background:#1e1e32;}
+[data-theme="midnight"] .upd-sidebar-item{border-color:var(--border);}
+[data-theme="midnight"] .upd-sidebar-title,[data-theme="midnight"] .upd-date-label,[data-theme="midnight"] .upd-stat-num{color:var(--text);}
 /* ── Original theme ── */
 [data-theme="original"]{--navy:#0a2342;--royal:#1a4480;--sky:#4a90d9;--gold:#c9a84c;--gold-light:#f0d080;--cream:#faf8f4;--text:#1a2035;--muted:#6b7a99;--border:#e2e8f2;--card-shadow:0 4px 24px rgba(10,35,66,.10);--card-hover:0 12px 40px rgba(10,35,66,.18);--theme-font-body:'Plus Jakarta Sans',sans-serif;--theme-font-display:'Cormorant Garamond',serif;}
 [data-theme="original"] .header-top{background:white;border-color:#e2e8f2;}
@@ -898,6 +903,95 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 .menu-card h3{font-family:var(--theme-font-display);font-size:15px;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:-.2px;}
 .menu-card p{font-size:12px;color:var(--muted);font-weight:500;}
 
+/* ══ ANNOUNCEMENTS — UPDATES PAGE REDESIGN ══ */
+.upd-hero{
+  position:relative;overflow:hidden;border-radius:var(--r);
+  background:linear-gradient(135deg,#fbfaf9 0%,#f7f5f2 100%);
+  padding:28px 36px 28px;margin-bottom:8px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.upd-hero-left{position:relative;z-index:2;flex:1;min-width:0;}
+.upd-hero-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+.upd-hero-dot{position:absolute;border-radius:50%;animation:orbFloat3 6s ease-in-out infinite;}
+.upd-hero-dot-1{width:8px;height:8px;background:#ffb648;top:22%;left:38%;opacity:.6;animation-delay:.2s;}
+.upd-hero-dot-2{width:10px;height:10px;background:#8f6bff;top:65%;left:44%;opacity:.5;animation-delay:1.4s;}
+.upd-hero-dot-3{width:6px;height:6px;background:#ff6b7a;top:38%;right:14%;opacity:.6;animation-delay:.8s;}
+.upd-hero-dot-4{width:9px;height:9px;background:#8f6bff;bottom:14%;right:32%;opacity:.45;animation-delay:2s;}
+.upd-hero-illustration{position:relative;z-index:2;width:280px;max-width:34%;flex-shrink:0;}
+.upd-hero-illustration svg{width:100%;height:auto;display:block;}
+
+@media (max-width:900px){
+  .upd-hero{padding:22px 20px 20px;}
+  .upd-hero-illustration{display:none;}
+}
+
+.upd-stats{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap;}
+.upd-stat-card{
+  background:white;border:1.5px solid var(--border);border-radius:var(--r-sm);
+  padding:7px 12px;display:inline-flex;align-items:center;gap:8px;
+  box-shadow:var(--card-shadow);transition:.2s;flex:0 0 auto;width:auto;
+}
+.upd-stat-card:hover{box-shadow:var(--card-hover);transform:translateY(-2px);}
+.upd-stat-ico{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;}
+.upd-stat-num{font-family:var(--theme-font-display);font-size:13px;font-weight:800;color:var(--text);line-height:1.15;}
+.upd-stat-label{font-size:9px;color:var(--muted);font-weight:600;white-space:nowrap;}
+
+.upd-body{display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start;}
+.upd-main{min-width:0;}
+.upd-toolbar{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap;}
+.upd-search{
+  flex:1;min-width:200px;display:flex;align-items:center;gap:10px;
+  background:white;border:1.5px solid var(--border);border-radius:var(--r-pill);
+  padding:10px 18px;font-size:13.5px;color:var(--muted);
+}
+.upd-search i{font-size:13px;}
+.upd-search input{border:none;outline:none;background:none;flex:1;font-family:var(--theme-font-body);font-size:13.5px;color:var(--text);font-weight:500;}
+.upd-pills{display:flex;gap:8px;flex-wrap:wrap;}
+.upd-pill{
+  padding:9px 16px;border:1.5px solid var(--border);border-radius:var(--r-pill);
+  background:white;cursor:pointer;font-size:12px;font-weight:700;color:var(--muted);
+  transition:.2s;font-family:var(--theme-font-display);white-space:nowrap;display:inline-flex;align-items:center;gap:6px;
+}
+.upd-pill:hover:not(.active){border-color:var(--navy);color:var(--navy);}
+.upd-pill.active{background:var(--navy);color:white;border-color:var(--navy);box-shadow:0 4px 14px rgba(18,22,58,.25);}
+.upd-pill.active.pill-urgent{background:#991b1b;border-color:#991b1b;}
+.upd-pill.active.pill-info{background:#c2410c;border-color:#c2410c;}
+.upd-pill.active.pill-general{background:#475569;border-color:#475569;}
+.upd-pill.active.pill-saved{background:var(--sky);border-color:var(--sky);}
+
+.upd-date-group{margin-bottom:26px;}
+.upd-date-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-left:2px;}
+.upd-date-dot{width:11px;height:11px;border-radius:50%;border:2.5px solid var(--sky);background:white;flex-shrink:0;}
+.upd-date-label{font-size:14px;font-weight:800;color:var(--text);font-family:var(--theme-font-display);}
+.upd-date-sub{font-size:11.5px;color:var(--muted);font-weight:600;}
+
+.upd-sidebar{position:sticky;top:20px;}
+.upd-sidebar-card{background:white;border:1.5px solid var(--border);border-radius:var(--r);padding:18px;box-shadow:var(--card-shadow);}
+.upd-sidebar-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.upd-sidebar-head h4{font-family:var(--theme-font-display);font-size:14.5px;font-weight:800;color:var(--text);}
+.upd-sidebar-head button{background:none;border:none;color:var(--sky);font-size:11.5px;font-weight:700;cursor:pointer;font-family:inherit;}
+.upd-sidebar-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);cursor:pointer;}
+.upd-sidebar-item:last-child{border-bottom:none;}
+.upd-sidebar-ico{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12.5px;flex-shrink:0;}
+.upd-sidebar-text{min-width:0;}
+.upd-sidebar-title{font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:2px;}
+.upd-sidebar-snippet{font-size:11.5px;color:var(--muted);font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.upd-sidebar-time{font-size:10.5px;color:var(--muted);font-weight:600;margin-top:2px;}
+.upd-sidebar-view-all{
+  width:100%;margin-top:6px;padding:10px;border:1.5px solid var(--border);border-radius:var(--r-pill);
+  background:none;color:var(--text);font-weight:700;font-size:12.5px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;font-family:inherit;transition:.2s;
+}
+.upd-sidebar-view-all:hover{border-color:var(--navy);background:var(--navy);color:white;}
+
+@media (max-width:900px){
+  .upd-body{grid-template-columns:1fr;}
+  .upd-sidebar{position:static;order:-1;}
+  .upd-stats{flex-wrap:wrap;}
+  .upd-toolbar{flex-direction:column;align-items:stretch;}
+  .upd-pills{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;}
+}
+
 /* ══ ANNOUNCEMENTS ══ */
 .ann-list{display:flex;flex-direction:column;gap:12px;}
 .ann-item{
@@ -1489,6 +1583,56 @@ footer::after{
   .mk-card2-inner{padding:20px 14px 14px;}
   .makeup-item{padding:14px;gap:12px;}
 }
+
+/* ══ MODULES — coordinated with TIMETABLE / MAKEUP SESSIONS style ══ */
+.mod-eyebrow2{display:inline-flex;align-items:center;gap:8px;background:#ede9fe;color:#7c4dff;border-radius:100px;padding:6px 16px;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;margin-bottom:20px;}
+.mod-eyebrow2 .pulse-dot4{width:6px;height:6px;border-radius:50%;background:#7c4dff;box-shadow:0 0 0 3px rgba(124,77,255,.2);}
+.mod-hero2-accent{background:linear-gradient(120deg,var(--gold),#7c4dff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+.mod-search-wrap{position:relative;flex:0 0 260px;}
+#modSemTabs.tt-tabs .sem-tab{padding:9px 22px;border-radius:100px;font-size:13px;font-weight:700;color:var(--muted);border:none;margin:0;box-shadow:none;background:transparent;cursor:pointer;transition:.2s;font-family:var(--theme-font-display);}
+#modSemTabs.tt-tabs .sem-tab.active{background:linear-gradient(120deg,var(--royal),#6d4de0);color:#fff;box-shadow:0 6px 16px rgba(60,50,180,.28);}
+#modSemTabs.tt-tabs .sem-tab:hover:not(.active){color:var(--navy);}
+.mod-search-wrap i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px;}
+.mod-search-input{width:100%;padding:9px 14px 9px 34px;border:1.5px solid var(--border);border-radius:100px;font-family:inherit;font-size:13px;color:var(--text);background:var(--cream);transition:.2s;}
+.mod-search-input:focus{outline:none;border-color:var(--royal);background:#fff;}
+
+.mod-stats-row{display:flex;gap:8px;margin:2px 0 20px;flex-wrap:wrap;}
+
+.mdc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.mdc-item{background:var(--cream);border:1.5px solid var(--border);border-radius:16px;padding:16px;transition:.2s;cursor:pointer;display:flex;flex-direction:column;}
+.mdc-item:hover{border-color:var(--royal);background:#fff;box-shadow:var(--card-shadow);}
+.mdc-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:11px;}
+.mdc-ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.mdc-bookmark{width:26px;height:26px;border-radius:8px;border:none;background:transparent;color:var(--muted);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;}
+.mdc-bookmark:hover{background:#fff;color:var(--gold);}
+.mdc-bookmark.saved{color:var(--gold);}
+.mdc-name{font-family:var(--theme-font-display);font-weight:700;font-size:14px;color:var(--navy);line-height:1.3;margin-bottom:12px;min-height:36px;}
+[data-theme="midnight"] .mdc-name{color:var(--text);}
+.mdc-stats{display:flex;gap:6px;margin-bottom:12px;}
+.mdc-stat{flex:1;background:#fff;border:1px solid var(--border);border-radius:9px;padding:6px 3px;text-align:center;}
+[data-theme="midnight"] .mdc-stat{background:#1e1e32;}
+.mdc-stat i{font-size:10px;display:block;margin-bottom:3px;}
+.mdc-stat .mdc-num{font-size:12px;font-weight:800;color:var(--text);font-family:var(--theme-font-display);display:block;}
+.mdc-stat .mdc-label{font-size:8px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.3px;}
+.mdc-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:11px;border-top:1px solid var(--border);margin-top:auto;font-size:11px;}
+.mdc-count{color:var(--muted);font-weight:600;display:flex;align-items:center;gap:5px;}
+.mdc-open{color:var(--royal);font-weight:800;display:flex;align-items:center;gap:5px;white-space:nowrap;}
+.mdc-open i{font-size:9px;transition:transform .2s;}
+.mdc-item:hover .mdc-open i{transform:translateX(3px);}
+.mdc-item .mod-files{display:none;padding:13px 0 0;border-top:1px solid var(--border);margin-top:11px;}
+.mdc-item.open .mod-files{display:block;}
+.mdc-item.open .mdc-open i{transform:rotate(90deg);}
+.mdc-empty{grid-column:1/-1;text-align:center;padding:36px 20px;color:var(--muted);font-size:13.5px;}
+
+@media (max-width:900px){
+  .mdc-grid{grid-template-columns:repeat(2,1fr);}
+  .mod-search-wrap{flex:1 1 100%;order:3;}
+}
+@media (max-width:560px){
+  .mdc-grid{grid-template-columns:1fr;}
+}
+
 .makeup-cta{
   display:flex;align-items:center;gap:22px;flex-wrap:wrap;
   background:linear-gradient(135deg,#eef2ff,#e0e7ff);
@@ -2368,10 +2512,6 @@ footer::after{
   })();
   </script>
 
-  <main>
-    <div class="sec-header" style="margin-top:8px;"><h2><i class="fas fa-bullhorn"></i> Latest Updates</h2><div class="section-divider"></div></div>
-    <div class="ann-list" id="annPreview"></div>
-  </main>
 <!-- COSMIC HERO -->
 <style>
 .cos-hero{
@@ -2555,10 +2695,98 @@ footer::after{
 
 <!-- MODULES -->
 <div id="page-modules" class="page">
-  <main>
-    <div class="sec-header" style="margin-top:8px;"><h2><i class="fas fa-book"></i> Study Modules</h2><p>Click a module to view lessons and files</p><div class="section-divider"></div></div>
-    <div class="sem-tabs" id="modSemTabs"></div>
-    <div class="module-list" id="modList"></div>
+  <section class="tt-hero2">
+    <div class="tt-hero2-grid">
+      <div class="tt-hero2-text">
+        <div class="mod-eyebrow2"><span class="pulse-dot4"></span> Modules</div>
+        <h1 class="tt-hero2-title">Study Smarter,<br><span class="mod-hero2-accent">Not Harder</span></h1>
+        <p class="tt-hero2-sub">Everything you need for every module — lessons, PDFs and videos — organized and ready to explore.</p>
+        <div class="tt-hero2-btns">
+          <button class="tt-btn-primary" onclick="document.getElementById('modCardAnchor').scrollIntoView({behavior:'smooth',block:'start'})">Browse modules <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+      <div class="tt-hero2-visual">
+        <div class="tt-hero2-img-wrap">
+          <svg viewBox="0 0 500 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+            <defs>
+              <linearGradient id="modBook1" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#9d7bff"/><stop offset="1" stop-color="#7c4dff"/>
+              </linearGradient>
+              <linearGradient id="modBook2" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#ff8c5a"/><stop offset="1" stop-color="#ff6b35"/>
+              </linearGradient>
+              <linearGradient id="modCapRing" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#9d7bff"/><stop offset="1" stop-color="#7c4dff"/>
+              </linearGradient>
+            </defs>
+            <circle cx="350" cy="190" r="150" fill="#efeaff" opacity=".55"/>
+            <g opacity=".55">
+              <circle cx="60" cy="70" r="2.5" fill="#c7cbe0"/><circle cx="78" cy="70" r="2.5" fill="#c7cbe0"/><circle cx="96" cy="70" r="2.5" fill="#c7cbe0"/>
+              <circle cx="60" cy="86" r="2.5" fill="#c7cbe0"/><circle cx="78" cy="86" r="2.5" fill="#c7cbe0"/><circle cx="96" cy="86" r="2.5" fill="#c7cbe0"/>
+            </g>
+            <rect x="30" y="290" width="16" height="16" fill="#ffd9c2" transform="rotate(45 38 298)"/>
+            <polygon points="245,120 245,330 300,300 300,150" fill="#e3e5f2"/>
+            <g>
+              <rect x="55" y="270" width="34" height="30" rx="6" fill="#ffffff" stroke="#e4e6f2" stroke-width="2"/>
+              <path d="M72 272 C60 260 58 245 72 235 C86 245 84 260 72 272 Z" fill="#2fbf9f"/>
+              <path d="M72 272 C64 262 64 250 72 242" fill="none" stroke="#1f9a80" stroke-width="2"/>
+            </g>
+            <g>
+              <rect x="360" y="255" width="90" height="16" rx="4" fill="url(#modBook2)"/>
+              <rect x="365" y="239" width="80" height="16" rx="4" fill="#e0287d" opacity=".85"/>
+              <rect x="360" y="223" width="90" height="16" rx="4" fill="url(#modBook1)"/>
+            </g>
+            <g>
+              <circle cx="380" cy="300" r="46" fill="url(#modCapRing)"/>
+              <circle cx="380" cy="300" r="34" fill="#ffffff"/>
+              <path d="M362 296 L380 288 L398 296 L380 304 Z" fill="#12163a"/>
+              <rect x="378" y="304" width="4" height="14" fill="#12163a"/>
+              <circle cx="382" cy="318" r="3" fill="var(--gold)"/>
+            </g>
+            <g>
+              <rect x="120" y="110" width="200" height="180" rx="14" fill="#ffffff" stroke="#e4e6f2" stroke-width="2"/>
+              <path d="M120 124 Q120 110 134 110 L306 110 Q320 110 320 124 L320 148 L120 148 Z" fill="url(#modBook1)"/>
+              <circle cx="150" cy="110" r="7" fill="#ffffff" stroke="#e39a6b" stroke-width="3"/>
+              <circle cx="195" cy="110" r="7" fill="#ffffff" stroke="#e39a6b" stroke-width="3"/>
+              <circle cx="245" cy="110" r="7" fill="#ffffff" stroke="#e39a6b" stroke-width="3"/>
+              <circle cx="290" cy="110" r="7" fill="#ffffff" stroke="#e39a6b" stroke-width="3"/>
+              <rect x="133" y="158" width="46" height="14" rx="4" fill="#efeaff"/>
+              <rect x="243" y="158" width="46" height="14" rx="4" fill="#9d7bff"/>
+              <path d="M140 195 L220 195 L220 265 L140 265 Z" fill="#f1f2fa"/>
+              <path d="M300 195 L220 195 L220 265 L300 265 Z" fill="#f1f2fa"/>
+              <path d="M150 205 h60 M150 216 h60 M150 227 h50" stroke="#c7cbe0" stroke-width="3" stroke-linecap="round"/>
+              <path d="M230 205 h60 M230 216 h60 M230 227 h45" stroke="#c7cbe0" stroke-width="3" stroke-linecap="round"/>
+              <rect x="212" y="192" width="16" height="76" rx="3" fill="#e4e6f2"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+  <main id="modCardAnchor">
+    <div class="tt-card2">
+      <div class="tt-card2-inner">
+        <div class="tt-card2-top">
+          <div class="tt-tabs" id="modSemTabs"></div>
+          <div class="mod-search-wrap">
+            <i class="fas fa-search"></i>
+            <input type="text" id="modSearchInput" class="mod-search-input" placeholder="Search a module..." oninput="renderModules(curModSem)">
+          </div>
+        </div>
+        <div class="upd-stats mod-stats-row" id="modStats"></div>
+        <div class="mdc-grid" id="modList"></div>
+      </div>
+    </div>
+    <div class="tt-card2" style="margin-top:-16px;">
+      <div class="makeup-cta">
+        <div class="makeup-cta-icon"><i class="fas fa-comment-dots"></i></div>
+        <div class="makeup-cta-text">
+          <h4>Need help?</h4>
+          <p>Can't find a lesson or have a problem?</p>
+        </div>
+        <button class="makeup-cta-btn" onclick="showPage('space')"><i class="fas fa-envelope"></i> Contact Admin</button>
+      </div>
+    </div>
   </main>
 </div>
 
@@ -2797,14 +3025,99 @@ footer::after{
 <!-- ANNOUNCEMENTS -->
 <div id="page-announcements" class="page">
   <main>
-    <div class="sec-header" style="margin-top:8px;"><h2><i class="fas fa-bullhorn"></i> All Updates</h2><p>Official updates from the English Studies Department</p><div class="section-divider"></div></div>
-    <!-- Tabs: All / Saved -->
-    <div style="display:flex;gap:8px;margin-bottom:18px;">
-      <button id="annTab-all" class="sem-tab active" onclick="switchAnnTab('all')"><i class="fas fa-list" style="margin-right:5px;"></i>All Posts</button>
-      <button id="annTab-saved" class="sem-tab" onclick="switchAnnTab('saved')"><i class="fas fa-bookmark" style="margin-right:5px;"></i>Saved</button>
+    <div class="upd-hero">
+      <div class="upd-hero-bg">
+        <span class="about-orb about-orb-1" style="width:260px;height:260px;top:-60px;right:120px;"></span>
+        <span class="about-orb about-orb-2" style="width:220px;height:220px;bottom:-80px;right:20px;background:radial-gradient(circle,rgba(124,77,255,.18) 0%,transparent 70%);"></span>
+        <span class="upd-hero-dot upd-hero-dot-1"></span>
+        <span class="upd-hero-dot upd-hero-dot-2"></span>
+        <span class="upd-hero-dot upd-hero-dot-3"></span>
+        <span class="upd-hero-dot upd-hero-dot-4"></span>
+      </div>
+      <div class="upd-hero-left">
+        <div class="sec-header" style="margin-top:8px;position:relative;z-index:2;"><h2><i class="fas fa-bullhorn"></i> All Updates</h2><p>Official updates from the English Studies Department</p><div class="section-divider"></div></div>
+
+        <!-- Stat cards -->
+        <div class="upd-stats">
+          <div class="upd-stat-card">
+            <div class="upd-stat-ico" style="background:#ede9fe;color:#7c3aed;"><i class="fas fa-layer-group"></i></div>
+            <div><div class="upd-stat-num" id="updStatTotal">0</div><div class="upd-stat-label">Total Updates</div></div>
+          </div>
+          <div class="upd-stat-card">
+            <div class="upd-stat-ico" style="background:#fff0e8;color:#ff6b35;"><i class="fas fa-circle-exclamation"></i></div>
+            <div><div class="upd-stat-num" id="updStatImportant">0</div><div class="upd-stat-label">Important</div></div>
+          </div>
+          <div class="upd-stat-card">
+            <div class="upd-stat-ico" style="background:#e6f9f6;color:#00b4a0;"><i class="fas fa-clock"></i></div>
+            <div><div class="upd-stat-num" id="updStatLast">—</div><div class="upd-stat-label">Last update</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="upd-hero-illustration">
+        <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- papers stack -->
+          <rect x="118" y="46" width="146" height="150" rx="18" fill="#f4eef9" transform="rotate(6 191 121)"/>
+          <rect x="100" y="40" width="146" height="150" rx="18" fill="#ffffff" stroke="#eee7f7" stroke-width="1.5"/>
+          <rect x="122" y="72" width="98" height="9" rx="4.5" fill="#f1d9d0"/>
+          <rect x="122" y="90" width="82" height="9" rx="4.5" fill="#f1d9d0"/>
+          <rect x="122" y="108" width="90" height="9" rx="4.5" fill="#f1d9d0"/>
+          <!-- bookmark ribbon -->
+          <path d="M198 40 h24 v46 l-12 -10 -12 10 z" fill="#ff6b7a"/>
+          <!-- chat bubble -->
+          <g transform="translate(58,58)">
+            <rect x="0" y="0" width="46" height="34" rx="12" fill="#8f6bff"/>
+            <path d="M10 34 l0 14 14 -14 z" fill="#8f6bff"/>
+            <rect x="9" y="10" width="20" height="4" rx="2" fill="#ffffff" opacity=".85"/>
+            <rect x="9" y="18" width="14" height="4" rx="2" fill="#ffffff" opacity=".6"/>
+          </g>
+          <!-- bell -->
+          <g transform="translate(150,86)">
+            <defs>
+              <linearGradient id="updBellGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#ffb648"/>
+                <stop offset="100%" stop-color="#ff6b35"/>
+              </linearGradient>
+            </defs>
+            <path d="M28 0c-15 0-24 11-24 27 0 20-8 24-8 30h64c0-6-8-10-8-30 0-16-9-27-24-27z" fill="url(#updBellGrad)"/>
+            <circle cx="28" cy="66" r="9" fill="url(#updBellGrad)"/>
+            <circle cx="28" cy="-5" r="5" fill="url(#updBellGrad)"/>
+          </g>
+          <!-- floating dots -->
+          <circle cx="70" cy="20" r="4" fill="#ffb648" opacity=".8"/>
+          <circle cx="270" cy="60" r="5" fill="#8f6bff" opacity=".7"/>
+          <circle cx="252" cy="150" r="7" fill="#8f6bff" opacity=".55"/>
+          <circle cx="90" cy="180" r="4" fill="#ff6b7a" opacity=".7"/>
+        </svg>
+      </div>
     </div>
-    <div id="annFull"></div>
-    <div id="annSaved" style="display:none;"></div>
+
+    <div class="upd-body">
+      <div class="upd-main">
+        <!-- Search + filter pills -->
+        <div class="upd-toolbar">
+          <div class="upd-search"><i class="fas fa-search"></i><input type="text" id="updSearchInput" placeholder="Search updates..." oninput="renderAllAnn()"></div>
+          <div class="upd-pills" id="updPills">
+            <button class="upd-pill active" data-f="all" onclick="setUpdFilter('all')">All</button>
+            <button class="upd-pill pill-urgent" data-f="urgent" onclick="setUpdFilter('urgent')"><i class="fas fa-circle-exclamation"></i>Important</button>
+            <button class="upd-pill pill-general" data-f="general" onclick="setUpdFilter('general')"><i class="fas fa-layer-group"></i>General</button>
+            <button class="upd-pill pill-info" data-f="info" onclick="setUpdFilter('info')"><i class="fas fa-circle-info"></i>Info</button>
+            <button class="upd-pill pill-saved" data-f="saved" onclick="setUpdFilter('saved')"><i class="fas fa-bookmark"></i>Saved</button>
+          </div>
+        </div>
+
+        <div id="annFull"></div>
+        <div id="annSaved" style="display:none;"></div>
+      </div>
+
+      <!-- Sidebar: Latest Updates -->
+      <aside class="upd-sidebar">
+        <div class="upd-sidebar-card">
+          <div class="upd-sidebar-head"><h4>Latest Updates</h4></div>
+          <div id="updSidebarList"></div>
+          <button class="upd-sidebar-view-all" onclick="setUpdFilter('all')"><i class="fas fa-list"></i> View all updates</button>
+        </div>
+      </aside>
+    </div>
   </main>
 </div>
 
@@ -4692,13 +5005,25 @@ function showToast(msg){
 window.switchAnnTab = function(tab){
   const allEl=document.getElementById('annFull');
   const savedEl=document.getElementById('annSaved');
-  document.getElementById('annTab-all').classList.toggle('active',tab==='all');
-  document.getElementById('annTab-saved').classList.toggle('active',tab==='saved');
+  if(!allEl||!savedEl) return;
   if(tab==='all'){
     allEl.style.display=''; savedEl.style.display='none';
   } else {
     allEl.style.display='none'; savedEl.style.display='';
     renderSavedPosts();
+  }
+};
+
+// Category filter state for the redesigned Updates page
+let updCurrentFilter='all';
+window.setUpdFilter = function(f){
+  updCurrentFilter=f;
+  document.querySelectorAll('.upd-pill').forEach(p=>p.classList.toggle('active',p.dataset.f===f));
+  if(f==='saved'){
+    switchAnnTab('saved');
+  } else {
+    switchAnnTab('all');
+    renderAllAnn();
   }
 };
 
@@ -5765,17 +6090,111 @@ function adjustThreadLines(){
 }
 function renderAnnPreview(){
   const el=document.getElementById('annPreview');
+  if(!el) return;
   const arr=filteredAnn().slice(0,3);
   const newHtml=arr.length?arr.map(annHTML).join(''):'<p style="color:var(--muted);font-size:14px;">No announcements yet.</p>';
   if(el._lastHtml!==newHtml){ el.innerHTML=newHtml; el._lastHtml=newHtml; }
   adjustThreadLines();
 }
+function timeAgo(dateStr,timeStr){
+  if(!dateStr) return '';
+  const d=new Date(dateStr+'T'+(timeStr||'00:00'));
+  if(isNaN(d.getTime())) return '';
+  const diffMs=Date.now()-d.getTime();
+  const mins=Math.floor(diffMs/60000);
+  if(mins<1) return 'Just now';
+  if(mins<60) return mins+'m ago';
+  const hrs=Math.floor(mins/60);
+  if(hrs<24) return hrs+'h ago';
+  const days=Math.floor(hrs/24);
+  if(days<7) return days+'d ago';
+  return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+}
+
+function updDateGroupLabel(dateStr){
+  if(!dateStr) return {label:'Earlier',sub:''};
+  const d=new Date(dateStr+'T00:00:00');
+  const today=new Date(); today.setHours(0,0,0,0);
+  const diffDays=Math.round((today-d)/86400000);
+  const sub=d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
+  if(diffDays===0) return {label:'Today',sub};
+  if(diffDays===1) return {label:'Yesterday',sub};
+  if(diffDays>1 && diffDays<7) return {label:'Last Week',sub};
+  return {label:sub,sub:''};
+}
+
 function renderAllAnn(){
   const el=document.getElementById('annFull');
-  const arr=filteredAnn();
-  const newHtml=arr.length?arr.map(annHTML).join(''):'<p style="color:var(--muted);font-size:14px;">No announcements yet.</p>';
+  if(!el) return;
+  let arr=filteredAnn();
+
+  // Category filter (Important/General/Info) — 'all' and 'saved' skip this
+  if(updCurrentFilter && updCurrentFilter!=='all' && updCurrentFilter!=='saved'){
+    arr=arr.filter(a=>a.type===updCurrentFilter);
+  }
+  // Search filter
+  const searchEl=document.getElementById('updSearchInput');
+  const q=(searchEl?searchEl.value:'').trim().toLowerCase();
+  if(q){
+    arr=arr.filter(a=>(a.title||'').toLowerCase().includes(q) || (a.text||'').toLowerCase().includes(q));
+  }
+
+  // Sort newest first for chronological grouping, without mutating admin drag-order
+  const sorted=[...arr].sort((a,b)=>((b.date||'')+((b.time||''))).localeCompare((a.date||'')+((a.time||''))));
+
+  let newHtml='';
+  if(!sorted.length){
+    newHtml='<p style="color:var(--muted);font-size:14px;">No updates found.</p>';
+  } else {
+    let curLabel=null;
+    sorted.forEach(a=>{
+      const g=updDateGroupLabel(a.date);
+      if(g.label!==curLabel){
+        if(curLabel!==null) newHtml+='</div></div>';
+        newHtml+=`<div class="upd-date-group"><div class="upd-date-head"><span class="upd-date-dot"></span><span class="upd-date-label">${g.label}</span>${g.sub?`<span class="upd-date-sub">${g.sub}</span>`:''}</div><div class="ann-list">`;
+        curLabel=g.label;
+      }
+      newHtml+=annHTML(a);
+    });
+    newHtml+='</div></div>';
+  }
+
   if(el._lastHtml!==newHtml){ el.innerHTML=newHtml; el._lastHtml=newHtml; }
   adjustThreadLines();
+  renderUpdStats();
+  renderUpdSidebar();
+}
+
+function renderUpdStats(){
+  const arr=filteredAnn();
+  const totalEl=document.getElementById('updStatTotal');
+  const impEl=document.getElementById('updStatImportant');
+  const lastEl=document.getElementById('updStatLast');
+  if(totalEl) totalEl.textContent=arr.length;
+  if(impEl) impEl.textContent=arr.filter(a=>a.type==='urgent').length;
+  if(lastEl){
+    const sorted=[...arr].sort((a,b)=>((b.date||'')+(b.time||'')).localeCompare((a.date||'')+(a.time||'')));
+    lastEl.textContent=sorted.length?(timeAgo(sorted[0].date,sorted[0].time)||'—'):'—';
+  }
+}
+
+function renderUpdSidebar(){
+  const el=document.getElementById('updSidebarList');
+  if(!el) return;
+  const arr=[...filteredAnn()].sort((a,b)=>((b.date||'')+(b.time||'')).localeCompare((a.date||'')+(a.time||''))).slice(0,5);
+  if(!arr.length){ el.innerHTML='<p style="color:var(--muted);font-size:12.5px;">No updates yet.</p>'; return; }
+  const icoMap={urgent:['#fff0e8','#ff6b35','fa-circle-exclamation'],info:['#fff0e8','#c2410c','fa-circle-info'],general:['#f1f5f9','#475569','fa-layer-group']};
+  el.innerHTML=arr.map(a=>{
+    const [bg,clr,ico]=icoMap[a.type]||icoMap.general;
+    return `<div class="upd-sidebar-item" onclick="setUpdFilter('all')">
+      <div class="upd-sidebar-ico" style="background:${bg};color:${clr};"><i class="fas ${ico}"></i></div>
+      <div class="upd-sidebar-text">
+        <div class="upd-sidebar-title">${escapeHtml(a.title||'Update')}</div>
+        <div class="upd-sidebar-snippet">${escapeHtml((a.text||'').slice(0,60))}</div>
+        <div class="upd-sidebar-time">${timeAgo(a.date,a.time)}</div>
+      </div>
+    </div>`;
+  }).join('');
 }
 function updateTicker(){
   const el = document.getElementById('tickerText');
@@ -5801,18 +6220,102 @@ function gdriveDirectUrl(url){
 }
 function isGdriveUrl(url){ return url&&(url.includes('drive.google.com')||url.includes('docs.google.com')); }
 
+function fileCategory(f){
+  const hay=((f.url||'')+' '+(f.name||'')).toLowerCase();
+  if(hay.includes('youtube.com')||hay.includes('youtu.be')||hay.includes('vimeo.com')||hay.includes('.mp4')||hay.includes('video')) return 'video';
+  if(hay.includes('.pdf')||hay.includes('pdf')) return 'pdf';
+  return 'lesson';
+}
+const MOD_ICON_RULES=[
+  {kw:['composition','writing','essay'],icon:'fa-pen-nib',bg:'#ede9fe',color:'#7c3aed'},
+  {kw:['digital','tech','computer','ict'],icon:'fa-desktop',bg:'#ffe4d1',color:'#ff6b35'},
+  {kw:['reading'],icon:'fa-book',bg:'#dcfce7',color:'#16a34a'},
+  {kw:['grammar'],icon:'fa-graduation-cap',bg:'#ede9fe',color:'#7c3aed'},
+  {kw:['comprehension'],icon:'fa-file-lines',bg:'#dbeafe',color:'#2563eb'},
+  {kw:['oral','communication','speaking','listening'],icon:'fa-microphone',bg:'#ffedd5',color:'#f59e0b'},
+  {kw:['civilization','history','culture','british','american'],icon:'fa-landmark',bg:'#dbeafe',color:'#2563eb'},
+  {kw:['linguistic','phonetic','phonology'],icon:'fa-wave-square',bg:'#fce7f3',color:'#db2777'},
+  {kw:['translation'],icon:'fa-language',bg:'#e0f2fe',color:'#0284c7'},
+  {kw:['poetry','novel','literature'],icon:'fa-feather',bg:'#fef3c7',color:'#d97706'},
+];
+const MOD_ICON_PALETTE=[
+  {icon:'fa-book-open',bg:'#ede9fe',color:'#7c3aed'},
+  {icon:'fa-file-lines',bg:'#dbeafe',color:'#2563eb'},
+  {icon:'fa-graduation-cap',bg:'#ffe4d1',color:'#ff6b35'},
+  {icon:'fa-book',bg:'#dcfce7',color:'#16a34a'},
+];
+function modIconMeta(name){
+  const lower=(name||'').toLowerCase();
+  for(const r of MOD_ICON_RULES){ if(r.kw.some(k=>lower.includes(k))) return r; }
+  let hash=0; for(let i=0;i<lower.length;i++) hash=(hash*31+lower.charCodeAt(i))>>>0;
+  return MOD_ICON_PALETTE[hash%MOD_ICON_PALETTE.length];
+}
+function getSavedMods(){ try{return JSON.parse(localStorage.getItem('savedModules')||'[]');}catch(e){return [];} }
+window.toggleSaveModule=function(ev,key,btn){
+  if(ev) ev.stopPropagation();
+  let saved=getSavedMods();
+  if(saved.includes(key)){ saved=saved.filter(k=>k!==key); btn.classList.remove('saved'); btn.querySelector('i').className='far fa-bookmark'; }
+  else{ saved.push(key); btn.classList.add('saved'); btn.querySelector('i').className='fas fa-bookmark'; }
+  localStorage.setItem('savedModules',JSON.stringify(saved));
+};
+
 function renderModules(sem){
   curModSem=sem;
   const el=document.getElementById('modList');
-  el.innerHTML=MODS[sem].map((m,i)=>{
-    const files=lessons.filter(f=>f.sem===sem&&f.mod===m&&(f.group==='Both'||f.group===currentGroup)).sort((a,b)=>(a.order??99)-(b.order??99));
-    const fh=files.length?files.map(f=>{
-      const viewUrl = isGdriveUrl(f.url) ? gdriveDirectUrl(f.url) : f.url;
-      const fileIcon = isGdriveUrl(f.url) ? `<i class="fab fa-google-drive" style="color:#4285F4;font-size:14px;"></i>` : `<i class="fas fa-file-pdf" style="color:#ef4444;font-size:14px;"></i>`;
-      return `<div class="file-item">${fileIcon}<a href="${viewUrl}" target="_blank">${f.name}</a><span class="file-tag">${f.group}</span></div>`;
-    }).join(''):'<div class="no-files"><i class="fas fa-info-circle" style="margin-right:6px;"></i>No files uploaded yet.</div>';
-    return `<div class="mod-item" id="modItem-${i}"><div class="mod-header" onclick="toggleMod('modItem-${i}')"><span class="mod-name"><i class="fas fa-book-open" style="color:var(--royal);"></i>${m}</span><i class="fas fa-chevron-down mod-toggle"></i></div><div class="mod-files">${fh}</div></div>`;
-  }).join('');
+  if(!el) return;
+  const q=(document.getElementById('modSearchInput')?.value||'').trim().toLowerCase();
+  const savedMods=getSavedMods();
+  const allMods=MODS[sem]||[];
+  const mods=q?allMods.filter(m=>m.toLowerCase().includes(q)):allMods;
+  if(!mods.length){
+    el.innerHTML='<div class="mdc-empty"><i class="fas fa-book-open" style="font-size:22px;display:block;margin-bottom:8px;opacity:.4;"></i>No modules found.</div>';
+  } else {
+    el.innerHTML=mods.map((m)=>{
+      const i=allMods.indexOf(m);
+      const files=lessons.filter(f=>f.sem===sem&&f.mod===m&&(f.group==='Both'||f.group===currentGroup)).sort((a,b)=>(a.order??99)-(b.order??99));
+      const lessonsCount=files.filter(f=>fileCategory(f)==='lesson').length;
+      const pdfCount=files.filter(f=>fileCategory(f)==='pdf').length;
+      const videoCount=files.filter(f=>fileCategory(f)==='video').length;
+      const meta=modIconMeta(m);
+      const modKey=(sem+'-'+m).replace(/'/g,"\\'");
+      const isSaved=savedMods.includes(sem+'-'+m);
+      const fh=files.length?files.map(f=>{
+        const viewUrl = isGdriveUrl(f.url) ? gdriveDirectUrl(f.url) : f.url;
+        const fileIcon = isGdriveUrl(f.url) ? `<i class="fab fa-google-drive" style="color:#4285F4;font-size:14px;"></i>` : `<i class="fas fa-file-pdf" style="color:#ef4444;font-size:14px;"></i>`;
+        return `<div class="file-item">${fileIcon}<a href="${viewUrl}" target="_blank" onclick="event.stopPropagation()">${f.name}</a><span class="file-tag">${f.group}</span></div>`;
+      }).join(''):'<div class="no-files"><i class="fas fa-info-circle" style="margin-right:6px;"></i>No files uploaded yet.</div>';
+      return `<div class="mdc-item" id="modItem-${i}" onclick="toggleMod('modItem-${i}')">
+        <div class="mdc-top">
+          <div class="mdc-ico" style="background:${meta.bg};color:${meta.color};"><i class="fas ${meta.icon}"></i></div>
+          <button class="mdc-bookmark${isSaved?' saved':''}" onclick="toggleSaveModule(event,'${modKey}',this)"><i class="${isSaved?'fas':'far'} fa-bookmark"></i></button>
+        </div>
+        <div class="mdc-name">${m}</div>
+        <div class="mdc-stats">
+          <div class="mdc-stat"><i class="fas fa-book-open" style="color:#7c3aed;"></i><span class="mdc-num">${lessonsCount}</span><span class="mdc-label">Lessons</span></div>
+          <div class="mdc-stat"><i class="fas fa-file-pdf" style="color:#ef4444;"></i><span class="mdc-num">${pdfCount}</span><span class="mdc-label">PDFs</span></div>
+          <div class="mdc-stat"><i class="fas fa-circle-play" style="color:#2563eb;"></i><span class="mdc-num">${videoCount}</span><span class="mdc-label">Videos</span></div>
+        </div>
+        <div class="mdc-footer">
+          <span class="mdc-count"><i class="fas fa-folder-open"></i> ${files.length} file${files.length!==1?'s':''}</span>
+          <span class="mdc-open">Open Module <i class="fas fa-chevron-right"></i></span>
+        </div>
+        <div class="mod-files">${fh}</div>
+      </div>`;
+    }).join('');
+  }
+  renderModStats(sem);
+}
+function renderModStats(sem){
+  const statsEl=document.getElementById('modStats');
+  if(!statsEl) return;
+  const mods=MODS[sem]||[];
+  const allFiles=lessons.filter(f=>f.sem===sem&&(f.group==='Both'||f.group===currentGroup));
+  const pdfCount=allFiles.filter(f=>fileCategory(f)==='pdf').length;
+  statsEl.innerHTML=`
+    <div class="upd-stat-card"><div class="upd-stat-ico" style="background:#ede9fe;color:#7c3aed;"><i class="fas fa-book"></i></div><div><div class="upd-stat-num">${mods.length}</div><div class="upd-stat-label">Modules</div></div></div>
+    <div class="upd-stat-card"><div class="upd-stat-ico" style="background:#ffe4d1;color:#ff6b35;"><i class="fas fa-file"></i></div><div><div class="upd-stat-num">${allFiles.length}</div><div class="upd-stat-label">Files</div></div></div>
+    <div class="upd-stat-card"><div class="upd-stat-ico" style="background:#dcfce7;color:#16a34a;"><i class="fas fa-file-pdf"></i></div><div><div class="upd-stat-num">${pdfCount}</div><div class="upd-stat-label">PDFs</div></div></div>
+  `;
 }
 window.showModSem=function(sem,el){document.querySelectorAll('#page-modules .sem-tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');curModSem=sem;renderModules(sem);};
 function renderModSemTabs(){
