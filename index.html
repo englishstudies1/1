@@ -1235,6 +1235,7 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 .tt-table2 tbody tr:hover td{background:#faf9ff;}
 .tt-day-cell{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);}
 .tt-day-cell i{font-size:12px;}
+.tt-day-ico{width:28px;height:28px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
 .tt-mod-cell{display:flex;align-items:center;gap:10px;font-weight:700;color:var(--text);}
 .tt-mod-ico{width:28px;height:28px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
 .tt-time-pill,.tt-room-pill{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:100px;font-size:11.5px;font-weight:800;white-space:nowrap;font-family:var(--theme-font-display);}
@@ -1598,6 +1599,18 @@ footer::after{
 .mod-search-input:focus{outline:none;border-color:var(--royal);background:#fff;}
 
 .mod-stats-row{display:flex;gap:8px;margin:2px 0 20px;flex-wrap:wrap;}
+#modStats.mod-hero-stats{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap;}
+#modStats.mod-hero-stats .upd-stat-card{
+  padding:14px 20px;gap:12px;border-radius:18px;
+  box-shadow:0 4px 16px rgba(18,22,58,.05);min-width:120px;
+}
+#modStats.mod-hero-stats .upd-stat-ico{width:36px;height:36px;border-radius:11px;font-size:14px;}
+#modStats.mod-hero-stats .upd-stat-num{font-size:24px;line-height:1;}
+#modStats.mod-hero-stats .upd-stat-label{font-size:10px;text-transform:uppercase;letter-spacing:1.3px;font-weight:700;margin-top:2px;}
+@media (max-width:760px){
+  #modStats.mod-hero-stats{justify-content:center;}
+  #modStats.mod-hero-stats .upd-stat-card{flex:1 1 auto;justify-content:center;}
+}
 
 .mdc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
 .mdc-item{background:var(--cream);border:1.5px solid var(--border);border-radius:16px;padding:16px;transition:.2s;cursor:pointer;display:flex;flex-direction:column;}
@@ -2025,20 +2038,23 @@ footer::after{
   /* Table: fixed layout so % widths are respected, fills the card, no scroll */
   .tt-scale-outer{overflow:visible;}
   .tt-scale-inner{display:block;width:100%!important;transform:none!important;}
-  .tt-table2{table-layout:fixed;width:100%;border-radius:14px;}
-  .tt-table2 thead th{padding:11px 4px;font-size:10px;white-space:normal;line-height:1.15;}
-  .tt-table2 tbody td{padding:13px 4px;font-size:11.5px;vertical-align:middle;overflow:visible;}
+  .tt-table2{table-layout:fixed;width:100%;border-radius:16px;}
+  .tt-table2 thead th{padding:13px 6px;font-size:11.5px;white-space:normal;line-height:1.2;}
+  .tt-table2 thead th i{margin-right:5px;font-size:10px;}
+  .tt-table2 tbody td{padding:14px 8px;font-size:13px;vertical-align:middle;overflow:visible;}
   /* column widths: Day, Module, Time, Room, Teacher, chevron */
   .tt-table2 th:nth-child(1),.tt-table2 td:nth-child(1){width:26%;}
   .tt-table2 th:nth-child(2),.tt-table2 td:nth-child(2){width:44%;}
-  .tt-table2 th:nth-child(3),.tt-table2 td:nth-child(3){width:22%;}
+  .tt-table2 th:nth-child(3),.tt-table2 td:nth-child(3){width:30%;}
   .tt-table2 th:nth-child(4),.tt-table2 td:nth-child(4),
-  .tt-table2 th:nth-child(5),.tt-table2 td:nth-child(5){display:none;}
-  .tt-table2 th:nth-child(6),.tt-table2 td:nth-child(6){width:6%;padding-left:0;padding-right:2px;}
-  .tt-day-cell{font-size:11px;flex-direction:row;align-items:center;gap:6px;white-space:normal;overflow-wrap:break-word;word-break:normal;}
-  .tt-mod-cell{font-size:11.5px;line-height:1.25;gap:6px;}
-  .tt-mod-ico{width:20px;height:20px;font-size:9px;flex-shrink:0;}
-  .tt-time-pill,.tt-room-pill{font-size:9px;padding:3px 6px;white-space:normal;line-height:1.2;gap:3px;}
+  .tt-table2 th:nth-child(5),.tt-table2 td:nth-child(5),
+  .tt-table2 th:nth-child(6),.tt-table2 td:nth-child(6){display:none;}
+  .tt-day-cell{font-size:12.5px;flex-direction:row;align-items:center;gap:8px;white-space:normal;overflow-wrap:break-word;word-break:normal;font-weight:800;}
+  .tt-day-ico{width:30px;height:30px;border-radius:10px;font-size:12px;flex-shrink:0;}
+  .tt-mod-cell{font-size:13px;line-height:1.25;gap:8px;font-weight:800;}
+  .tt-mod-ico{width:30px;height:30px;border-radius:10px;font-size:12px;flex-shrink:0;}
+  .tt-time-pill,.tt-room-pill{font-size:11px;padding:5px 10px;white-space:normal;line-height:1.25;gap:4px;text-align:center;}
+  .tt-time-pill{float:right;}
   .tt-teacher-cell{font-size:10px;line-height:1.2;word-break:break-word;}
   .tt-chevron{font-size:10px;}
   .tt-show-more-btn{font-size:12.5px;padding:9px 20px;}
@@ -2704,6 +2720,7 @@ footer::after{
         <div class="tt-hero2-btns">
           <button class="tt-btn-primary" onclick="document.getElementById('modCardAnchor').scrollIntoView({behavior:'smooth',block:'start'})">Browse modules <i class="fas fa-arrow-right"></i></button>
         </div>
+        <div class="upd-stats mod-hero-stats" id="modStats"></div>
       </div>
       <div class="tt-hero2-visual">
         <div class="tt-hero2-img-wrap">
@@ -2773,7 +2790,6 @@ footer::after{
             <input type="text" id="modSearchInput" class="mod-search-input" placeholder="Search a module..." oninput="renderModules(curModSem)">
           </div>
         </div>
-        <div class="upd-stats mod-stats-row" id="modStats"></div>
         <div class="mdc-grid" id="modList"></div>
       </div>
     </div>
@@ -6435,7 +6451,7 @@ function renderTimetable(sem){
     const tdR=showRoom?`<td><span class="tt-room-pill" style="background:${st.icoBg};color:${st.text}"><i class="fas fa-location-dot"></i>${r.room||'—'}</span></td>`:'';
     const tdP=showProf?`<td><span class="tt-teacher-cell">${r.prof||'—'}</span></td>`:'';
     return `<tr>
-      <td><div class="tt-day-cell"><i class="fas fa-calendar-day" style="color:${st.text}"></i>${r.day}</div></td>
+      <td><div class="tt-day-cell"><span class="tt-day-ico" style="background:${st.icoBg};color:${st.icoColor}"><i class="fas fa-calendar-day"></i></span>${r.day}</div></td>
       <td><div class="tt-mod-cell"><span class="tt-mod-ico" style="background:${st.icoBg};color:${st.icoColor}"><i class="fas ${st.icon}"></i></span>${r.module}</div></td>
       <td><span class="tt-time-pill" style="background:${st.icoBg};color:${st.text}"><i class="far fa-clock"></i>${r.time}</span></td>
       ${tdR}${tdP}
