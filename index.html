@@ -618,7 +618,7 @@ header::after{display:none;}
 .logo-icon:hover{transform:scale(1.06);}
 .logo-text{display:flex;flex-direction:column;justify-content:center;gap:0;}
 .logo-text .site-name{font-family:var(--theme-font-display);font-size:16px;font-weight:800;color:var(--navy);letter-spacing:-.3px;line-height:1.2;}
-.logo-text .site-sub{color:var(--muted);font-size:10.5px;font-weight:600;letter-spacing:.2px;text-transform:none;margin-top:1px;background:none;padding:0;border-radius:0;}
+.logo-text .site-sub{color:var(--muted);font-size:10.5px;font-weight:600;letter-spacing:.2px;text-transform:none;margin-top:1px;background:none;padding:0;border-radius:0;display:block;}
 .header-actions{display:flex;align-items:center;gap:8px;position:relative;z-index:2;flex-shrink:0;margin-left:auto;}
 .group-switcher{
   display:flex;background:var(--cream);
@@ -1735,7 +1735,7 @@ footer::after{
   .logo-block{order:1;gap:10px;}
   .logo-icon{width:38px;height:38px;font-size:16px;border-radius:12px;}
   .logo-text .site-name{font-size:16px;}
-  .logo-text .site-sub{font-size:10px;padding:3px 10px;}
+  .logo-text .site-sub{font-size:10px;}
   .header-actions{order:2;margin-left:auto;gap:8px;}
   .group-switcher{padding:3px;}
   .gr-btn{padding:6px 12px;font-size:11px;}
@@ -1876,28 +1876,25 @@ footer::after{
   .tt-view-menu{left:4px;right:4px;width:auto;}
   .tt-card2-inner .info-alert{margin-left:4px;margin-right:4px;font-size:12.5px;padding:12px 14px;}
   #ttView{padding:0 2px;}
-  #ttView > div{border-radius:14px;box-shadow:0 4px 16px rgba(18,22,58,.06);}
+  #ttView > div{border-radius:14px;box-shadow:0 4px 16px rgba(18,22,58,.06);overflow:hidden;}
 
   /* Table: fixed layout so % widths are respected, fills the card, no scroll */
   .tt-scale-outer{overflow:visible;}
   .tt-scale-inner{display:block;width:100%!important;transform:none!important;}
-  .tt-table2{table-layout:fixed;width:100%;border-radius:14px;overflow:hidden;}
+  .tt-table2{table-layout:fixed;width:100%;border-radius:14px;}
   .tt-table2 thead th{padding:11px 4px;font-size:10px;white-space:normal;line-height:1.15;}
-  .tt-table2 thead th i{display:none;}
-  .tt-table2 tbody td{padding:13px 4px;font-size:11.5px;vertical-align:middle;}
+  .tt-table2 tbody td{padding:13px 4px;font-size:11.5px;vertical-align:middle;overflow:visible;}
   /* column widths: Day, Module, Time, Room, Teacher, chevron */
-  .tt-table2 th:nth-child(1),.tt-table2 td:nth-child(1){width:13%;}
-  .tt-table2 th:nth-child(2),.tt-table2 td:nth-child(2){width:34%;}
-  .tt-table2 th:nth-child(3),.tt-table2 td:nth-child(3){width:19%;}
-  .tt-table2 th:nth-child(4),.tt-table2 td:nth-child(4){width:19%;}
-  .tt-table2 th:nth-child(5),.tt-table2 td:nth-child(5){width:12%;}
-  .tt-table2 th:nth-child(6),.tt-table2 td:nth-child(6){width:3%;padding-left:0;padding-right:2px;}
-  .tt-day-cell{font-size:11px;flex-direction:column;align-items:flex-start;gap:2px;}
-  .tt-day-cell i{display:none;}
+  .tt-table2 th:nth-child(1),.tt-table2 td:nth-child(1){width:26%;}
+  .tt-table2 th:nth-child(2),.tt-table2 td:nth-child(2){width:44%;}
+  .tt-table2 th:nth-child(3),.tt-table2 td:nth-child(3){width:22%;}
+  .tt-table2 th:nth-child(4),.tt-table2 td:nth-child(4),
+  .tt-table2 th:nth-child(5),.tt-table2 td:nth-child(5){display:none;}
+  .tt-table2 th:nth-child(6),.tt-table2 td:nth-child(6){width:6%;padding-left:0;padding-right:2px;}
+  .tt-day-cell{font-size:11px;flex-direction:row;align-items:center;gap:6px;white-space:normal;overflow-wrap:break-word;word-break:normal;}
   .tt-mod-cell{font-size:11.5px;line-height:1.25;gap:6px;}
   .tt-mod-ico{width:20px;height:20px;font-size:9px;flex-shrink:0;}
   .tt-time-pill,.tt-room-pill{font-size:9px;padding:3px 6px;white-space:normal;line-height:1.2;gap:3px;}
-  .tt-time-pill i,.tt-room-pill i{display:none;}
   .tt-teacher-cell{font-size:10px;line-height:1.2;word-break:break-word;}
   .tt-chevron{font-size:10px;}
   .tt-show-more-btn{font-size:12.5px;padding:9px 20px;}
