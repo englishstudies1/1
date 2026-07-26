@@ -2057,14 +2057,48 @@ footer::after{
   .makeup-cta{padding:20px;flex-direction:column;text-align:center;}
   .makeup-cta-btn{width:100%;justify-content:center;}
 
-  /* ── Announcement / post card stats row ── */
-  .post-content{margin-left:0;}
-  .post-footer{margin-left:0;max-width:100%;width:100%;padding:10px 14px;gap:8px 12px;border-radius:16px;}
-  .post-actions{margin-left:0;}
-  .post-stat{font-size:11px;}
-  .post-stat-divider{display:none;}
+  /* ── Update / Post card — compact mobile redesign ── */
+  .post-card{padding:14px 14px 12px;border-radius:18px;margin-bottom:12px;}
+  .post-header{gap:9px;margin-bottom:9px;}
+  .post-site-avatar,.post-site-avatar-ring,.post-site-avatar-inner{width:36px;height:36px;}
+  .post-site-avatar{font-size:14px;}
+  .post-site-avatar-inner{font-size:14px;}
+  .post-admin-name{font-size:13.5px;}
+  .post-publisher-row{gap:5px;}
+  .post-pub-name{font-size:10.5px;margin-top:1px;}
+  .post-views-pill{font-size:10px;padding:5px 10px;gap:4px;}
+  .post-admin-symbol{width:15px;height:15px;font-size:7px;}
+  .ann-tag{font-size:9.5px!important;padding:3px 8px!important;}
+  .post-publisher-row > span:not(.post-admin-symbol):not(.post-admin-name){font-size:9.5px!important;padding:3px 8px!important;}
+
   .post-thread-line{display:none;}
+  .post-content{margin-left:0;margin-bottom:8px;}
+  .post-title{font-size:15px;margin-bottom:4px;line-height:1.3;}
+  .post-title-divider{display:none;}
+  .post-text{font-size:12.5px;line-height:1.55;}
+  .post-img{max-width:100%;height:auto;border-radius:12px;}
+
+  .post-actions{margin-left:0;margin-bottom:10px;justify-content:center;gap:10px;}
+  .post-action-btn{
+    width:38px;height:38px;padding:0;border-radius:50%;
+    justify-content:center;flex:0 0 auto;
+  }
+  .post-action-btn i{font-size:14px;}
+  .post-action-btn .post-count{display:none;}
+
+  .post-footer{
+    margin-left:0;width:100%;max-width:100%;
+    padding:9px 8px;border-radius:14px;
+    display:flex;justify-content:space-between;gap:4px;
+  }
+  .post-stat{font-size:10px;gap:4px;flex:1;justify-content:center;}
+  .post-stat i{font-size:11px;}
+  .post-stat-divider{display:none;}
   .post-img{max-width:100%;height:auto;}
+
+
+  /* extra tightening for very narrow phones handled via .post-card etc. below */
+  .post-stat{font-size:9px;}
 
   /* ── ABOUT PAGE MOBILE ── */
   .about-hero{padding:44px 20px 40px;text-align:center;}
@@ -2133,6 +2167,17 @@ footer::after{
   .about-bus-name{font-size:13px;}
   .about-bus-lines{gap:7px;}
   .bus-line-dyn{min-width:42px;height:28px;font-size:11px;padding:0 8px;border-radius:7px;}
+}
+
+@media(max-width:380px){
+  .post-card{padding:12px 12px 10px;}
+  .post-site-avatar,.post-site-avatar-ring,.post-site-avatar-inner{width:32px;height:32px;}
+  .post-admin-name{font-size:12.5px;}
+  .post-title{font-size:14px;}
+  .post-text{font-size:12px;}
+  .post-action-btn{width:34px;height:34px;}
+  .post-actions{gap:8px;}
+  .post-stat{font-size:9px;}
 }
 
 @media(max-width:360px){
