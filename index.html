@@ -1008,7 +1008,9 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
   .upd-sidebar{position:static;order:-1;}
   .upd-stats{flex-wrap:wrap;}
   .upd-toolbar{flex-direction:column;align-items:stretch;}
-  .upd-pills{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;}
+  .upd-pills{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px;scrollbar-width:none;}
+  .upd-pills::-webkit-scrollbar{display:none;}
+  .upd-pill{flex-shrink:0;}
 }
 
 /* ══ ANNOUNCEMENTS ══ */
@@ -2056,10 +2058,13 @@ footer::after{
   .makeup-cta-btn{width:100%;justify-content:center;}
 
   /* ── Announcement / post card stats row ── */
+  .post-content{margin-left:0;}
   .post-footer{margin-left:0;max-width:100%;width:100%;padding:10px 14px;gap:8px 12px;border-radius:16px;}
   .post-actions{margin-left:0;}
   .post-stat{font-size:11px;}
   .post-stat-divider{display:none;}
+  .post-thread-line{display:none;}
+  .post-img{max-width:100%;height:auto;}
 
   /* ── ABOUT PAGE MOBILE ── */
   .about-hero{padding:44px 20px 40px;text-align:center;}
@@ -2171,9 +2176,9 @@ footer::after{
   .tt-scale-outer{overflow:visible;}
   .tt-scale-inner{display:block;width:100%!important;transform:none!important;}
   .tt-table2{table-layout:fixed;width:100%;border-radius:16px;}
-  .tt-table2 thead th{padding:13px 6px;font-size:11.5px;white-space:normal;line-height:1.2;}
-  .tt-table2 thead th i{margin-right:5px;font-size:10px;}
-  .tt-table2 tbody td{padding:14px 8px;font-size:13px;vertical-align:middle;overflow:visible;}
+  .tt-table2 thead th{padding:11px 5px;font-size:10px;white-space:normal;line-height:1.15;}
+  .tt-table2 thead th i{margin-right:4px;font-size:9px;}
+  .tt-table2 tbody td{padding:11px 6px;font-size:11px;vertical-align:middle;overflow:visible;}
   /* column widths: Day, Module, Time, Room, Teacher, chevron */
   .tt-table2 th:nth-child(1),.tt-table2 td:nth-child(1){width:26%;}
   .tt-table2 th:nth-child(2),.tt-table2 td:nth-child(2){width:42%;}
@@ -2181,14 +2186,14 @@ footer::after{
   .tt-table2 th:nth-child(4),.tt-table2 td:nth-child(4),
   .tt-table2 th:nth-child(5),.tt-table2 td:nth-child(5),
   .tt-table2 th:nth-child(6),.tt-table2 td:nth-child(6){display:none;}
-  .tt-day-cell{font-size:12px;flex-direction:row;align-items:center;gap:6px;white-space:normal;overflow-wrap:break-word;word-break:normal;font-weight:800;}
-  .tt-day-ico{width:28px;height:28px;border-radius:9px;font-size:11px;flex-shrink:0;}
-  .tt-mod-cell{font-size:12.5px;line-height:1.25;gap:6px;font-weight:800;}
-  .tt-mod-ico{width:28px;height:28px;border-radius:9px;font-size:11px;flex-shrink:0;}
-  .tt-time-pill,.tt-room-pill{font-size:10.5px;padding:5px 9px;white-space:nowrap;line-height:1.2;gap:4px;text-align:center;}
+  .tt-day-cell{font-size:10.5px;flex-direction:row;align-items:center;gap:4px;white-space:normal;overflow-wrap:break-word;word-break:normal;font-weight:800;}
+  .tt-day-ico{width:22px;height:22px;border-radius:7px;font-size:9px;flex-shrink:0;}
+  .tt-mod-cell{font-size:11px;line-height:1.2;gap:5px;font-weight:800;}
+  .tt-mod-ico{width:22px;height:22px;border-radius:7px;font-size:9px;flex-shrink:0;}
+  .tt-time-pill,.tt-room-pill{font-size:9.5px;padding:4px 7px;white-space:nowrap;line-height:1.15;gap:3px;text-align:center;}
   .tt-time-pill{float:none;display:block;margin-left:auto;width:fit-content;}
-  .tt-teacher-cell{font-size:10px;line-height:1.2;word-break:break-word;}
-  .tt-chevron{font-size:10px;}
+  .tt-teacher-cell{font-size:9px;line-height:1.15;word-break:break-word;}
+  .tt-chevron{font-size:9px;}
   .tt-show-more-btn{font-size:12.5px;padding:9px 20px;}
 }
 
