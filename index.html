@@ -959,12 +959,12 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 }
 .upd-search i{font-size:13px;}
 .upd-search input{border:none;outline:none;background:none;flex:1;font-family:var(--theme-font-body);font-size:13.5px;color:var(--text);font-weight:500;}
-.upd-pills{display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.upd-pills{display:flex;align-items:center;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
 .upd-pills::-webkit-scrollbar{display:none;}
 .upd-pill{
   padding:9px 16px;border:1.5px solid var(--border);border-radius:var(--r-pill);
   background:white;cursor:pointer;font-size:12px;font-weight:700;color:var(--muted);
-  transition:.2s;font-family:var(--theme-font-display);white-space:nowrap;display:inline-flex;align-items:center;gap:6px;
+  transition:.2s;font-family:var(--theme-font-display);white-space:nowrap;display:inline-flex;align-items:center;gap:6px;flex-shrink:0;
 }
 .upd-pill:hover:not(.active){border-color:var(--navy);color:var(--navy);}
 .upd-pill.active{background:var(--navy);color:white;border-color:var(--navy);box-shadow:0 4px 14px rgba(18,22,58,.25);}
@@ -2015,6 +2015,9 @@ footer::after{
 
   /* ── Announcement / post card stats row ── */
   .post-card{padding:16px 16px 14px;border-radius:18px;}
+  .post-thread-line{display:none;}
+  .post-header{flex-wrap:wrap;row-gap:6px;}
+  .post-views-pill{order:99;flex-basis:100%;width:fit-content;margin-left:auto;}
   .post-content{margin-left:0;}
   .post-title{font-size:15.5px;}
   .post-text{font-size:13px;}
