@@ -972,6 +972,79 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 .upd-pill.active.pill-general{background:#475569;border-color:#475569;}
 .upd-pill.active.pill-saved{background:var(--sky);border-color:var(--sky);}
 
+/* ── Updates toolbar v2 — segmented "All Posts/Saved" control + colored category chips ── */
+.upd-toolbar-v2{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px;min-width:0;max-width:100%;}
+.upd-toolbar-v2 .upd-search{flex:1 1 220px;min-width:180px;}
+
+.upd-toolbar-row2{display:flex;align-items:center;gap:10px;flex:1 1 auto;min-width:0;}
+.upd-scroll-group{
+  display:flex;align-items:center;gap:10px;flex:1;min-width:0;
+  overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:2px 2px;
+}
+.upd-scroll-group::-webkit-scrollbar{display:none;}
+
+.upd-seg{
+  display:inline-flex;align-items:center;gap:2px;flex-shrink:0;
+  background:#eef0f6;border:1.5px solid var(--border);border-radius:var(--r-pill);padding:3px;
+}
+.upd-seg .upd-pill{border:none;background:transparent;box-shadow:none;padding:8px 15px;color:var(--muted);white-space:nowrap;}
+.upd-seg .upd-pill.active{box-shadow:0 4px 12px rgba(18,22,58,.22);}
+.upd-seg .upd-pill:hover:not(.active){background:rgba(255,255,255,.7);color:var(--navy);}
+
+.upd-divider{width:1.5px;height:26px;background:var(--border);flex-shrink:0;}
+
+.upd-chips{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.upd-chip{
+  display:inline-flex;align-items:center;gap:7px;padding:6px 14px 6px 6px;
+  border:1.5px solid var(--border);border-radius:var(--r-pill);background:white;cursor:pointer;
+  font-size:12px;font-weight:700;color:var(--text);font-family:var(--theme-font-display);
+  white-space:nowrap;transition:.2s;flex-shrink:0;
+}
+.upd-chip:hover{border-color:var(--navy);transform:translateY(-1px);box-shadow:0 4px 12px rgba(18,22,58,.1);}
+.upd-chip-ico{width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9.5px;color:white;flex-shrink:0;}
+.upd-chip.chip-urgent .upd-chip-ico{background:#ef4444;}
+.upd-chip.chip-urgent.active{background:#fee2e2;border-color:#ef4444;color:#991b1b;}
+.upd-chip.chip-general .upd-chip-ico{background:#7c3aed;}
+.upd-chip.chip-general.active{background:#ede9fe;border-color:#7c3aed;color:#5b21b6;}
+.upd-chip.chip-exams .upd-chip-ico{background:#f59e0b;}
+.upd-chip.chip-makeup .upd-chip-ico{background:#16a34a;}
+
+.upd-more-wrap{position:relative;flex-shrink:0;margin-left:auto;}
+.upd-more-btn{
+  width:36px;height:36px;border-radius:50%;border:1.5px solid var(--border);background:white;
+  color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:.2s;flex-shrink:0;
+}
+.upd-more-btn:hover{border-color:var(--navy);color:var(--navy);}
+.upd-more-menu{
+  display:none;position:absolute;top:calc(100% + 8px);right:0;background:white;border:1.5px solid var(--border);
+  border-radius:14px;box-shadow:var(--card-hover);padding:6px;min-width:150px;z-index:40;
+}
+.upd-more-menu.open{display:block;animation:fadeUp .18s ease;}
+.upd-more-item{
+  width:100%;display:flex;align-items:center;gap:8px;padding:9px 12px;border:none;background:none;
+  border-radius:9px;font-size:12.5px;font-weight:700;color:var(--text);cursor:pointer;font-family:inherit;transition:.15s;white-space:nowrap;
+}
+.upd-more-item:hover{background:#f4f5f9;}
+.upd-more-item.active{background:var(--navy);color:white;}
+
+[data-theme="midnight"] .upd-seg{background:#161628;}
+[data-theme="midnight"] .upd-chip{background:#1e1e32;}
+[data-theme="midnight"] .upd-more-btn{background:#1e1e32;}
+[data-theme="midnight"] .upd-more-menu{background:#1e1e32;}
+
+@media (max-width:900px){
+  .upd-toolbar-v2{gap:8px;}
+  .upd-toolbar-v2 .upd-search{flex:1 1 100%;width:100%;box-sizing:border-box;min-width:0;}
+  .upd-toolbar-row2{width:100%;}
+}
+@media (max-width:560px){
+  .upd-seg .upd-pill{padding:7px 12px;font-size:11px;}
+  .upd-chip{padding:6px 12px 6px 5px;font-size:11px;}
+  .upd-chip-ico{width:19px;height:19px;font-size:9px;}
+  .upd-divider{height:22px;}
+  .upd-more-btn{width:33px;height:33px;font-size:13px;}
+}
+
 .upd-date-group{margin-bottom:26px;}
 .upd-date-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-left:2px;}
 .upd-date-dot{width:11px;height:11px;border-radius:50%;border:2.5px solid var(--sky);background:white;flex-shrink:0;}
@@ -1004,7 +1077,7 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
   .upd-pill{scroll-snap-align:start;}
 }
 @media (max-width:900px){
-  .upd-body{grid-template-columns:1fr;}
+  .upd-body{grid-template-columns:minmax(0,1fr);}
   .upd-sidebar{position:static;order:-1;}
   .upd-stats{flex-wrap:wrap;}
   .upd-toolbar{flex-direction:column;align-items:stretch;}
@@ -1116,7 +1189,7 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
   box-shadow:0 1px 5px rgba(255,107,53,.4);
 }
 .post-admin-name{font-family:var(--theme-font-display);font-size:15.5px;font-weight:800;color:var(--navy);line-height:1.2;}
-.post-pub-name{font-size:12px;color:var(--muted);font-weight:600;margin:2px 0 8px;}
+.post-pub-name{font-size:12px;color:var(--muted);font-weight:600;margin:2px 0 8px 24px;}
 .post-time{font-size:11px;color:var(--muted);font-weight:600;margin-left:auto;flex-shrink:0;}
 .post-views-pill{
   background:#f1f5f9;color:#475569;font-size:11px;font-weight:800;
@@ -1262,6 +1335,26 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 .tt-table2 tbody tr:last-child td{border-bottom:none;}
 .tt-table2 tbody tr{transition:background .15s;}
 .tt-table2 tbody tr:hover td{background:#faf9ff;}
+
+/* ── Mobile: table is desktop-only, show a friendly notice + download prompt instead ── */
+.tt-mobile-notice{display:none;}
+@media(max-width:768px){
+  .tt-card2-top,#ttView,#ttInfoAlert{display:none;}
+  .tt-mobile-notice{
+    display:flex;flex-direction:column;align-items:center;text-align:center;
+    gap:10px;padding:34px 20px 30px;
+  }
+  .tt-mobile-notice-ico{
+    width:56px;height:56px;border-radius:50%;
+    background:linear-gradient(135deg,#efeaff,#e0d4ff);color:var(--royal);
+    display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:4px;
+  }
+  .tt-mobile-notice h4{font-family:var(--theme-font-display);font-size:16.5px;font-weight:800;color:var(--navy);}
+  .tt-mobile-notice p{font-size:13px;color:var(--muted);line-height:1.6;max-width:320px;font-weight:500;}
+  .tt-mobile-notice .tt-btn-secondary{margin-top:6px;}
+}
+[data-theme="midnight"] .tt-mobile-notice-ico{background:#232340;}
+
 .tt-day-cell{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);}
 .tt-day-cell i{font-size:12px;}
 .tt-day-ico{width:28px;height:28px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
@@ -2073,7 +2166,7 @@ footer::after{
   .post-site-avatar-inner{font-size:13px;}
   .post-admin-name{font-size:13px;}
   .post-publisher-row{gap:5px;}
-  .post-pub-name{font-size:10px;margin:2px 0 6px;}
+  .post-pub-name{font-size:10px;margin:2px 0 6px 19px;}
   .post-views-pill{font-size:9.5px;padding:4px 9px;gap:4px;}
   .post-admin-symbol{width:14px;height:14px;font-size:6.5px;}
   .ann-tag{font-size:9px!important;padding:3px 7px!important;}
@@ -3103,7 +3196,7 @@ footer::after{
   <main id="ttCardAnchor">
     <div class="tt-card2">
       <div class="tt-card2-inner" id="tt-print-area">
-        <div class="tt-card2-top">
+        <div class="tt-card2-top" id="ttCard2Top">
           <div class="tt-tabs" id="ttSemTabs"></div>
           <div class="tt-view-dd">
             <button class="tt-view-btn" onclick="toggleTTViewMenu()"><i class="fas fa-calendar-days"></i> <span id="ttViewLabel">Week view</span> <i class="fas fa-chevron-down"></i></button>
@@ -3113,7 +3206,16 @@ footer::after{
             </div>
           </div>
         </div>
-        <div class="info-alert"><i class="fas fa-info-circle"></i> The timetable may be updated by the admin. Please check back regularly.</div>
+        <div class="info-alert" id="ttInfoAlert"><i class="fas fa-info-circle"></i> The timetable may be updated by the admin. Please check back regularly.</div>
+
+        <!-- Mobile-only notice: table is desktop-only, phones get a download prompt instead -->
+        <div class="tt-mobile-notice">
+          <div class="tt-mobile-notice-ico"><i class="fas fa-display"></i></div>
+          <h4>Best viewed on a computer</h4>
+          <p>The timetable is easier to read on a PC. Open this page on a computer to see it here, or download it below to view anytime.</p>
+          <button class="tt-btn-secondary" onclick="downloadTTPdf()"><i class="fas fa-download"></i> Download PDF</button>
+        </div>
+
         <div id="ttView"></div>
       </div>
     </div>
@@ -3298,14 +3400,32 @@ footer::after{
     <div class="upd-body">
       <div class="upd-main">
         <!-- Search + filter pills -->
-        <div class="upd-toolbar">
+        <div class="upd-toolbar-v2">
           <div class="upd-search"><i class="fas fa-search"></i><input type="text" id="updSearchInput" placeholder="Search updates..." oninput="renderAllAnn()"></div>
-          <div class="upd-pills" id="updPills">
-            <button class="upd-pill active" data-f="all" onclick="setUpdFilter('all')">All</button>
-            <button class="upd-pill pill-urgent" data-f="urgent" onclick="setUpdFilter('urgent')"><i class="fas fa-circle-exclamation"></i>Important</button>
-            <button class="upd-pill pill-general" data-f="general" onclick="setUpdFilter('general')"><i class="fas fa-layer-group"></i>General</button>
-            <button class="upd-pill pill-info" data-f="info" onclick="setUpdFilter('info')"><i class="fas fa-circle-info"></i>Info</button>
-            <button class="upd-pill pill-saved" data-f="saved" onclick="setUpdFilter('saved')"><i class="fas fa-bookmark"></i>Saved</button>
+
+          <div class="upd-toolbar-row2">
+            <div class="upd-scroll-group">
+              <div class="upd-seg" id="updPills">
+                <button class="upd-pill active" data-f="all" onclick="setUpdFilter('all')"><i class="fas fa-bars"></i>All Posts</button>
+                <button class="upd-pill pill-saved" data-f="saved" onclick="setUpdFilter('saved')"><i class="far fa-bookmark"></i>Saved</button>
+              </div>
+
+              <div class="upd-divider"></div>
+
+              <div class="upd-chips">
+                <button class="upd-pill upd-chip chip-urgent" data-f="urgent" onclick="setUpdFilter('urgent')"><span class="upd-chip-ico"><i class="fas fa-circle-exclamation"></i></span>Important</button>
+                <button class="upd-pill upd-chip chip-general" data-f="general" onclick="setUpdFilter('general')"><span class="upd-chip-ico"><i class="fas fa-book"></i></span>General</button>
+                <button class="upd-chip chip-exams" onclick="showPage('exams')"><span class="upd-chip-ico"><i class="fas fa-calendar-alt"></i></span>Exams</button>
+                <button class="upd-chip chip-makeup" onclick="showPage('makeup')"><span class="upd-chip-ico"><i class="fas fa-graduation-cap"></i></span>Makeup</button>
+              </div>
+            </div>
+
+            <div class="upd-more-wrap" id="updMoreWrap">
+              <button class="upd-more-btn" onclick="toggleUpdMore(event)" title="More filters"><i class="fas fa-ellipsis"></i></button>
+              <div class="upd-more-menu" id="updMoreMenu">
+                <button class="upd-more-item upd-pill" data-f="info" onclick="setUpdFilter('info');toggleUpdMore()"><i class="fas fa-circle-info"></i>Info</button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -5270,6 +5390,25 @@ window.setUpdFilter = function(f){
   }
 };
 
+window.toggleUpdMore = function(e){
+  if(e) e.stopPropagation();
+  const menu = document.getElementById('updMoreMenu');
+  if(!menu) return;
+  menu.classList.toggle('open');
+  if(menu.classList.contains('open')){
+    setTimeout(()=>{
+      function outsideClick(ev){
+        const wrap = document.getElementById('updMoreWrap');
+        if(wrap && !wrap.contains(ev.target)){
+          menu.classList.remove('open');
+          document.removeEventListener('click',outsideClick);
+        }
+      }
+      document.addEventListener('click',outsideClick);
+    },10);
+  }
+};
+
 function renderSavedPosts(){
   const el=document.getElementById('annSaved');
   if(!el) return;
@@ -6191,6 +6330,7 @@ function annHTML(a){
           <span style="background:${grBg};color:${grColor};font-size:10.5px;padding:4px 11px;border-radius:100px;font-weight:800;">${a.group}</span>
           <span style="background:#eef2ff;color:#3730a3;font-size:10.5px;padding:4px 11px;border-radius:100px;font-weight:800;">${a.sem||'S1'}</span>
         </div>
+        <div class="post-pub-name">${dt||'&nbsp;'}</div>
       </div>
       <span class="post-views-pill"><i class="fas fa-eye"></i>${a.views||0}</span>
     </div>
@@ -6198,7 +6338,6 @@ function annHTML(a){
     <!-- Content -->
     <div class="post-content">
       <div class="post-title">${escapeHtml(a.title||'')}</div>
-      <div class="post-pub-name">${dt||'&nbsp;'}</div>
       <div class="post-title-divider"></div>
       <div class="post-text">${/<[a-z][\s\S]*>/i.test(a.text||'') ? (a.text||'') : (a.text||'').replace(/\n/g,'<br>')}</div>
       ${a.imgUrl ? `<img class="post-img" src="${a.imgUrl}" alt="" onclick="this.requestFullscreen&&this.requestFullscreen()" onerror="this.style.display='none'">` : ''}
