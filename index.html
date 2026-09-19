@@ -1375,6 +1375,13 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
   body *{visibility:hidden;}
   #tt-print-area, #tt-print-area *{visibility:visible;}
   #tt-print-area{position:absolute;left:0;top:0;width:100%;padding:20px;}
+  /* Force the REAL timetable to print even when triggered from a phone —
+     the mobile "best viewed on a computer" notice is a screen-only thing. */
+  #ttView{display:block!important;}
+  .tt-view-dd{display:block!important;}
+  #ttInfoAlert{display:flex!important;}
+  .tt-card2-top{display:flex!important;}
+  .tt-mobile-notice{display:none!important;}
 }
 @media (max-width:860px){
   .tt-hero2-grid{grid-template-columns:1fr;gap:32px;text-align:center;}
