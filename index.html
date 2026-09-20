@@ -1413,6 +1413,10 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
      was pushing the table wider than a printable page and cropping off the
      right-most columns (Room/Teacher). Cap it in real physical units (mm) instead. */
   main,#page-timetable,#ttCardAnchor,.tt-card2{max-width:190mm!important;width:100%!important;margin:0 auto!important;padding:0!important;}
+  /* The on-screen "card" look (border + rounded corners + drop shadow) was
+     printing as a visible frame down the sides of the page. Drop it so the
+     timetable sits flat on the paper instead of looking boxed-in. */
+  .tt-card2-inner{border:none!important;box-shadow:none!important;border-radius:0!important;padding:0!important;background:transparent!important;}
   #tt-print-area{position:static!important;width:100%!important;max-width:190mm!important;padding:0!important;}
   /* Force the REAL timetable to print even when triggered from a phone —
      the mobile "best viewed on a computer" notice is a screen-only thing. */
@@ -1429,6 +1433,7 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
   .tt-scale-inner{display:block!important;width:100%!important;max-width:190mm!important;transform:none!important;}
   .tt-table2{table-layout:fixed;width:100%;max-width:190mm;font-size:9.5px!important;}
   .tt-table2 th,.tt-table2 td,.tt-table2 thead th,.tt-table2 tbody td{padding:5px 3px!important;overflow:hidden;}
+  .tt-table2 tbody td{padding-top:9px!important;padding-bottom:9px!important;}
   .tt-table2 .tt-room-pill,.tt-table2 .tt-teacher-cell,.tt-table2 .tt-time-pill{white-space:normal;overflow-wrap:break-word;}
   /* Extra breathing room between the Module and Time columns specifically. */
   .tt-table2 th:nth-child(2),.tt-table2 td:nth-child(2){padding-right:14px!important;}
