@@ -1405,9 +1405,15 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
 .tt-show-more-btn.expanded i{transform:rotate(180deg);}
 .tt-week-group-title{padding:14px 4px 6px;font-family:var(--theme-font-display);font-weight:800;font-size:13px;color:var(--navy);display:flex;align-items:center;gap:8px;}
 @media print{
-  body *{visibility:hidden;}
-  #tt-print-area, #tt-print-area *{visibility:visible;}
-  #tt-print-area{position:absolute;left:0;top:0;width:100%;padding:20px;}
+  @page{margin:12mm;}
+  header,footer,.tt-hero2,.tt-show-more-wrap,#loadingOverlay,#studentGate,#adminLoginOverlay,.modal-overlay,#adminPanel,.notif-dropdown,#flshm-toast{display:none!important;}
+  /* Force a safe, fixed print width regardless of the browser window's real size —
+     the desktop card's max-width:1180px (and even 100%) resolves against the
+     screen's viewport during print, not the physical paper width, which is what
+     was pushing the table wider than a printable page and cropping off the
+     right-most columns (Room/Teacher). Cap it in real physical units (mm) instead. */
+  main,#page-timetable,#ttCardAnchor,.tt-card2{max-width:190mm!important;width:100%!important;margin:0 auto!important;padding:0!important;}
+  #tt-print-area{position:static!important;width:100%!important;max-width:190mm!important;padding:0!important;}
   /* Force the REAL timetable to print even when triggered from a phone —
      the mobile "best viewed on a computer" notice is a screen-only thing. */
   #ttView{display:block!important;}
@@ -1415,6 +1421,35 @@ main{max-width:1180px;margin:0 auto;padding:40px 24px;}
   #ttInfoAlert{display:flex!important;}
   .tt-card2-top{display:flex!important;}
   .tt-mobile-notice{display:none!important;}
+  /* Never let the on-screen JS zoom-to-fit transform leak into print — it's
+     calculated for the browser window's width, not the printed page's width,
+     which is what was scaling/cropping the table (losing Room/Teacher) and
+     leaving a blank second page. Print gets its own simple, unscaled, single-page layout. */
+  .tt-scale-outer{overflow:visible!important;height:auto!important;width:100%!important;max-width:190mm!important;}
+  .tt-scale-inner{display:block!important;width:100%!important;max-width:190mm!important;transform:none!important;}
+  .tt-table2{table-layout:fixed;width:100%;max-width:190mm;font-size:9.5px!important;}
+  .tt-table2 th,.tt-table2 td,.tt-table2 thead th,.tt-table2 tbody td{padding:5px 3px!important;overflow:hidden;}
+  .tt-table2 .tt-room-pill,.tt-table2 .tt-teacher-cell,.tt-table2 .tt-time-pill{white-space:normal;overflow-wrap:break-word;}
+  /* Extra breathing room between the Module and Time columns specifically. */
+  .tt-table2 th:nth-child(2),.tt-table2 td:nth-child(2){padding-right:14px!important;}
+  .tt-table2 th:nth-child(3),.tt-table2 td:nth-child(3){padding-left:14px!important;}
+  /* The mobile-screen rule (max-width:768px, further down this stylesheet) hides
+     the Room/Teacher/chevron columns with display:none so the table fits small
+     screens. That rule still matches when printing/saving-as-PDF from a phone,
+     and being later in the stylesheet it would otherwise win and drop the Room
+     and Teacher columns from the PDF. Force every column back on for print. */
+  .tt-table2 th,.tt-table2 td{display:table-cell!important;}
+  /* Give every column its own fixed, sensible width instead of letting the
+     browser split the table into equal-sized slices (which squashed Module
+     text onto 3 lines while Room/Teacher sat mostly empty, and made column
+     boundaries look inconsistent between the header row and the data rows).
+     This also keeps each header locked exactly above its own column. */
+  .tt-table2 th:nth-child(1),.tt-table2 td:nth-child(1){width:11%!important;}
+  .tt-table2 th:nth-child(2),.tt-table2 td:nth-child(2){width:29%!important;}
+  .tt-table2 th:nth-child(3),.tt-table2 td:nth-child(3){width:17%!important;}
+  .tt-table2 th:nth-child(4),.tt-table2 td:nth-child(4){width:15%!important;}
+  .tt-table2 th:nth-child(5),.tt-table2 td:nth-child(5){width:21%!important;}
+  .tt-table2 th:nth-child(6),.tt-table2 td:nth-child(6){width:7%!important;}
 }
 @media (max-width:860px){
   .tt-hero2-grid{grid-template-columns:1fr;gap:32px;text-align:center;}
@@ -6728,7 +6763,15 @@ window.toggleTTShowMore=function(){
   renderTimetable(curTTSem);
   if(!ttShowAll) document.getElementById('ttCardAnchor')?.scrollIntoView({behavior:'smooth',block:'start'});
 };
-window.downloadTTPdf=function(){ showToast('🖨️ Opening print dialog — choose "Save as PDF"'); setTimeout(()=>window.print(),300); };
+window.downloadTTPdf=function(){
+  // Print the full list, not just the on-screen "first 8" preview.
+  const wasShowAll = ttShowAll;
+  if(!ttShowAll){ ttShowAll=true; renderTimetable(curTTSem); }
+  showToast('🖨️ Opening print dialog — choose "Save as PDF"');
+  const restore = ()=>{ if(!wasShowAll){ ttShowAll=false; renderTimetable(curTTSem); } window.removeEventListener('afterprint',restore); };
+  window.addEventListener('afterprint',restore);
+  setTimeout(()=>window.print(),300);
+};
 
 function fitTimetableScale(){
   const inner = document.getElementById('ttScaleInner');
