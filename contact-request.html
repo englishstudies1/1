@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Admin &amp; Ressources | English Studies FLSHM</title>
+<title>Contact Admin &amp; Request Resources | English Studies FLSHM</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -27,7 +27,7 @@
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:var(--font-body);background:var(--cream);color:var(--text);line-height:1.5;}
 
-/* ===== HEADER (like site's header) ===== */
+/* ===== HEADER (matches site header) ===== */
 header{
   background:var(--white);
   border-bottom:1px solid var(--border);
@@ -152,7 +152,7 @@ footer{text-align:center;padding:26px;color:var(--muted);font-size:12px;}
       <span class="site-sub">FLSH Mohammedia</span>
     </div>
   </div>
-  <a class="back-link" href="index.html"><i class="fas fa-arrow-left"></i> Retour au site</a>
+  <a class="back-link" href="index.html"><i class="fas fa-arrow-left"></i> Back to site</a>
 </header>
 
 <section class="hero">
@@ -161,9 +161,9 @@ footer{text-align:center;padding:26px;color:var(--muted);font-size:12px;}
     <i class="fas fa-atom i2"></i>
     <i class="fas fa-book-open i3"></i>
   </div>
-  <div class="hero-eyebrow">Besoin d'aide ?</div>
-  <h1>Contactez-nous ou <span>demandez une ressource</span></h1>
-  <p>Une question pour l'administration ou un document/lien manquant dans votre espace étudiant ? Envoyez-nous un message ci-dessous.</p>
+  <div class="hero-eyebrow">Need help?</div>
+  <h1>Contact Admin or <span>request a resource</span></h1>
+  <p>Have a question for the administration, or a document/link missing from your Student Space? Send us a message below.</p>
 </section>
 
 <div class="tabswitch">
@@ -171,7 +171,7 @@ footer{text-align:center;padding:26px;color:var(--muted);font-size:12px;}
     <i class="fas fa-headset"></i> Contact Admin
   </button>
   <button id="tabBtnResource" onclick="switchTab('resource')">
-    <i class="fas fa-box-open"></i> Demande de Ressources
+    <i class="fas fa-box-open"></i> Request Resource
   </button>
 </div>
 
@@ -179,71 +179,71 @@ footer{text-align:center;padding:26px;color:var(--muted);font-size:12px;}
   <!-- ===== PANEL 1 : CONTACT ADMIN ===== -->
   <div id="panelContact" class="panel active">
     <div class="card">
-      <div class="card-title"><i class="fas fa-envelope-open-text"></i> Envoyez-nous votre message</div>
-      <div class="card-sub">Réclamation, question administrative, problème technique... nous vous répondrons dès que possible.</div>
+      <div class="card-title"><i class="fas fa-envelope-open-text"></i> Send us your message</div>
+      <div class="card-sub">Complaint, administrative question, technical problem... we'll get back to you as soon as possible.</div>
 
       <form id="contactForm" novalidate>
         <div class="field-row">
           <div class="field">
-            <label for="cName">Nom complet *</label>
-            <input type="text" id="cName" placeholder="Votre nom complet" required>
-            <div class="error-text" id="cNameErr">Veuillez entrer votre nom complet.</div>
+            <label for="cName">Full name *</label>
+            <input type="text" id="cName" placeholder="Your full name" required>
+            <div class="error-text" id="cNameErr">Please enter your full name.</div>
           </div>
           <div class="field">
-            <label for="cPhone">Téléphone *</label>
+            <label for="cPhone">Phone *</label>
             <input type="tel" id="cPhone" placeholder="06 XX XX XX XX" required>
-            <div class="error-text" id="cPhoneErr">Veuillez entrer un numéro valide.</div>
+            <div class="error-text" id="cPhoneErr">Please enter a valid phone number.</div>
           </div>
         </div>
         <div class="field">
-          <label for="cEmail">E-mail *</label>
-          <input type="email" id="cEmail" placeholder="votre.email@exemple.com" required>
-          <div class="error-text" id="cEmailErr">Veuillez entrer un e-mail valide.</div>
+          <label for="cEmail">Email *</label>
+          <input type="email" id="cEmail" placeholder="your.email@example.com" required>
+          <div class="error-text" id="cEmailErr">Please enter a valid email.</div>
         </div>
         <div class="field">
           <label for="cMessage">Message</label>
-          <textarea id="cMessage" placeholder="Décrivez votre demande ici..."></textarea>
+          <textarea id="cMessage" placeholder="Describe your request here..."></textarea>
         </div>
 
         <button type="submit" class="submit-btn" id="cSubmitBtn">
-          <i class="fas fa-paper-plane"></i> Envoyer
+          <i class="fas fa-paper-plane"></i> Send
         </button>
         <div class="status-msg" id="cStatus"></div>
-        <div class="hint">Votre message sera transmis directement à l'administration du site.</div>
+        <div class="hint">Your message will be sent directly to the site administration.</div>
       </form>
     </div>
   </div>
 
-  <!-- ===== PANEL 2 : REQUEST RESOURCES ===== -->
+  <!-- ===== PANEL 2 : REQUEST RESOURCE ===== -->
   <div id="panelResource" class="panel">
     <div class="card">
-      <div class="card-title"><i class="fas fa-box-open"></i> Demander une ressource</div>
-      <div class="card-sub">Un cours, un ancien examen, un lien de groupe ou tout autre document manquant dans votre Student Space ? Faites-en la demande ici.</div>
+      <div class="card-title"><i class="fas fa-box-open"></i> Request a resource</div>
+      <div class="card-sub">Missing a lesson, an old exam, a group link, or any other document in your Student Space? Request it here.</div>
 
       <form id="resourceForm" novalidate>
         <div class="field-row">
           <div class="field">
-            <label for="rName">Nom complet *</label>
-            <input type="text" id="rName" placeholder="Votre nom complet" required>
-            <div class="error-text" id="rNameErr">Veuillez entrer votre nom complet.</div>
+            <label for="rName">Full name *</label>
+            <input type="text" id="rName" placeholder="Your full name" required>
+            <div class="error-text" id="rNameErr">Please enter your full name.</div>
           </div>
           <div class="field">
-            <label for="rPhone">Téléphone *</label>
+            <label for="rPhone">Phone *</label>
             <input type="tel" id="rPhone" placeholder="06 XX XX XX XX" required>
-            <div class="error-text" id="rPhoneErr">Veuillez entrer un numéro valide.</div>
+            <div class="error-text" id="rPhoneErr">Please enter a valid phone number.</div>
           </div>
         </div>
         <div class="field">
-          <label for="rDesc">Description de la ressource demandée *</label>
-          <textarea id="rDesc" placeholder="Ex : Cours de Phonetics S3, examen de Grammar 2 de l'année dernière..." required></textarea>
-          <div class="error-text" id="rDescErr">Veuillez décrire la ressource demandée.</div>
+          <label for="rDesc">Description of the requested resource *</label>
+          <textarea id="rDesc" placeholder="E.g. Phonetics S3 lesson, last year's Grammar 2 exam..." required></textarea>
+          <div class="error-text" id="rDescErr">Please describe the resource you need.</div>
         </div>
 
         <button type="submit" class="submit-btn" id="rSubmitBtn">
-          <i class="fas fa-paper-plane"></i> Envoyer la demande
+          <i class="fas fa-paper-plane"></i> Send request
         </button>
         <div class="status-msg" id="rStatus"></div>
-        <div class="hint">Votre demande apparaîtra dans le panel admin, section "Request Resources".</div>
+        <div class="hint">Your request will appear in the admin panel, "Request Resources" section.</div>
       </form>
     </div>
   </div>
@@ -257,7 +257,15 @@ function switchTab(which){
   document.getElementById('tabBtnResource').classList.toggle('active', which==='resource');
   document.getElementById('panelContact').classList.toggle('active', which==='contact');
   document.getElementById('panelResource').classList.toggle('active', which==='resource');
+  if(history.replaceState) history.replaceState(null, '', '#'+which);
 }
+// Deep-link support: contact-request.html#resource or ?tab=resource
+(function(){
+  const hash = (location.hash||'').replace('#','');
+  const qs = new URLSearchParams(location.search);
+  const tab = hash || qs.get('tab');
+  if(tab === 'resource') switchTab('resource');
+})();
 </script>
 
 <!-- FIREBASE -->
@@ -265,7 +273,7 @@ function switchTab(which){
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// Même projet Firebase que le site principal / panel admin
+// Same Firebase project as the main site / admin panel
 const firebaseConfig = {
   apiKey: "AIzaSyDH1738INWjoXnzXLOPytluX1ED8saNcyI",
   authDomain: "english-studies-flshm.firebaseapp.com",
@@ -311,7 +319,7 @@ contactForm.addEventListener('submit', async (e) => {
   if(!valid) return;
 
   btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
   status.classList.remove('show');
 
   try{
@@ -323,18 +331,18 @@ contactForm.addEventListener('submit', async (e) => {
       status: 'new',
       ts: Date.now()
     });
-    showStatus(status, true, 'Votre message a bien été envoyé. Merci !');
+    showStatus(status, true, 'Your message has been sent. Thank you!');
     contactForm.reset();
   }catch(err){
     console.error(err);
-    showStatus(status, false, "Une erreur est survenue. Merci de réessayer.");
+    showStatus(status, false, "Something went wrong. Please try again.");
   }finally{
     btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer';
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send';
   }
 });
 
-/* ---------- REQUEST RESOURCES FORM ---------- */
+/* ---------- REQUEST RESOURCE FORM ---------- */
 const resourceForm = document.getElementById('resourceForm');
 resourceForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -355,7 +363,7 @@ resourceForm.addEventListener('submit', async (e) => {
   if(!valid) return;
 
   btn.disabled = true;
-  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi...';
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
   status.classList.remove('show');
 
   try{
@@ -366,14 +374,14 @@ resourceForm.addEventListener('submit', async (e) => {
       status: 'new',
       ts: Date.now()
     });
-    showStatus(status, true, 'Votre demande a bien été envoyée. Merci !');
+    showStatus(status, true, 'Your request has been sent. Thank you!');
     resourceForm.reset();
   }catch(err){
     console.error(err);
-    showStatus(status, false, "Une erreur est survenue. Merci de réessayer.");
+    showStatus(status, false, "Something went wrong. Please try again.");
   }finally{
     btn.disabled = false;
-    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Envoyer la demande';
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send request';
   }
 });
 </script>
