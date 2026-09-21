@@ -2938,7 +2938,7 @@ footer::after{
           <h4>Need help?</h4>
           <p>Can't find a lesson or have a problem?</p>
         </div>
-        <button class="makeup-cta-btn" onclick="showPage('space')"><i class="fas fa-envelope"></i> Contact Admin</button>
+        <button class="makeup-cta-btn" onclick="window.open('contact-request.html','_blank')"><i class="fas fa-envelope"></i> Contact Admin</button>
       </div>
     </div>
   </main>
@@ -7236,7 +7236,7 @@ window.ssFilterResources = function(q){
   });
 };
 window.ssRequestResource = function(){
-  showToast('✉️ Thanks! Use the Contact Admin option to send your request.');
+  window.open('contact-request.html#resource','_blank');
 };
 function ssTimeAgo(ts){
   const diff = Date.now()-ts;
