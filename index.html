@@ -2938,7 +2938,7 @@ footer::after{
           <h4>Need help?</h4>
           <p>Can't find a lesson or have a problem?</p>
         </div>
-        <button class="makeup-cta-btn" onclick="window.open('contact-request.html','_blank')"><i class="fas fa-envelope"></i> Contact Admin</button>
+        <button class="makeup-cta-btn" onclick="window.open('contact-admin.html','_blank')"><i class="fas fa-envelope"></i> Contact Admin</button>
       </div>
     </div>
   </main>
@@ -5215,17 +5215,21 @@ const USER_ID = (()=>{
 
 // ══ VIEWS — 1 view per user per item, stored in Firebase ══
 // viewed set: loaded once at startup from localStorage cache + Firebase
-let viewedSet = JSON.parse(localStorage.getItem('flshm_viewed')||'{}');
-function saveViewedSet(){ localStorage.setItem('flshm_viewed', JSON.stringify(viewedSet)); }
+// (v2 key: resets any views that got stuck as "viewed" locally without
+//  actually writing to Firebase, e.g. if the write failed before login)
+let viewedSet = JSON.parse(localStorage.getItem('flshm_viewed_v2')||'{}');
+function saveViewedSet(){ localStorage.setItem('flshm_viewed_v2', JSON.stringify(viewedSet)); }
 
 async function recordView(col, id){
   const key = col+'_'+id;
   if(viewedSet[key]) return;
-  viewedSet[key] = true;
-  saveViewedSet();
+  if(!auth.currentUser) return; // not logged in yet — retry on next render once authenticated
   try {
     await setDoc(doc(db,'userViews',USER_ID+'_'+col+'_'+id),{uid:USER_ID,col,itemId:id,ts:Date.now()});
     await updateDoc(doc(db,col,id),{views: increment(1)});
+    // Only cache as "viewed" once the write actually succeeded
+    viewedSet[key] = true;
+    saveViewedSet();
     // Track named student engagement
     if(studentLoggedIn && currentStudent && col==='announcements'){
       const engId = currentStudent.uid+'_view_'+id;
@@ -7236,7 +7240,7 @@ window.ssFilterResources = function(q){
   });
 };
 window.ssRequestResource = function(){
-  window.open('contact-request.html#resource','_blank');
+  window.open('request-resources.html','_blank');
 };
 function ssTimeAgo(ts){
   const diff = Date.now()-ts;
