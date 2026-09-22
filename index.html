@@ -3062,11 +3062,12 @@ footer::after{
         </div>
         <div class="info-alert" id="ttInfoAlert"><i class="fas fa-info-circle"></i> The timetable may be updated by the admin. Please check back regularly.</div>
 
-        <!-- Mobile-only notice: table is desktop-only, phones get a download prompt instead -->
+        <!-- Mobile-only notice: table is desktop-only, phones get a link to the dedicated mobile timetable page instead -->
         <div class="tt-mobile-notice">
           <div class="tt-mobile-notice-ico"><i class="fas fa-display"></i></div>
           <h4>Best viewed on a computer</h4>
-          <p>The timetable is easier to read on a PC. Open this page on a computer to see it here, or download it below to view anytime.</p>
+          <p>Sorry, the timetable isn't easy to read on mobile. Switch to a PC for the full view, or if you don't have one, tap below to open the mobile-friendly timetable.</p>
+          <button class="tt-btn-primary" onclick="openFullTimetable()"><i class="fas fa-calendar-days"></i> View Full Timetable</button>
           <button class="tt-btn-secondary" onclick="downloadTTPdf()"><i class="fas fa-download"></i> Download PDF</button>
         </div>
 
@@ -6777,6 +6778,9 @@ window.toggleTTShowMore=function(){
   ttShowAll=!ttShowAll;
   renderTimetable(curTTSem);
   if(!ttShowAll) document.getElementById('ttCardAnchor')?.scrollIntoView({behavior:'smooth',block:'start'});
+};
+window.openFullTimetable=function(){
+  location.href = `timetable.html?gr=${encodeURIComponent(currentGroup)}&sem=${encodeURIComponent(curTTSem)}`;
 };
 window.downloadTTPdf=function(){
   // Print the full list, not just the on-screen "first 8" preview.
