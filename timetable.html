@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Full Timetable | English Studies</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --navy:#12163a;--royal:#1e2a6e;--sky:#00b4a0;--gold:#ff6b35;--gold-light:#ffb89a;
+  --cream:#f5f3ef;--text:#1a1d2e;--muted:#7a7f9a;--border:#e4e1dc;--white:#ffffff;
+  --card-shadow:0 2px 20px rgba(18,22,58,.07),0 1px 4px rgba(18,22,58,.04);
+  --r:18px;--r-sm:12px;--r-pill:100px;
+  --font-body:'Outfit',sans-serif;--font-display:'Bricolage Grotesque',sans-serif;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--cream);color:var(--text);font-family:var(--font-body);-webkit-font-smoothing:antialiased;padding-bottom:40px;}
+
+/* ── Header (matches main site logo) ── */
+header{
+  position:sticky;top:0;z-index:20;background:var(--white);
+  border-bottom:1.5px solid var(--border);
+  padding:12px 16px;display:flex;align-items:center;gap:10px;
+  box-shadow:0 2px 14px rgba(18,22,58,.05);
+}
+.logo-icon{
+  width:36px;height:36px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--gold),#ff8c5a);
+  border-radius:11px;display:flex;align-items:center;justify-content:center;
+  font-size:15px;color:white;box-shadow:0 4px 14px rgba(255,107,53,.35);
+}
+.logo-text{display:flex;flex-direction:column;line-height:1.15;flex:1;min-width:0;}
+.logo-text .site-name{font-family:var(--font-display);font-size:14.5px;font-weight:800;color:var(--navy);letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.logo-text .site-sub{font-size:10px;font-weight:600;color:var(--muted);margin-top:1px;}
+.back-btn{
+  flex-shrink:0;display:flex;align-items:center;gap:6px;
+  background:var(--cream);border:1.5px solid var(--border);color:var(--navy);
+  border-radius:var(--r-pill);padding:8px 13px;font-size:12px;font-weight:700;
+  font-family:var(--font-display);text-decoration:none;white-space:nowrap;
+}
+
+/* ── Page intro ── */
+.tt-intro{padding:22px 16px 6px;text-align:center;}
+.tt-eyebrow{display:inline-flex;align-items:center;gap:7px;background:#f0ebff;color:#7c4dff;border-radius:100px;padding:5px 14px;font-size:10.5px;font-weight:800;letter-spacing:.6px;text-transform:uppercase;margin-bottom:12px;}
+.tt-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:#7c4dff;}
+.tt-intro h1{font-family:var(--font-display);font-size:23px;font-weight:800;color:var(--navy);letter-spacing:-.5px;margin:0 0 4px;}
+.tt-intro p{font-size:12.5px;color:var(--muted);margin:0;font-weight:500;}
+
+/* ── Controls ── */
+.tt-controls{
+  position:sticky;top:61px;z-index:15;background:var(--cream);
+  padding:14px 16px 10px;display:flex;flex-direction:column;gap:10px;
+  border-bottom:1px solid transparent;
+}
+.tt-controls.stuck{border-bottom-color:var(--border);box-shadow:0 6px 16px rgba(18,22,58,.05);}
+.group-switcher{display:flex;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-pill);padding:3px;gap:3px;align-self:center;}
+.gr-btn{padding:7px 20px;border:none;cursor:pointer;font-family:var(--font-display);font-weight:700;font-size:12px;color:var(--muted);background:transparent;border-radius:var(--r-pill);transition:.2s;}
+.gr-btn.active{background:linear-gradient(135deg,var(--gold),#ff8c5a);color:white;box-shadow:0 2px 10px rgba(255,107,53,.32);}
+.sem-tabs{display:flex;gap:6px;overflow-x:auto;padding:2px 1px;scrollbar-width:none;}
+.sem-tabs::-webkit-scrollbar{display:none;}
+.sem-tab{flex-shrink:0;padding:8px 17px;border-radius:var(--r-pill);font-size:12px;font-weight:700;color:var(--muted);background:var(--white);border:1.5px solid var(--border);cursor:pointer;font-family:var(--font-display);white-space:nowrap;transition:.2s;}
+.sem-tab.active{background:linear-gradient(120deg,var(--royal),#6d4de0);color:white;border-color:transparent;box-shadow:0 6px 16px rgba(60,50,180,.25);}
+
+.info-alert{display:flex;align-items:center;gap:9px;background:#fff7e8;border:1px solid #ffe4ae;color:#8a6100;border-radius:14px;padding:11px 14px;font-size:11.5px;font-weight:600;margin:0 16px 14px;line-height:1.5;}
+.info-alert i{font-size:13px;flex-shrink:0;}
+
+/* ── Day-grouped list ── */
+#ttList{padding:0 16px;}
+.tt-day-title{
+  display:flex;align-items:center;gap:9px;
+  font-family:var(--font-display);font-weight:800;font-size:12.5px;
+  color:var(--navy);letter-spacing:.3px;text-transform:uppercase;
+  padding:22px 2px 10px;
+}
+.tt-day-title .dtico{
+  width:22px;height:22px;border-radius:7px;flex-shrink:0;
+  background:linear-gradient(135deg,var(--royal),#6d4de0);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:10px;
+}
+.tt-day-title .dtline{flex:1;height:1px;background:var(--border);margin-left:2px;}
+.tt-day-title .dtcount{
+  font-size:9.5px;font-weight:800;color:var(--muted);background:var(--white);
+  border:1px solid var(--border);border-radius:100px;padding:3px 8px;letter-spacing:0;text-transform:none;
+}
+.tt-day-title:first-child{padding-top:4px;}
+
+.tt-card{
+  background:linear-gradient(180deg,var(--tint,#fff) 0%,var(--white) 60%);
+  border:1.5px solid var(--border);border-radius:17px;
+  padding:14px 16px 13px 18px;margin-bottom:11px;
+  box-shadow:0 3px 14px rgba(18,22,58,.055),0 1px 3px rgba(18,22,58,.04);
+  display:flex;flex-direction:column;gap:11px;position:relative;overflow:hidden;
+  animation:ttCardIn .35s ease both;
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.tt-card:active{transform:scale(.985);box-shadow:0 2px 8px rgba(18,22,58,.06);}
+.tt-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--accent,#ff6b35);border-radius:0 3px 3px 0;}
+@keyframes ttCardIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+@media (prefers-reduced-motion:reduce){.tt-card{animation:none;}}
+
+.tt-card-top{display:flex;align-items:center;gap:12px;}
+.tt-mod-ico{
+  width:38px;height:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+  font-size:14.5px;flex-shrink:0;background:var(--icoBg);color:var(--icoColor);
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.6);
+}
+.tt-card-head{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;}
+.tt-mod-name{font-weight:800;font-size:14px;color:var(--navy);line-height:1.25;font-family:var(--font-display);letter-spacing:-.1px;}
+.tt-mod-day-time{font-size:10.5px;font-weight:700;color:var(--accent,#ff6b35);}
+
+.tt-divider{height:1px;background:linear-gradient(90deg,var(--border),transparent 90%);margin:0 0 0 50px;}
+
+.tt-card-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-left:50px;flex-wrap:wrap;}
+.tt-card-pills{display:flex;flex-wrap:wrap;gap:6px;}
+.tt-pill{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:100px;font-size:11px;font-weight:800;white-space:nowrap;font-family:var(--font-display);}
+.tt-pill.time{background:var(--accent,#ff6b35);color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.10);}
+.tt-pill.room{background:#fff;color:var(--text);border:1.3px solid var(--border);}
+.tt-pill i{font-size:9px;}
+.tt-teacher{display:flex;align-items:center;gap:7px;padding-left:50px;font-size:11.5px;font-weight:700;color:var(--text);}
+.tt-teacher-avatar{
+  width:19px;height:19px;border-radius:50%;flex-shrink:0;font-size:9px;font-weight:800;color:#fff;
+  display:flex;align-items:center;justify-content:center;background:var(--icoColor);
+}
+.tt-teacher-name{color:var(--muted);font-weight:600;}
+
+.tt-empty{text-align:center;padding:50px 20px;color:var(--muted);}
+.tt-empty i{font-size:30px;color:var(--border);margin-bottom:12px;display:block;}
+.tt-empty p{font-size:13px;font-weight:600;margin:0;}
+
+.tt-loading{display:flex;flex-direction:column;align-items:center;gap:12px;padding:70px 20px;color:var(--muted);font-size:12.5px;font-weight:600;}
+.tt-spinner{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--royal);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.tt-footer{text-align:center;padding:26px 16px 4px;font-size:11px;color:var(--muted);font-weight:600;}
+.tt-footer a{color:var(--royal);text-decoration:none;font-weight:700;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-icon"><i class="fas fa-book-open" id="logoIconEl"></i></div>
+  <div class="logo-text">
+    <span class="site-name" id="siteNameEl">English Studies</span>
+    <span class="site-sub" id="siteSubEl">FLSH Mohammedia</span>
+  </div>
+  <a class="back-btn" href="index.html"><i class="fas fa-arrow-left"></i> Site</a>
+</header>
+
+<div class="tt-intro">
+  <div class="tt-eyebrow"><span class="dot"></span> Full Schedule</div>
+  <h1>Weekly Timetable</h1>
+  <p>Your complete class schedule, built for mobile.</p>
+</div>
+
+<div class="tt-controls" id="ttControls">
+  <div class="group-switcher" id="grSwitcher">
+    <button class="gr-btn active" id="grBtn1">GR1</button>
+    <button class="gr-btn" id="grBtn2">GR2</button>
+  </div>
+  <div class="sem-tabs" id="semTabs"></div>
+</div>
+
+<div class="info-alert"><i class="fas fa-info-circle"></i> The timetable may be updated by the admin. Please check back regularly.</div>
+
+<div id="ttList">
+  <div class="tt-loading"><div class="tt-spinner"></div>Loading timetable…</div>
+</div>
+
+<div class="tt-footer">Built for English Studies · FLSHM Mohammedia<br><a href="index.html">← Back to full site</a></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, onSnapshot, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDH1738INWjoXnzXLOPytluX1ED8saNcyI",
+  authDomain: "english-studies-flshm.firebaseapp.com",
+  projectId: "english-studies-flshm",
+  storageBucket: "english-studies-flshm.firebasestorage.app",
+  messagingSenderId: "271583538710",
+  appId: "1:271583538710:web:1922dbfbeebc9fb1a5cf37"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ── State ──
+const params = new URLSearchParams(location.search);
+let currentGroup = (params.get('gr')==='GR2') ? 'GR2' : 'GR1';
+let curSem = params.get('sem') || 'S1';
+let timetable = [];
+let settings = { ttColumns:{room:true,prof:true}, hiddenTTSems:[], gr1Label:'GR1', gr2Label:'GR2' };
+let gotSettings = false, gotTimetable = false;
+
+const TT_PALETTE=[
+  {bg:'#fff1e8',text:'#ff6b35',icoBg:'#ffe4d1',icoColor:'#ff6b35',icon:'fa-book'},
+  {bg:'#f3eeff',text:'#7c4dff',icoBg:'#e7ddff',icoColor:'#7c4dff',icon:'fa-graduation-cap'},
+  {bg:'#e8faf5',text:'#0e8a70',icoBg:'#d3f5ea',icoColor:'#0e8a70',icon:'fa-book-open'},
+  {bg:'#eaf3ff',text:'#2f6fed',icoBg:'#d9e9ff',icoColor:'#2f6fed',icon:'fa-pen'},
+  {bg:'#ffeaf3',text:'#e0287d',icoBg:'#ffd9ea',icoColor:'#e0287d',icon:'fa-headphones'},
+  {bg:'#fff9e0',text:'#c99a06',icoBg:'#fff2b8',icoColor:'#c99a06',icon:'fa-flask'}
+];
+function ttStyleFor(moduleName){
+  const s=(moduleName||'').toLowerCase();
+  let idx;
+  if(s.includes('vocab'))idx=0;
+  else if(s.includes('methodolog'))idx=1;
+  else if(s.includes('read'))idx=2;
+  else if(s.includes('writ'))idx=3;
+  else if(s.includes('listen')||s.includes('speak'))idx=4;
+  else{ let h=0; for(let i=0;i<s.length;i++) h=(h*31+s.charCodeAt(i))>>>0; idx=h%TT_PALETTE.length; }
+  return TT_PALETTE[idx];
+}
+function esc(v){ return (v??'').toString().replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── Firebase listeners ──
+onSnapshot(doc(db,'settings','main'), snap=>{
+  const d = snap.data()||{};
+  settings.ttColumns    = d.ttColumns || {room:true,prof:true};
+  settings.hiddenTTSems = d.hiddenTTSems || [];
+  settings.gr1Label     = d.gr1Label || 'GR1';
+  settings.gr2Label     = d.gr2Label || 'GR2';
+  settings.hideGR1      = !!d.hideGR1;
+  settings.hideGR2      = !!d.hideGR2;
+
+  document.getElementById('logoIconEl').className = d.logoIcon || 'fas fa-book-open';
+  document.getElementById('siteNameEl').textContent = d.siteName || 'English Studies';
+  document.getElementById('siteSubEl').textContent = d.siteSub || 'FLSH Mohammedia';
+  document.getElementById('grBtn1').textContent = settings.gr1Label;
+  document.getElementById('grBtn2').textContent = settings.gr2Label;
+  document.getElementById('grBtn1').style.display = settings.hideGR1 ? 'none' : '';
+  document.getElementById('grBtn2').style.display = settings.hideGR2 ? 'none' : '';
+
+  gotSettings = true;
+  renderSemTabs();
+  if(gotTimetable) renderList();
+});
+
+onSnapshot(collection(db,'timetable'), snap=>{
+  timetable = snap.docs.map(d=>({id:d.id,...d.data()}));
+  gotTimetable = true;
+  if(gotSettings) renderList();
+});
+
+// ── Group switcher ──
+document.getElementById('grBtn1').addEventListener('click', ()=>switchGroup('GR1'));
+document.getElementById('grBtn2').addEventListener('click', ()=>switchGroup('GR2'));
+function switchGroup(gr){
+  currentGroup = gr;
+  document.getElementById('grBtn1').classList.toggle('active', gr==='GR1');
+  document.getElementById('grBtn2').classList.toggle('active', gr==='GR2');
+  renderList();
+}
+
+// ── Semester tabs ──
+function renderSemTabs(){
+  const sems=['S1','S2','S3','S4','S5','S6'];
+  const visible = sems.filter(s=>!(settings.hiddenTTSems||[]).includes(s));
+  if(!visible.includes(curSem)) curSem = visible[0] || 'S1';
+  const cont = document.getElementById('semTabs');
+  cont.innerHTML = visible.map(s=>
+    `<button class="sem-tab${s===curSem?' active':''}" data-sem="${s}">${s}</button>`
+  ).join('');
+  cont.querySelectorAll('.sem-tab').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      curSem = btn.dataset.sem;
+      cont.querySelectorAll('.sem-tab').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      renderList();
+    });
+  });
+}
+
+// ── Render the day-grouped card list ──
+function renderList(){
+  const el = document.getElementById('ttList');
+  const rows = timetable
+    .filter(r=>r.gr===currentGroup && r.sem===curSem)
+    .sort((a,b)=>(a.order??99)-(b.order??99));
+
+  if(!rows.length){
+    el.innerHTML = `<div class="tt-empty"><i class="fas fa-calendar-xmark"></i><p>Timetable for this semester will be uploaded soon.</p></div>`;
+    return;
+  }
+
+  const showRoom = settings.ttColumns.room !== false;
+  const showProf = settings.ttColumns.prof !== false;
+  const dayOrder = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const grouped = {};
+  rows.forEach(r=>{ (grouped[r.day]=grouped[r.day]||[]).push(r); });
+
+  let ci = 0;
+  el.innerHTML = dayOrder.filter(d=>grouped[d]).map(day=>{
+    const cards = grouped[day].map(r=>{
+      ci++;
+      const delay = Math.min(ci*35, 350);
+      const st = ttStyleFor(r.module);
+      const initial = esc(r.prof||'?').trim().charAt(0).toUpperCase() || '?';
+      const roomPill = showRoom ? `<span class="tt-pill room"><i class="fas fa-location-dot"></i>${esc(r.room)||'—'}</span>` : '';
+      const teacher = showProf ? `<div class="tt-teacher"><span class="tt-teacher-avatar" style="background:${st.icoColor}">${initial}</span><span class="tt-teacher-name">${esc(r.prof)||'—'}</span></div>` : '';
+      return `<div class="tt-card" style="--accent:${st.text};--icoBg:${st.icoBg};--icoColor:${st.icoColor};--tint:${st.bg};animation-delay:${delay}ms">
+        <div class="tt-card-top">
+          <div class="tt-mod-ico"><i class="fas ${st.icon}"></i></div>
+          <div class="tt-card-head">
+            <div class="tt-mod-name">${esc(r.module)}</div>
+            <div class="tt-mod-day-time">${day} · ${esc(r.time)}</div>
+          </div>
+        </div>
+        <div class="tt-divider"></div>
+        <div class="tt-card-bottom">
+          <div class="tt-card-pills">
+            <span class="tt-pill time"><i class="far fa-clock"></i>${esc(r.time)}</span>
+            ${roomPill}
+          </div>
+        </div>
+        ${teacher}
+      </div>`;
+    }).join('');
+    return `<div class="tt-day-title"><span class="dtico"><i class="fas fa-calendar-day"></i></span>${day}<span class="dtline"></span><span class="dtcount">${grouped[day].length} class${grouped[day].length>1?'es':''}</span></div>${cards}`;
+  }).join('');
+}
+
+// Shadow the controls bar once the page scrolls under it
+window.addEventListener('scroll', ()=>{
+  document.getElementById('ttControls').classList.toggle('stuck', window.scrollY > 90);
+}, {passive:true});
+</script>
+</body>
+</html>
