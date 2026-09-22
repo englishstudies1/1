@@ -4504,6 +4504,7 @@ onAuthStateChanged(auth, async user => {
       currentAdmin={email:user.email, name:acc.name, role:acc.role};
       closeModal('loginModal');
       hideGate();
+      renderAnnPreview(); renderAllAnn();
       updateStudentBar(null);
       const grColor=acc.role==='GR1'?'#1e40af':'#166534';
       const grBg=acc.role==='GR1'?'#dbeafe':'#dcfce7';
@@ -4527,6 +4528,7 @@ onAuthStateChanged(auth, async user => {
             if(ov){ ov.style.cssText='position:fixed;inset:0;z-index:99999;display:flex;opacity:1;visibility:visible;pointer-events:all;'; }
             if(st) st.textContent='Welcome, '+(data.firstName||'Student')+'! 🎓';
             hideGate();
+            renderAnnPreview(); renderAllAnn();
             updateStudentBar(data);
             if(data.group&&(data.group==='GR1'||data.group==='GR2')) window.switchGroup(data.group);
             // Fade out loading overlay after brief welcome
