@@ -40,6 +40,10 @@ header{
   border-radius:var(--r-pill);padding:8px 13px;font-size:12px;font-weight:700;
   font-family:var(--font-display);text-decoration:none;white-space:nowrap;
 }
+/* Compact GR1/GR2 switcher, lives in the header */
+.header-group-switcher{display:flex;background:var(--cream);border:1.5px solid var(--border);border-radius:var(--r-pill);padding:2px;gap:2px;flex-shrink:0;}
+.header-gr-btn{padding:5px 5px;min-width:30px;border:none;cursor:pointer;font-family:var(--font-display);font-weight:700;font-size:10px;color:var(--muted);background:transparent;border-radius:var(--r-pill);transition:.2s;}
+.header-gr-btn.active{background:linear-gradient(135deg,var(--gold),#ff8c5a);color:white;box-shadow:0 2px 8px rgba(255,107,53,.32);}
 
 /* ── Page intro ── */
 .tt-intro{padding:22px 16px 6px;text-align:center;}
@@ -55,13 +59,12 @@ header{
   border-bottom:1px solid transparent;
 }
 .tt-controls.stuck{border-bottom-color:var(--border);box-shadow:0 6px 16px rgba(18,22,58,.05);}
-.group-switcher{display:flex;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-pill);padding:3px;gap:3px;align-self:center;}
-.gr-btn{padding:7px 20px;border:none;cursor:pointer;font-family:var(--font-display);font-weight:700;font-size:12px;color:var(--muted);background:transparent;border-radius:var(--r-pill);transition:.2s;}
-.gr-btn.active{background:linear-gradient(135deg,var(--gold),#ff8c5a);color:white;box-shadow:0 2px 10px rgba(255,107,53,.32);}
-.sem-tabs{display:flex;gap:6px;overflow-x:auto;padding:2px 1px;scrollbar-width:none;}
+/* Same look as the main site's .tt-tabs / .tt-tab (Timetable page semester pills) */
+.sem-tabs{display:flex;gap:6px;background:var(--cream);border-radius:100px;padding:4px;overflow-x:auto;scrollbar-width:none;width:fit-content;margin:0 auto;}
 .sem-tabs::-webkit-scrollbar{display:none;}
-.sem-tab{flex-shrink:0;padding:8px 17px;border-radius:var(--r-pill);font-size:12px;font-weight:700;color:var(--muted);background:var(--white);border:1.5px solid var(--border);cursor:pointer;font-family:var(--font-display);white-space:nowrap;transition:.2s;}
-.sem-tab.active{background:linear-gradient(120deg,var(--royal),#6d4de0);color:white;border-color:transparent;box-shadow:0 6px 16px rgba(60,50,180,.25);}
+.sem-tab{flex-shrink:0;padding:9px 22px;border-radius:100px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;transition:.2s;font-family:var(--font-display);white-space:nowrap;background:transparent;border:none;}
+.sem-tab.active{background:linear-gradient(120deg,var(--royal),#6d4de0);color:#fff;box-shadow:0 6px 16px rgba(60,50,180,.28);}
+.sem-tab:hover:not(.active){color:var(--navy);}
 
 .info-alert{display:flex;align-items:center;gap:9px;background:#fff7e8;border:1px solid #ffe4ae;color:#8a6100;border-radius:14px;padding:11px 14px;font-size:11.5px;font-weight:600;margin:0 16px 14px;line-height:1.5;}
 .info-alert i{font-size:13px;flex-shrink:0;}
@@ -145,7 +148,11 @@ header{
     <span class="site-name" id="siteNameEl">English Studies</span>
     <span class="site-sub" id="siteSubEl">FLSH Mohammedia</span>
   </div>
-  <a class="back-btn" href="index.html"><i class="fas fa-arrow-left"></i> Site</a>
+  <div class="header-group-switcher" id="grSwitcher">
+    <button class="header-gr-btn active" id="grBtn1">GR1</button>
+    <button class="header-gr-btn" id="grBtn2">GR2</button>
+  </div>
+  <a class="back-btn" href="index.html"><i class="fas fa-arrow-left"></i></a>
 </header>
 
 <div class="tt-intro">
@@ -155,10 +162,6 @@ header{
 </div>
 
 <div class="tt-controls" id="ttControls">
-  <div class="group-switcher" id="grSwitcher">
-    <button class="gr-btn active" id="grBtn1">GR1</button>
-    <button class="gr-btn" id="grBtn2">GR2</button>
-  </div>
   <div class="sem-tabs" id="semTabs"></div>
 </div>
 
@@ -286,13 +289,46 @@ function renderList(){
 
   const showRoom = settings.ttColumns.room !== false;
   const showProf = settings.ttColumns.prof !== false;
-  const dayOrder = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-  const grouped = {};
-  rows.forEach(r=>{ (grouped[r.day]=grouped[r.day]||[]).push(r); });
+  // Map lots of ways a day can be typed (English/French, full/short,
+  // any case, extra spaces, common misspellings) to a Mon=0..Sun=6 index —
+  // used purely for SORTING. The admin's original label is always kept
+  // for display. Matched by the first 3 letters, so a typo like
+  // "Wedensday" or "Thirsday" still matches "wed"/"thu" correctly.
+  const DAY_PREFIXES = [
+    {idx:0, p:['mon','lun']},
+    {idx:1, p:['tue','tu','mar']},
+    {idx:2, p:['wed','mer']},
+    {idx:3, p:['thu','jeu']},
+    {idx:4, p:['fri','ven']},
+    {idx:5, p:['sat','sam']},
+    {idx:6, p:['sun','dim']},
+  ];
+  function dayIndex(raw){
+    const key = (raw||'').toString().trim().toLowerCase().replace(/[^a-zàâäéèêëïîôöùûüç]/g,'');
+    if(!key) return 99;
+    const hit = DAY_PREFIXES.find(d=>d.p.some(p=>key.startsWith(p)));
+    return hit ? hit.idx : 99; // truly unrecognized → pushed to the end
+  }
+  // Group by the exact label the admin typed (so "Lundi" still shows as
+  // "Lundi"), but only ONE group per day even if casing/spacing differs.
+  const grouped = {};      // normalizedKey -> rows[]
+  const labelFor = {};     // normalizedKey -> original display label
+  rows.forEach(r=>{
+    const label = (r.day||'Other').toString().trim() || 'Other';
+    const key = label.toLowerCase();
+    if(!grouped[key]){ grouped[key]=[]; labelFor[key]=label; }
+    grouped[key].push(r);
+  });
+  const orderedKeys = Object.keys(grouped).sort((a,b)=>{
+    const ia=dayIndex(a), ib=dayIndex(b);
+    if(ia!==ib) return ia-ib;
+    return a.localeCompare(b); // unrecognized labels: alphabetical, stable
+  });
 
   let ci = 0;
-  el.innerHTML = dayOrder.filter(d=>grouped[d]).map(day=>{
-    const cards = grouped[day].map(r=>{
+  el.innerHTML = orderedKeys.map(key=>{
+    const day = labelFor[key];
+    const cards = grouped[key].map(r=>{
       ci++;
       const delay = Math.min(ci*35, 350);
       const st = ttStyleFor(r.module);
@@ -317,7 +353,7 @@ function renderList(){
         ${teacher}
       </div>`;
     }).join('');
-    return `<div class="tt-day-title"><span class="dtico"><i class="fas fa-calendar-day"></i></span>${day}<span class="dtline"></span><span class="dtcount">${grouped[day].length} class${grouped[day].length>1?'es':''}</span></div>${cards}`;
+    return `<div class="tt-day-title"><span class="dtico"><i class="fas fa-calendar-day"></i></span>${day}<span class="dtline"></span><span class="dtcount">${grouped[key].length} class${grouped[key].length>1?'es':''}</span></div>${cards}`;
   }).join('');
 }
 
