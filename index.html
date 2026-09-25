@@ -3390,6 +3390,17 @@ footer::after{
         <div class="ss-cta-visual"><i class="fas fa-envelope-open-text"></i></div>
       </div>
     </div>
+
+    <div class="ss-row2" style="grid-template-columns:1fr;">
+      <div class="ss-cta" style="background:linear-gradient(120deg,#00b4a0,var(--navy));">
+        <div class="ss-cta-text">
+          <h3>Not in a WhatsApp group yet?</h3>
+          <p>Verify your student info and we'll add you to the right group.</p>
+          <button class="ss-cta-btn" onclick="ssMemberVerification()">Member Verification <i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="ss-cta-visual"><i class="fas fa-shield-halved"></i></div>
+      </div>
+    </div>
   </main>
 </div>
 
@@ -4771,14 +4782,16 @@ async function seedIfEmpty(){
 
 async function init(){
   try{
-    await loadFirestoreAdmins();
-    await syncLikesFromFirebase();
+    try{ await loadFirestoreAdmins(); }catch(e){ console.warn('loadFirestoreAdmins failed',e); }
+    try{ await syncLikesFromFirebase(); }catch(e){ console.warn('syncLikesFromFirebase failed',e); }
     // ── Load settings FIRST so hidden sems/pages apply before first render ──
     try{
       const snap = await getDoc(doc(db,'settings','main'));
       if(snap.exists()) applySettingsData(snap.data());
     }catch(e){ console.warn('settings preload failed',e); }
-    await seedIfEmpty();
+    try{ await seedIfEmpty(); }catch(e){ console.warn('seedIfEmpty failed (ok if not admin)',e); }
+    // Everything below MUST run even if something above failed —
+    // this is what actually wires up the live timetable/announcements/etc.
     setupListeners();
     setupSondageListeners();
     populateLessonMods();
@@ -7248,6 +7261,9 @@ window.ssFilterResources = function(q){
     const match = !query || el.getAttribute('data-ss-search').includes(query);
     el.style.display = match ? '' : 'none';
   });
+};
+window.ssMemberVerification = function(){
+  window.open('member-verification.html','_blank');
 };
 window.ssRequestResource = function(){
   window.open('request-resources.html','_blank');
