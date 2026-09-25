@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Verification | English Studies FLSHM</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --navy:#12163a;
+  --royal:#1e2a6e;
+  --sky:#00b4a0;
+  --gold:#ff6b35;
+  --gold-light:#ffb89a;
+  --cream:#f5f3ef;
+  --text:#1a1d2e;
+  --muted:#7a7f9a;
+  --border:#e4e1dc;
+  --white:#ffffff;
+  --card-shadow:0 2px 20px rgba(18,22,58,.07),0 1px 4px rgba(18,22,58,.04);
+  --r:20px;--r-sm:12px;--r-pill:100px;
+  --font-body:'Outfit',sans-serif;
+  --font-display:'Bricolage Grotesque',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font-body);background:var(--cream);color:var(--text);line-height:1.5;}
+
+/* ===== HEADER ===== */
+header{
+  background:var(--white);
+  border-bottom:1px solid var(--border);
+  padding:14px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:50;
+}
+.logo-block{display:flex;align-items:center;gap:12px;}
+.logo-icon{
+  width:42px;height:42px;border-radius:12px;
+  background:linear-gradient(135deg,var(--navy),var(--royal));
+  color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.logo-text{display:flex;flex-direction:column;line-height:1.1;}
+.site-name{font-family:var(--font-display);font-weight:800;font-size:17px;color:var(--navy);}
+.site-sub{font-size:11.5px;color:var(--muted);font-weight:600;letter-spacing:.03em;}
+.back-link{
+  font-size:13px;font-weight:700;color:var(--navy);text-decoration:none;
+  display:flex;align-items:center;gap:6px;padding:9px 16px;border:1.5px solid var(--border);
+  border-radius:var(--r-pill);transition:.2s;
+}
+.back-link:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(120deg,#e9f9f5,#f5f3ef 60%);
+  padding:56px 24px 90px;
+  text-align:center;
+}
+.hero-deco{position:absolute;inset:0;pointer-events:none;opacity:.5;}
+.hero-deco i{position:absolute;color:var(--sky);opacity:.25;}
+.hero-deco .i1{top:20px;left:8%;font-size:70px;transform:rotate(-12deg);}
+.hero-deco .i2{bottom:10px;right:10%;font-size:90px;color:var(--gold);opacity:.18;}
+.hero-deco .i3{top:60%;left:2%;font-size:50px;color:var(--navy);opacity:.12;}
+.hero-eyebrow{
+  font-family:var(--font-display);font-weight:800;font-size:12.5px;letter-spacing:.14em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:10px;position:relative;
+}
+.hero h1{
+  font-family:var(--font-display);font-weight:800;font-size:clamp(28px,4vw,40px);
+  color:var(--navy);position:relative;
+}
+.hero h1 span{color:var(--gold);}
+.hero p{max-width:560px;margin:14px auto 0;color:var(--muted);font-size:14.5px;position:relative;}
+
+/* ===== LAYOUT ===== */
+main{max-width:720px;margin:0 auto;padding:56px 20px 80px;}
+
+.card{
+  background:var(--white);border-radius:var(--r);padding:28px 26px;
+  box-shadow:var(--card-shadow);border:1px solid var(--border);
+  margin-bottom:22px;position:relative;
+}
+.card.top{margin-top:-46px;position:relative;z-index:5;}
+.card-title{
+  font-family:var(--font-display);font-weight:800;font-size:19px;color:var(--navy);
+  margin-bottom:4px;display:flex;align-items:center;gap:10px;
+}
+.card-title i{color:var(--gold);}
+.card-sub{color:var(--muted);font-size:13.5px;margin-bottom:20px;}
+
+/* ===== WhatsApp CTA mini-card ===== */
+.wa-cta{
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.wa-cta-ico{
+  width:52px;height:52px;border-radius:16px;background:#e6faf3;color:#25d366;
+  display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;
+}
+.wa-cta-text{flex:1;min-width:200px;}
+.wa-cta-text h3{font-family:var(--font-display);font-weight:800;font-size:15.5px;color:var(--navy);}
+.wa-cta-text p{font-size:13px;color:var(--muted);margin-top:3px;font-style:italic;}
+.wa-cta-btn{
+  border:none;border-radius:var(--r-pill);padding:12px 22px;
+  background:linear-gradient(135deg,#25d366,#1fb958);color:#fff;
+  font-family:var(--font-display);font-weight:800;font-size:13.5px;cursor:pointer;transition:.2s;
+  display:flex;align-items:center;gap:8px;box-shadow:0 8px 20px rgba(37,211,102,.28);
+}
+.wa-cta-btn:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(37,211,102,.36);}
+
+/* ===== Intro / warnings ===== */
+.warn-red{
+  background:#fdecec;border:1.5px solid #f7c9c4;color:#c0392b;
+  border-radius:var(--r-sm);padding:14px 16px;font-size:13.5px;font-weight:700;
+  display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;
+}
+.warn-red i{margin-top:1px;flex-shrink:0;}
+.note-line{
+  display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);
+  padding:10px 4px;border-top:1px dashed var(--border);
+}
+.note-line i{margin-top:2px;color:var(--gold);flex-shrink:0;}
+
+/* ===== Form ===== */
+.field{margin-bottom:16px;}
+.field-row{display:flex;gap:12px;}
+.field-row .field{flex:1;}
+label{display:block;font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+label em{color:var(--muted);font-weight:500;font-style:normal;}
+input[type=text],input[type=tel],input[type=email],input[type=number],select,textarea{
+  width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:var(--r-sm);
+  font-family:var(--font-body);font-size:14px;color:var(--text);background:var(--cream);
+  transition:.2s;appearance:none;
+}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a7f9a' stroke-width='1.6' fill='none' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 16px center;padding-right:38px;
+}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--sky);background:#fff;box-shadow:0 0 0 4px rgba(0,180,160,.10);}
+.error-text{color:#e0463b;font-size:11.5px;font-weight:600;margin-top:4px;display:none;}
+
+.section-label{
+  font-family:var(--font-display);font-weight:800;font-size:13.5px;color:var(--navy);
+  text-transform:uppercase;letter-spacing:.05em;margin:26px 0 14px;padding-top:18px;
+  border-top:1px solid var(--border);display:flex;align-items:center;gap:8px;
+}
+.section-label:first-of-type{margin-top:0;padding-top:0;border-top:none;}
+.section-label i{color:var(--gold);}
+.instr-note{
+  background:#fff6ee;border:1px solid #ffe0c2;color:#a15a12;font-size:12.5px;font-weight:600;
+  border-radius:10px;padding:9px 13px;margin-bottom:14px;display:flex;gap:8px;align-items:flex-start;
+}
+.instr-note i{margin-top:1px;}
+
+.radio-group{display:flex;gap:10px;}
+.radio-opt{
+  flex:1;border:1.5px solid var(--border);border-radius:var(--r-sm);padding:12px 14px;
+  cursor:pointer;text-align:center;font-weight:700;font-size:13.5px;color:var(--text);
+  background:var(--cream);transition:.2s;
+}
+.radio-opt.active{border-color:var(--sky);background:#e6f9f5;color:#0a7d55;}
+.radio-opt input{display:none;}
+
+/* ===== Upload box ===== */
+.upload-box{
+  border:1.5px dashed var(--border);border-radius:var(--r-sm);padding:22px;text-align:center;
+  background:var(--cream);transition:.2s;position:relative;
+}
+.upload-box.has-img{border-style:solid;padding:14px;}
+.upload-box i.upload-ico{font-size:26px;color:var(--gold);margin-bottom:8px;}
+.upload-box p{font-size:12.5px;color:var(--muted);margin-bottom:12px;}
+.upload-btn{
+  display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--border);
+  border-radius:var(--r-pill);padding:9px 18px;font-size:12.5px;font-weight:700;color:var(--navy);
+  background:#fff;cursor:pointer;transition:.2s;
+}
+.upload-btn:hover{border-color:var(--gold);color:var(--gold);}
+.upload-preview-wrap{display:none;}
+.upload-box.has-img .upload-preview-wrap{display:block;}
+.upload-box.has-img .upload-empty{display:none;}
+#cardPreviewImg{max-width:100%;max-height:220px;border-radius:10px;display:block;margin:0 auto 10px;}
+.upload-actions{display:flex;gap:8px;justify-content:center;}
+.upload-actions button{
+  border:none;border-radius:var(--r-pill);padding:8px 15px;font-size:12px;font-weight:700;cursor:pointer;
+}
+.up-replace{background:#eef2ff;color:#3730a3;}
+.up-remove{background:#fdecec;color:#c0392b;}
+.up-progress-wrap{display:none;height:5px;background:var(--border);border-radius:100px;overflow:hidden;margin-top:10px;}
+.up-progress-bar{height:100%;width:0;background:var(--sky);transition:.15s;}
+
+/* ===== WhatsApp groups picker ===== */
+.wa-group-list{display:flex;flex-direction:column;gap:10px;}
+.wa-group-opt{
+  border:1.5px solid var(--border);border-radius:var(--r-sm);padding:13px 16px;
+  cursor:pointer;transition:.2s;display:flex;align-items:center;gap:12px;
+}
+.wa-group-opt.active{border-color:var(--sky);background:#e6f9f5;}
+.wa-group-opt input{accent-color:var(--sky);width:16px;height:16px;flex-shrink:0;}
+.wa-group-opt .wgi{font-size:18px;color:#25d366;flex-shrink:0;}
+.wa-group-opt-text strong{font-size:13.5px;color:var(--navy);display:block;}
+.wa-group-opt-text span{font-size:12px;color:var(--muted);}
+.wa-empty{font-size:13px;color:var(--muted);font-style:italic;padding:10px 2px;}
+
+/* ===== Submit ===== */
+.submit-btn{
+  width:100%;margin-top:6px;padding:15px;border:none;border-radius:var(--r-pill);
+  background:linear-gradient(135deg,var(--gold),#ff8a5c);color:#fff;
+  font-family:var(--font-display);font-weight:800;font-size:14.5px;letter-spacing:.02em;
+  cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:0 8px 22px rgba(255,107,53,.30);
+}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(255,107,53,.38);}
+.submit-btn:disabled{opacity:.6;cursor:not-allowed;transform:none;}
+.status-msg{
+  display:none;margin-top:16px;padding:13px 16px;border-radius:var(--r-sm);font-size:13.5px;font-weight:600;
+  align-items:center;gap:8px;
+}
+.status-msg.show{display:flex;}
+.status-msg.err{background:#fdecec;color:#c0392b;border:1px solid #f7c9c4;}
+
+/* ===== Rules card ===== */
+.rules-list{list-style:none;counter-reset:rule;margin-bottom:16px;}
+.rules-list li{
+  counter-increment:rule;position:relative;padding-left:32px;margin-bottom:11px;font-size:13.5px;color:var(--text);
+}
+.rules-list li::before{
+  content:counter(rule);position:absolute;left:0;top:0;width:22px;height:22px;border-radius:8px;
+  background:var(--navy);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;
+}
+.rules-warning{
+  background:#fdecec;border:1.5px solid #f5b5ad;border-radius:var(--r-sm);padding:14px 16px;
+  color:#8a1f16;font-size:13px;font-weight:700;display:flex;gap:10px;align-items:flex-start;
+}
+.rules-warning i{font-size:18px;flex-shrink:0;}
+
+/* ===== Pending view ===== */
+#pendingView{display:none;}
+.pending-icon{
+  width:76px;height:76px;border-radius:50%;background:#fff6ee;color:var(--gold);
+  display:flex;align-items:center;justify-content:center;font-size:34px;margin:0 auto 18px;
+}
+.pending-status-pill{
+  display:inline-flex;align-items:center;gap:7px;background:#fef3c7;color:#92400e;
+  font-weight:800;font-size:12.5px;padding:7px 16px;border-radius:var(--r-pill);margin:14px 0 18px;
+}
+.pending-note{
+  background:#fdecec;color:#c0392b;border:1px solid #f7c9c4;border-radius:var(--r-sm);
+  padding:13px 16px;font-size:13px;font-weight:600;margin-top:16px;text-align:left;
+}
+
+footer{text-align:center;padding:26px;color:var(--muted);font-size:12px;}
+
+@media(max-width:520px){
+  .field-row{flex-direction:column;gap:0;}
+  main{padding-top:40px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-block">
+    <div class="logo-icon"><i class="fas fa-graduation-cap"></i></div>
+    <div class="logo-text">
+      <span class="site-name">English Studies</span>
+      <span class="site-sub">FLSH Mohammedia</span>
+    </div>
+  </div>
+  <a class="back-link" href="index.html"><i class="fas fa-arrow-left"></i> Back to site</a>
+</header>
+
+<section class="hero">
+  <div class="hero-deco">
+    <i class="fas fa-star i1"></i>
+    <i class="fas fa-shield-halved i2"></i>
+    <i class="fas fa-book-open i3"></i>
+  </div>
+  <div class="hero-eyebrow">Student Space</div>
+  <h1>Member <span>Verification</span></h1>
+  <p>Verify your student information so we can add you to the right WhatsApp group.</p>
+</section>
+
+<main>
+
+  <!-- FORM VIEW -->
+  <div id="formView">
+
+    <!-- WhatsApp CTA -->
+    <div class="card top" id="waCtaCard">
+      <div class="wa-cta">
+        <div class="wa-cta-ico"><i class="fab fa-whatsapp"></i></div>
+        <div class="wa-cta-text">
+          <h3>Haven't joined a WhatsApp group yet?</h3>
+          <p>"Go verify yourself. We'll add you soon."</p>
+        </div>
+        <button class="wa-cta-btn" onclick="document.getElementById('verifForm').scrollIntoView({behavior:'smooth',block:'start'})">
+          Verify Yourself <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Intro / warnings -->
+    <div class="card">
+      <div class="card-title"><i class="fas fa-circle-info"></i> Before you start</div>
+      <div class="warn-red" id="introRedWarning"><i class="fas fa-triangle-exclamation"></i> <span></span></div>
+      <div class="note-line"><i class="fas fa-shield-halved"></i> <span id="introFalseInfo"></span></div>
+      <div class="note-line"><i class="fas fa-hourglass-half"></i> <span id="introReviewNote"></span></div>
+    </div>
+
+    <!-- Form -->
+    <div class="card">
+      <div class="card-title"><i class="fas fa-user-check"></i> Verification Form</div>
+      <div class="card-sub">Fill in your information carefully and accurately.</div>
+
+      <form id="verifForm" novalidate>
+
+        <div class="section-label"><i class="fas fa-id-card"></i> Personal Information</div>
+
+        <div class="field">
+          <label for="vName">Full Name *</label>
+          <input type="text" id="vName" placeholder="Your full name" required>
+          <div class="error-text" id="vNameErr">Please enter your full name.</div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="vPhone">Mobile Number *</label>
+            <input type="tel" id="vPhone" placeholder="06 XX XX XX XX" required>
+            <div class="error-text" id="vPhoneErr">Please enter a valid phone number.</div>
+          </div>
+          <div class="field">
+            <label for="vEmail">Email *</label>
+            <input type="email" id="vEmail" placeholder="your.email@example.com" required>
+            <div class="error-text" id="vEmailErr">Please enter a valid email.</div>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="vApogee">Apogée *</label>
+            <input type="text" id="vApogee" placeholder="Your apogée number" required>
+            <div class="error-text" id="vApogeeErr">Please enter your apogée number.</div>
+          </div>
+          <div class="field">
+            <label for="vMassar">Massar Code *</label>
+            <input type="text" id="vMassar" placeholder="e.g. R123456" required>
+            <div class="error-text" id="vMassarErr">Please enter your Massar code.</div>
+          </div>
+        </div>
+
+        <div class="section-label"><i class="fas fa-graduation-cap"></i> Academic Information</div>
+
+        <div class="field">
+          <label for="vGR">GR (Group) *</label>
+          <div class="instr-note" id="grInstrNote"><i class="fas fa-lightbulb"></i> <span></span></div>
+          <select id="vGR" required onchange="onGrChange()">
+            <option value="">Select your GR...</option>
+          </select>
+          <div class="error-text" id="vGRErr">Please select your GR.</div>
+        </div>
+
+        <div class="field">
+          <label>Are you currently in any student group? *</label>
+          <div class="radio-group">
+            <label class="radio-opt" id="optGroupYes"><input type="radio" name="hasGroup" value="yes" onchange="onHasGroupChange()"> Yes</label>
+            <label class="radio-opt" id="optGroupNo"><input type="radio" name="hasGroup" value="no" onchange="onHasGroupChange()"> No</label>
+          </div>
+          <div class="error-text" id="vHasGroupErr">Please choose an option.</div>
+        </div>
+
+        <div class="field" id="existingGroupField" style="display:none;">
+          <label for="vExistingGroup">Which group are you currently in? *</label>
+          <select id="vExistingGroup">
+            <option value="">Select your group...</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Are you already in a WhatsApp group where another class's modules are shared with you? *</label>
+          <div class="radio-group">
+            <label class="radio-opt" id="optOtherClassYes"><input type="radio" name="hasOtherClassGroup" value="yes" onchange="onOtherClassGroupChange()"> Yes</label>
+            <label class="radio-opt" id="optOtherClassNo"><input type="radio" name="hasOtherClassGroup" value="no" onchange="onOtherClassGroupChange()"> No</label>
+          </div>
+          <div class="error-text" id="vHasOtherClassErr">Please choose an option.</div>
+        </div>
+
+        <div class="field" id="otherClassLevelField" style="display:none;">
+          <label for="vOtherClassLevel">Which class? *</label>
+          <select id="vOtherClassLevel">
+            <option value="">Select class...</option>
+          </select>
+          <div class="error-text" id="vOtherClassLevelErr">Please select the class.</div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="vLevel">You are in *</label>
+            <select id="vLevel" required>
+              <option value="">Select level...</option>
+            </select>
+            <div class="error-text" id="vLevelErr">Please select your level.</div>
+          </div>
+          <div class="field">
+            <label for="vYear">Year of Registration *</label>
+            <select id="vYear" required>
+              <option value="">Select year...</option>
+            </select>
+            <div class="error-text" id="vYearErr">Please select your year of registration.</div>
+          </div>
+        </div>
+
+        <div class="section-label"><i class="fas fa-id-badge"></i> Student Card Picture</div>
+        <p style="font-size:12.5px;color:var(--muted);margin-bottom:12px;margin-top:-8px;">Please upload a clear and readable picture of your student card.</p>
+        <div class="field">
+          <div class="upload-box" id="cardUploadBox">
+            <div class="upload-empty">
+              <i class="fas fa-id-card upload-ico"></i>
+              <p>PNG or JPG, clearly showing your name and photo</p>
+              <label class="upload-btn"><i class="fas fa-upload"></i> Upload picture
+                <input type="file" id="cardFileInput" accept="image/*" style="display:none;" onchange="onCardFileChosen(this)">
+              </label>
+            </div>
+            <div class="upload-preview-wrap">
+              <img id="cardPreviewImg" src="">
+              <div class="upload-actions">
+                <label class="up-replace" style="cursor:pointer;"><i class="fas fa-rotate"></i> Replace
+                  <input type="file" id="cardFileInputReplace" accept="image/*" style="display:none;" onchange="onCardFileChosen(this)">
+                </label>
+                <button type="button" class="up-remove" onclick="removeCardImg()"><i class="fas fa-trash"></i> Remove</button>
+              </div>
+            </div>
+            <div class="up-progress-wrap" id="cardUpProgressWrap"><div class="up-progress-bar" id="cardUpProgressBar"></div></div>
+          </div>
+          <div class="error-text" id="vCardErr">Please upload a picture of your student card.</div>
+        </div>
+
+        <div class="section-label"><i class="fab fa-whatsapp"></i> WhatsApp Group</div>
+        <p style="font-size:12.5px;color:var(--muted);margin-bottom:12px;margin-top:-8px;">Select the group you'd like to be added to. An administrator will review your request and add you after approval.</p>
+        <div class="field">
+          <div class="wa-group-list" id="waGroupList"></div>
+          <div class="error-text" id="vWaGroupErr">Please select a WhatsApp group.</div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="vSubmitBtn">
+          <i class="fas fa-paper-plane"></i> Submit Verification Request
+        </button>
+        <div class="status-msg" id="vStatus"></div>
+      </form>
+    </div>
+
+    <!-- Group Rules -->
+    <div class="card">
+      <div class="card-title"><i class="fas fa-gavel"></i> Group Rules</div>
+      <ol class="rules-list" id="rulesList"></ol>
+      <div class="rules-warning"><i class="fas fa-circle-exclamation"></i> <span id="rulesWarning"></span></div>
+    </div>
+
+  </div>
+
+  <!-- PENDING VIEW -->
+  <div id="pendingView">
+    <div class="card top" style="text-align:center;">
+      <div class="pending-icon"><i class="fas fa-hourglass-half"></i></div>
+      <div class="card-title" style="justify-content:center;">Your Verification Request Has Been Submitted</div>
+      <p style="color:var(--muted);font-size:14px;max-width:440px;margin:10px auto 0;">
+        Thank you for submitting your information. Your request is currently pending review.
+        Please wait while an administrator verifies your information.
+      </p>
+      <div class="pending-status-pill"><i class="fas fa-clock"></i> Status: Pending Review</div>
+      <div class="pending-note">
+        <i class="fas fa-circle-exclamation" style="margin-right:6px;"></i>
+        Please do not contact admins privately about your verification request. You will receive an update once your request has been reviewed.
+      </div>
+      <a href="index.html" class="back-link" style="display:inline-flex;margin-top:22px;"><i class="fas fa-arrow-left"></i> Back to site</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>English Studies · FLSH Mohammedia</footer>
+
+<!-- FIREBASE -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, getDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDH1738INWjoXnzXLOPytluX1ED8saNcyI",
+  authDomain: "english-studies-flshm.firebaseapp.com",
+  projectId: "english-studies-flshm",
+  storageBucket: "english-studies-flshm.firebasestorage.app",
+  messagingSenderId: "271583538710",
+  appId: "1:271583538710:web:1922dbfbeebc9fb1a5cf37"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const CLOUDINARY_CLOUD  = 'dl8ibag5f';
+const CLOUDINARY_PRESET = 'English Studies';
+
+// ── Defaults used until the Admin Panel configures this page ──
+const DEFAULT_CONFIG = {
+  introRedWarning: "Make sure to request access in the relevant WhatsApp group first, then complete this form.",
+  introFalseInfo: "Any incorrect or false information may result in your application being rejected.",
+  introReviewNote: "Please note that verification may take some time while your information is being reviewed.",
+  grInstruction: "Make sure to choose your group according to the specified format.",
+  grList: [
+    { id:'gr1', label:'GR1', range:'A to H', instruction:'Students with last names A to H', enabled:true, order:0 },
+    { id:'gr2', label:'GR2', range:'I to Z', instruction:'Students with last names I to Z', enabled:true, order:1 }
+  ],
+  existingGroups: [
+    { id:'eg1', label:'S1 - GR1', enabled:true, order:0 },
+    { id:'eg2', label:'S1 - GR2', enabled:true, order:1 }
+  ],
+  levels: ['S1','S2','S3','S4','S5','S6'].map((l,i)=>({id:l.toLowerCase(),label:l,enabled:true,order:i})),
+  years: [
+    { id:'y2025', label:'2025–2026', enabled:true, order:0 },
+    { id:'y2026', label:'2026–2027', enabled:true, order:1 }
+  ],
+  whatsappGroups: [],
+  rules: [
+    { id:'r1', text:'Stickers are not allowed.', order:0 },
+    { id:'r2', text:'Sharing links from other groups is not allowed.', order:1 },
+    { id:'r3', text:'Harassment, bullying, hate speech, or any form of disrespectful behavior will not be tolerated.', order:2 },
+    { id:'r4', text:'If an admin notices a sticker, group link, or any other violation of these rules, the member may be removed from the group.', order:3 },
+    { id:'r5', text:'Please do not contact admins privately regarding group matters. If you have a question, suggestion, or concern, post it in the group so everyone can participate in the discussion.', order:4 }
+  ],
+  rulesWarning: "These rules are strictly enforced. Any violation may result in removal from the group and, where appropriate, further administrative or legal action."
+};
+
+let CONFIG = DEFAULT_CONFIG;
+let selectedWaGroup = null;
+
+function escapeHtml(s){ return (s||'').toString().replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+function sortActive(arr){ return (arr||[]).filter(x=>x.enabled!==false).sort((a,b)=>(a.order||0)-(b.order||0)); }
+
+async function loadConfig(){
+  try{
+    const snap = await getDoc(doc(db,'settings','memberVerification'));
+    if(snap.exists()){
+      const d = snap.data();
+      CONFIG = { ...DEFAULT_CONFIG, ...d };
+    }
+  }catch(e){ console.warn('Using default member-verification config', e); }
+  renderConfig();
+}
+
+function renderConfig(){
+  document.getElementById('introRedWarning').querySelector('span').textContent = CONFIG.introRedWarning;
+  document.getElementById('introFalseInfo').textContent = CONFIG.introFalseInfo;
+  document.getElementById('introReviewNote').textContent = CONFIG.introReviewNote;
+  document.getElementById('grInstrNote').querySelector('span').textContent = CONFIG.grInstruction;
+
+  const grSel = document.getElementById('vGR');
+  grSel.innerHTML = '<option value="">Select your GR...</option>' +
+    sortActive(CONFIG.grList).map(g=>`<option value="${g.id}" data-label="${escapeHtml(g.label)}" data-range="${escapeHtml(g.range||'')}">${escapeHtml(g.label)}${g.range?' — '+escapeHtml(g.range):''}</option>`).join('');
+
+  const egSel = document.getElementById('vExistingGroup');
+  egSel.innerHTML = '<option value="">Select your group...</option>' +
+    sortActive(CONFIG.existingGroups).map(g=>`<option value="${g.id}" data-label="${escapeHtml(g.label)}">${escapeHtml(g.label)}</option>`).join('');
+
+  const lvlSel = document.getElementById('vLevel');
+  lvlSel.innerHTML = '<option value="">Select level...</option>' +
+    sortActive(CONFIG.levels).map(l=>`<option value="${l.id}" data-label="${escapeHtml(l.label)}">${escapeHtml(l.label)}</option>`).join('');
+
+  const otherLvlSel = document.getElementById('vOtherClassLevel');
+  otherLvlSel.innerHTML = '<option value="">Select class...</option>' +
+    sortActive(CONFIG.levels).map(l=>`<option value="${l.id}" data-label="${escapeHtml(l.label)}">${escapeHtml(l.label)}</option>`).join('');
+
+  const yrSel = document.getElementById('vYear');
+  yrSel.innerHTML = '<option value="">Select year...</option>' +
+    sortActive(CONFIG.years).map(y=>`<option value="${y.id}" data-label="${escapeHtml(y.label)}">${escapeHtml(y.label)}</option>`).join('');
+
+  const waList = document.getElementById('waGroupList');
+  const activeGroups = sortActive(CONFIG.whatsappGroups);
+  waList.innerHTML = activeGroups.length ? activeGroups.map(g=>`
+    <label class="wa-group-opt" id="waopt_${g.id}">
+      <input type="radio" name="waGroup" value="${g.id}" onchange="selectWaGroup('${g.id}','${escapeHtml(g.name).replace(/'/g,"\\'")}')">
+      <i class="fab fa-whatsapp wgi"></i>
+      <div class="wa-group-opt-text"><strong>${escapeHtml(g.name)}</strong>${g.description?`<span>${escapeHtml(g.description)}</span>`:''}</div>
+    </label>`).join('') : '<div class="wa-empty">No WhatsApp groups are configured yet — check back soon.</div>';
+
+  const rulesList = document.getElementById('rulesList');
+  rulesList.innerHTML = (CONFIG.rules||[]).sort((a,b)=>(a.order||0)-(b.order||0)).map(r=>`<li>${escapeHtml(r.text)}</li>`).join('');
+  document.getElementById('rulesWarning').textContent = CONFIG.rulesWarning;
+}
+
+window.selectWaGroup = function(id,name){
+  selectedWaGroup = {id,name};
+  document.querySelectorAll('.wa-group-opt').forEach(el=>el.classList.remove('active'));
+  const el = document.getElementById('waopt_'+id);
+  if(el) el.classList.add('active');
+};
+
+window.onGrChange = function(){};
+
+window.onHasGroupChange = function(){
+  const val = document.querySelector('input[name="hasGroup"]:checked')?.value;
+  document.getElementById('optGroupYes').classList.toggle('active', val==='yes');
+  document.getElementById('optGroupNo').classList.toggle('active', val==='no');
+  document.getElementById('existingGroupField').style.display = val==='yes' ? 'block' : 'none';
+};
+
+window.onOtherClassGroupChange = function(){
+  const val = document.querySelector('input[name="hasOtherClassGroup"]:checked')?.value;
+  document.getElementById('optOtherClassYes').classList.toggle('active', val==='yes');
+  document.getElementById('optOtherClassNo').classList.toggle('active', val==='no');
+  document.getElementById('otherClassLevelField').style.display = val==='yes' ? 'block' : 'none';
+  if(val!=='yes'){ document.getElementById('vOtherClassLevel').value=''; showErr('vOtherClassLevelErr',false); }
+};
+
+// ── Student card upload ──
+let cardFile = null;
+window.onCardFileChosen = function(input){
+  const file = input.files[0]; if(!file) return;
+  cardFile = file;
+  const reader = new FileReader();
+  reader.onload = e=>{
+    document.getElementById('cardPreviewImg').src = e.target.result;
+    document.getElementById('cardUploadBox').classList.add('has-img');
+    document.getElementById('vCardErr').style.display='none';
+  };
+  reader.readAsDataURL(file);
+};
+window.removeCardImg = function(){
+  cardFile = null;
+  document.getElementById('cardFileInput').value='';
+  document.getElementById('cardFileInputReplace').value='';
+  document.getElementById('cardPreviewImg').src='';
+  document.getElementById('cardUploadBox').classList.remove('has-img');
+};
+
+function uploadCardImage(file){
+  const bar = document.getElementById('cardUpProgressBar');
+  const wrap = document.getElementById('cardUpProgressWrap');
+  wrap.style.display='block'; bar.style.width='0%';
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('upload_preset', CLOUDINARY_PRESET);
+  formData.append('public_id', `memberVerifications/${Date.now()}_${Math.random().toString(36).slice(2,8)}`);
+  return new Promise((resolve,reject)=>{
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`);
+    xhr.upload.onprogress = e=>{ if(e.lengthComputable) bar.style.width = Math.round(e.loaded/e.total*100)+'%'; };
+    xhr.onload = ()=>{
+      wrap.style.display='none';
+      if(xhr.status===200){ resolve(JSON.parse(xhr.responseText).secure_url); }
+      else reject(new Error('Cloudinary error: '+xhr.responseText));
+    };
+    xhr.onerror = ()=>{ wrap.style.display='none'; reject(new Error('Network error')); };
+    xhr.send(formData);
+  });
+}
+
+function isValidPhone(v){ return /^[0-9+\s().-]{8,}$/.test(v.trim()); }
+function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+function showErr(id,show){ const el=document.getElementById(id); if(el) el.style.display = show?'block':'none'; }
+
+document.getElementById('verifForm').addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const name=document.getElementById('vName'), phone=document.getElementById('vPhone'),
+        email=document.getElementById('vEmail'), apogee=document.getElementById('vApogee'),
+        massar=document.getElementById('vMassar'), grSel=document.getElementById('vGR'),
+        lvlSel=document.getElementById('vLevel'), yrSel=document.getElementById('vYear'),
+        egSel=document.getElementById('vExistingGroup'), otherLvlSel=document.getElementById('vOtherClassLevel');
+  const hasGroup = document.querySelector('input[name="hasGroup"]:checked')?.value;
+  const hasOtherClassGroup = document.querySelector('input[name="hasOtherClassGroup"]:checked')?.value;
+  const status = document.getElementById('vStatus'), btn = document.getElementById('vSubmitBtn');
+
+  let valid = true;
+  ['vNameErr','vPhoneErr','vEmailErr','vApogeeErr','vMassarErr','vGRErr','vHasGroupErr','vHasOtherClassErr','vOtherClassLevelErr','vLevelErr','vYearErr','vCardErr','vWaGroupErr'].forEach(id=>showErr(id,false));
+
+  if(!name.value.trim()){ showErr('vNameErr',true); valid=false; }
+  if(!isValidPhone(phone.value)){ showErr('vPhoneErr',true); valid=false; }
+  if(!isValidEmail(email.value)){ showErr('vEmailErr',true); valid=false; }
+  if(!apogee.value.trim()){ showErr('vApogeeErr',true); valid=false; }
+  if(!massar.value.trim()){ showErr('vMassarErr',true); valid=false; }
+  if(!grSel.value){ showErr('vGRErr',true); valid=false; }
+  if(!hasGroup){ showErr('vHasGroupErr',true); valid=false; }
+  if(hasGroup==='yes' && !egSel.value){ egSel.style.borderColor='#e0463b'; valid=false; } else { egSel.style.borderColor=''; }
+  if(!hasOtherClassGroup){ showErr('vHasOtherClassErr',true); valid=false; }
+  if(hasOtherClassGroup==='yes' && !otherLvlSel.value){ showErr('vOtherClassLevelErr',true); valid=false; }
+  if(!lvlSel.value){ showErr('vLevelErr',true); valid=false; }
+  if(!yrSel.value){ showErr('vYearErr',true); valid=false; }
+  if(!cardFile){ showErr('vCardErr',true); valid=false; }
+  if(!selectedWaGroup){ showErr('vWaGroupErr',true); valid=false; }
+
+  if(!valid){ status.classList.remove('show'); return; }
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+  status.classList.remove('show');
+
+  try{
+    const cardUrl = await uploadCardImage(cardFile);
+    const grOpt = grSel.selectedOptions[0];
+    const lvlOpt = lvlSel.selectedOptions[0];
+    const yrOpt = yrSel.selectedOptions[0];
+    const egOpt = egSel.selectedOptions[0];
+    const otherLvlOpt = otherLvlSel.selectedOptions[0];
+
+    await addDoc(collection(db,'memberVerifications'), {
+      fullName: name.value.trim(),
+      mobileNumber: phone.value.trim(),
+      apogee: apogee.value.trim(),
+      massarCode: massar.value.trim(),
+      email: email.value.trim(),
+      gr: grOpt?.dataset.label || '',
+      grRange: grOpt?.dataset.range || '',
+      existingGroup: hasGroup,
+      existingGroupName: hasGroup==='yes' ? (egOpt?.dataset.label||'') : '',
+      inOtherClassGroup: hasOtherClassGroup,
+      otherClassLevel: hasOtherClassGroup==='yes' ? (otherLvlOpt?.dataset.label||'') : '',
+      studentLevel: lvlOpt?.dataset.label || '',
+      registrationYear: yrOpt?.dataset.label || '',
+      studentCardUrl: cardUrl,
+      whatsappGroup: selectedWaGroup.name,
+      whatsappGroupId: selectedWaGroup.id,
+      status: 'pending',
+      adminComment: '',
+      createdAt: Date.now(),
+      updatedAt: Date.now()
+    });
+
+    document.getElementById('formView').style.display = 'none';
+    document.getElementById('pendingView').style.display = 'block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }catch(err){
+    console.error(err);
+    status.textContent = 'Something went wrong. Please try again.';
+    status.className = 'status-msg show err';
+  }finally{
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Verification Request';
+  }
+});
+
+loadConfig();
+</script>
+
+</body>
+</html>
