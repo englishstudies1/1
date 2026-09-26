@@ -286,6 +286,34 @@ footer{text-align:center;padding:26px;color:var(--muted);font-size:12px;}
   <!-- FORM VIEW -->
   <div id="formView">
 
+    <!-- Already submitted? -->
+    <div class="card top">
+      <div class="card-title"><i class="fas fa-circle-question"></i> Already submitted this form?</div>
+      <div class="card-sub">If you're waiting for a reply (approval, a follow-up question, or a correction request), check here instead of filling the form again.</div>
+      <div class="radio-group">
+        <label class="radio-opt" id="optAlreadyNo"><input type="radio" name="alreadySubmitted" value="no" onchange="onAlreadySubmittedChange()"> No, this is my first time</label>
+        <label class="radio-opt" id="optAlreadyYes"><input type="radio" name="alreadySubmitted" value="yes" onchange="onAlreadySubmittedChange()"> Yes, I already submitted</label>
+      </div>
+    </div>
+
+    <!-- CHECK STATUS VIEW -->
+    <div class="card" id="checkStatusCard" style="display:none;">
+      <div class="card-title"><i class="fas fa-magnifying-glass"></i> Check Your Request Status</div>
+      <div class="card-sub">Enter your full name and Apogée number to see the status of your request.</div>
+      <div class="field">
+        <label for="csName">Full Name *</label>
+        <input type="text" id="csName" placeholder="Your full name">
+      </div>
+      <div class="field">
+        <label for="csApogee">Apogée *</label>
+        <input type="text" id="csApogee" placeholder="Your apogée number">
+      </div>
+      <button type="button" class="submit-btn" onclick="checkStatus()" id="csBtn"><i class="fas fa-magnifying-glass"></i> Check Status</button>
+      <div id="csResult" style="margin-top:16px;"></div>
+    </div>
+
+    <div id="normalFormWrap">
+
     <!-- WhatsApp CTA -->
     <div class="card top" id="waCtaCard">
       <div class="wa-cta">
@@ -374,21 +402,10 @@ footer{text-align:center;padding:26px;color:var(--muted);font-size:12px;}
           </select>
         </div>
 
-        <div class="field">
-          <label>Are you already in a WhatsApp group where another class's modules are shared with you? *</label>
-          <div class="radio-group">
-            <label class="radio-opt" id="optOtherClassYes"><input type="radio" name="hasOtherClassGroup" value="yes" onchange="onOtherClassGroupChange()"> Yes</label>
-            <label class="radio-opt" id="optOtherClassNo"><input type="radio" name="hasOtherClassGroup" value="no" onchange="onOtherClassGroupChange()"> No</label>
-          </div>
-          <div class="error-text" id="vHasOtherClassErr">Please choose an option.</div>
-        </div>
-
-        <div class="field" id="otherClassLevelField" style="display:none;">
-          <label for="vOtherClassLevel">Which class? *</label>
-          <select id="vOtherClassLevel">
-            <option value="">Select class...</option>
-          </select>
-          <div class="error-text" id="vOtherClassLevelErr">Please select the class.</div>
+        <div class="field" id="joinReasonField" style="display:none;">
+          <label for="vJoinReason">Which group would you like to join now, and why should we accept you? <em>(optional)</em></label>
+          <p style="font-size:12px;color:var(--muted);margin:-2px 0 8px;">This helps admins review your request faster — it's not required.</p>
+          <textarea id="vJoinReason" rows="3" placeholder="e.g. I'd like to join S2 - GR1 because..."></textarea>
         </div>
 
         <div class="field-row">
@@ -434,10 +451,10 @@ footer{text-align:center;padding:26px;color:var(--muted);font-size:12px;}
         </div>
 
         <div class="section-label"><i class="fab fa-whatsapp"></i> WhatsApp Group</div>
-        <p style="font-size:12.5px;color:var(--muted);margin-bottom:12px;margin-top:-8px;">Select the group you'd like to be added to. An administrator will review your request and add you after approval.</p>
+        <p style="font-size:12.5px;color:var(--muted);margin-bottom:12px;margin-top:-8px;">Select up to 2 groups you'd like to be added to. An administrator will review your request and add you after approval.</p>
         <div class="field">
           <div class="wa-group-list" id="waGroupList"></div>
-          <div class="error-text" id="vWaGroupErr">Please select a WhatsApp group.</div>
+          <div class="error-text" id="vWaGroupErr">Please select at least one WhatsApp group (max 2).</div>
         </div>
 
         <button type="submit" class="submit-btn" id="vSubmitBtn">
@@ -454,6 +471,8 @@ footer{text-align:center;padding:26px;color:var(--muted);font-size:12px;}
       <div class="rules-warning"><i class="fas fa-circle-exclamation"></i> <span id="rulesWarning"></span></div>
     </div>
 
+    </div><!-- /normalFormWrap -->
+
   </div>
 
   <!-- PENDING VIEW -->
@@ -466,6 +485,11 @@ footer{text-align:center;padding:26px;color:var(--muted);font-size:12px;}
         Please wait while an administrator verifies your information.
       </p>
       <div class="pending-status-pill"><i class="fas fa-clock"></i> Status: Pending Review</div>
+      <div class="pending-note" style="background:#fff6ee;border-color:#ffe0c2;color:#a15a12;">
+        <i class="fas fa-circle-exclamation" style="margin-right:6px;"></i>
+        Important: you must send a join request in the WhatsApp group(s) below yourself. Your verification request cannot be approved until you've done so.
+      </div>
+      <div id="pendingGroupLinks" style="display:flex;flex-direction:column;gap:10px;margin-top:14px;text-align:left;"></div>
       <div class="pending-note">
         <i class="fas fa-circle-exclamation" style="margin-right:6px;"></i>
         Please do not contact admins privately about your verification request. You will receive an update once your request has been reviewed.
@@ -481,7 +505,7 @@ footer{text-align:center;padding:26px;color:var(--muted);font-size:12px;}
 <!-- FIREBASE -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, doc, getDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getFirestore, doc, getDoc, collection, addDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDH1738INWjoXnzXLOPytluX1ED8saNcyI",
@@ -528,7 +552,7 @@ const DEFAULT_CONFIG = {
 };
 
 let CONFIG = DEFAULT_CONFIG;
-let selectedWaGroup = null;
+let selectedWaGroups = [];
 
 function escapeHtml(s){ return (s||'').toString().replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
 function sortActive(arr){ return (arr||[]).filter(x=>x.enabled!==false).sort((a,b)=>(a.order||0)-(b.order||0)); }
@@ -562,10 +586,6 @@ function renderConfig(){
   lvlSel.innerHTML = '<option value="">Select level...</option>' +
     sortActive(CONFIG.levels).map(l=>`<option value="${l.id}" data-label="${escapeHtml(l.label)}">${escapeHtml(l.label)}</option>`).join('');
 
-  const otherLvlSel = document.getElementById('vOtherClassLevel');
-  otherLvlSel.innerHTML = '<option value="">Select class...</option>' +
-    sortActive(CONFIG.levels).map(l=>`<option value="${l.id}" data-label="${escapeHtml(l.label)}">${escapeHtml(l.label)}</option>`).join('');
-
   const yrSel = document.getElementById('vYear');
   yrSel.innerHTML = '<option value="">Select year...</option>' +
     sortActive(CONFIG.years).map(y=>`<option value="${y.id}" data-label="${escapeHtml(y.label)}">${escapeHtml(y.label)}</option>`).join('');
@@ -574,7 +594,7 @@ function renderConfig(){
   const activeGroups = sortActive(CONFIG.whatsappGroups);
   waList.innerHTML = activeGroups.length ? activeGroups.map(g=>`
     <label class="wa-group-opt" id="waopt_${g.id}">
-      <input type="radio" name="waGroup" value="${g.id}" onchange="selectWaGroup('${g.id}','${escapeHtml(g.name).replace(/'/g,"\\'")}')">
+      <input type="checkbox" name="waGroup" value="${g.id}" onchange="toggleWaGroup('${g.id}','${escapeHtml(g.name).replace(/'/g,"\\'")}','${escapeHtml(g.link||'').replace(/'/g,"\\'")}',this)">
       <i class="fab fa-whatsapp wgi"></i>
       <div class="wa-group-opt-text"><strong>${escapeHtml(g.name)}</strong>${g.description?`<span>${escapeHtml(g.description)}</span>`:''}</div>
     </label>`).join('') : '<div class="wa-empty">No WhatsApp groups are configured yet — check back soon.</div>';
@@ -584,11 +604,82 @@ function renderConfig(){
   document.getElementById('rulesWarning').textContent = CONFIG.rulesWarning;
 }
 
-window.selectWaGroup = function(id,name){
-  selectedWaGroup = {id,name};
+window.toggleWaGroup = function(id,name,link,inputEl){
+  if(inputEl.checked){
+    if(selectedWaGroups.length>=2){
+      inputEl.checked = false;
+      return;
+    }
+    selectedWaGroups.push({id,name,link});
+  } else {
+    selectedWaGroups = selectedWaGroups.filter(g=>g.id!==id);
+  }
   document.querySelectorAll('.wa-group-opt').forEach(el=>el.classList.remove('active'));
-  const el = document.getElementById('waopt_'+id);
-  if(el) el.classList.add('active');
+  selectedWaGroups.forEach(g=>{
+    const el = document.getElementById('waopt_'+g.id);
+    if(el) el.classList.add('active');
+  });
+  document.getElementById('vWaGroupErr').style.display = 'none';
+};
+
+function renderPendingGroupLinks(){
+  const el = document.getElementById('pendingGroupLinks');
+  if(!el) return;
+  if(!selectedWaGroups.length){ el.innerHTML=''; return; }
+  el.innerHTML = selectedWaGroups.map(g=>`
+    <div class="wa-group-opt active" style="cursor:default;">
+      <i class="fab fa-whatsapp wgi"></i>
+      <div class="wa-group-opt-text" style="flex:1;"><strong>${escapeHtml(g.name)}</strong></div>
+      ${g.link ? `<a href="${escapeHtml(g.link)}" target="_blank" rel="noopener" class="wa-cta-btn" style="padding:8px 16px;font-size:12px;">Join <i class="fas fa-arrow-up-right-from-square"></i></a>` : '<span style="font-size:11.5px;color:var(--muted);">Link not available yet</span>'}
+    </div>`).join('');
+}
+
+const CS_STATUS_STYLE = {
+  pending:  {bg:'#fef3c7', color:'#92400e', label:'⏳ Pending Review', text:'Your request is still pending review. Please wait for an administrator to check your information.'},
+  approved: {bg:'#dcfce7', color:'#166534', label:'✅ Approved', text:'Your request has been approved! Make sure you sent the join request in your chosen WhatsApp group(s).'},
+  rejected: {bg:'#fee2e2', color:'#991b1b', label:'❌ Rejected', text:'Your request was rejected.'},
+  needs_correction: {bg:'#fee7d6', color:'#9a4a12', label:'✏️ Needs Correction', text:'Some information needs to be corrected. See the note below.'}
+};
+
+window.onAlreadySubmittedChange = function(){
+  const val = document.querySelector('input[name="alreadySubmitted"]:checked')?.value;
+  document.getElementById('optAlreadyNo').classList.toggle('active', val==='no');
+  document.getElementById('optAlreadyYes').classList.toggle('active', val==='yes');
+  document.getElementById('normalFormWrap').style.display = val==='yes' ? 'none' : 'block';
+  document.getElementById('checkStatusCard').style.display = val==='yes' ? 'block' : 'none';
+  document.getElementById('csResult').innerHTML = '';
+};
+
+window.checkStatus = async function(){
+  const nameVal = document.getElementById('csName').value.trim();
+  const apogeeVal = document.getElementById('csApogee').value.trim();
+  const resultEl = document.getElementById('csResult');
+  const btn = document.getElementById('csBtn');
+  if(!nameVal || !apogeeVal){
+    resultEl.innerHTML = '<div class="status-msg show err">Please enter both your full name and apogée number.</div>';
+    return;
+  }
+  btn.disabled = true; btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
+  resultEl.innerHTML = '';
+  try{
+    const snap = await getDocs(query(collection(db,'memberVerifications'), where('apogee','==', apogeeVal)));
+    const match = snap.docs.map(d=>d.data()).find(r=>(r.fullName||'').trim().toLowerCase() === nameVal.toLowerCase());
+    if(!match){
+      resultEl.innerHTML = '<div class="status-msg show err">No matching request found. Double-check your name and apogée number, or submit the form if you haven\'t yet.</div>';
+    } else {
+      const st = CS_STATUS_STYLE[match.status] || CS_STATUS_STYLE.pending;
+      resultEl.innerHTML = `
+        <div class="pending-status-pill" style="background:${st.bg};color:${st.color};">${st.label}</div>
+        <p style="font-size:13.5px;color:var(--muted);margin-top:8px;">${st.text}</p>
+        ${match.adminComment ? `<div class="pending-note" style="margin-top:10px;">${escapeHtml(match.adminComment)}</div>` : ''}
+      `;
+    }
+  }catch(err){
+    console.error(err);
+    resultEl.innerHTML = '<div class="status-msg show err">Something went wrong. Please try again.</div>';
+  }finally{
+    btn.disabled = false; btn.innerHTML = '<i class="fas fa-magnifying-glass"></i> Check Status';
+  }
 };
 
 window.onGrChange = function(){};
@@ -598,14 +689,7 @@ window.onHasGroupChange = function(){
   document.getElementById('optGroupYes').classList.toggle('active', val==='yes');
   document.getElementById('optGroupNo').classList.toggle('active', val==='no');
   document.getElementById('existingGroupField').style.display = val==='yes' ? 'block' : 'none';
-};
-
-window.onOtherClassGroupChange = function(){
-  const val = document.querySelector('input[name="hasOtherClassGroup"]:checked')?.value;
-  document.getElementById('optOtherClassYes').classList.toggle('active', val==='yes');
-  document.getElementById('optOtherClassNo').classList.toggle('active', val==='no');
-  document.getElementById('otherClassLevelField').style.display = val==='yes' ? 'block' : 'none';
-  if(val!=='yes'){ document.getElementById('vOtherClassLevel').value=''; showErr('vOtherClassLevelErr',false); }
+  document.getElementById('joinReasonField').style.display = val==='yes' ? 'block' : 'none';
 };
 
 // ── Student card upload ──
@@ -661,13 +745,12 @@ document.getElementById('verifForm').addEventListener('submit', async (e)=>{
         email=document.getElementById('vEmail'), apogee=document.getElementById('vApogee'),
         massar=document.getElementById('vMassar'), grSel=document.getElementById('vGR'),
         lvlSel=document.getElementById('vLevel'), yrSel=document.getElementById('vYear'),
-        egSel=document.getElementById('vExistingGroup'), otherLvlSel=document.getElementById('vOtherClassLevel');
+        egSel=document.getElementById('vExistingGroup'), joinReason=document.getElementById('vJoinReason');
   const hasGroup = document.querySelector('input[name="hasGroup"]:checked')?.value;
-  const hasOtherClassGroup = document.querySelector('input[name="hasOtherClassGroup"]:checked')?.value;
   const status = document.getElementById('vStatus'), btn = document.getElementById('vSubmitBtn');
 
   let valid = true;
-  ['vNameErr','vPhoneErr','vEmailErr','vApogeeErr','vMassarErr','vGRErr','vHasGroupErr','vHasOtherClassErr','vOtherClassLevelErr','vLevelErr','vYearErr','vCardErr','vWaGroupErr'].forEach(id=>showErr(id,false));
+  ['vNameErr','vPhoneErr','vEmailErr','vApogeeErr','vMassarErr','vGRErr','vHasGroupErr','vLevelErr','vYearErr','vCardErr','vWaGroupErr'].forEach(id=>showErr(id,false));
 
   if(!name.value.trim()){ showErr('vNameErr',true); valid=false; }
   if(!isValidPhone(phone.value)){ showErr('vPhoneErr',true); valid=false; }
@@ -677,12 +760,10 @@ document.getElementById('verifForm').addEventListener('submit', async (e)=>{
   if(!grSel.value){ showErr('vGRErr',true); valid=false; }
   if(!hasGroup){ showErr('vHasGroupErr',true); valid=false; }
   if(hasGroup==='yes' && !egSel.value){ egSel.style.borderColor='#e0463b'; valid=false; } else { egSel.style.borderColor=''; }
-  if(!hasOtherClassGroup){ showErr('vHasOtherClassErr',true); valid=false; }
-  if(hasOtherClassGroup==='yes' && !otherLvlSel.value){ showErr('vOtherClassLevelErr',true); valid=false; }
   if(!lvlSel.value){ showErr('vLevelErr',true); valid=false; }
   if(!yrSel.value){ showErr('vYearErr',true); valid=false; }
   if(!cardFile){ showErr('vCardErr',true); valid=false; }
-  if(!selectedWaGroup){ showErr('vWaGroupErr',true); valid=false; }
+  if(!selectedWaGroups.length){ showErr('vWaGroupErr',true); valid=false; }
 
   if(!valid){ status.classList.remove('show'); return; }
 
@@ -696,7 +777,6 @@ document.getElementById('verifForm').addEventListener('submit', async (e)=>{
     const lvlOpt = lvlSel.selectedOptions[0];
     const yrOpt = yrSel.selectedOptions[0];
     const egOpt = egSel.selectedOptions[0];
-    const otherLvlOpt = otherLvlSel.selectedOptions[0];
 
     await addDoc(collection(db,'memberVerifications'), {
       fullName: name.value.trim(),
@@ -708,19 +788,19 @@ document.getElementById('verifForm').addEventListener('submit', async (e)=>{
       grRange: grOpt?.dataset.range || '',
       existingGroup: hasGroup,
       existingGroupName: hasGroup==='yes' ? (egOpt?.dataset.label||'') : '',
-      inOtherClassGroup: hasOtherClassGroup,
-      otherClassLevel: hasOtherClassGroup==='yes' ? (otherLvlOpt?.dataset.label||'') : '',
+      joinReason: joinReason.value.trim(),
       studentLevel: lvlOpt?.dataset.label || '',
       registrationYear: yrOpt?.dataset.label || '',
       studentCardUrl: cardUrl,
-      whatsappGroup: selectedWaGroup.name,
-      whatsappGroupId: selectedWaGroup.id,
+      whatsappGroup: selectedWaGroups.map(g=>g.name).join(', '),
+      whatsappGroups: selectedWaGroups,
       status: 'pending',
       adminComment: '',
       createdAt: Date.now(),
       updatedAt: Date.now()
     });
 
+    renderPendingGroupLinks();
     document.getElementById('formView').style.display = 'none';
     document.getElementById('pendingView').style.display = 'block';
     window.scrollTo({top:0,behavior:'smooth'});
